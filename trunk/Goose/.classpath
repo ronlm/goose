@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="E:/MavenRepo/spring-3.2.0.M1-dist/spring-3.2.0.M1/libs/spring-orm-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="E:/MavenRepo/spring-3.2.0.M1-dist/spring-3.2.0.M1/libs/spring-tx-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="E:/MavenRepo/spring-3.2.0.M1-dist/spring-3.2.0.M1/libs/spring-web-3.2.0.M1.jar"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.struts2.MYECLIPSE_STRUTS21_CORE"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
