@@ -9,13 +9,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<base href="<%=basePath%>">
-	<title>Goose 系统登录</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+<base href="<%=basePath%>">
+<title>Goose 系统登录</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
 </head>
 
 <body onload=document.form1.userName.focus();>
@@ -37,10 +37,11 @@
 					border=0>
 					<tr>
 						<td width=16><img height=122 src="images/login_3.jpg"
-							width=16></td>
+							width=16>
+						</td>
 						<td align="center">
-							<table cellspacing=0 cellpadding=0 width=230 border=0>
-								<form name=form1 action="" method="post">
+							<form name="form1" action="/User/UserAction!login" method="post">
+								<table cellspacing=0 cellpadding=0 width=230 border=0>
 									<tr height="5px">
 										<td width=5></td>
 										<td width=56></td>
@@ -50,32 +51,33 @@
 										<td></td>
 										<td>用户名</td>
 										<td><input type="text" name="userName" maxlength="30"
-											size="24px" height="20px">
-										</td>
+											size="24px" height="20px"></td>
 									</tr>
 									<tr height="36px">
 										<td>&nbsp;</td>
 										<td>密 码</td>
 										<td><input type="password" name="password" maxlength="30"
-											size="24"></td>
+											size="24">
+										</td>
 									</tr>
 									<tr height="20px">
 										<td></td>
 										<td></td>
-										<td><a href="#"><font color="red">忘记密码？</font>
-										</a>
-										</td>
+										<td><a href="#"><font color="red">忘记密码？</font> </a></td>
 									</tr>
 									<tr style="padding-top: 3px">
 										<td>&nbsp;</td>
 										<td>&nbsp;</td>
 										<td><input type=image height="30px" width=70
-											src="images/login_Btn.png"></td>
+											src="images/login_Btn.png">
+										</td>
 									</tr>
-								</form>
-							</table></td>
+								</table>
+							</form>
+						</td>
 						<td width=16><img height=122 src="images/login_4.jpg"
-							width=16></td>
+							width=16>
+						</td>
 					</tr>
 				</table>
 				<table cellspacing=0 cellpadding=0 width=468 border=0>
@@ -88,9 +90,11 @@
 					style="padding-top: 10px;">
 					<tr>
 						<td align=right><a href="#" target=_blank><font
-								color="white" size="3">联系我们</font> </a></td>
+								color="white" size="3">联系我们</font> </a>
+						</td>
 					</tr>
-				</table></td>
+				</table>
+			</td>
 		</tr>
 	</table>
 </body>

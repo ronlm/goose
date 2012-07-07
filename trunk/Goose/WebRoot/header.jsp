@@ -12,12 +12,12 @@
 <base href="<%=basePath%>">
 
 <title>My JSP 'header.jsp' starting page</title>
-
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
+	
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -31,7 +31,7 @@
 					System</font></td>
 			<td
 				style="FONT-WEIGHT: bold; COLOR: #fff; padding-top: 20px;padding-right: 10px;"
-				align="right">当前用户：<%=request.getRemoteAddr() %> &nbsp;&nbsp; <A
+				align="right">当前用户：${userName} &nbsp;&nbsp; <A
 				style="COLOR: #fff" href="" target=main>修改密码</A> &nbsp;&nbsp; <A
 				style="COLOR: #fff" onclick="confirmExist()" href="" target=_top>退出系统</A>
 			</td>

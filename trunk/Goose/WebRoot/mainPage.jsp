@@ -16,11 +16,11 @@
 <meta http-equiv=expires content=-1000>
 <link href="css/admin.css" type="text/css" rel="stylesheet">
 </head>
-<frameset border=0 framespacing=0 rows="60, *" frameborder=0>
-	<frame name=header src="header.jsp" frameborder=0 noresize scrolling=no>
+<frameset border="0" framespacing="0" rows="60, *" frameborder="no">
+	<frame name=header src="header.jsp" frameborder="0" noresize scrolling=no>
 	<frameset cols="170, *">
 		<frame name=menu src="menu.jsp" frameborder=0 noresize>
-		<frame name=main src="main.htm" frameborder=0 noresize scrolling=yes>
+		<frame name=main src="main.jsp" frameborder=0 noresize scrolling=yes>
 	</frameset>
 </frameset>
 <noframes>

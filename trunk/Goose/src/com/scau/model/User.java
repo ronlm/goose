@@ -1,15 +1,11 @@
-package com.scau.action;
+package com.scau.model;
 
-public class UserAction extends BaseAction{
+import org.springframework.stereotype.Component;
+
+@Component
+public class User {
 	private String userName;
 	private String password;
-	public String login(){
-		if(userName.equals("admin") && password.equals("admin"))
-			return "success";
-		else {
-			return "fail";
-		}
-	}
 	public String getUserName() {
 		return userName;
 	}
