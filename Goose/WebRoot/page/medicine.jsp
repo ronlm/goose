@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>农户信息</title>
+<title>药品信息</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -22,7 +22,7 @@
 <body>
 	<table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
 		<tr height=28>
-			<td background=images/title_bg1.jpg>当前位置:农户信息管理</td>
+			<td background=images/title_bg1.jpg>当前位置:药品信息管理</td>
 		</tr>
 		<tr>
 			<td bgcolor=#b1ceef height=1></td>
@@ -31,6 +31,5 @@
 			<td background=images/shadow_bg.jpg></td>
 		</tr>
 	</table>
-	
 </body>
 </html>

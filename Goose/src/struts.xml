@@ -3,7 +3,7 @@
 <struts>
 	<package name="User" extends="struts-default" namespace="/User">
 
-		<action name="userAction" class="com.zjh.action.UserAction">
+		<action name="userAction" class="userAction">
 			<result type="redirect" name="success">/mainPage.jsp</result>
 		</action>
 	</package>

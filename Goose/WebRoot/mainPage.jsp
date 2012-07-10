@@ -9,7 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Goose Systr</title>
+<title>Goose System</title>
 <meta http-equiv=content-type content="text/html; charset=gb2312">
 <meta http-equiv=pragma content=no-cache>
 <meta http-equiv=cache-control content=no-cache>
