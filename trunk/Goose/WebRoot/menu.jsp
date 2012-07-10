@@ -58,28 +58,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="main.jsp" target=main>农户信息</a>
+						<td><a class=menuchild href="page/farmer.jsp" target=main>农户信息</a>
 						</td>
 					</tr>
 					<tr height=20>
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="#" target=main>技术人员信息</a>
+						<td><a class=menuchild href="page/technician.jsp" target=main>技术人员信息</a>
 						</td>
 					</tr>
 					<tr height=20>
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="#" target=main>药品信息</a>
+						<td><a class=menuchild href="page/medicine.jsp" target=main>药品信息</a>
 						</td>
 					</tr>
 					<tr height=20>
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="#" target=main>鹅只信息</a>
+						<td><a class=menuchild href="page/gooseInfo.jsp" target=main>鹅只信息</a>
 						</td>
 					</tr>
 					<tr height=4>
@@ -104,14 +104,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="#" target=main>基本设置</a>
+						<td><a class=menuchild href="main.jsp" target=main>基本设置</a>
 						</td>
 					</tr>				
 					<tr height=20>
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="#" target=main>管理员列表</a>
+						<td><a class=menuchild href="main.jsp" target=main>管理员列表</a>
 						</td>
 					</tr>
 					<tr height=4>
@@ -135,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td align="center" width=30><img height=9
 							src="images/menu_icon.gif" width=9>
 						</td>
-						<td><a class=menuchild href="#" target=main>修改口令</a>
+						<td><a class=menuchild href="main.jsp" target=main>修改口令</a>
 						</td>
 					</tr>
 					<tr height=20>
@@ -143,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							src="images/menu_icon.gif" width=9>
 						</td>
 						<td><a class=menuchild onclick="confirmExist();"
-							href="http://www.mycodes.net" target=_top>退出系统</a>
+							href="main.jsp" target=_top>退出系统</a>
 						</td>
 					</tr>
 				</table>

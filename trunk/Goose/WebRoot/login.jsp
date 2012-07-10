@@ -44,14 +44,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							width=16>
 						</td>
 						<td align="center">
-							<form name="form1" action="/User/UserAction!login" method="post">
+							<form name="form1" action="User/userAction!login" method="post">
 								<table cellspacing=0 cellpadding=0 width=230 border=0>
 									<!--  <tr height="5px">
 										<td width=5></td>
 										<td width=56></td>
 										<td></td>
-										-->
-									</tr>
+										
+									</tr>-->
 									<tr height="30px">
 										<td></td>
 										<td>用户名</td>

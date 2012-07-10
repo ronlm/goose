@@ -97,7 +97,13 @@
 		quid       	"4FF3D9A10131"
 		stereotype 	"Actor")
 	    (object UseCase "农户信息管理"
-		quid       	"4FF3D843033C")
+		quid       	"4FF3D843033C"
+		visible_modules 	(list dependency_list
+		    (object Dependency_Relationship
+			quid       	"4FFAE8B6001F"
+			stereotype 	"include"
+			supplier   	"Use Case View::养殖成本管理"
+			quidu      	"4FFAE89A00A1")))
 	    (object UseCase "技术人员信息管理"
 		quid       	"4FF3D845011B")
 	    (object UseCase "药品信息管理"
@@ -110,10 +116,17 @@
 		quid       	"4FF3DA6100B0")
 	    (object UseCase "信息"
 		quid       	"4FF3DA9F00A8")
-	    (object UseCase "任务管理"
-		quid       	"4FF7CF680082")
+	    (object UseCase "出勤任务通知"
+		quid       	"4FF7CF680082"
+		documentation 	"有一定权限的人员为兽医安排出勤任务、兽医从系统得到任务安排通知，")
 	    (object UseCase "用药信息导入系统"
 		quid       	"4FF7CF810108")
+	    (object UseCase "养殖成本管理"
+		quid       	"4FFAE89A00A1"
+		documentation 	
+|记录农户在公司购买的树苗、饲料、化肥、药品历史
+|鹅在幼苗时期主要食饲料（公司指定），到了一定的时期后，饲料全部为槐树叶和油麦菜直到出栏
+		)
 	    (object Association "$UNNAMED$0"
 		quid       	"4FF3D8A402B3"
 		roles      	(list role_list
@@ -215,7 +228,7 @@
 		roles      	(list role_list
 		    (object Role "$UNNAMED$25"
 			quid       	"4FF7CF9500AE"
-			supplier   	"Use Case View::任务管理"
+			supplier   	"Use Case View::出勤任务通知"
 			quidu      	"4FF7CF680082"
 			is_navigable 	TRUE)
 		    (object Role "$UNNAMED$26"
@@ -245,7 +258,7 @@
 		origin_y   	416
 		items      	(list diagram_item_list
 		    (object UseCaseView "Use Case View::鹅只信息管理" @1
-			location   	(850, 628)
+			location   	(868, 768)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -257,7 +270,7 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@1
-			    location   	(850, 766)
+			    location   	(868, 906)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
@@ -269,7 +282,7 @@
 			quidu      	"4FF3D8C003E3"
 			height     	118)
 		    (object UseCaseView "Use Case View::农户信息管理" @2
-			location   	(897, 115)
+			location   	(928, 278)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -281,7 +294,7 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@2
-			    location   	(897, 253)
+			    location   	(928, 416)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
@@ -293,7 +306,7 @@
 			quidu      	"4FF3D843033C"
 			height     	118)
 		    (object UseCaseView "Use Case View::技术人员信息管理" @3
-			location   	(928, 368)
+			location   	(950, 515)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -305,7 +318,7 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@3
-			    location   	(928, 506)
+			    location   	(950, 653)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
@@ -320,7 +333,7 @@
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
-			location   	(308, 325)
+			location   	(311, 553)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -332,7 +345,7 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@4
-			    location   	(308, 485)
+			    location   	(311, 713)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	325
@@ -345,7 +358,7 @@
 			annotation 	8
 			autoResize 	TRUE)
 		    (object AssociationViewNew "$UNNAMED$9" @5
-			location   	(556, 462)
+			location   	(562, 647)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -361,7 +374,7 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$10" @6
 				Parent_View 	@5
-				location   	(268, -126)
+				location   	(274, 59)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3D8CA01B2"
@@ -370,7 +383,7 @@
 				line_style 	0)
 			    (object RoleView "$UNNAMED$11" @7
 				Parent_View 	@5
-				location   	(268, -126)
+				location   	(274, 59)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3D8CA01B4"
@@ -378,7 +391,7 @@
 				supplier   	@4
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$0" @8
-			location   	(576, 226)
+			location   	(570, 435)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -394,7 +407,7 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$1" @9
 				Parent_View 	@8
-				location   	(288, -362)
+				location   	(282, -153)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3D8A500DF"
@@ -403,7 +416,7 @@
 				line_style 	0)
 			    (object RoleView "$UNNAMED$2" @10
 				Parent_View 	@8
-				location   	(288, -362)
+				location   	(282, -153)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3D8A500E1"
@@ -411,7 +424,7 @@
 				supplier   	@4
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$3" @11
-			location   	(591, 342)
+			location   	(604, 532)
 			font       	(object Font
 			    size       	12
 			    face       	"Arial"
@@ -427,7 +440,7 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$4" @12
 				Parent_View 	@11
-				location   	(303, -246)
+				location   	(316, -56)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3D8A702D0"
@@ -436,7 +449,7 @@
 				line_style 	0)
 			    (object RoleView "$UNNAMED$5" @13
 				Parent_View 	@11
-				location   	(303, -246)
+				location   	(316, -56)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3D8A702D2"
@@ -491,7 +504,7 @@
 			fill_color 	13434879
 			quidu      	"4FF3DA6100B0"
 			height     	118)
-		    (object UseCaseView "Use Case View::任务管理" @16
+		    (object UseCaseView "Use Case View::出勤任务通知" @16
 			location   	(1356, 1433)
 			font       	(object Font
 			    size       	12
@@ -509,13 +522,37 @@
 			    nlines     	2
 			    max_width  	630
 			    justify    	0
-			    label      	"任务管理")
+			    label      	"出勤任务通知")
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"4FF7CF680082"
 			height     	118)
-		    (object ClassView "Class" "Use Case View::技术人员(兽医)" @17
+		    (object UseCaseView "Use Case View::用药信息导入系统" @17
+			location   	(1340, 1700)
+			font       	(object Font
+			    size       	12
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@17
+			    location   	(1340, 1838)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"用药信息导入系统")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"4FF7CF810108"
+			height     	118)
+		    (object ClassView "Class" "Use Case View::技术人员(兽医)" @18
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
@@ -530,7 +567,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@17
+			    Parent_View 	@18
 			    location   	(464, 1294)
 			    anchor_loc 	1
 			    nlines     	2
@@ -543,7 +580,7 @@
 			quidu      	"4FF3D9A10131"
 			annotation 	8
 			autoResize 	TRUE)
-		    (object AssociationViewNew "$UNNAMED$18" @18
+		    (object AssociationViewNew "$UNNAMED$18" @19
 			location   	(899, 1150)
 			font       	(object Font
 			    size       	12
@@ -558,25 +595,25 @@
 			line_color 	3342489
 			quidu      	"4FF3DA4302F0"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$19" @19
-				Parent_View 	@18
+			    (object RoleView "$UNNAMED$19" @20
+				Parent_View 	@19
 				location   	(463, -606)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3DA44018C"
-				client     	@18
+				client     	@19
 				supplier   	@14
 				line_style 	0)
-			    (object RoleView "$UNNAMED$20" @20
-				Parent_View 	@18
+			    (object RoleView "$UNNAMED$20" @21
+				Parent_View 	@19
 				location   	(463, -606)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3DA44018E"
-				client     	@18
-				supplier   	@17
+				client     	@19
+				supplier   	@18
 				line_style 	0)))
-		    (object AssociationViewNew "$UNNAMED$21" @21
+		    (object AssociationViewNew "$UNNAMED$21" @22
 			location   	(908, 1019)
 			font       	(object Font
 			    size       	12
@@ -591,25 +628,25 @@
 			line_color 	3342489
 			quidu      	"4FF3DA810237"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$22" @22
-				Parent_View 	@21
+			    (object RoleView "$UNNAMED$22" @23
+				Parent_View 	@22
 				location   	(472, -737)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3DA8200E4"
-				client     	@21
+				client     	@22
 				supplier   	@15
 				line_style 	0)
-			    (object RoleView "$UNNAMED$23" @23
-				Parent_View 	@21
+			    (object RoleView "$UNNAMED$23" @24
+				Parent_View 	@22
 				location   	(472, -737)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF3DA8200E6"
-				client     	@21
-				supplier   	@17
+				client     	@22
+				supplier   	@18
 				line_style 	0)))
-		    (object AssociationViewNew "$UNNAMED$24" @24
+		    (object AssociationViewNew "$UNNAMED$24" @25
 			location   	(883, 1272)
 			font       	(object Font
 			    size       	12
@@ -624,48 +661,24 @@
 			line_color 	3342489
 			quidu      	"4FF7CF940162"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$25" @25
-				Parent_View 	@24
+			    (object RoleView "$UNNAMED$25" @26
+				Parent_View 	@25
 				location   	(447, -484)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF7CF9500AE"
-				client     	@24
+				client     	@25
 				supplier   	@16
 				line_style 	0)
-			    (object RoleView "$UNNAMED$26" @26
-				Parent_View 	@24
+			    (object RoleView "$UNNAMED$26" @27
+				Parent_View 	@25
 				location   	(447, -484)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"4FF7CF9500B0"
-				client     	@24
-				supplier   	@17
+				client     	@25
+				supplier   	@18
 				line_style 	0)))
-		    (object UseCaseView "Use Case View::用药信息导入系统" @27
-			location   	(1340, 1700)
-			font       	(object Font
-			    size       	12
-			    face       	"Arial"
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@27
-			    location   	(1340, 1838)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"用药信息导入系统")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"4FF7CF810108"
-			height     	118)
 		    (object AssociationViewNew "$UNNAMED$27" @28
 			location   	(938, 1438)
 			font       	(object Font
@@ -688,7 +701,7 @@
 				line_color 	3342489
 				quidu      	"4FF7CF980196"
 				client     	@28
-				supplier   	@27
+				supplier   	@17
 				line_style 	0)
 			    (object RoleView "$UNNAMED$29" @30
 				Parent_View 	@28
@@ -697,8 +710,76 @@
 				line_color 	3342489
 				quidu      	"4FF7CF980198"
 				client     	@28
-				supplier   	@17
-				line_style 	0)))))))
+				supplier   	@18
+				line_style 	0)))
+		    (object UseCaseView "Use Case View::养殖成本管理" @31
+			location   	(1734, 303)
+			font       	(object Font
+			    size       	12
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@31
+			    location   	(1734, 441)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"养殖成本管理")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"4FFAE89A00A1"
+			height     	118)
+		    (object DependencyView "" @32
+			font       	(object Font
+			    size       	12
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@32
+			    location   	(1330, 287)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	196
+			    justify    	0
+			    label      	"")
+			stereotype 	(object SegLabel @33
+			    Parent_View 	@32
+			    location   	(1351, 203)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	450
+			    justify    	0
+			    label      	"<<include>>"
+			    pctDist    	0.500000
+			    height     	120
+			    orientation 	0)
+			line_color 	3342489
+			quidu      	"4FFAE8B6001F"
+			client     	@2
+			supplier   	@31
+			line_style 	0)))))
     root_category 	(object Class_Category "Logical View"
 	quid       	"4FF3D80E03D7"
 	exportControl 	"Public"

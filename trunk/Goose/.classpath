@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="E:/MavenRepo/commons-dbcp-1.4-bin/commons-dbcp-1.4/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="E:/MavenRepo/commons-pool/commons-pool/1.4/commons-pool-1.4.jar"/>
 	<classpathentry kind="lib" path="E:/MavenRepo/org/springframework/spring-dao/2.0.8/spring-dao-2.0.8.jar"/>
+	<classpathentry kind="lib" path="E:/MavenRepo/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

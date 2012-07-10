@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@Component
 public class BaseAction extends ActionSupport implements ServletResponseAware,ServletRequestAware{
 	private HttpServletResponse response;
 	private HttpServletRequest request;

@@ -12,7 +12,9 @@
      http://www.springframework.org/schema/aop 
      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<context:annotation-config />
-	<context:component-scan base-package="com.scau,*" />
+	<context:component-scan base-package="com.scau.action" />
+	<context:component-scan base-package="com.scau.dao" />
+	<context:component-scan base-package="com.scau.service" />
 
 	<!-- 使用HibernateTemplate -->
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
