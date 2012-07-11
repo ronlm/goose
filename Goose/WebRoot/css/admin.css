@@ -1,20 +1,14 @@
 body {
 	margin: 0px
+	color: #000;
+	background-color: #AA9F55
+	font-size: 12px;
+	line-height: 150%; 
+	font-family: "verdana", "arial", "helvetica", "sans-serif"
 }
 
 p {
 	margin: 0px
-}
-
-body {
-	color: #000;
-	background-color: #fff
-}
-
-body {
-	font-size: 12px;
-	line-height: 150%;
-	font-family: "verdana", "arial", "helvetica", "sans-serif"
 }
 
 table {
