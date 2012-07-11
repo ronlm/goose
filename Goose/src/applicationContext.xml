@@ -17,6 +17,7 @@
 	<context:component-scan base-package="com.scau.service" />
 
 	<!-- 使用HibernateTemplate -->
+	
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
