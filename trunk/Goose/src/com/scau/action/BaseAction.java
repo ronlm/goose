@@ -11,8 +11,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Component
 public class BaseAction extends ActionSupport implements ServletResponseAware,ServletRequestAware{
-	private HttpServletResponse response;
-	private HttpServletRequest request;
+	protected HttpServletResponse response;
+	protected HttpServletRequest request;
 	
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
