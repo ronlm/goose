@@ -15,7 +15,7 @@ public class UserDao implements BaseDao<User> {
 	@Override
 	public User get(User t) {
 		
-		List<User> users = hibernateTemplate.find("from User u where u.username= '"+ t.getUserName() + "', u.password='" + t.getPassword()+ "'");
+		List<User> users = hibernateTemplate.find("from User u where u.username='"+ t.getUserName() + "' and u.password='" + t.getPassword()+ "'");
 		if(users != null && users.size() >0 ){
 			return users.get(0);
 		}
