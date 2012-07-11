@@ -1,6 +1,7 @@
 package com.scau.action;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,14 +21,20 @@ public class UserAction extends BaseAction{
 	 */
 	public String login(){
 		User u = new User();
-		u.setUserName(userName);
+		u.setUsername(userName);
 		u.setPassword(password);
 		
-		if(userService.checkUserIsExist(u))
+		if(userService.checkUserIsExist(u)){
+			request.getSession().setAttribute("userName", u.getUsername());
 			return "success";
+		}
 		else {
 			return "fail";
 		}
+	}
+	
+	public String register() {
+		return "success";
 	}
 	
 	
