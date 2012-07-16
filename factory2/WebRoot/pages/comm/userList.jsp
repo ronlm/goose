@@ -11,7 +11,7 @@
 				<th colspan="4">
 					<h3>用户列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/comm/user.do?act=get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/userAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll(); return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
@@ -40,8 +40,8 @@
 				<td>${user.userName}</td>
 				<td>${user.realName}</td>
 				<td>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/comm/user.do?act=get&user.id=${user.id }'; return false;"><span>修改</span></a>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/comm/user.do?act=del&id=${user.id }'); return false;"><span>删除</span></a>
+					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/userAction!get?user.id=${user.id }'; return false;"><span>修改</span></a>
+					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/userAction!del?id=${user.id }'); return false;"><span>删除</span></a>
 				</td>
 			</tr>
 			</c:if>

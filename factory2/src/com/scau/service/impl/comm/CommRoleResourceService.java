@@ -13,13 +13,14 @@ import com.scau.service.BaseService;
 @Component
 public class CommRoleResourceService extends BaseService<CommRoleResource> implements Serializable {
 
-	public List<CommRoleResource> listByRoleId(CommRoleResource entity) throws BusinessException {
+	public List<CommRoleResource> listByRoleId(CommRoleResource entity) throws Exception {
+		
 		if(null != entity && null != entity.getRoleId()){
-			
-			@SuppressWarnings("unchecked")
-			List<CommRoleResource> roleResources = baseDao.getHibernateTemplate().find(
-					"from CommRoleResource rr where rr.roleId=?" ,entity.getRoleId());
-			return roleResources;
+			// List<CommRoleResource> roleResources = findByCondition((
+				//	"from CommRoleResource rr where rr.roleId=?" ,entity.getRoleId());
+			//return roleResources;
+			//return findByCondition("from CommRoleResource rr where rr.getRoleId='" + entity.getRoleId() + "'");
+			return list(entity);
 		}
 		else {
 			throw new BusinessException("roleId 不能为空!");

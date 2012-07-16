@@ -15,6 +15,7 @@ import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommRoleService;
 import com.scau.service.impl.comm.CommUserService;
+import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 
 import cn.com.ege.mvc.exception.BusinessException;
@@ -48,7 +49,7 @@ public class UserAction extends BaseAction implements Serializable {
 	public String get() {
 		// 点了添加或者点了修改	
 			commUser = commUserService.get(commUser);
-			CommRoleService roleService = new CommRoleService();
+			CommRoleService roleService = (CommRoleService) BeansUtil.get("commRoleService");
 			roleList = roleService.listAll(new CommRole());
 			return "edit";
 	}

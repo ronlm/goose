@@ -11,7 +11,7 @@
 				<th colspan="4">
 					<h3>角色列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/comm/role.do?act=get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/roleAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll();  return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
@@ -29,14 +29,14 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/comm/role.do?act=del" name="myForm" id="myForm" method="post">
+		<form action="${pageContext.request.contextPath }/Comm/roleAction!del" name="myForm" id="myForm" method="post">
 			<c:forEach items="${pager.data}" var="role">
 			<tr>
 				<td width="20px"><input type="checkbox" name="id" value="${role.id}"/></td>
 				<td>${role.name}</td>
 				<td>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/comm/role.do?act=get&role.id=${role.id }'; return false;"><span>修改</span></a>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/comm/role.do?act=del&id=${role.id }'); return false;"><span>删除</span></a>
+					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/roleAtion!get?role.id=${role.id }'; return false;"><span>修改</span></a>
+					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/roleAtion!del?role.id=${role.id }'); return false;"><span>删除</span></a>
 				</td>
 			</tr> 
 			</c:forEach>

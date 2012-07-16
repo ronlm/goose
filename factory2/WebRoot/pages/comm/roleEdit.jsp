@@ -6,7 +6,7 @@
 	<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<form
-			action="${pageContext.request.contextPath }/pages/comm/role.do?act=save"
+			action="${pageContext.request.contextPath }/Comm/roleAction!save"
 			name="myForm" id="myForm" method="post">
 			<table class="mainTable">
 				<thead>

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.ejb.FinderException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -119,6 +120,11 @@ public class BaseDao<T> {
 		return listAll(entity);
 	}
 
+	public List<T> findByCondition(String queryString){
+		return hibernateTemplate.find(queryString);
+	}
+	
+	
 	public int getRecordCount(T entity) throws DataAccessException {
 		List<T> list = this.listAll(entity);
 		return list.size();
