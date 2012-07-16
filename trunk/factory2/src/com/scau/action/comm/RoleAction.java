@@ -19,6 +19,7 @@ import com.scau.model.comm.CommRoleResource;
 import com.scau.service.impl.comm.CommResourceService;
 import com.scau.service.impl.comm.CommRoleResourceService;
 import com.scau.service.impl.comm.CommRoleService;
+import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 
 import cn.com.ege.mvc.exception.BusinessException;
@@ -31,7 +32,9 @@ public class RoleAction extends BaseAction implements Serializable {
 	private CommRole commRole;
 	private List<CommRoleResource> roleResourceList = null;
 	private List<CommResource> resourceList = null;
-
+	private CommRoleResourceService commRoleResourceService;
+	
+	
 	public String list() {
 	
 			// 取列表
@@ -51,21 +54,19 @@ public class RoleAction extends BaseAction implements Serializable {
 			commRole = commRoleService.get(commRole);
 			// 获取该角色的资源
 			if (null != commRole) {
-				CommRoleResourceService commRoleResourceService = new CommRoleResourceService();
 				CommRoleResource crr = new CommRoleResource();
 				crr.setRoleId(commRole.getId());
 				try {
-					roleResourceList = commRoleResourceService
-							.listByRoleId(crr);
+					roleResourceList = commRoleResourceService.listByRoleId(crr);
 					// request.setAttribute("roleResourceList",
 					// roleResourceList);
 
-				} catch (BusinessException e) {
+				} catch (Exception e) {
 					logger.error("查询获取该角色的资源时出错了: " + e.getMessage(), e);
 				}
 			}
 			// 所有资源
-			CommResourceService resourceService = new CommResourceService();
+			CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");
 			resourceList = resourceService.listAll(new CommResource());
 			return "edit";
 	}
@@ -157,6 +158,16 @@ public class RoleAction extends BaseAction implements Serializable {
 	@Resource
 	public void setCommRoleService(CommRoleService commRoleService) {
 		this.commRoleService = commRoleService;
+	}
+
+	public CommRoleResourceService getCommRoleResourceService() {
+		return commRoleResourceService;
+	}
+
+	@Resource
+	public void setCommRoleResourceService(
+			CommRoleResourceService commRoleResourceService) {
+		this.commRoleResourceService = commRoleResourceService;
 	}
 	
 	

@@ -44,6 +44,11 @@ public class BaseService<T> {
 		return baseDao.get(entity);
 	}
 	
+	
+	public List<T> findByCondition(String queryString){
+		return baseDao.findByCondition(queryString);
+	}
+	
 	public int getRecordCount(T entity) {
 		return this.baseDao.getRecordCount(entity);
 	}
