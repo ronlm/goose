@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 这个Struts配置文件用于业务模块 -->
+	
+	<package name="goose" extends="struts-default" namespace="/goose">
+		
+	</package>
+
+</struts>
+	
