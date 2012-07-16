@@ -32,7 +32,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/comm/user.do?act=del" name="myForm" id="myForm" method="post">
+		<form action="${pageContext.request.contextPath }/Comm/userAction!del" name="myForm" id="myForm" method="post">
 			<c:forEach items="${pager.data}" var="user">
 			<c:if test="${user.id!=1}">
 			<tr>
