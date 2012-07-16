@@ -15,6 +15,13 @@
 			<result  name="error">/error/WebError.jsp</result>
 			<result  name="list">/pages/comm/MenuList.jsp</result>
 		</action>
+		
+		<action name="resourceAction" class="resourceAction">
+			<result  name="edit">/pages/comm/ResourceEdit.jsp</result>
+			<result  name="del">resourceAction</result>
+			<result  name="error">/error/WebError.jsp</result>
+			<result  name="list">/pages/comm/ResourceList.jsp</result>
+		</action>
 	</package>
 
 </struts>
