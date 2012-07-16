@@ -81,7 +81,13 @@ public class BaseDao<T> {
 	 */
 	public T get(T entity) {
 			try {
-				return list(entity).get(0);
+				
+				if(list(entity).size() == 0 || null == list(entity)){
+					return null;
+				}
+				else{ 
+					return list(entity).get(0);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

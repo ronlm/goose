@@ -43,7 +43,6 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 		try {
 			loginUser = (CommUser) commUserService.checkUser(user);
 			if (null != loginUser) {
-	
 				CommRoleResource crr = new CommRoleResource();
 				crr.setRoleId(loginUser.getRoleId());
 				List<CommRoleResource> crrList = commRoleResourceService.listAll(crr);
@@ -76,9 +75,9 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 	}
 
 	public String get() {
+		
 		this.user = commUserService.get(user);
 		return "edit";
-
 	}
 
 	public String save() {

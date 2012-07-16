@@ -33,7 +33,7 @@ public class RoleAction extends BaseAction implements Serializable {
 	private List<CommResource> resourceList = null;
 
 	public String list() {
-		try {
+	
 			// 取列表
 			int totalRows = commRoleService.getRecordCount(new CommRole());
 			String URL = request.getRequestURI();
@@ -44,14 +44,10 @@ public class RoleAction extends BaseAction implements Serializable {
 					true);
 			pager.setData(resourceList);
 			return "list";
-		} catch (Exception e) {
-			return "error";
-		}
 	}
 
 	public String get() {
 		// 点了添加或者点了修改
-		try {
 			commRole = commRoleService.get(commRole);
 			// 获取该角色的资源
 			if (null != commRole) {
@@ -71,11 +67,7 @@ public class RoleAction extends BaseAction implements Serializable {
 			// 所有资源
 			CommResourceService resourceService = new CommResourceService();
 			resourceList = resourceService.listAll(new CommResource());
-			return "EDIT";
-		} catch (Exception e) {
-			return "error";
-		}
-
+			return "edit";
 	}
 
 	public String save() {
@@ -98,18 +90,18 @@ public class RoleAction extends BaseAction implements Serializable {
 					}
 				}
 			}
-			return "getList";
+			return "list";
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("role", commRole);
 			request.setAttribute("message", e.getMessage());
-			return "EDIT";
+			return "edit";
 		}
 
 	}
 
 	public String del() {
-		try {
+		
 			// 删除
 			String[] ids = request.getParameterValues("id");
 			for (String id : ids) {
@@ -119,10 +111,7 @@ public class RoleAction extends BaseAction implements Serializable {
 					commRoleService.delete(role);
 				}
 			}
-			return "getList";
-		} catch (Exception e) {
-			return "error";
-		}
+			return "list";
 	}
 
 	public PageController getPager() {
@@ -160,4 +149,15 @@ public class RoleAction extends BaseAction implements Serializable {
 	public void setResourceList(List<CommResource> resourceList) {
 		this.resourceList = resourceList;
 	}
+
+	public CommRoleService getCommRoleService() {
+		return commRoleService;
+	}
+
+	@Resource
+	public void setCommRoleService(CommRoleService commRoleService) {
+		this.commRoleService = commRoleService;
+	}
+	
+	
 }

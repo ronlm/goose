@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ public class CommMenu implements Serializable {
 
 	
 	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}

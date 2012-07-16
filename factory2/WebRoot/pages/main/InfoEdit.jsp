@@ -5,7 +5,7 @@
 <html style="overflow-y: visible;">
     <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
   <body style="overflow-y: visible!important;overflow-y: scroll;">
-	  <form action="${pageContext.request.contextPath }/adminLoginout.do?act=save" name="myForm" id="myForm" method="post">
+	  <form action="${pageContext.request.contextPath }/Comm/adminLoginoutAction!save" name="myForm" id="myForm" method="post">
 	    	<table class="mainTable">
 				<thead>
 					<tr class="tableController">

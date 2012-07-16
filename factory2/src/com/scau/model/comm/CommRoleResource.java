@@ -3,6 +3,7 @@ package com.scau.model.comm;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ public class CommRoleResource implements Serializable{
 	private Long resourceId;
 	
 	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}

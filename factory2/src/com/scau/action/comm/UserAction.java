@@ -40,19 +40,17 @@ public class UserAction extends BaseAction implements Serializable {
 			List<CommUser> resourceList = commUserService.list(new CommUser(),
 					this.pageController.getPageStartRow(), pageController.getPageSize(), null, true);
 			pageController.setData(resourceList);
+			request.setAttribute("pager", pageController);
 			return "list";
 		
 	}
 
 	public String get() {
-		// 点了添加或者点了修改
-		
+		// 点了添加或者点了修改	
 			commUser = commUserService.get(commUser);
 			CommRoleService roleService = new CommRoleService();
 			roleList = roleService.listAll(new CommRole());
 			return "edit";
-		
-
 	}
 
 	public String save() {
@@ -107,6 +105,7 @@ public class UserAction extends BaseAction implements Serializable {
 		return commUser;
 	}
 
+	@Resource
 	public void setCommUser(CommUser commUser) {
 		this.commUser = commUser;
 	}

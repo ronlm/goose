@@ -55,10 +55,7 @@
 										cellspacing="0" cellpadding="0" style="margin-top: 5px;">
 										<tr>
 											<td id="errorMsg" colspan="6" align="center">
-												&nbsp;
-												<c:forEach items="${message }" var="m">
-													${m }
-												</c:forEach>
+												&nbsp;${message}
 											</td>
 										</tr>
 										<tr>

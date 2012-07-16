@@ -11,7 +11,7 @@
 				<th colspan="4">
 					<h3>用户列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/comm/menu.do?act=get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/menuAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll(); return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
@@ -32,8 +32,8 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/comm/user.do?act=del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="menu">
+		<form action="${pageContext.request.contextPath }/Comm/menuAction!del" name="myForm" id="myForm" method="post">
+			<c:forEach items="${pageController.data}" var="menu">
 			<tr>
 				<td width="20px"><input type="checkbox" name="id" value="${menu.id}"/></td>
 				<td>
@@ -50,8 +50,8 @@
 					</c:if>
 				</td>
 				<td>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/comm/menu.do?act=get&menu.id=${menu.id }'; return false;"><span>修改</span></a>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/comm/menu.do?act=del&id=${menu.id }'); return false;"><span>删除</span></a>
+					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/menuAction!get?menu.id=${menu.id }'; return false;"><span>修改</span></a>
+					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/menuAction!del?id=${menu.id }'); return false;"><span>删除</span></a>
 				</td>
 			</tr> 
 			</c:forEach>

@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
+	<include file="struts2.xml"/>
+	
 	<package name="Comm" extends="struts-default" namespace="/Comm">
 		<action name="adminLoginoutAction" class="adminLoginoutAction">
 			<result type="redirect" name="success">/pages/main/Main.jsp</result>
-			<result type="redirect" name="failure">/Login.jsp</result>
-			<result type="redirect" name="edit">/pages/main/Main.jsp</result>
-			<result type="redirect" name="list">/pages/main/Main.jsp</result>
+			<result name="failure">/Login.jsp</result>
+			<result name="edit">/pages/main/InfoEdit.jsp</result>
+			<result name="error">/error/WebError.jsp</result>
 		</action>
 		
 		<action name="menuAction" class="menuAction">
-			<result  name="edit">/pages/comm/MenuEdit.jsp</result>
-			<result  type="chain" name="del">menuAction</result>
-			<result  name="error">/error/WebError.jsp</result>
-			<result  name="list">/pages/comm/MenuList.jsp</result>
+			<result name="edit">/pages/comm/MenuEdit.jsp</result>
+			<result type="chain" name="del">menuAction</result>
+			<result name="error">/error/WebError.jsp</result>
+			<result name="list">/pages/comm/MenuList.jsp</result>
 		</action>
 		
 		<action name="resourceAction" class="resourceAction">
-			<result  name="edit">/pages/comm/ResourceEdit.jsp</result>
-			<result  name="del">resourceAction</result>
-			<result  name="error">/error/WebError.jsp</result>
-			<result  name="list">/pages/comm/ResourceList.jsp</result>
+			<result name="edit">/pages/comm/ResourceEdit.jsp</result>
+			<result name="del" type="chain">resourceAction</result>
+			<result name="error">/error/WebError.jsp</result>
+			<result name="list">/pages/comm/ResourceList.jsp</result>
+		</action>
+		
+		<action name="userAction" class="userAction">
+			<result name="edit">/pages/comm/UserEdit.jsp</result>
+			<result name="del" type="chain">userAction</result>
+			<result name="error">/error/WebError.jsp</result>
+			<result name="list">/pages/comm/UserList.jsp</result>
+		</action>
+		
+		<action name="roleAction" class="roleAction">
+			<result name="edit">/pages/comm/RoleEdit.jsp</result>
+			<result name="del" type="chain">roleAction</result>
+			<result name="error">/error/WebError.jsp</result>
+			<result name="list">/pages/comm/RoleList.jsp</result>
 		</action>
 	</package>
 

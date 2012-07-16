@@ -14,13 +14,13 @@ public class CommMenuService extends BaseService<CommMenu> implements Serializab
 	
 	public void save(CommMenu menu) throws BusinessException{
 		if (null != menu && null != menu.getName()) {
-			if( 0 != menu.getId() && null != menu.getId()){
+			if(null != menu.getId() && 0 != menu.getId()){
 				update(menu);
 			}else{
 				add(menu);
 			}
 		}else {
-			throw new BusinessException("菜单名不能为�?!");
+			throw new BusinessException("菜单名不能为空!");
 		}
 	}
 }

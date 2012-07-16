@@ -13,21 +13,20 @@ import com.scau.service.BaseService;
 @Component
 public class CommUserService extends BaseService<CommUser> implements Serializable {
 
-	@SuppressWarnings("unchecked")
 	public CommUser checkUser(CommUser entity) throws BusinessException {
 		if (null == entity) {
 			throw new BusinessException("用户对象不能为空!");
 		}
-		if (null == entity.getUserName() || null == entity.getPassword()) {
+		if (null == entity.getUserName()
+				|| null == entity.getPassword()) {
 			throw new BusinessException("用户名或者密码不能为空!");
 		}
-		
-		return get(entity);
+		return this.get(entity);
 	}
 	
 	public void save(CommUser user) throws BusinessException{
 		if (null != user && null != user.getUserName()) {
-			if( 0 != user.getId() && null != user.getId()){
+			if(null != user.getId() && 0 != user.getId()){
 				update(user);
 			}else{
 				add(user);
