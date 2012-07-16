@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="Comm" extends="struts-default" namespace="/Comm">
+		<action name="adminLoginoutAction" class="adminLoginoutAction">
+			<result type="redirect" name="success">/pages/main/Main.jsp</result>
+			<result type="redirect" name="failure">/Login.jsp</result>
+			<result type="redirect" name="edit">/pages/main/Main.jsp</result>
+			<result type="redirect" name="list">/pages/main/Main.jsp</result>
+		</action>
+		
+		<action name="menuAction" class="menuAction">
+			<result  name="edit">/pages/comm/MenuEdit.jsp</result>
+			<result  type="chain" name="del">menuAction</result>
+			<result  name="error">/error/WebError.jsp</result>
+			<result  name="list">/pages/comm/MenuList.jsp</result>
+		</action>
+	</package>
+
+</struts>
+	
