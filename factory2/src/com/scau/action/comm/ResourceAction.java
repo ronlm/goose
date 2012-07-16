@@ -38,25 +38,25 @@ public class ResourceAction extends BaseAction implements Serializable {
 				new CommResource(), this.pager.getPageStartRow(),
 				pager.getPageSize(), null, true);
 		pager.setData(resourceList);
-		return "LIST";
+		return "list";
 	}
 
 	public String get() {
 		// 点了添加或者点了修改
 		commResource = commResourceService.get(commResource);
-		return "EDIT";
+		return "edit";
 	}
 
 	public String save() {
 		// 保存表单
 		try {
 			commResourceService.save(commResource);
-			return "getList";
+			return "list";
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("resource", commResource);
 			request.setAttribute("message", e.getMessage());
-			return "EDIT";
+			return "edit";
 		}
 	}
 
@@ -70,7 +70,7 @@ public class ResourceAction extends BaseAction implements Serializable {
 				commResourceService.delete(resource);
 			}
 		}
-		return "getList";
+		return "list";
 	}
 
 	public PageController getPager() {
