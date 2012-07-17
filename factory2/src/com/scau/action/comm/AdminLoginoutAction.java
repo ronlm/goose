@@ -72,8 +72,8 @@ public class AdminLoginoutAction extends BaseAction implements Serializable ,Mod
 
 	public String get() {
 		// 取得当前登录用户
-		loginUser = commUserService.get(user);
-		request.setAttribute("user", loginUser);
+		user = commUserService.get(user);
+		request.setAttribute("user", user);
 		return "edit";
 	}
 

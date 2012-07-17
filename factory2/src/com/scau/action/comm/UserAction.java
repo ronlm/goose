@@ -30,10 +30,11 @@ public class UserAction extends BaseAction implements Serializable {
 	private CommUserService commUserService;
 	private CommUser commUser;
 	private List<CommRole> roleList = null;
+	private CommUser user;
+	private CommRoleService commRoleService;
 	
 	public String list() {
-		// 取列表
-		
+		// 取列表		
 			int totalRows = commUserService.getRecordCount(new CommUser());
 			String URL = request.getRequestURI();
 			this.pageController.setURL(URL);
@@ -48,22 +49,24 @@ public class UserAction extends BaseAction implements Serializable {
 
 	public String get() {
 		// 点了添加或者点了修改	
-			commUser = commUserService.get(commUser);
-			CommRoleService roleService = (CommRoleService) BeansUtil.get("commRoleService");
-			roleList = roleService.listAll(new CommRole());
+			user = commUserService.get(user);
+			roleList = commRoleService.listAll(new CommRole());
+			
+			request.setAttribute("user", user);
 			return "edit";
 	}
 
 	public String save() {
 		// 保存表单
 		try {
-			commUserService.save(commUser);
+			commUserService.save(user);
+			roleList = commRoleService.listAll(new CommRole());
 			return "list";
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("user", commUser);
 			request.setAttribute("message", e.getMessage());
-			return "edit";
+			return "list";
 		}
 
 	}
@@ -120,4 +123,22 @@ public class UserAction extends BaseAction implements Serializable {
 		this.roleList = roleList;
 	}
 
+	public CommUser getUser() {
+		return user;
+	}
+
+	public void setUser(CommUser user) {
+		this.user = user;
+	}
+
+	public CommRoleService getCommRoleService() {
+		return commRoleService;
+	}
+
+	@Resource
+	public void setCommRoleService(CommRoleService commRoleService) {
+		this.commRoleService = commRoleService;
+	}
+
+	
 }
