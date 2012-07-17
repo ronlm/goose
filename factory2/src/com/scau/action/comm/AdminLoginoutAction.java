@@ -6,16 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommRoleResource;
@@ -28,14 +24,14 @@ import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 @Scope("prototype")
-public class AdminLoginoutAction extends BaseAction implements Serializable {
+public class AdminLoginoutAction extends BaseAction implements Serializable ,ModelDriven<CommUser>{
 
 	private final static Log logger = LogFactory.getLog(AdminLoginoutAction.class);
 	private CommUser commUser;
 	private CommUser loginUser;
 	private CommUserService commUserService;
 	private CommRoleResourceService commRoleResourceService;
-	private CommUser user;
+	private CommUser user ;
 	private MenuAction menuAction;
 	private CommRoleService commRoleService;
 	
@@ -75,18 +71,19 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 	}
 
 	public String get() {
-		
-		this.user = commUserService.get(user);
+		// 取得当前登录用户
+		loginUser = commUserService.get(user);
+		request.setAttribute("user", loginUser);
 		return "edit";
 	}
 
 	public String save() {
 
-		try {
+		try {	
 			commUserService.save(user);
 			request.setAttribute("message",
 					"资料修改成功，请<a href=\"" + request.getContextPath() + "/Login.jsp\">重新登录。</a>");
-			return "success";
+			return "edit";
 		} catch (Exception e) {
 			request.setAttribute("user", user);
 			request.setAttribute("message", e.getMessage());
@@ -121,15 +118,6 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 		this.commUserService = commUserService;
 	}
 
-	public CommUser getUser() {
-		return user;
-	}
-
-	@Resource
-	public void setUser(CommUser user) {
-		this.user = user;
-	}
-
 	public CommRoleResourceService getCommRoleResourceService() {
 		return commRoleResourceService;
 	}
@@ -140,8 +128,6 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 		this.commRoleResourceService = commRoleResourceService;
 	}
 	
-	
-
 	public MenuAction getMenuAction() {
 		return menuAction;
 	}
@@ -161,6 +147,16 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 		this.commRoleService = commRoleService;
 	}
 
+	
+	
+	public CommUser getUser() {
+		return user;
+	}
+
+	public void setUser(CommUser user) {
+		this.user = user;
+	}
+
 	// 把空的<li></li>对和<li><ul></ul></li>对删除掉。
 	private String trim(String str) {
 		Pattern p = Pattern.compile("<li></li>");
@@ -174,5 +170,10 @@ public class AdminLoginoutAction extends BaseAction implements Serializable {
 			str = m.replaceAll("");
 		}
 		return str;
+	}
+
+	public CommUser getModel() {
+		// TODO Auto-generated method stub
+		return user;
 	}
 }

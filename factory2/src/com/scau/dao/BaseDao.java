@@ -65,7 +65,7 @@ public class BaseDao<T> {
 			throw new DataAccessException("尝试更新空对象！请至少对id属性设置值。entity==null");
 		}		
 		try {
-			hibernateTemplate.update(entity);
+			hibernateTemplate.saveOrUpdate(entity);
 			logger.info("成功更新");
 		} catch (Exception e) {
 			logger.error("更新记录出错！");
