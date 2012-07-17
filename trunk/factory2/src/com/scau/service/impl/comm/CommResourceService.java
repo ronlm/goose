@@ -3,6 +3,7 @@ package com.scau.service.impl.comm;
 import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.ege.mvc.exception.BusinessException;
 
@@ -11,6 +12,8 @@ import com.scau.service.BaseService;
 
 @Component
 public class CommResourceService extends BaseService<CommResource> implements Serializable {
+	
+	@Transactional
 	public void save(CommResource resource) throws BusinessException{
 		if (null != resource && null != resource.getName()) {
 			if(0 != resource.getId() && null != resource.getId()){

@@ -13,6 +13,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/proxool-0.9.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/proxool-cglib.jar"/>
+	<classpathentry kind="lib" path="E:/MavenRepo/struts-2.3.4-all/struts-2.3.4/lib/asm-3.3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring3.MYECLIPSE_SPRING30_CORE"/>

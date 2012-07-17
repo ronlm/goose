@@ -16,10 +16,6 @@ public class CommRoleResourceService extends BaseService<CommRoleResource> imple
 	public List<CommRoleResource> listByRoleId(CommRoleResource entity) throws Exception {
 		
 		if(null != entity && null != entity.getRoleId()){
-			// List<CommRoleResource> roleResources = findByCondition((
-				//	"from CommRoleResource rr where rr.roleId=?" ,entity.getRoleId());
-			//return roleResources;
-			//return findByCondition("from CommRoleResource rr where rr.getRoleId='" + entity.getRoleId() + "'");
 			return list(entity);
 		}
 		else {

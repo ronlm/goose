@@ -34,13 +34,13 @@
 					<tr>
 						<td width="200" align="right">用户名:</td>
 						<td>
-						<input type="text" validation="required,alpha" name="user.userName" id="userName" value="${requestScope.user.userName}"/>
-						<input type="hidden" name="user.id" id="id" value="${requestScope.user.id==null?"":requestScope.user.id}"/>
+						<input type="text" validation="required,alpha" name="user.userName" id="userName" value="${user.userName}"/>
+						<input type="hidden" name="user.id" id="id" value="${user.id==null?"":user.id}"/>
 						</td>
 					</tr> 
 					<tr>
 						<td align="right">	密码:</td>
-						<td><input type="password" validation="required,minLength=6"  name="user.password" id="password" value="${requestScope.user.password}"/></td>
+						<td><input type="password" validation="required,minLength=6"  name="user.password" id="password" value="${user.password}"/></td>
 					</tr> 
 					<tr>
 						<td align="right">确认密码:</td>

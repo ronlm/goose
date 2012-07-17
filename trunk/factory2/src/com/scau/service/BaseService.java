@@ -5,8 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
-
-import cn.com.ege.mvc.exception.DataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.scau.dao.BaseDao;
 
@@ -18,6 +17,7 @@ public class BaseService<T> {
 		return baseDao.add(entity);
 	}
 
+	
 	public void delete(T entity)  {
 			baseDao.delete(entity);
 	}
@@ -35,6 +35,7 @@ public class BaseService<T> {
 			String condition, boolean isQueryAll)  {
 		return baseDao.list(entity, start, size, condition, isQueryAll);
 	}
+
 
 	public void update(T entity)  {
 		baseDao.update(entity);
