@@ -66,7 +66,6 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	public String get() {		
 			// 点了添加或者点了修改
-		
 			CommMenu temp = commMenuService.get(menu);
 			if (null != temp) {
 				commMenu = temp;

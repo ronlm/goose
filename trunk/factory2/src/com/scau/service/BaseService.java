@@ -13,11 +13,12 @@ import com.scau.dao.BaseDao;
 public class BaseService<T> {
 	protected BaseDao<T> baseDao = new BaseDao<T>();
 
+	@Transactional
 	public Long add(T entity)  {
 		return baseDao.add(entity);
 	}
 
-	
+	@Transactional
 	public void delete(T entity)  {
 			baseDao.delete(entity);
 	}
