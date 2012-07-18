@@ -33,7 +33,7 @@ public class BaseDao<T> {
 	 * @return 返回新增记录在数据库是自增的字段值
 	 * @throws DataAccessException
 	 */
-	public Long add(T entity) throws DataAccessException {
+	public void add(T entity) throws DataAccessException {
 		if (null == entity) {
 			throw new DataAccessException("尝试插入空记录！entity==null");
 		}
@@ -44,7 +44,7 @@ public class BaseDao<T> {
 			logger.error("插入记录出错！");
 			e.printStackTrace();
 		}
-		return (long) 1;
+		
 	}
 
 	public void delete(T entity) throws DataAccessException {
@@ -56,10 +56,12 @@ public class BaseDao<T> {
 			logger.info("成功删除");
 		} catch (Exception e) {
 			logger.error("删除记录出错！" );
-			throw new DataAccessException("删除记录出错！");
+			e.printStackTrace();
+			//throw new DataAccessException("删除记录出错！");
 		}
 	}
 
+	
 	public void update(T entity) throws DataAccessException {
 		if (null == entity) {
 			throw new DataAccessException("尝试更新空对象！请至少对id属性设置值。entity==null");
