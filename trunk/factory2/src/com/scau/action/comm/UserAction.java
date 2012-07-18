@@ -51,7 +51,6 @@ public class UserAction extends BaseAction implements Serializable {
 		// 点了添加或者点了修改	
 			user = commUserService.get(user);
 			roleList = commRoleService.listAll(new CommRole());
-			
 			request.setAttribute("user", user);
 			return "edit";
 	}
@@ -61,19 +60,17 @@ public class UserAction extends BaseAction implements Serializable {
 		try {
 			commUserService.save(user);
 			roleList = commRoleService.listAll(new CommRole());
-			return "list";
+			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("user", commUser);
 			request.setAttribute("message", e.getMessage());
-			return "list";
+			return list();
 		}
-
 	}
 
 	public String del() {
-		// 删除
-		
+		// 删除	
 			String[] ids = request.getParameterValues("id");
 			for (String id : ids) {
 				CommUser user = new CommUser();
@@ -82,7 +79,7 @@ public class UserAction extends BaseAction implements Serializable {
 					commUserService.delete(user);
 				}
 			}
-			return "list";
+			return list();//返回取列表页面，并刷新列表
 	}
 
 	

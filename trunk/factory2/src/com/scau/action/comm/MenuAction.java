@@ -81,7 +81,7 @@ public class MenuAction extends BaseAction implements Serializable {
 		// 保存表单
 		try {
 			commMenuService.save(menu);
-			return "list";
+			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("menu", commMenu);
@@ -101,7 +101,7 @@ public class MenuAction extends BaseAction implements Serializable {
 				commMenuService.delete(menu);
 			}
 		}
-		return "list";
+		return list();
 	}
 
 	private void save(List<CommMenu> originList, List<CommMenu2> objectList) {
