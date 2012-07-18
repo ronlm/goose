@@ -40,7 +40,7 @@
 					<td>${resource.path}</td>
 					<td>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/resourceAction!get?resource.id=${resource.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/resourceAction!del?resource.id=${resource.id }'); return false;"><span>删除</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/resourceAction!del?id=${resource.id }'); return false;"><span>删除</span></a>
 					</td>
 				</tr> 
 				</c:forEach>
