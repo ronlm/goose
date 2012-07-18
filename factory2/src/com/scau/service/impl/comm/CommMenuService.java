@@ -13,7 +13,7 @@ import com.scau.service.BaseService;
 @Component
 public class CommMenuService extends BaseService<CommMenu> implements Serializable {
 	
-	@Transactional
+	
 	public void save(CommMenu menu) throws BusinessException{
 		if (null != menu && null != menu.getName()) {
 			if(null != menu.getId() && 0 != menu.getId()){
