@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.model.comm.CommResource;
 import com.scau.model.comm.CommRole;
@@ -25,7 +22,7 @@ import com.scau.util.PageController;
 import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
-public class RoleAction extends BaseAction implements Serializable {
+public class RoleAction extends BaseAction implements Serializable ,ModelDriven<CommRole>{
 	private final static Log logger = LogFactory.getLog(RoleAction.class);
 	private PageController pager = null;
 	private CommRoleService commRoleService;
@@ -33,7 +30,7 @@ public class RoleAction extends BaseAction implements Serializable {
 	private List<CommRoleResource> roleResourceList = null;
 	private List<CommResource> resourceList = null;
 	private CommRoleResourceService commRoleResourceService;
-	
+	private CommRole role;
 	
 	public String list() {
 	
@@ -51,16 +48,14 @@ public class RoleAction extends BaseAction implements Serializable {
 
 	public String get() {
 		// 点了添加或者点了修改
-			commRole = commRoleService.get(commRole);
+			role = commRoleService.get(role);
 			// 获取该角色的资源
-			if (null != commRole) {
+			if (null != role) {
 				CommRoleResource crr = new CommRoleResource();
-				crr.setRoleId(commRole.getId());
+				crr.setRoleId(role.getId());
 				try {
 					roleResourceList = commRoleResourceService.listByRoleId(crr);
-					// request.setAttribute("roleResourceList",
-					// roleResourceList);
-
+					
 				} catch (Exception e) {
 					logger.error("查询获取该角色的资源时出错了: " + e.getMessage(), e);
 				}
@@ -91,7 +86,7 @@ public class RoleAction extends BaseAction implements Serializable {
 					}
 				}
 			}
-			return "list";
+			return list();// 重新取列表
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("role", commRole);
@@ -102,7 +97,7 @@ public class RoleAction extends BaseAction implements Serializable {
 	}
 
 	public String del() {
-		
+	
 			// 删除
 			String[] ids = request.getParameterValues("id");
 			for (String id : ids) {
@@ -112,7 +107,7 @@ public class RoleAction extends BaseAction implements Serializable {
 					commRoleService.delete(role);
 				}
 			}
-			return "list";
+			return list();
 	}
 
 	public PageController getPager() {
@@ -128,7 +123,6 @@ public class RoleAction extends BaseAction implements Serializable {
 		return commRole;
 	}
 
-	@Resource
 	public void setRole(CommRole role) {
 		this.commRole = role;
 	}
@@ -168,6 +162,20 @@ public class RoleAction extends BaseAction implements Serializable {
 	public void setCommRoleResourceService(
 			CommRoleResourceService commRoleResourceService) {
 		this.commRoleResourceService = commRoleResourceService;
+	}
+
+	public CommRole getCommRole() {
+		return commRole;
+	}
+
+	@Resource
+	public void setCommRole(CommRole commRole) {
+		this.commRole = commRole;
+	}
+
+	public CommRole getModel() {
+		// TODO Auto-generated method stub
+		return role;
 	}
 	
 	

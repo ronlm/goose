@@ -27,7 +27,8 @@ public class ResourceAction extends BaseAction implements Serializable {
 	private PageController pager = null;
 	private CommResourceService commResourceService;
 	private CommResource commResource ;
-
+	private CommResource resource;
+	
 	public String list() {
 		// 取列表
 		int totalRows = commResourceService.getRecordCount(new CommResource());
@@ -50,8 +51,8 @@ public class ResourceAction extends BaseAction implements Serializable {
 	public String save() {
 		// 保存表单
 		try {
-			commResourceService.save(commResource);
-			return "list";
+			commResourceService.save(resource);
+			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
 			request.setAttribute("resource", commResource);
@@ -70,7 +71,7 @@ public class ResourceAction extends BaseAction implements Serializable {
 				commResourceService.delete(resource);
 			}
 		}
-		return "list";
+		return list();
 	}
 
 	public PageController getPager() {
@@ -98,6 +99,14 @@ public class ResourceAction extends BaseAction implements Serializable {
 	@Resource
 	public void setCommResource(CommResource commResource) {
 		this.commResource = commResource;
+	}
+
+	public CommResource getResource() {
+		return resource;
+	}
+
+	public void setResource(CommResource resource) {
+		this.resource = resource;
 	}
 
 	
