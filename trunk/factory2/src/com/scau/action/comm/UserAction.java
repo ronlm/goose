@@ -43,21 +43,22 @@ public class UserAction extends BaseAction implements Serializable {
 					this.pageController.getPageStartRow(), pageController.getPageSize(), null, true);
 			pageController.setData(resourceList);
 			request.setAttribute("pager", pageController);
-			return "list";
-		
+			return "list";		
 	}
 
 	public String get() {
 		// 点了添加或者点了修改	
-			user = commUserService.get(user);
+			commUser = commUserService.get(user);
+			
 			roleList = commRoleService.listAll(new CommRole());
-			request.setAttribute("user", user);
+			request.setAttribute("user", commUser);
 			return "edit";
 	}
 
 	public String save() {
 		// 保存表单
 		try {
+			
 			commUserService.save(user);
 			roleList = commRoleService.listAll(new CommRole());
 			return list();

@@ -36,4 +36,15 @@ public class CommUserService extends BaseService<CommUser> implements Serializab
 			throw new BusinessException("用户名不能为空!");
 		}
 	}
+
+	@Override
+	public CommUser get(CommUser entity) {
+		if(null != entity.getId()){
+			return get(entity, entity.getId());
+		}
+		return super.get(entity);
+	}
+	
+	
+
 }

@@ -35,12 +35,16 @@ public class testCommUserService {
 		service.save(u);
 	}
 
-	//@Test
-	public void testAdd() {
-		u.setUserName("test3");
-		u.setPassword("test3");
-		long ret = service.add(u);
-		assertEquals(ret,1L);
+	@Test
+	public void testGet() {
+		CommUser user = new CommUser();	
+		user.setId(11L);
+		
+		CommUser ret = service.get(user, user.getId());
+		System.out.println(ret.getId());
+		long retId = ret.getId();
+		assertEquals(11L,retId);	
+		
 	}
 
 	//@Test
@@ -48,16 +52,16 @@ public class testCommUserService {
 		fail("Not yet implemented");
 	}
 
-	@Test
+	//@Test
 	public void testUpdate() {
 		CommUser user = new CommUser();
 		user.setPassword("123445");
 		user.setId(5L);
 		user.setUserName("WTF");
 		
-		//u = service.get(u);
-		
 		service.update(user);
 	}
+	
+	
 
 }

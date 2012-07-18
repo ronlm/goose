@@ -1,5 +1,6 @@
 package com.scau.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -47,6 +48,9 @@ public class BaseService<T> {
 		return baseDao.get(entity);
 	}
 	
+	public T get(T entity,Long id) {
+		return baseDao.get(entity,id);
+	}
 	
 	public List<T> findByCondition(String queryString){
 		return baseDao.findByCondition(queryString);
