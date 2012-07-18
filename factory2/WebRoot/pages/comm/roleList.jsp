@@ -31,14 +31,14 @@
 		<tbody>
 		<form action="${pageContext.request.contextPath }/Comm/roleAction!del" name="myForm" id="myForm" method="post">
 			<c:forEach items="${pager.data}" var="role">
-			<tr>
-				<td width="20px"><input type="checkbox" name="id" value="${role.id}"/></td>
-				<td>${role.name}</td>
-				<td>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/roleAtion!get?role.id=${role.id }'; return false;"><span>修改</span></a>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/roleAtion!del?role.id=${role.id }'); return false;"><span>删除</span></a>
-				</td>
-			</tr> 
+				<tr>
+					<td width="20px"><input type="checkbox" name="id" value="${role.id}"/></td>
+					<td>${role.name}</td>
+					<td>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/roleAction!get?role.id=${role.id }'; return false;"><span>修改</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/roleAction!del?id=${role.id }'); return false;"><span>删除</span></a>
+					</td>
+				</tr> 
 			</c:forEach>
 		</form>
 		</tbody>

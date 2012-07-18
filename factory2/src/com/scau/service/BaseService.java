@@ -14,8 +14,8 @@ public class BaseService<T> {
 	protected BaseDao<T> baseDao = new BaseDao<T>();
 
 	@Transactional
-	public Long add(T entity)  {
-		return baseDao.add(entity);
+	public void add(T entity)  {
+		 baseDao.add(entity);
 	}
 
 	@Transactional
@@ -38,6 +38,7 @@ public class BaseService<T> {
 	}
 
 
+	@Transactional
 	public void update(T entity)  {
 		baseDao.update(entity);
 	}
