@@ -25,7 +25,6 @@ public class CommUserService extends BaseService<CommUser> implements Serializab
 		return this.get(entity);
 	}
 	
-	@Transactional
 	public void save(CommUser user) throws BusinessException{
 		if (null != user && null != user.getUserName()) {
 			if(null != user.getId() && 0 != user.getId()){

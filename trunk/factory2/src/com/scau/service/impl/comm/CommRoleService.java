@@ -12,14 +12,15 @@ import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 public class CommRoleService extends BaseService<CommRole> implements Serializable{
-	@Transactional
+	
 	public Long save(CommRole role) throws BusinessException{
 		if (null != role && null != role.getName()) {
-			if(0 != role.getId() && null != role.getId()){
-				update(role);
+			if(null != role.getId() && 0 != role.getId()){
+				update(role);	
 				return role.getId();
 			}else{
-				return add(role);
+				add(role);
+				return get(role).getId();
 			}
 		}else {
 			throw new BusinessException("角色名不能为空!");
