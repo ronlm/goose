@@ -52,7 +52,7 @@
 			<tr  class="tableController_bottom">
 				<td colspan="11" align="center">
 					<jsp:include page="../../include/SplitPage.jsp">
-						<jsp:param name="pager" value="${pager}"/>
+						<jsp:param name="pager" value="${pageController}"/>
 					</jsp:include>
 				</td>
 			</tr>
