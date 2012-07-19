@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class CommUser implements Serializable {
 	
 	private Long id;
-	private String userName;//用户名即账号，用于登�?
+	private String userName;//用户名即账号，用于登录?
 	private String realName;//真实姓名
 	private String password;
 	private String qq;
