@@ -7,9 +7,13 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Property;
 import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -110,108 +114,33 @@ public class BaseDao<T> {
 		return (List<T>) hibernateTemplate.loadAll(entity.getClass());
 	}
 
-	/**
-	 * 查询列表的方法,实现分页查询 注意: entity的属性如果没设置有值并且isQueryAll=true时会查询所有记录!
-	 * 
-	 * @param entity
-	 *            实体对象
-	 * @param start
-	 *            开始记录的下标
-	 * @param size
-	 *            要查询返回的数量
-	 * @param condition
-	 *            条件, 如 order by updateTime desc.如果没有条件则设为"1=1"(含有一空格的字符串)
-	 * @param isQueryAll
-	 * @return
-	 * @throws DataAccessException
-	 */
+	
 	@SuppressWarnings("unchecked")
-	public List<T> list(final T entity, final Integer start,
-			final Integer size, final String condition, boolean isQueryAll)
+	public List<T> list(final T entity,  final Integer start, final Integer size,String[] propertyNames,Object[] values) 
 			throws DataAccessException {
-				
-		List<T> list = hibernateTemplate
-				.executeFind(new HibernateCallback<T>() {
-					public T doInHibernate(Session session)
-							throws HibernateException, SQLException {
-						Query query = session
-								.createQuery("from "+ entity.getClass().getSimpleName() +" T where "+ condition );
-						query.setFirstResult(start);
-						query.setMaxResults(size);
-						List list = query.list();
-						return (T) list;
-					}
-				});
-		return list;
+		if(propertyNames.length != values.length){
+			logger.error("要查询的属性个数和属性值的个数不相等！");
+			throw  new DataAccessException("执行分页查询出错！");
+		}
+		else {
+			final DetachedCriteria criteria = DetachedCriteria.forClass(entity.getClass());
+			// 加上查询的约束条件
+			for(int i = 0 ;i < propertyNames.length;i++ ){
+				criteria.add( Property.forName(propertyNames[i]).eq(values[i]) );
+			}
+			return (List) hibernateTemplate.execute(new HibernateCallback() {
+				  public Object doInHibernate(Session session) { 
+					  if(null == start || null == size){
+						 return criteria.getExecutableCriteria(session).list();
+					  }
+					  else{
+						  return criteria.getExecutableCriteria(session).setMaxResults(size).setFirstResult(start).list();
+					  }
+				  }
+			});
+	
+		}
 	}
-
-	/**
-	 * 使用hql 语句进行操作
-	 * 
-	 * @param hql
-	 *            HSQL 查询语句
-	 * @param offset
-	 *            开始取数据的下标
-	 * @param length
-	 *            读取数据记录数
-	 * @return List 结果集
-	 * 
-	 *         public List getListForPage(final String hql, final int offset,
-	 *         final int length) {
-	 * 
-	 *         List list = getHibernateTemplate().executeFind(new
-	 *         HibernateCallback() { public Object doInHibernate(Session
-	 *         session) throws HibernateException, SQLException { Query query =
-	 *         session.createQuery(hql); query.setFirstResult(offset);
-	 *         query.setMaxResults(length); List list = query.list(); return
-	 *         list; } }); return list; }
-	 */
-
-	/*
-	 * Connection conn = null; PreparedStatement prmt = null; ResultSet rs =
-	 * null; Class entityClass = entity.getClass(); String entityClassName =
-	 * entityClass.getName(); // 获得实体类名 String tableName =
-	 * Utils.getTableNameFromEntityName
-	 * (entityClassName.substring(entityClassName .lastIndexOf('.') + 1));
-	 * Field[] field = entityClass.getDeclaredFields(); // 获取实体类的所有字段 String[]
-	 * fieldGetterName = Utils.getColumnGetterName(entityClass); // 获取字段值getter名
-	 *//** *创建预备查询语句** */
-	/*
-	 * StringBuilder sql = new StringBuilder("select * from " + tableName +
-	 * " where 1=1"); List<T> list = new ArrayList<T>(); try { // 准备基本的sql语句 for
-	 * (int i = 0; i < fieldGetterName.length; i++) {// 构造查询字符串 if
-	 * (entityClass.getMethod(fieldGetterName[i]).invoke(entity) != null) { //
-	 * 如果实体对象字段值不为空 sql.append(" and " + field[i].getName() + "=?"); } } // 排序
-	 * if (null != condition) { sql.append(" " + condition); }
-	 * 
-	 * // 如果需要分布查询 if (null != start && null != size) { sql.append(" limit " +
-	 * start + "," + size); }
-	 * 
-	 * conn = JdbcUtil.getConnection(); prmt =
-	 * conn.prepareStatement(sql.toString());
-	 *//** **为查询语句设值***** */
-	/*
-	 * int j = 1;// 预查询语句的设值下标号 for (int i = 0; i < fieldGetterName.length; i++)
-	 * { if (entityClass.getMethod(fieldGetterName[i]).invoke(entity) != null) {
-	 * // 如果实体对象字段值不为空 Object value =
-	 * entityClass.getMethod(fieldGetterName[i]).invoke(entity);
-	 * prmt.setObject(j, value); j++; } } // 如果没有一个属性被赋值的话, 会查询全部列表!! //
-	 * 所以除非是要查询所有记录, 否则要避免这种情况 if (1 == j && (!isQueryAll)) { //
-	 * 如果不是查询全部但没有一个属性被赋值,则抛异常!! logger.error("查询记录出错！sql=" + sql +
-	 * ". 请确认: 1.对象的getter方法为public; 2. 如果不是查询所有记录, 请至少有一个属性被赋值."); return list;
-	 * } // System.out.print("sql============" + sql + "======"); rs =
-	 * prmt.executeQuery(); ResultSetMetaData rsMetaData = rs.getMetaData();
-	 * String[] columnSetterName = Utils.getColumnSetterName(entityClass); //
-	 * 实体类中字段的设值方法名 list = (List<T>) Utils.setEntityObject(entityClass, rs,
-	 * rsMetaData, columnSetterName); } catch (Exception e) { logger
-	 * .error("查询记录出错！sql=" + sql +
-	 * ". 请确认: 1.对象的getter方法为public; 2.如果不是查询所有记录, 请至少有一个属性被赋值.", e); throw new
-	 * DataAccessException("查询记录出错！sql=" + sql +
-	 * ". 请确认: 1.对象的getter方法为public; 2.如果不是查询所有记录, 请至少有一个属性被赋值.", e); } finally
-	 * { 关闭连接 JdbcUtil.close(prmt, conn); } logger.info("sql=" + sql);
-	 * logger.info("成功查询记录。"); return list;
-	 */
-	// }
 
 	public List<T> findByCondition(String queryString) {
 		return hibernateTemplate.find(queryString);
