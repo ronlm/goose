@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import cn.com.ege.mvc.exception.DataAccessException;
@@ -91,19 +92,9 @@ public class BaseDao<T> {
 		return null;
 	}
 
+	@Transactional
 	public T get(T entity, Long id) {
-		try {
-			if (null == id) {
-				logger.info("ID 为空");
-				throw new DataAccessException("ID不存在！");
-			} else {
-				return (T) hibernateTemplate.get(entity.getClass(),
-						(Serializable) id);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		return (T) hibernateTemplate.get(entity.getClass(),(Serializable) id);
 	}
 
 	public List<T> list(T entity) throws DataAccessException, Exception {
