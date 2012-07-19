@@ -1,7 +1,5 @@
 package cn.com.ege.mvc.security;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
