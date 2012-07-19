@@ -2,6 +2,8 @@ package testService;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,6 +13,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 import com.scau.action.comm.UserAction;
 import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommUserService;
+import com.scau.util.PageController;
 
 public class testCommUserService {
 
@@ -62,6 +65,12 @@ public class testCommUserService {
 		service.update(user);
 	}
 	
-	
+	@Test
+	public void testList(){
+		//PageController page = (PageController) ctx.getBean("PageController");
+		List<CommUser> users = service.list(u,2 , 9, null, null);
+		int ret = users.size();
+		assertEquals(9, ret);
+	}
 
 }
