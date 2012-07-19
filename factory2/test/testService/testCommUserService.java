@@ -38,13 +38,13 @@ public class testCommUserService {
 		service.save(u);
 	}
 
-	@Test
+	//@Test
 	public void testGet() {
 		CommUser user = new CommUser();	
-		user.setId(11L);
+		user.setId(23L);
 		
 		CommUser ret = service.get(user, user.getId());
-		System.out.println(ret.getId());
+		System.out.println(ret.getUserName());
 		long retId = ret.getId();
 		assertEquals(11L,retId);	
 		
@@ -55,17 +55,17 @@ public class testCommUserService {
 		fail("Not yet implemented");
 	}
 
-	//@Test
+	@Test
 	public void testUpdate() {
 		CommUser user = new CommUser();
 		user.setPassword("123445");
 		user.setId(5L);
-		user.setUserName("WTF");
+		user.setUserName("去死！");
 		
-		service.update(user);
+		service.add(user);
 	}
 	
-	@Test
+	//@Test
 	public void testList(){
 		//PageController page = (PageController) ctx.getBean("PageController");
 		List<CommUser> users = service.list(u,2 , 9, null, null);
