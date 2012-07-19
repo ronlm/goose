@@ -24,7 +24,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 @Scope("prototype")
 public class ResourceAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(ResourceAction.class);
-	private PageController pager = null;
+	private PageController pageController;
 	private CommResourceService commResourceService;
 	private CommResource commResource ;
 	private CommResource resource;
@@ -33,12 +33,12 @@ public class ResourceAction extends BaseAction implements Serializable {
 		// 取列表
 		int totalRows = commResourceService.getRecordCount(new CommResource());
 		String URL = request.getRequestURI();
-		this.pager.setURL(URL);
-		this.pager.setTotalRowsAmount(totalRows);
+		this.pageController.setURL(URL);
+		this.pageController.setTotalRowsAmount(totalRows);
 		List<CommResource> resourceList = commResourceService.list(
-				new CommResource(), this.pager.getPageStartRow(),
-				pager.getPageSize(), null, null);
-		pager.setData(resourceList);
+				new CommResource(), this.pageController.getPageStartRow(),
+				pageController.getPageSize(), null, null);
+		pageController.setData(resourceList);
 		return "list";
 	}
 
@@ -74,13 +74,15 @@ public class ResourceAction extends BaseAction implements Serializable {
 		return list();
 	}
 
-	public PageController getPager() {
-		return pager;
+	
+
+	public PageController getPageController() {
+		return pageController;
 	}
 
 	@Resource
-	public void setPager(PageController pager) {
-		this.pager = pager;
+	public void setPageController(PageController pageController) {
+		this.pageController = pageController;
 	}
 
 	public CommResourceService getCommResourceService() {

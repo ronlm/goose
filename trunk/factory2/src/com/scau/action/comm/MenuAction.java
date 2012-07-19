@@ -32,7 +32,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 @Scope("prototype")
 public class MenuAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(MenuAction.class);
-	private PageController pageController = null;
+	private PageController pageController ;
 	private CommMenuService commMenuService;
 	private CommMenu commMenu;
 	private CommMenu menu;
