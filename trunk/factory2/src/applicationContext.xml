@@ -60,6 +60,13 @@
 				<value>com.scau.model.comm.CommResource</value>
 				<value>com.scau.model.comm.CommRole</value>
 				<value>com.scau.model.comm.CommRoleResource</value>
+				<value>com.scau.model.goose.Farm</value>
+				<value>com.scau.model.goose.Farmer</value>
+				<value>com.scau.model.goose.Goose</value>
+				<value>com.scau.model.goose.Goosetrade</value>
+				<value>com.scau.model.goose.Goosereceive</value>
+				<value>com.scau.model.goose.Resourcetrade</value>
+				<value>com.scau.model.goose.Resource</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -73,4 +80,5 @@
 			</props>
 		</property>
 	</bean>
+	 
 </beans>
