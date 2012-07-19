@@ -5,7 +5,7 @@
 	<!-- 这个Struts配置文件用于业务模块 -->
 	
 	<package name="goose" extends="struts-default" namespace="/goose">	
-		<!-- 使用通配符 对菜单，用户，资源，角色配置，页面名第一个单词用小写 开始-->
+		<!-- 使用通配符 对农户，养殖场配置，页面名第一个单词用小写 开始-->
 		<action name="*Action" class="{1}Action">
 			<result name="edit">/pages/comm/{1}Edit.jsp</result>
 			<result name="error">/error/WebError.jsp</result>
