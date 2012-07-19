@@ -12,6 +12,8 @@ public class testUserAction {
 
 	protected ApplicationContext  ctx = new  ClassPathXmlApplicationContext("applicationContext.xml");
 	protected UserAction userAction = (UserAction) ctx.getBean("userAction");
+	
+	
 	@Test
 	public void testList() {
 		assertEquals(userAction.list(), "list");
