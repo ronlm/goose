@@ -116,8 +116,12 @@ public class BaseDao<T> {
 
 	
 	@SuppressWarnings("unchecked")
-	public List<T> list(final T entity,  final Integer start, final Integer size,String[] propertyNames,Object[] values) 
+	public List<T> list(final T entity,   final Integer start, final Integer size,String[] propertyNames,Object[] values) 
 			throws DataAccessException {
+		if(null == propertyNames || null == values){
+			propertyNames = new String[0];
+			values = new String[0];
+		}
 		if(propertyNames.length != values.length){
 			logger.error("要查询的属性个数和属性值的个数不相等！");
 			throw  new DataAccessException("执行分页查询出错！");
