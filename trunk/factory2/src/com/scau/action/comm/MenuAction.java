@@ -74,6 +74,7 @@ public class MenuAction extends BaseAction implements Serializable {
 			request.setAttribute("menuList", this.menuList);
 			List<CommResource> resourceList = commResourceService.listAll(new CommResource());
 			request.setAttribute("resourceList", resourceList);
+			request.setAttribute("menu", commMenu);
 			return "edit";	
 	}
 

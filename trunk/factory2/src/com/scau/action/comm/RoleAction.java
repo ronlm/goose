@@ -48,7 +48,7 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 
 	public String get() {
 		// 点了添加或者点了修改
-			role = commRoleService.get(role);
+			role = commRoleService.get(commRole);
 			// 获取该角色的资源
 			if (null != role) {
 				CommRoleResource crr = new CommRoleResource();
@@ -61,8 +61,9 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 				}
 			}
 			// 所有资源
-			CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");
+			CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");			
 			resourceList = resourceService.listAll(new CommResource());
+			request.setAttribute("role", role);
 			return "edit";
 	}
 
