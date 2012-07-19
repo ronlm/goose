@@ -33,9 +33,8 @@ public class BaseService<T> {
 		return baseDao.listAll(entity);
 	}
 
-	public List<T> list(T entity, Integer start, Integer size,
-			String condition, boolean isQueryAll)  {
-		return baseDao.list(entity, start, size, condition, isQueryAll);
+	public List<T> list(T entity,Integer start, Integer size,String[] propertyNames,Object[] values) {
+		return baseDao.list(entity, start, size, propertyNames, values);
 	}
 
 
