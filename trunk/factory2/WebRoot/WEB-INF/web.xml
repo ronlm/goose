@@ -70,7 +70,7 @@
 	</filter-mapping>
 	<!-- Spring 对Hibernate Session的支持 结束 -->
 
-	<!-- 权限验证过滤器 开始 
+	<!-- 权限验证过滤器 开始
 	<filter>
 		<filter-name>SecurityFilter</filter-name>
 		<filter-class>cn.com.ege.mvc.security.SecurityFilter</filter-class>
@@ -79,7 +79,7 @@
 		<filter-name>SecurityFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	-->
+	 -->
 	<!-- 权限验证过滤器 结束 -->
 
 	<!-- 连接池配置信息开始 -->
