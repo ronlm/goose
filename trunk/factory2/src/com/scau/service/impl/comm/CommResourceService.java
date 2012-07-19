@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.model.comm.CommResource;
+import com.scau.model.comm.CommRoleResource;
 import com.scau.service.BaseService;
 
 @Component
@@ -22,7 +23,20 @@ public class CommResourceService extends BaseService<CommResource> implements Se
 				add(resource);
 			}
 		}else {
-			throw new BusinessException("角色名不能为�?!");
+			throw new BusinessException("资源名不能为空!");
+		}
+	}
+	
+	@Override
+	public CommResource get(CommResource entity) {
+		if(null != entity && null != entity.getId() && 0!= entity.getId()){
+			return super.get(entity, entity.getId());
+		}
+		else if(null != entity) {
+			return super.get(entity);
+		}
+		else {
+			return null;
 		}
 	}
 }

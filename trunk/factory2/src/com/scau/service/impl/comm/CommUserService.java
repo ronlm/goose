@@ -39,17 +39,15 @@ public class CommUserService extends BaseService<CommUser> implements Serializab
 
 	@Override
 	public CommUser get(CommUser entity) {
-		if(null != entity && null != entity.getId()){
-			return get(entity, entity.getId());
+		if(null != entity && null != entity.getId() && 0!= entity.getId()){
+			return super.get(entity, entity.getId());
 		}
 		else if(null != entity) {
-			return get(entity);
+			return super.get(entity);
 		}
 		else {
 			return null;
 		}
 	}
 	
-	
-
 }
