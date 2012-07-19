@@ -46,7 +46,7 @@ public class MenuAction extends BaseAction implements Serializable {
 			this.pageController.setURL(URL);
 			this.pageController.setTotalRowsAmount(totalRows);
 			List<CommMenu> mList = commMenuService.list(new CommMenu(), null, null,
-					null, true);
+					null, null);
 			List<CommMenu2> tempList = new ArrayList<CommMenu2>();
 			this.save(mList, tempList);
 			List<CommMenu2> tempList2 = new ArrayList<CommMenu2>();
@@ -153,7 +153,7 @@ public class MenuAction extends BaseAction implements Serializable {
 	public String printMainMenu(HttpServletRequest request, List<CommRoleResource> crrList) {
 		
 		List<CommMenu2> tempList2 = new ArrayList<CommMenu2>();
-		List<CommMenu> tempList = commMenuService.list(new CommMenu(), null, null, null, true);
+		List<CommMenu> tempList = commMenuService.list(new CommMenu(), null, null, null, null);
 		this.save(tempList, tempList2);
 		List<CommMenu2> resultList = new ArrayList<CommMenu2>();
 		this.setMenu(0L, tempList2, resultList);

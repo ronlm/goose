@@ -41,7 +41,7 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 			this.pager.setTotalRowsAmount(totalRows);
 			List<CommRole> resourceList = commRoleService.list(new CommRole(),
 					this.pager.getPageStartRow(), pager.getPageSize(), null,
-					true);
+					null);
 			pager.setData(resourceList);
 			return "list";
 	}

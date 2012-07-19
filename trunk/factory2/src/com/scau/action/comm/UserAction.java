@@ -40,7 +40,7 @@ public class UserAction extends BaseAction implements Serializable {
 			this.pageController.setURL(URL);
 			this.pageController.setTotalRowsAmount(totalRows);
 			List<CommUser> resourceList = commUserService.list(new CommUser(),
-					this.pageController.getPageStartRow(), pageController.getPageSize(), "1=1", true);
+					this.pageController.getPageStartRow(), pageController.getPageSize(), null, null);
 			pageController.setData(resourceList);
 			request.setAttribute("pager", pageController);
 			return "list";		
