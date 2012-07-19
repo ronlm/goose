@@ -33,7 +33,7 @@
 			</thead>
 			<tbody>
 			<form action="${pageContext.request.contextPath }/Comm/resourceAction!del" name="myForm" id="myForm" method="post">
-				<c:forEach items="${pager.data}" var="resource">
+				<c:forEach items="${pageController.data}" var="resource">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${resource.id}"/></td>
 					<td>${resource.name}</td>

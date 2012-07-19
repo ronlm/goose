@@ -30,7 +30,7 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/Comm/roleAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="role">
+			<c:forEach items="${pageController.data}" var="role">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${role.id}"/></td>
 					<td>${role.name}</td>
