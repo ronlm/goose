@@ -1,14 +1,16 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html style="overflow-y: visible;">
     <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
   <body style="overflow-y: visible!important;overflow-y: scroll;">
-	  <form action="${pageContext.request.contextPath }/Comm/menuAction!save" name="myForm" id="myForm" method="post">
+	  <form action="${pageContext.request.contextPath }/Comm/userAction!save" name="myForm" id="myForm" method="post">
 	    	<table class="mainTable">
 				<thead>
 					<tr class="tableController">
 						<th colspan="2">
-							<h3>菜单编辑</h3>
+							<h3>农户信息编辑</h3>
 						</th>
 					</tr>
 					<tr>
@@ -30,50 +32,37 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td width="200" align="right">菜单名:</td>
+						<td width="200" align="right">姓名:</td>
 						<td>
-						<input type="text" validation="required" name="menu.name" id="name" value="${menu.name}"/>
-						<input type="hidden" name="menu.id" id="id" value="${requestScope.menu.id==null?"":requestScope.menu.id}"/>
+						<input type="text" validation="required,alpha" name="user.userName" id="userName" value="${user.userName}"/>
+						<input type="hidden" name="user.id" id="id" value="${user.id==null?"":user.id}"/>
 						</td>
 					</tr> 
 					<tr>
-						<td align="right">	链接:</td>
-						<td><input type="text" validation="required"  name="menu.url" id="url" value="${menu.url}" size="100"/></td>
+						<td align="right">	住址:</td>
+						<td><input type="password" validation="required,minLength=6"  name="user.password" id="password" value="${user.password}"/></td>
 					</tr> 
 					<tr>
-						<td align="right">父菜单:</td>
-						<td>
-							<select validation="required"  name="menu.pid" id="pid">
-								<option value="0" <c:if test="${0 == menu.pid}">selected</c:if>>一级菜单</option>
-								<c:forEach items="${menuList}" var="item">
-									<option value="${item.id }" <c:if test="${item.id == menu.pid}">selected</c:if>>${item.name}</option>
-								</c:forEach>
-							</select>
-						</td>
+						<td align="right">联系电话:</td>
+						<td><input type="password" validation="equals=password"  name="" id="password1" value=""/></td>
 					</tr> 
 					<tr>
-						<td align="right">背景图片:</td>
-						<td>
-							<select name="menu.image" validation="required" id="image">
-								<option value="/images/main/null.png" <c:if test="${0 != menu.pid}">selected</c:if>>
-									/images/main/null.png
-								</option>
-								<option value="/images/main/MenuIcon.png" <c:if test="${0 == menu.pid}">selected</c:if>>
-									/images/main/MenuIcon.png
-								</option>
-							</select>
-						</td>
+						<td align="right">真实姓名:</td>
+						<td><input type="text" validation="chinese"  name="user.realName" id="realName" value="${user.realName}"/></td>
 					</tr> 
 					<tr>
-						<td align="right">菜单资源:</td>
-						<td>
-							<select validation="required"  name="menu.resourceId" id="resourceId">
-								<c:forEach items="${resourceList}" var="item">
-									<option value="${item.id }" <c:if test="${item.id == menu.resourceId}">selected</c:if>>${item.name}</option>
-								</c:forEach>
-							</select>
-						</td>
+						<td align="right">QQ:</td>
+						<td><input type="text" name="user.qq" id="qq" value="${user.qq}"/></td>
 					</tr> 
+					<tr>
+						<td align="right">Email:</td>
+						<td><input type="text" name="user.email" id="email" value="${user.email}"/></td>
+					</tr> 
+					<tr>
+						<td align="right">电话号码:</td>
+						<td><input type="text" name="user.tel" id="tel" value="${user.tel}"/></td>
+					</tr> 
+					
 				</tbody>
 				<tfoot>
 					<tr  class="tableController_bottom">
