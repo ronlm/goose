@@ -37,7 +37,7 @@ public class ResourceAction extends BaseAction implements Serializable {
 		this.pager.setTotalRowsAmount(totalRows);
 		List<CommResource> resourceList = commResourceService.list(
 				new CommResource(), this.pager.getPageStartRow(),
-				pager.getPageSize(), null, true);
+				pager.getPageSize(), null, null);
 		pager.setData(resourceList);
 		return "list";
 	}
