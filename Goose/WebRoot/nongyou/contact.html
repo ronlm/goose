@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>农友农林牧有限公司</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="./css/style.css" rel="stylesheet" type="text/css" />
+<link href="./css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+jQuery(document).ready(function(){
+	$('#contactform').submit(function(){				  
+		var action = $(this).attr('action');
+		$.post(action, { 
+			name: $('#name').val(),
+			email: $('#email').val(),
+			company: $('#company').val(),
+			subject: $('#subject').val(),
+			message: $('#message').val()
+		},
+			function(data){
+				$('#contactform #submit').attr('disabled','');
+				$('.response').remove();
+				$('#contactform').before('<p class="response">'+data+'</p>');
+				$('.response').slideDown();
+				if(data=='Message sent!') $('#contactform').slideUp();
+			}
+		); 
+		return false;
+	});
+});
+// ]]>
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="block_header">
+      <div class="logo"><a href="index.html"><img src="images/logo.gif" width="220" height="100" border="0" alt="logo" /></a></div>
+      <div class="menu">
+        <ul>
+          <li><a href="index.html" ><span>主页</span></a></li>
+          <li><a href="about.html"><span> 关于农友</span></a></li>
+          <li><a href="faq.html"><span>技术解答</span></a></li>
+          <li><a href="feedback.html"><span>信息反馈 </span></a></li>
+          <li><a href="contact.html" class="active"><span> 联系我们 </span></a></li>
+        </ul>
+        <div class="clr"></div>
+      </div>
+  </div>
+  </div>
+  <div class="top_bg2">
+   <div class="clr"></div>
+  </div>
+  <div class="clr"></div>
+   <div class="body">
+    <div class="body_resize">
+      <div class="left">
+        <h2>Contact to company<br />
+        <span>Ideal Choice Hotel and Resort</span></h2>
+        <p>Thank you for your advices. We promise that we would actually listen your voice.</p>
+		<form action="#" method="post" id="contactform">
+          <ol>
+            <li>
+              <label for="name">First Name * </label>
+              <input id="name" name="name" class="text" />
+            </li>
+            <li>
+              <label for="email">Your email * </label>
+              <input id="email" name="email" class="text" />
+            </li>
+            <li>
+              <label for="company">Company</label>
+              <input id="company" name="company" class="text" />
+            </li>
+            <li>
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" class="text" />
+            </li>
+            <li>
+              <label for="message">Message * </label>
+              <textarea id="message" name="message" rows="6" cols="50"></textarea>
+            </li>
+            <li class="buttons">
+              <input type="image" name="imageField" id="imageField" src="images/send.gif" />
+            </li>
+          </ol>
+        </form>
+      </div>
+      <div class="right">
+        <h2>Get in touch<br />
+       <span> near me, near you</span></h2>
+        <p><strong>Ideal Choice Hotel, your best choice for hotels.</strong><br />
+        contact us please, thank you for your support.</p>
+        <p><strong>Address</strong>:          xxx XXX Road, XXX, 12<br />
+          <strong>Telephone</strong>:      +123-1234-5678<br />
+          <strong>FAX</strong>:                  +458-4578<br />
+          <strong>Others</strong>:            +301 - 0125 - 01258<br />
+          <strong>E-mail</strong>:              <strong>XXX@yoursitename.com</strong></p>
+          <div class="bg"></div>
+			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_1.gif" alt="picture" class="floated" /></a>
+			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_2.gif" alt="picture" class="floated" /></a>
+			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_3.gif" alt="picture" class="floated" /></a>
+			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_4.gif" alt="picture" class="floated" /></a>
+			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_5.gif" alt="picture" class="floated" /></a>
+			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_6.gif" alt="picture" class="floated" /></a>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <div class="clr"></div>
+  </div>
+  <div class="footer">
+  	<div class="footer_resize">
+  		<p class="leftt">© Copyright  2003 - 2011. All Rights Reserved<br />
+    		<a href="#">Home</a> | <a href="#">Contact</a> | <a href="#">RSS </a></p>
+    	<div class="clr"></div>
+  		<div class="clr"></div>
+   </div>
+</div>
+</div>
+
+
+</body>
+</html>
