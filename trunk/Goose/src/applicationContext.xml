@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	 http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<context:annotation-config />
+
+	<!-- 要容器扫描，自动完成注入的类所在的包 -->
+	<context:component-scan base-package="com.scau.*" />
+
+	<!-- 配置事务 开始 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
+	 <aop:aspectj-autoproxy proxy-target-class="true"/>  
+	<!-- 配置事务 结束 -->
+
+	<!-- 使用HibernateTemplate -->
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:jdbc.properties</value>
+		</property>
+	</bean>
+	<!-- 配置MySqL数据源 -->
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- 配置Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 映射的实体类 -->
+		<property name="annotatedClasses">
+			<list>
+				<value>com.scau.model.comm.CommUser</value>
+				<value>com.scau.model.comm.CommMenu</value>
+				<value>com.scau.model.comm.CommResource</value>
+				<value>com.scau.model.comm.CommRole</value>
+				<value>com.scau.model.comm.CommRoleResource</value>
+				<value>com.scau.model.goose.Farm</value>
+				<value>com.scau.model.goose.Farmer</value>
+				<value>com.scau.model.goose.Goose</value>
+				<value>com.scau.model.goose.TradeGoose</value>
+				<value>com.scau.model.goose.ReceiveGoose</value>
+				<value>com.scau.model.goose.TradeGood</value>
+				<value>com.scau.model.goose.Good</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+
+			</props>
+		</property>
+	</bean>
+	 
+</beans>
