@@ -11,7 +11,7 @@
 				<th colspan="8">
 					<h3>成品鹅交易记录列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/goose/tradeGooseAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGooseAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll();  return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
@@ -44,7 +44,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/goose/tradeGooseAction!del" name="myForm" id="myForm" method="post">
+		<form action="${pageContext.request.contextPath }/pages/goose/tradeGooseAction!del" name="myForm" id="myForm" method="post">
 			<c:forEach items="${pageController.data}" var="tradeGoose">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${tradeGoose.id}"/></td>
@@ -54,8 +54,8 @@
 					<td>${tradeGoose.totalWeight}</td>
 					<td>${tradeGoose.unitPrice * tradeGoose.totalWeight}</td>
 					<td>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/goose/tradeGooseAction!get?tradeGoose.id=${tradeGoose.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/goose/tradeGooseAction!del?id=${tradeGoose.id }'); return false;"><span>删除</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGooseAction!get?tradeGoose.id=${tradeGoose.id }'; return false;"><span>修改</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/tradeGooseAction!del?id=${tradeGoose.id }'); return false;"><span>删除</span></a>
 					</td>
 					<td>${tradeGoose.comments}</td>
 				</tr> 

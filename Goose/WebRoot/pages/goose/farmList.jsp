@@ -11,7 +11,7 @@
 				<th colspan="7">
 					<h3>${farmer.name}的农场列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/goose/farmAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll();  return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
@@ -41,7 +41,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/goose/farmAction!del" name="myForm" id="myForm" method="post">
+		<form action="${pageContext.request.contextPath }/pages/goose/farmAction!del" name="myForm" id="myForm" method="post">
 			<c:forEach items="${pageController.data}" var="farm">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${farm.id}"/></td>
@@ -51,10 +51,10 @@
 					<td>${farm.signDate}</td>
 					<td>
 						<c:if test="${farm.signDate != null }" >
-							<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/goose/receiveGooseAction!list?farm.id=${farm.id }'; return false;"><span>查看接收鹅苗记录</span></a>
-							<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/goose/tradeGooseAction!list?farm.id=${farm.id }'; return false;"><span>查看交易成品鹅记录</span></a>
+							<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!list?farm.id=${farm.id }'; return false;"><span>查看接收鹅苗记录</span></a>
+							<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGooseAction!list?farm.id=${farm.id }'; return false;"><span>查看交易成品鹅记录</span></a>
 						</c:if>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/goose/farmAction!get?farm.id=${farm.id }'; return false;"><span>修改</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!get?farm.id=${farm.id }'; return false;"><span>修改</span></a>
 					</td>
 					<td>${farm.comments}</td>
 				</tr> 

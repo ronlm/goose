@@ -25,7 +25,6 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<!-- <param-value>/WEB-INF/applicationContext-*.xml,classpath*:applicationContext-*.xml</param-value> -->
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 	<!-- 初始化Sping 容器 结束 -->
@@ -66,21 +65,11 @@
 
 	<filter-mapping>
 		<filter-name>openSessionInView</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
 	<!-- Spring 对Hibernate Session的支持 结束 -->
 
-	<!-- 权限验证过滤器 开始
-	<filter>
-		<filter-name>SecurityFilter</filter-name>
-		<filter-class>cn.com.ege.mvc.security.SecurityFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>SecurityFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	 -->
-	<!-- 权限验证过滤器 结束 -->
+	
 
 	<!-- 连接池配置信息开始 -->
 	<servlet>
@@ -123,6 +112,19 @@
 		<location>/error/Error.jsp</location>
 	</error-page>
 	 -->
+	 
+	 <!-- 权限验证过滤器 开始  
+	<filter>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>cn.com.ege.mvc.security.SecurityFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		
+	</filter-mapping>
+	 -->
+	<!-- 权限验证过滤器 结束 -->
 	 
 	 
 	<!-- struts2 的过滤器 开始 -->
