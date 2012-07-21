@@ -31,7 +31,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 @Scope("prototype")
-public class MenuAction extends BaseAction implements Serializable ,ModelDriven<CommMenu>{
+public class MenuAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(MenuAction.class);
 	private PageController pageController ;
 	private CommMenuService commMenuService;
@@ -67,7 +67,7 @@ public class MenuAction extends BaseAction implements Serializable ,ModelDriven<
 
 	public String get() {		
 			// 点了添加或者点了修改
-			CommMenu temp = commMenuService.get(menu);
+			CommMenu temp = commMenuService.get(commMenu);
 			if (null != temp) {
 				commMenu = temp;
 			}
@@ -81,7 +81,7 @@ public class MenuAction extends BaseAction implements Serializable ,ModelDriven<
 	public String save() {
 		// 保存表单
 		try {
-			commMenuService.save(menu);
+			commMenuService.save(commMenu);
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
@@ -244,12 +244,5 @@ public class MenuAction extends BaseAction implements Serializable ,ModelDriven<
 	public void setMenu(CommMenu menu) {
 		this.menu = menu;
 	}
-
-	public CommMenu getModel() {
-		// TODO Auto-generated method stub
-		return menu;
-	}
-	
-	
 
 }

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.com.ege.mvc.exception.BusinessException;
@@ -21,6 +22,7 @@ import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.util.PageController;
 
 @Component
+@Scope("prototype")
 public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private static final long serialVersionUID = 8299975587235537983L;
 	private final static Log logger = LogFactory.getLog(ReceiveGooseAction.class);

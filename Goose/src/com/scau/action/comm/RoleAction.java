@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
@@ -18,11 +19,13 @@ import com.scau.service.impl.comm.CommRoleResourceService;
 import com.scau.service.impl.comm.CommRoleService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
-public class RoleAction extends BaseAction implements Serializable ,ModelDriven<CommRole>{
+@Scope("prototype")
+public class RoleAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(RoleAction.class);
 	private PageController pageController;
 	private CommRoleService commRoleService;
@@ -52,7 +55,7 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 		
 		//获取该角色的资源
 		if(null != role){
-			CommRoleResourceService commRoleResourceService = new CommRoleResourceService();
+			CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");
 			CommRoleResource crr = new CommRoleResource();
 			crr.setRoleId(role.getId());
 			try {
@@ -65,18 +68,21 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 		//所有资源
 		CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");
 		resourceList = resourceService.listAll(new CommResource());
+		//request.setAttribute("role",role);
+		//request.setAttribute("roleResourceList", roleResourceList);
+		//request.setAttribute("resourceList", resourceList);
 		
-			return "edit";
+		return "edit";
 	}
-
+		
 	public String save() {
 		try {
-			Long key = commRoleService.save(role);
+			Long key = commRoleService.save(commRole);
 			// 如果插入或者更新记录成功, 会返回该记录的主键
 			if (null != key) {
 				// 获取选中了的权限资源
 				String[] resources = request.getParameterValues("resource");
-				CommRoleResourceService commRoleResourceService = new CommRoleResourceService();
+				CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");
 				// 把选中了的插入中间表
 				CommRoleResource crr = new CommRoleResource();
 				crr.setRoleId(commRole.getId());
@@ -123,13 +129,13 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 		this.pageController = pageController;
 	}
 
+	
 	public CommRole getRole() {
-		return commRole;
+		return role;
 	}
 
-	@Resource
 	public void setRole(CommRole role) {
-		this.commRole = role;
+		this.role = role;
 	}
 
 	public List<CommRoleResource> getRoleResourceList() {
@@ -177,11 +183,5 @@ public class RoleAction extends BaseAction implements Serializable ,ModelDriven<
 	public void setCommRole(CommRole commRole) {
 		this.commRole = commRole;
 	}
-
-	public CommRole getModel() {
-	
-		return role;
-	}
-	
 	
 }
