@@ -3,7 +3,7 @@
 <struts>
 
 	<!-- 这个Struts配置文件用于业务模块 -->	
-	<package name="goose" extends="struts-default" namespace="/goose">	
+	<package name="goose" extends="struts-default" namespace="/pages/goose">	
 		<!-- 使用通配符 对农户，养殖场配置，页面名第一个单词用小写 开始-->
 		<action name="*Action" class="{1}Action" >
 			<result name="edit">/pages/goose/{1}Edit.jsp</result>

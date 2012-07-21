@@ -6,7 +6,7 @@
 	<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<form
-			action="${pageContext.request.contextPath }/goose/farm!save"
+			action="${pageContext.request.contextPath }/pages/goose/farm!save"
 			name="myForm" id="myForm" method="post">
 			<table class="mainTable">
 				<thead>

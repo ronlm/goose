@@ -13,7 +13,7 @@
         		</div>
         		<div id="headerMsg">
         			<br/>欢迎您：${sessionScope.loginUser.userName }&nbsp;&nbsp;您的身份是： ${sessionScope.role.name }
-        			&nbsp;&nbsp;[<a href="${pageContext.request.contextPath }/Comm/adminLoginoutAction!get?user.id=${sessionScope.loginUser.id }" target="mainIframe">修改密码</a> | <a href="${pageContext.request.contextPath }/Comm/adminLoginoutAction!logout">退出登陆</a>]&nbsp;&nbsp;
+        			&nbsp;&nbsp;[<a href="${pageContext.request.contextPath }/pages/Comm/adminLoginoutAction!get?user.id=${sessionScope.loginUser.id }" target="mainIframe">修改密码</a> | <a href="${pageContext.request.contextPath }/pages/Comm/adminLoginoutAction!logout">退出登陆</a>]&nbsp;&nbsp;
         		</div>
         		</td>
 		  </tr>

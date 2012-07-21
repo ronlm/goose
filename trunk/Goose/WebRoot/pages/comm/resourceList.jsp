@@ -11,7 +11,7 @@
 					<th colspan="4">
 						<h3>资源列表</h3>
 						<div class="tableControllerButton">
-							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/resourceAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/Comm/resourceAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 							<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll(); return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 						</div>
 					</th>
@@ -32,15 +32,15 @@
 				</tr>
 			</thead>
 			<tbody>
-			<form action="${pageContext.request.contextPath }/Comm/resourceAction!del" name="myForm" id="myForm" method="post">
+			<form action="${pageContext.request.contextPath }/pages/Comm/resourceAction!del" name="myForm" id="myForm" method="post">
 				<c:forEach items="${pageController.data}" var="resource">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${resource.id}"/></td>
 					<td>${resource.name}</td>
 					<td>${resource.path}</td>
 					<td>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/Comm/resourceAction!get?resource.id=${resource.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/Comm/resourceAction!del?id=${resource.id }'); return false;"><span>删除</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/Comm/resourceAction!get?resource.id=${resource.id }'; return false;"><span>修改</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/Comm/resourceAction!del?id=${resource.id }'); return false;"><span>删除</span></a>
 					</td>
 				</tr> 
 				</c:forEach>

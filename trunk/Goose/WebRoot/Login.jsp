@@ -39,7 +39,7 @@
 	</head>
 
 	<body bgcolor="#a7e3e3" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="document.getElementById('userName').focus();">
-		<form id="formId"	action="${pageContext.request.contextPath}/Comm/adminLoginoutAction!login" style="width: 100%;  text-align: center;" method="POST" onKeyPress="enterDown(event);">
+		<form id="formId"	action="${pageContext.request.contextPath}/login/adminLoginoutAction!login" style="width: 100%;  text-align: center;" method="POST" onKeyPress="enterDown(event);">
 			<table height="735" style="width: 100%; text-align: center;" border="0" cellpadding="0" background="images/login/login_02.jpg">
 				<tr>
 					<td align="center" valign="middle">

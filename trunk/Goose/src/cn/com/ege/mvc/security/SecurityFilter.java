@@ -30,6 +30,8 @@ public class SecurityFilter implements Filter {
 
 	private final static Logger logger = Logger.getLogger(SecurityFilter.class);
 
+	private String[] interceptPaths = {"/pages"};//要拦截的路径
+	
 	public void destroy() {
 		// TODO Auto-generated method stub
 
@@ -43,7 +45,8 @@ public class SecurityFilter implements Filter {
 		
 		String path = request.getServletPath();
 		
-		if(path.startsWith("/pages")){
+		System.out.println(path);
+		if(path.startsWith(interceptPaths[0])){
 			//获取当前登录用户的信息
 			CommUser user = (CommUser)request.getSession().getAttribute("loginUser");
 			if(hasRight(path, user)){

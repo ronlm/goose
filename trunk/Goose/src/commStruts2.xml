@@ -4,11 +4,17 @@
 
 	<!-- 这个Struts配置文件用于系统资源，用户管理模块 -->
 	
-	<package name="Comm" extends="struts-default" namespace="/Comm">
-		
+	<!-- 登录操作，不受拦截 -->
+	<package name="LoginOut" extends="struts-default" namespace="/login">
 		<action name="adminLoginoutAction" class="adminLoginoutAction">
 			<result type="redirect" name="success">/pages/main/Main.jsp</result>
 			<result name="failure">/Login.jsp</result>
+		</action>
+	</package>
+	
+	<package name="Comm" extends="struts-default" namespace="/pages/Comm">	
+		<action name="adminLoginoutAction" class="adminLoginoutAction">
+			<result type="redirect" name="success">/pages/main/Main.jsp</result>
 			<result name="edit">/pages/main/InfoEdit.jsp</result>
 			<result name="error">/error/WebError.jsp</result>
 		</action>
