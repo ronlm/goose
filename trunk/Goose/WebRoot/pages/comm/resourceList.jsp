@@ -11,7 +11,7 @@
 					<th colspan="4">
 						<h3>资源列表</h3>
 						<div class="tableControllerButton">
-							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/Comm/resourceAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/Comm/resourceAction!add'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 							<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll(); return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 						</div>
 					</th>
