@@ -44,11 +44,18 @@ public class ResourceAction extends BaseAction implements Serializable {
 
 	public String get() {
 		// 点了添加或者点了修改
-		commResource = commResourceService.get(commResource);
+		commResource = commResourceService.get(resource);
 		request.setAttribute("resource", commResource);
 		return "edit";
 	}
 
+	public String add(){
+		commResource = commResourceService.get(resource);
+		request.setAttribute("resource", commResource);
+		return "edit";
+	}
+	
+	
 	public String save() {
 		// 保存表单
 		try {
