@@ -29,7 +29,7 @@ public class RoleAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(RoleAction.class);
 	private PageController pageController;
 	private CommRoleService commRoleService;
-	private CommRole commRole;
+	//private CommRole commRole;
 	private List<CommRoleResource> roleResourceList = null;
 	private List<CommResource> resourceList = null;
 	private CommRoleResourceService commRoleResourceService;
@@ -68,16 +68,13 @@ public class RoleAction extends BaseAction implements Serializable {
 		//所有资源
 		CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");
 		resourceList = resourceService.listAll(new CommResource());
-		//request.setAttribute("role",role);
-		//request.setAttribute("roleResourceList", roleResourceList);
-		//request.setAttribute("resourceList", resourceList);
 		
 		return "edit";
 	}
 		
 	public String save() {
 		try {
-			Long key = commRoleService.save(commRole);
+			Long key = commRoleService.save(role);
 			// 如果插入或者更新记录成功, 会返回该记录的主键
 			if (null != key) {
 				// 获取选中了的权限资源
@@ -85,7 +82,7 @@ public class RoleAction extends BaseAction implements Serializable {
 				CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");
 				// 把选中了的插入中间表
 				CommRoleResource crr = new CommRoleResource();
-				crr.setRoleId(commRole.getId());
+				crr.setRoleId(role.getId());
 				// 首先把当前获取的这个角色记录全部删除,然后再新增
 				commRoleResourceService.delete(crr);
 				if (null != resources) {
@@ -98,7 +95,7 @@ public class RoleAction extends BaseAction implements Serializable {
 			return list();// 重新取列表
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
-			request.setAttribute("role", commRole);
+			request.setAttribute("role", role);
 			request.setAttribute("message", e.getMessage());
 			return "edit";
 		}
@@ -173,15 +170,6 @@ public class RoleAction extends BaseAction implements Serializable {
 	public void setCommRoleResourceService(
 			CommRoleResourceService commRoleResourceService) {
 		this.commRoleResourceService = commRoleResourceService;
-	}
-
-	public CommRole getCommRole() {
-		return commRole;
-	}
-
-	@Resource
-	public void setCommRole(CommRole commRole) {
-		this.commRole = commRole;
 	}
 	
 }

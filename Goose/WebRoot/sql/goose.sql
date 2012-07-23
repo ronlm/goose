@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-07-23 15:33:05
+Date: 2012-07-23 16:26:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -38,9 +38,10 @@ INSERT INTO `comm_menu` VALUES ('3', '系统资源管理', '/pages/Comm/resource
 INSERT INTO `comm_menu` VALUES ('4', '系统菜单管理', '/pages/Comm/menuAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('5', '系统角色', '/pages/Comm/roleAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('6', '用户菜单', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
-INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('9', '农用物资管理', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('11', '搜索功能', '/pages/goose/searchAction!list', '6', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('9', '农用物资管理', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('10', '物资', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('11', '搜索功能', '/pages/goose/searchAction!list', '6', '/images/main/null.png', '3');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -70,14 +71,14 @@ CREATE TABLE `comm_role` (
   `name` varchar(100) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role
 -- ----------------------------
 INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '			');
 INSERT INTO `comm_role` VALUES ('2', '超级管理员', '				超级管理员										');
-INSERT INTO `comm_role` VALUES ('4', null, null);
+INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户	');
 
 -- ----------------------------
 -- Table structure for `comm_role_resource`
@@ -90,20 +91,18 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
 -- ----------------------------
-INSERT INTO `comm_role_resource` VALUES ('108', '1', '1');
-INSERT INTO `comm_role_resource` VALUES ('109', '1', '2');
-INSERT INTO `comm_role_resource` VALUES ('110', '1', '3');
-INSERT INTO `comm_role_resource` VALUES ('111', '1', '4');
-INSERT INTO `comm_role_resource` VALUES ('114', '2', '1');
-INSERT INTO `comm_role_resource` VALUES ('115', '2', '3');
-INSERT INTO `comm_role_resource` VALUES ('116', '2', '4');
-INSERT INTO `comm_role_resource` VALUES ('117', '3', '1');
-INSERT INTO `comm_role_resource` VALUES ('118', '3', '3');
+INSERT INTO `comm_role_resource` VALUES ('1', '1', '1');
+INSERT INTO `comm_role_resource` VALUES ('2', '1', '2');
+INSERT INTO `comm_role_resource` VALUES ('3', '1', '3');
+INSERT INTO `comm_role_resource` VALUES ('4', '2', '1');
+INSERT INTO `comm_role_resource` VALUES ('5', '2', '3');
+INSERT INTO `comm_role_resource` VALUES ('6', '3', '1');
+INSERT INTO `comm_role_resource` VALUES ('7', '3', '3');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -120,7 +119,7 @@ CREATE TABLE `comm_user` (
   `roleId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_user
@@ -128,6 +127,7 @@ CREATE TABLE `comm_user` (
 INSERT INTO `comm_user` VALUES ('1', 'admin', '引擎小组', 'admin', '123', '123@d.com', '123', '1');
 INSERT INTO `comm_user` VALUES ('2', 'engine', '', 'engine', '', '', '', '2');
 INSERT INTO `comm_user` VALUES ('3', 'test', null, 'test', null, null, null, '1');
+INSERT INTO `comm_user` VALUES ('4', 'user', '', '111111', '', '', '', '3');
 
 -- ----------------------------
 -- Table structure for `farm`

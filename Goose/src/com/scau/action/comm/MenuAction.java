@@ -33,7 +33,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 @Scope("prototype")
 public class MenuAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(MenuAction.class);
-	private PageController pageController ;
+	private PageController pageController;
 	private CommMenuService commMenuService;
 	private CommMenu commMenu;
 	private CommMenu menu;
@@ -42,40 +42,41 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	public String list() {
 		// 取列表
-			int totalRows = commMenuService.getRecordCount(new CommMenu());
-			String URL = request.getRequestURI();
-			this.pageController.setURL(URL);
-			this.pageController.setTotalRowsAmount(totalRows);
-			List<CommMenu> mList = commMenuService.list(new CommMenu(), null, null,
-					null, null);
-			List<CommMenu2> tempList = new ArrayList<CommMenu2>();
-			this.save(mList, tempList);
-			List<CommMenu2> tempList2 = new ArrayList<CommMenu2>();
-			this.setMenu(0l, tempList, tempList2);
-			tempList = new ArrayList<CommMenu2>();
-			this.display(tempList2, tempList);
-			if (tempList.size() <= this.pageController.getPageEndRow()) {
-				tempList = tempList.subList(this.pageController.getPageStartRow(),
-						tempList.size());
-			} else {
-				tempList = tempList.subList(this.pageController.getPageStartRow(),
-						this.pageController.getPageEndRow());
-			}
-			pageController.setData(tempList);
-			return "list";
+		int totalRows = commMenuService.getRecordCount(new CommMenu());
+		String URL = request.getRequestURI();
+		this.pageController.setURL(URL);
+		this.pageController.setTotalRowsAmount(totalRows);
+		List<CommMenu> mList = commMenuService.list(new CommMenu(), null, null,
+				null, null);
+		List<CommMenu2> tempList = new ArrayList<CommMenu2>();
+		this.save(mList, tempList);
+		List<CommMenu2> tempList2 = new ArrayList<CommMenu2>();
+		this.setMenu(0l, tempList, tempList2);
+		tempList = new ArrayList<CommMenu2>();
+		this.display(tempList2, tempList);
+		if (tempList.size() <= this.pageController.getPageEndRow()) {
+			tempList = tempList.subList(this.pageController.getPageStartRow(),
+					tempList.size());
+		} else {
+			tempList = tempList.subList(this.pageController.getPageStartRow(),
+					this.pageController.getPageEndRow());
+		}
+		pageController.setData(tempList);
+		return "list";
 	}
 
-	public String get() {		
-			// 点了添加或者点了修改
-			commMenu = commMenuService.get(menu);
-			
-			this.menuList = commMenuService.listAll(new CommMenu());
-			request.setAttribute("menuList", this.menuList);
-			List<CommResource> resourceList = commResourceService.listAll(new CommResource());
-			request.setAttribute("resourceList", resourceList);
-			request.setAttribute("menu", commMenu);
-			menu = null;
-			return "edit";	
+	public String get() {
+		// 点了添加或者点了修改
+		commMenu = commMenuService.get(menu);
+
+		this.menuList = commMenuService.listAll(new CommMenu());
+		request.setAttribute("menuList", this.menuList);
+		List<CommResource> resourceList = commResourceService
+				.listAll(new CommResource());
+		request.setAttribute("resourceList", resourceList);
+		request.setAttribute("menu", commMenu);
+		menu = null;
+		return "edit";
 	}
 
 	public String save() {
@@ -117,72 +118,89 @@ public class MenuAction extends BaseAction implements Serializable {
 			objectList.add(menu2);
 		}
 	}
-	
-	private void setMenu(Long pid, List<CommMenu2> menuList, List<CommMenu2> resultList) {
+
+	private void setMenu(Long pid, List<CommMenu2> menuList,
+			List<CommMenu2> resultList) {
 		List<CommMenu2> sub = getSubList(pid, menuList);
 		// 取得的subMenu 是空的。。。。擦
 		resultList.addAll(sub);
 		for (CommMenu2 menu : resultList) {
 			setMenu(menu.getId(), menuList, menu.getMenuList());
 		}
-		
+
 	}
-	
-	private List<CommMenu2> getSubList(Long pid, List<CommMenu2> menuList){
+
+	private List<CommMenu2> getSubList(Long pid, List<CommMenu2> menuList) {
 		// pid 就是父菜单的ID号， 子菜单以此得到父菜单号
 		List<CommMenu2> subList = new ArrayList<CommMenu2>();
 		for (CommMenu2 menu2 : menuList) {
-			if ((long)menu2.getPid() == (long)pid) {
+			if ((long) menu2.getPid() == (long) pid) {
 				subList.add(menu2);
-			}		
+			}
 		}
 		return subList;
 	}
-	
+
 	private void display(List<CommMenu2> resultList, List<CommMenu2> sortedList) {
-		if(resultList.size() > 0){
+		if (resultList.size() > 0) {
 			for (CommMenu2 m : resultList) {
 				sortedList.add(m);
 				if (m.getMenuList().size() > 0) {
 				}
 				display(m.getMenuList(), sortedList);
 			}
-		}else {
+		} else {
 		}
 	}
 
-	public String printMainMenu(HttpServletRequest request, List<CommRoleResource> crrList) {
-		
+	public String printMainMenu(HttpServletRequest request,
+			List<CommRoleResource> crrList) {
+
 		List<CommMenu2> tempList2 = new ArrayList<CommMenu2>();
-		List<CommMenu> tempList = commMenuService.list(new CommMenu(), null, null, null, null);
+		List<CommMenu> tempList = commMenuService.list(new CommMenu(), null,
+				null, null, null);
 		this.save(tempList, tempList2);
 		List<CommMenu2> resultList = new ArrayList<CommMenu2>();
 		this.setMenu(0L, tempList2, resultList);
-		String menuStr =  getMenuHTML(resultList, request, crrList);
+		String menuStr = getMenuHTML(resultList, request, crrList);
 		return menuStr;
 	}
 
 	private int level = 0;
-	private String getMenuHTML(List<CommMenu2> mainMenu2, HttpServletRequest request, List<CommRoleResource> crrList) {
+
+	private String getMenuHTML(List<CommMenu2> mainMenu2,
+			HttpServletRequest request, List<CommRoleResource> crrList) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(level==0?"<ul id=\"menu\">":"<ul>");
+		sb.append(level == 0 ? "<ul id=\"menu\">" : "<ul>");
 		level++;
-		for(CommMenu2 menu2: mainMenu2){
+		for (CommMenu2 menu2 : mainMenu2) {
 			sb.append("<li>");
 			if (menu2.getPid() == 0) {
 				for (CommRoleResource crr : crrList) {
-					if ((long)crr.getResourceId() == (long)menu2.getResourceId()) {
-						sb.append("<a href=\""+menu2.getUrl()+"\" target=\"mainIframe\" style=\"cursor: pointer;\"><img src=\""+request.getContextPath()+menu2.getImage()+"\" align=\"absmiddle\" style=\"padding-right:5px;\" />"+menu2.getName()+"</a>");
+					if ((long) crr.getResourceId() == (long) menu2
+							.getResourceId()) {
+						sb.append("<a href=\""
+								+ menu2.getUrl()
+								+ "\" target=\"mainIframe\" style=\"cursor: pointer;\"><img src=\""
+								+ request.getContextPath()
+								+ menu2.getImage()
+								+ "\" align=\"absmiddle\" style=\"padding-right:5px;\" />"
+								+ menu2.getName() + "</a>");
 					}
 				}
 			} else {
 				for (CommRoleResource crr : crrList) {
-					if ((long)crr.getResourceId() == (long)menu2.getResourceId()) {
-						sb.append("<a href=\""+request.getContextPath()+menu2.getUrl()+"\" target=\"mainIframe\" style=\"cursor: pointer;\">"+menu2.getName()+"</a>");
+					if ((long) crr.getResourceId() == (long) menu2
+							.getResourceId()) {
+						sb.append("<a href=\""
+								+ request.getContextPath()
+								+ menu2.getUrl()
+								+ "\" target=\"mainIframe\" style=\"cursor: pointer;\">"
+								+ menu2.getName() + "</a>");
 					}
 				}
 			}
-			if(menu2.getMenuList().size()>0){
+			if (menu2.getMenuList().size() > 0) {
 				sb.append(getMenuHTML(menu2.getMenuList(), request, crrList));
 			}
 			sb.append("</li>");
@@ -190,8 +208,6 @@ public class MenuAction extends BaseAction implements Serializable {
 		sb.append("</ul>");
 		return sb.toString();
 	}
-
-	
 
 	public PageController getPageController() {
 		return pageController;
@@ -209,7 +225,7 @@ public class MenuAction extends BaseAction implements Serializable {
 	public void setMenuList(List<CommMenu> menuList) {
 		this.menuList = menuList;
 	}
-	
+
 	public CommMenuService getCommMenuService() {
 		return commMenuService;
 	}
@@ -240,7 +256,7 @@ public class MenuAction extends BaseAction implements Serializable {
 	public CommMenu getMenu() {
 		return menu;
 	}
-	
+
 	public void setMenu(CommMenu menu) {
 		this.menu = menu;
 	}
