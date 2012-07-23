@@ -35,7 +35,6 @@ public class MenuAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(MenuAction.class);
 	private PageController pageController;
 	private CommMenuService commMenuService;
-	private CommMenu commMenu;
 	private CommMenu menu;
 	private List<CommMenu> menuList = new ArrayList<CommMenu>();
 	private CommResourceService commResourceService;
@@ -67,14 +66,17 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	public String get() {
 		// 点了添加或者点了修改
-		commMenu = commMenuService.get(menu);
+		menu = commMenuService.get(menu);
 
+		if(null == menu){
+			menu = new CommMenu();
+		}
 		this.menuList = commMenuService.listAll(new CommMenu());
 		request.setAttribute("menuList", this.menuList);
 		List<CommResource> resourceList = commResourceService
 				.listAll(new CommResource());
 		request.setAttribute("resourceList", resourceList);
-		request.setAttribute("menu", commMenu);
+		request.setAttribute("menu", menu);
 		menu = null;
 		return "edit";
 	}
@@ -233,15 +235,6 @@ public class MenuAction extends BaseAction implements Serializable {
 	@Resource
 	public void setCommMenuService(CommMenuService commMenuService) {
 		this.commMenuService = commMenuService;
-	}
-
-	public CommMenu getCommMenu() {
-		return commMenu;
-	}
-
-	@Resource
-	public void setCommMenu(CommMenu commMenu) {
-		this.commMenu = commMenu;
 	}
 
 	public CommResourceService getCommResourceService() {
