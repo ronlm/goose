@@ -49,13 +49,11 @@ public class FarmerAction extends BaseAction{
 	public String save() {
 		// 保存表单
 		try {
-			
 			farmerService.save(farmer);
-		
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
-			request.setAttribute("user", farmer);
+			request.setAttribute("farmer", farmer);
 			request.setAttribute("message", e.getMessage());
 			return list();
 		}
