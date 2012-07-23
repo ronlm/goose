@@ -53,8 +53,10 @@
 					<td>${tradeGoose.totalWeight}</td>
 					<td>${tradeGoose.unitPrice * tradeGoose.totalWeight}</td>
 					<td>
+					<!-- 
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGooseAction!get?tradeGoose.id=${tradeGoose.id }'; return false;"><span>修改</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/tradeGooseAction!del?id=${tradeGoose.id }'); return false;"><span>删除</span></a>
+					 -->
 					</td>
 					<td>${tradeGoose.comments}</td>
 				</tr> 
