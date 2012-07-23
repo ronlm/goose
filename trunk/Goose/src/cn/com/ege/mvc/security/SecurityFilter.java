@@ -24,7 +24,6 @@ import com.scau.model.comm.CommRoleResource;
 import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommResourceService;
 import com.scau.service.impl.comm.CommRoleResourceService;
-import com.scau.util.BeansUtil;
 
 
 public class SecurityFilter implements Filter {
@@ -57,7 +56,7 @@ public class SecurityFilter implements Filter {
 				String message = "尝试访问未授权资源! 已被拦截.";
 				logger.error(message);
 				response.setStatus(response.SC_FORBIDDEN);
-				message = java.net.URLEncoder.encode(message, "UTF-8")+ "<br/>path=" + path  + (null == user ? " " : " <br/>userId=" + user.getId() + " <br/>用户名：" + user.getUserName());
+				message = java.net.URLEncoder.encode(message, "UTF-8")+ "<br/>path=" + path  + (null == user ? " " : " <br/>userId=" + user.getId() + " <br/>userName=" + user.getUserName());
 				String url = request.getContextPath()+"/error/403.jsp?message=" + message;
 				logger.info("url=" + url);
 				response.sendRedirect(url);
@@ -74,8 +73,8 @@ public class SecurityFilter implements Filter {
 			//取得当前用户的可访问资源
 			CommRoleResource crr = new CommRoleResource();
 			crr.setRoleId(user.getRoleId());
-			CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");//new CommRoleResourceService();
-			CommResourceService commResourceService = (CommResourceService) BeansUtil.get("commResourceService");
+			CommRoleResourceService commRoleResourceService = new CommRoleResourceService();
+			CommResourceService commResourceService = new CommResourceService();
 			List<CommRoleResource> commRoleResources;
 			try {
 				commRoleResources = commRoleResourceService.listByRoleId(crr);
@@ -84,8 +83,13 @@ public class SecurityFilter implements Filter {
 					commResource.setId(commRoleResource.getResourceId());
 					CommResource resource = commResourceService.get(commResource);
 					logger.info("角色可访问资源: " + resource.getPath() + " 当前: " + path);
-					System.out.println("path= " + path);
-					System.out.println("resource.getPath()= " + resource.getPath());
+					
+					/*
+					 * 改用正则表达式,可以匹配*号等
+					 * if(path.equals(resource.getPath())){
+						logger.info("该资源可访问. 验证通过! resourcePath=" + resource.getPath());
+						return true;
+					}*/
 					if(match(path, resource.getPath())){
 						logger.info("该资源可访问. 验证通过! resourcePath=" + resource.getPath());
 						return true;
@@ -101,12 +105,7 @@ public class SecurityFilter implements Filter {
 	
 	
 
-	/** 使用正则表达式来匹配路径
-	 * @param path
-	 * @param resource
-	 * @return
-	 */
-	protected static boolean match(String path, String resource) {
+	private boolean match(String path, String resource) {
 		Pattern pattern = Pattern.compile(resource);
 		Matcher matcher = pattern.matcher(path);
 		return matcher.find();
@@ -116,5 +115,4 @@ public class SecurityFilter implements Filter {
 		// TODO Auto-generated method stub
 
 	}
-	
 }

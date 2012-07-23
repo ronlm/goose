@@ -47,8 +47,10 @@ public class GoodAction extends BaseAction{
 
 	public String save() throws Exception {
 		// 保存表单
-		try {	
+		try {
+			
 			goodService.save(good);
+		
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
@@ -62,7 +64,7 @@ public class GoodAction extends BaseAction{
 		// 删除	
 			String[] ids = request.getParameterValues("id");
 			for (String id : ids) {
-				Good good= new Good();
+				Farm farm= new Farm();
 				if (null != id && !("".equals(id))) {
 					good.setId(Long.valueOf(id));
 					goodService.delete(good);

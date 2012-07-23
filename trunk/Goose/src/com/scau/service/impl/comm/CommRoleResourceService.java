@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.model.comm.CommRoleResource;
+import com.scau.model.comm.CommUser;
 import com.scau.service.BaseService;
 
 @Component
@@ -34,17 +35,5 @@ public class CommRoleResourceService extends BaseService<CommRoleResource> imple
 			return null;
 		}
 	}
-	@Override
-	public void add(CommRoleResource entity) {
-		CommRoleResource crr = new CommRoleResource();
-		crr.setResourceId(entity.getRoleId());
-		crr.setRoleId(entity.getRoleId());
-		if(null == get(crr)){
-			super.add(entity);
-		}
-		else return ;// 已有记录，不再
-	}
-	
-	
 	
 }

@@ -10,6 +10,9 @@
 			<result name="error">/error/WebError.jsp</result>
 			<result name="list">/pages/goose/{1}List.jsp</result>
 		</action>
+		<action name="searchAction" class="searchAction">
+			<result name="list">/pages/goose/search.jsp</result>
+		</action>
 		<!-- 使用通配符 对农户，养殖场配置配置 结束-->
 	</package>
 

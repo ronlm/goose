@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-07-23 18:51:42
+Date: 2012-07-23 16:26:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,7 @@ INSERT INTO `comm_menu` VALUES ('5', '系统角色', '/pages/Comm/roleAction!lis
 INSERT INTO `comm_menu` VALUES ('6', '用户菜单', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
 INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('9', '农用物资管理', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('10', '物资', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('11', '搜索功能', '/pages/goose/searchAction!list', '6', '/images/main/null.png', '3');
 
 -- ----------------------------
@@ -57,7 +58,7 @@ CREATE TABLE `comm_resource` (
 -- ----------------------------
 -- Records of comm_resource
 -- ----------------------------
-INSERT INTO `comm_resource` VALUES ('1', '系统后台首页', '/pages/main/*', null);
+INSERT INTO `comm_resource` VALUES ('1', '系统后台首页', '/pages/Comm/*', null);
 INSERT INTO `comm_resource` VALUES ('2', '系统管理', '/pages/Comm/*', null);
 INSERT INTO `comm_resource` VALUES ('3', '用户管理', '/pages/goose/*', '用户管理,供超级管理员管理系统管理员				');
 
@@ -90,7 +91,7 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
@@ -101,7 +102,7 @@ INSERT INTO `comm_role_resource` VALUES ('3', '1', '3');
 INSERT INTO `comm_role_resource` VALUES ('4', '2', '1');
 INSERT INTO `comm_role_resource` VALUES ('5', '2', '3');
 INSERT INTO `comm_role_resource` VALUES ('6', '3', '1');
-INSERT INTO `comm_role_resource` VALUES ('126', '3', '3');
+INSERT INTO `comm_role_resource` VALUES ('7', '3', '3');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -161,7 +162,7 @@ CREATE TABLE `farmer` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of farmer
@@ -178,7 +179,7 @@ CREATE TABLE `good` (
   `name` varchar(255) NOT NULL,
   `unit` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good

@@ -36,7 +36,7 @@ public class testMenuAction {
 
 	@Test
 	public void testGetCommMenu() {
-		//assertEquals(menuAction.getCommMenu() == null, Boolean.FALSE);
+		assertEquals(menuAction.getCommMenu() == null, Boolean.FALSE);
 	}
 
 	@Test
