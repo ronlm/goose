@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.model.comm.CommRoleResource;
-import com.scau.model.comm.CommUser;
 import com.scau.service.BaseService;
 
 @Component
