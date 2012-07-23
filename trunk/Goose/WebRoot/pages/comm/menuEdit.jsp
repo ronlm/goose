@@ -34,19 +34,19 @@
 					<tr>
 						<td width="200" align="right">菜单名:</td>
 						<td>
-						<input type="text" validation="required" name="menu.name" id="name" value="${menu.name}"/>
+						<input type="text" validation="required" name="menu.name" id="name" value="${requestScope.menu.name}"/>
 						<input type="hidden" name="menu.id" id="id" value="${requestScope.menu.id==null?"":requestScope.menu.id}"/>
 						</td>
 					</tr> 
 					<tr>
 						<td align="right">	链接:</td>
-						<td><input type="text" validation="required"  name="menu.url" id="url" value="${menu.url}" size="100"/></td>
+						<td><input type="text" validation="required"  name="menu.url" id="url" value="${requestScope.menu.url}" size="100"/></td>
 					</tr> 
 					<tr>
 						<td align="right">父菜单:</td>
 						<td>
 							<select validation="required"  name="menu.pid" id="pid">
-								<option value="0" <c:if test="${0 == menu.pid}">selected</c:if>>一级菜单</option>
+								<option value="0" <c:if test="${0 == requestScope.menu.pid}">selected</c:if>>一级菜单</option>
 								<c:forEach items="${menuList}" var="item">
 									<option value="${item.id }" <c:if test="${item.id == menu.pid}">selected</c:if>>${item.name}</option>
 								</c:forEach>
@@ -56,7 +56,7 @@
 					<tr>
 						<td align="right">背景图片:</td>
 						<td>
-							<select name="menu.image" validation="required" id="image">
+							<select name="requestScope.menu.image" validation="required" id="image">
 								<option value="/images/main/null.png" <c:if test="${0 != menu.pid}">selected</c:if>>
 									/images/main/null.png
 								</option>
@@ -69,9 +69,9 @@
 					<tr>
 						<td align="right">菜单资源:</td>
 						<td>
-							<select validation="required"  name="menu.resourceId" id="resourceId">
+							<select validation="required"  name="requestScope.menu.resourceId" id="resourceId">
 								<c:forEach items="${resourceList}" var="item">
-									<option value="${item.id }" <c:if test="${item.id == menu.resourceId}">selected</c:if>>${item.name}</option>
+									<option value="${item.id }" <c:if test="${item.id == requestScope.menu.resourceId}">selected</c:if>>${item.name}</option>
 								</c:forEach>
 							</select>
 						</td>
