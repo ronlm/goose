@@ -67,25 +67,25 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	public String get() {		
 			// 点了添加或者点了修改
-			CommMenu temp = commMenuService.get(commMenu);
-			if (null != temp) {
-				commMenu = temp;
-			}
+			commMenu = commMenuService.get(menu);
+			
 			this.menuList = commMenuService.listAll(new CommMenu());
 			request.setAttribute("menuList", this.menuList);
 			List<CommResource> resourceList = commResourceService.listAll(new CommResource());
 			request.setAttribute("resourceList", resourceList);
+			request.setAttribute("menu", commMenu);
+			menu = null;
 			return "edit";	
 	}
 
 	public String save() {
 		// 保存表单
 		try {
-			commMenuService.save(commMenu);
+			commMenuService.save(menu);
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
-			request.setAttribute("menu", commMenu);
+			request.setAttribute("menu", menu);
 			request.setAttribute("message", e.getMessage());
 			return "edit";
 		}
@@ -240,7 +240,7 @@ public class MenuAction extends BaseAction implements Serializable {
 	public CommMenu getMenu() {
 		return menu;
 	}
-	@Resource
+	
 	public void setMenu(CommMenu menu) {
 		this.menu = menu;
 	}
