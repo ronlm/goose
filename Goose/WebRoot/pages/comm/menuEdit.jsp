@@ -48,7 +48,7 @@
 							<select validation="required"  name="menu.pid" id="pid">
 								<option value="0" <c:if test="${0 == requestScope.menu.pid}">selected</c:if>>一级菜单</option>
 								<c:forEach items="${menuList}" var="item">
-									<option value="${item.id }" <c:if test="${item.id == menu.pid}">selected</c:if>>${item.name}</option>
+									<option value="${item.id }" <c:if test="${menu.pid !=null && item.id == menu.pid}">selected</c:if>>${item.name}</option>
 								</c:forEach>
 							</select>
 						</td>

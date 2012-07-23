@@ -13,5 +13,7 @@ public class SearchAction {
 	private final static Log logger = LogFactory.getLog(SearchAction.class);
 	private FarmerService farmerService;
 	
-	
+	public String list(){
+		return "list";
+	}
 }
