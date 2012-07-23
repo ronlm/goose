@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-07-23 11:57:16
+Date: 2012-07-23 15:33:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,9 +34,13 @@ CREATE TABLE `comm_menu` (
 -- ----------------------------
 INSERT INTO `comm_menu` VALUES ('1', '系统菜单', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
 INSERT INTO `comm_menu` VALUES ('2', '系统用户管理', '/pages/Comm/userAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('3', '搜索功能', '/pages/goose/searchAction!list', '2', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('6', '农用物资管理', '/pages/goose/goodAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('7', '农户信息管理', '/pages/goose/farmerAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('3', '系统资源管理', '/pages/Comm/resourceAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('4', '系统菜单管理', '/pages/Comm/menuAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('5', '系统角色', '/pages/Comm/roleAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('6', '用户菜单', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
+INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('9', '农用物资管理', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('11', '搜索功能', '/pages/goose/searchAction!list', '6', '/images/main/null.png', '2');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -66,13 +70,14 @@ CREATE TABLE `comm_role` (
   `name` varchar(100) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role
 -- ----------------------------
 INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '			');
 INSERT INTO `comm_role` VALUES ('2', '超级管理员', '				超级管理员										');
+INSERT INTO `comm_role` VALUES ('4', null, null);
 
 -- ----------------------------
 -- Table structure for `comm_role_resource`
