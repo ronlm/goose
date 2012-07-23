@@ -13,5 +13,10 @@
 		<!-- 使用通配符 对农户，养殖场配置配置 结束-->
 	</package>
 
+	<!-- 搜索功能
+	<action name="searchAction" class="searchAction">
+		<result name=""></result>
+	</action>
+	 -->
 </struts>
 	

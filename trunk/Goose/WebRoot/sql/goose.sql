@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-07-20 16:14:39
+Date: 2012-07-23 11:57:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,18 +27,16 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
 -- ----------------------------
 INSERT INTO `comm_menu` VALUES ('1', '系统菜单', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
-INSERT INTO `comm_menu` VALUES ('2', '系统用户管理', '/Comm/userAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('3', '系统角色管理', '/Comm/roleAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('4', '系统资源管理', '/Comm/resourceAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('5', '系统菜单管理', '/Comm/menuAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('6', '农用物资管理', '/goose/goodAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('7', '农户信息管理', '/goose/farmerAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('2', '系统用户管理', '/pages/Comm/userAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('3', '搜索功能', '/pages/goose/searchAction!list', '2', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('6', '农用物资管理', '/pages/goose/goodAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('7', '农户信息管理', '/pages/goose/farmerAction!list', '1', '/images/main/null.png', '2');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -50,14 +48,14 @@ CREATE TABLE `comm_resource` (
   `path` varchar(200) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_resource
 -- ----------------------------
-INSERT INTO `comm_resource` VALUES ('1', '系统后台首页', '/pages/main/*', null);
-INSERT INTO `comm_resource` VALUES ('2', '系统管理', '/pages/comm/*', null);
-INSERT INTO `comm_resource` VALUES ('3', '用户管理', '/pages/comm/user.do*', '用户管理,供超级管理员管理系统管理员				');
+INSERT INTO `comm_resource` VALUES ('1', '系统后台首页', '/pages/Comm/*', null);
+INSERT INTO `comm_resource` VALUES ('2', '系统管理', '/pages/Comm/*', null);
+INSERT INTO `comm_resource` VALUES ('3', '用户管理', '/pages/goose/*', '用户管理,供超级管理员管理系统管理员				');
 
 -- ----------------------------
 -- Table structure for `comm_role`
@@ -68,7 +66,7 @@ CREATE TABLE `comm_role` (
   `name` varchar(100) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role
@@ -87,7 +85,7 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
@@ -99,6 +97,8 @@ INSERT INTO `comm_role_resource` VALUES ('111', '1', '4');
 INSERT INTO `comm_role_resource` VALUES ('114', '2', '1');
 INSERT INTO `comm_role_resource` VALUES ('115', '2', '3');
 INSERT INTO `comm_role_resource` VALUES ('116', '2', '4');
+INSERT INTO `comm_role_resource` VALUES ('117', '3', '1');
+INSERT INTO `comm_role_resource` VALUES ('118', '3', '3');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -162,8 +162,8 @@ CREATE TABLE `farmer` (
 -- ----------------------------
 -- Records of farmer
 -- ----------------------------
-INSERT INTO `farmer` VALUES ('1', '张三', '123456', '广州', '去死');
-INSERT INTO `farmer` VALUES ('2', '李四', '123456', '南海', null);
+INSERT INTO `farmer` VALUES ('1', '张三', '123456', '广州', '无');
+INSERT INTO `farmer` VALUES ('2', '李四', '123456', '南海', '未签约');
 
 -- ----------------------------
 -- Table structure for `good`
