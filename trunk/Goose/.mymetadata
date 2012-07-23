@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="Goose"
+  name="Goose-0723"
   id="myeclipse.1341300966565"
   context-root="/Goose"
   j2ee-spec="6.0"
-  archive="Goose.war">
+  archive="Goose-0723.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
