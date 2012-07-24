@@ -61,7 +61,9 @@ public class MenuAction extends BaseAction implements Serializable {
 	public String get() {
 		// 点了添加或者点了修改
 		menu = commMenuService.get(menu);
-
+		if(null == menu){
+			menu = new CommMenu();
+		}
 		this.menuList = commMenuService.listAll(new CommMenu());
 		request.setAttribute("menuList", this.menuList);
 		List<CommResource> resourceList = commResourceService
