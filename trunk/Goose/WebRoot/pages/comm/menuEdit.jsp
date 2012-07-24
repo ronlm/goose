@@ -48,7 +48,7 @@
 							<select validation="required"  name="menu.pid" id="pid">
 								<option value="0" <c:if test="${0 == menu.pid}">selected</c:if>>一级菜单</option>
 								<c:forEach items="${menuList}" var="item">
-									<option value="${item.id }" <c:if test="${menu.pid !=null && item.id == menu.pid}">selected</c:if>>${item.name}</option>
+									<option value="${item.id }" <c:if test="${item.id == menu.pid}">selected</c:if>>${item.name}</option>
 								</c:forEach>
 							</select>
 						</td>
@@ -57,9 +57,7 @@
 						<td align="right">背景图片:</td>
 						<td>
 							<select name="requestScope.menu.image" validation="required" id="image">
-								<option value="/images/main/null.png" <c:if test="${0 != menu.pid}">selected</c:if>>
-									/images/main/null.png
-								</option>
+								<option value="/images/main/null.png" <c:if test="${0 != menu.pid}">selected</c:if>>/images/main/null.png</option>
 								<option value="/images/main/MenuIcon.png" <c:if test="${0 == menu.pid}">selected</c:if>>
 									/images/main/MenuIcon.png
 								</option>
@@ -69,9 +67,9 @@
 					<tr>
 						<td align="right">菜单资源:</td>
 						<td>
-							<select validation="required"  name="requestScope.menu.resourceId" id="resourceId">
+							<select validation="required"  name="menu.resourceId" id="resourceId">
 								<c:forEach items="${resourceList}" var="item">
-									<option value="${item.id }" <c:if test="${item.id == requestScope.menu.resourceId}">selected</c:if>>${item.name}</option>
+									<option value="${item.id }" <c:if test="${item.id == menu.resourceId}">selected</c:if>>${item.name}</option>
 								</c:forEach>
 							</select>
 						</td>
