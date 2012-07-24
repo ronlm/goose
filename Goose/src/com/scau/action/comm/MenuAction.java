@@ -5,26 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.model.comm.CommMenu;
 import com.scau.model.comm.CommMenu2;
 import com.scau.model.comm.CommResource;
-import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommRoleResource;
-import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommMenuService;
 import com.scau.service.impl.comm.CommResourceService;
-import com.scau.service.impl.comm.CommRoleService;
 import com.scau.util.PageController;
 
 import cn.com.ege.mvc.exception.BusinessException;
@@ -35,7 +29,6 @@ public class MenuAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(MenuAction.class);
 	private PageController pageController;
 	private CommMenuService commMenuService;
-	private CommMenu commMenu;
 	private CommMenu menu;
 	private List<CommMenu> menuList = new ArrayList<CommMenu>();
 	private CommResourceService commResourceService;
@@ -67,15 +60,14 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	public String get() {
 		// 点了添加或者点了修改
-		commMenu = commMenuService.get(menu);
+		menu = commMenuService.get(menu);
 
 		this.menuList = commMenuService.listAll(new CommMenu());
 		request.setAttribute("menuList", this.menuList);
 		List<CommResource> resourceList = commResourceService
 				.listAll(new CommResource());
 		request.setAttribute("resourceList", resourceList);
-		request.setAttribute("menu", commMenu);
-		menu = null;
+		request.setAttribute("menu", menu);
 		return "edit";
 	}
 
@@ -233,15 +225,6 @@ public class MenuAction extends BaseAction implements Serializable {
 	@Resource
 	public void setCommMenuService(CommMenuService commMenuService) {
 		this.commMenuService = commMenuService;
-	}
-
-	public CommMenu getCommMenu() {
-		return commMenu;
-	}
-
-	@Resource
-	public void setCommMenu(CommMenu commMenu) {
-		this.commMenu = commMenu;
 	}
 
 	public CommResourceService getCommResourceService() {
