@@ -3,6 +3,8 @@ package com.scau.service.impl.comm;
 import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.model.comm.CommUser;
@@ -22,6 +24,7 @@ public class CommUserService extends BaseService<CommUser> implements Serializab
 		return this.get(entity);
 	}
 	
+	@Transactional
 	public void save(CommUser user) throws BusinessException{
 		if (null != user && null != user.getUserName()) {
 			if(null != user.getId() && 0 != user.getId()){
