@@ -14,7 +14,7 @@ import com.scau.service.BaseService;
 @Component
 public class CommResourceService extends BaseService<CommResource> implements Serializable {
 	
-	
+	@Transactional
 	public void save(CommResource resource) throws BusinessException{
 		if (null != resource && null != resource.getName()) {
 			if(null != resource.getId() && 0 != resource.getId()){
