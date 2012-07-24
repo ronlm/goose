@@ -17,13 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import cn.com.ege.mvc.exception.BusinessException;
-
 import com.scau.model.comm.CommResource;
 import com.scau.model.comm.CommRoleResource;
 import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommResourceService;
 import com.scau.service.impl.comm.CommRoleResourceService;
+import com.scau.util.BeansUtil;
 
 
 public class SecurityFilter implements Filter {
@@ -73,8 +72,8 @@ public class SecurityFilter implements Filter {
 			//取得当前用户的可访问资源
 			CommRoleResource crr = new CommRoleResource();
 			crr.setRoleId(user.getRoleId());
-			CommRoleResourceService commRoleResourceService = new CommRoleResourceService();
-			CommResourceService commResourceService = new CommResourceService();
+			CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");
+			CommResourceService commResourceService = (CommResourceService) BeansUtil.get("commResourceService");
 			List<CommRoleResource> commRoleResources;
 			try {
 				commRoleResources = commRoleResourceService.listByRoleId(crr);
