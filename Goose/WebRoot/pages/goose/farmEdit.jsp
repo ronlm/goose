@@ -3,10 +3,11 @@
 <%@page isELIgnored="false"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html style="overflow-y: visible;">
+<script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
 	<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<form
-			action="${pageContext.request.contextPath }/pages/goose/farm!save"
+			action="${pageContext.request.contextPath }/pages/goose/farmAction!save"
 			name="myForm" id="myForm" method="post">
 			<table class="mainTable">
 				<thead>
@@ -50,6 +51,7 @@
 							<input type="text" validation="required" name="farm.name"
 								id="name" value="${farm.name}" />
 							<input type="hidden" name="farm.id" id="id" value="${farm.id}" />
+							<input type="hidden" name="farm.farmerId" id="farmerId" value="${farm.farmerId == null?farmer.id:farm.farmerId }" />
 						</td>
 					</tr>
 					<tr>
@@ -73,7 +75,7 @@
 							签约日期:
 						</td>
 						<td>
-							<input type="text"  validation="date,required" readonly="readonly" name="farm.signDate" id="signDate" value="${farm.signDate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
+							<input type="text"  validation="date" readonly="readonly" name="farm.signDate" id="signDate" value="${farm.signDate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
 							<em style="color:red;">*</em>
 						</td>
 					</tr>
