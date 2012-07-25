@@ -32,8 +32,12 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 	
 	public String list() throws Exception {
 		// 取列表
-			farm = new Farm();
+			if(null != request.getAttribute("farmer")){
+				farmer = (Farmer) request.getAttribute("farmer");
+			}
 			farmer = farmerService.get(farmer);
+			
+			farm = new Farm();
 			farm.setFarmerId(farmer.getId());
 			int totalRows = farmService.list(farm).size();
 			String URL = request.getRequestURI();
@@ -54,12 +58,21 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 			return "edit";
 	}
 
+	public String add(){
+		farmer = farmerService.get(farmer);
+		request.setAttribute("farmer", farmer);
+		return "edit";
+	}
+	
 	public String save() throws Exception {
 		// 保存表单
 		try {
 			
 			farmService.save(farm);
-		
+			farmer = new Farmer();
+			farmer.setId(farm.getFarmerId());
+			farmer = farmerService.get(farmer);
+			request.setAttribute("farmer", farmer);
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
