@@ -10,10 +10,30 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-07-23 18:51:42
+Date: 2012-07-28 15:35:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `buy_good`
+-- ----------------------------
+DROP TABLE IF EXISTS `buy_good`;
+CREATE TABLE `buy_good` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存',
+  `goodId` varchar(255) NOT NULL,
+  `batchNum` int(11) DEFAULT NULL COMMENT '批号，可选填',
+  `unitPriace` varchar(255) DEFAULT NULL,
+  `amount` int(11) NOT NULL DEFAULT '0',
+  `Orgin` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of buy_good
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `comm_menu`
@@ -27,7 +47,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -36,11 +56,12 @@ INSERT INTO `comm_menu` VALUES ('1', '系统菜单', 'javascript:void(0)', '0', 
 INSERT INTO `comm_menu` VALUES ('2', '系统用户管理', '/pages/Comm/userAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('3', '系统资源管理', '/pages/Comm/resourceAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('4', '系统菜单管理', '/pages/Comm/menuAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('5', '系统角色', '/pages/Comm/roleAction!list', '1', '/images/main/null.png', '2');
+INSERT INTO `comm_menu` VALUES ('5', '系统角色管理', '/pages/Comm/roleAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('6', '用户菜单', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
 INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('9', '农用物资管理', '/pages/goose/goodAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('11', '搜索功能', '/pages/goose/searchAction!list', '6', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('15', 'test2', 'test2', '6', '/images/main/null.png', '3');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -52,7 +73,7 @@ CREATE TABLE `comm_resource` (
   `path` varchar(200) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_resource
@@ -70,7 +91,7 @@ CREATE TABLE `comm_role` (
   `name` varchar(100) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role
@@ -118,7 +139,7 @@ CREATE TABLE `comm_user` (
   `roleId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_user
@@ -127,6 +148,7 @@ INSERT INTO `comm_user` VALUES ('1', 'admin', '引擎小组', 'admin', '123', '1
 INSERT INTO `comm_user` VALUES ('2', 'engine', '', 'engine', '', '', '', '2');
 INSERT INTO `comm_user` VALUES ('3', 'test', null, 'test', null, null, null, '1');
 INSERT INTO `comm_user` VALUES ('4', 'user', '', '111111', '', '', '', '3');
+INSERT INTO `comm_user` VALUES ('5', 'zjh', '', '111111', '', '', '', '3');
 
 -- ----------------------------
 -- Table structure for `farm`
@@ -141,14 +163,15 @@ CREATE TABLE `farm` (
   `area` int(11) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of farm
 -- ----------------------------
-INSERT INTO `farm` VALUES ('1', '乐乐农场', '1', '广州', '2012-07-18', '3000', null);
-INSERT INTO `farm` VALUES ('2', '牛牛', '1', '南海', null, '2000', null);
+INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', '已签约		');
+INSERT INTO `farm` VALUES ('2', '牛牛', '1', '南海', null, '2000', '硬件考察中	');
 INSERT INTO `farm` VALUES ('3', '猪镇', '2', '南海', null, '1000', null);
+INSERT INTO `farm` VALUES ('4', 'testtes', '1', '234', null, '234234', '硬件考察中		');
 
 -- ----------------------------
 -- Table structure for `farmer`
@@ -161,7 +184,7 @@ CREATE TABLE `farmer` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of farmer
@@ -174,17 +197,20 @@ INSERT INTO `farmer` VALUES ('2', '李四', '123456', '南海', '未签约');
 -- ----------------------------
 DROP TABLE IF EXISTS `good`;
 CREATE TABLE `good` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存',
+  `good_id` varchar(255) NOT NULL,
+  `batch_num` int(11) DEFAULT NULL COMMENT '批号，可选填',
   `unit` varchar(255) DEFAULT NULL,
+  `stock` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '油麦菜种', '包');
-INSERT INTO `good` VALUES ('2', '大叶槐苗', '棵');
+INSERT INTO `good` VALUES ('1', '油麦菜种', null, '包', '0');
+INSERT INTO `good` VALUES ('2', '大叶槐苗', null, '棵', '0');
+INSERT INTO `good` VALUES ('3', 'XX消毒水', null, '瓶', '0');
 
 -- ----------------------------
 -- Table structure for `goose`
@@ -193,8 +219,9 @@ DROP TABLE IF EXISTS `goose`;
 CREATE TABLE `goose` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `receiveId` int(11) NOT NULL,
-  `tradeId` int(11) DEFAULT NULL,
-  `isValid` tinyint(4) DEFAULT NULL,
+  `tradeId` int(11) DEFAULT NULL COMMENT '收购批号',
+  `saleId` int(11) DEFAULT NULL COMMENT '销售批号',
+  `isValid` tinyint(1) DEFAULT NULL COMMENT '是否消号,0为没有消号，表示鹅只没死或没被销售',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -219,6 +246,42 @@ CREATE TABLE `receive_goose` (
 -- Records of receive_goose
 -- ----------------------------
 INSERT INTO `receive_goose` VALUES ('1', '1', '100', '2012-07-19', '木有');
+
+-- ----------------------------
+-- Table structure for `retailer`
+-- ----------------------------
+DROP TABLE IF EXISTS `retailer`;
+CREATE TABLE `retailer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of retailer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `sale_goose`
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_goose`;
+CREATE TABLE `sale_goose` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `retailerId` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `unitPrice` double DEFAULT NULL,
+  `totalWeight` double DEFAULT NULL,
+  `tradeDate` date DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of sale_goose
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `trade_good`
