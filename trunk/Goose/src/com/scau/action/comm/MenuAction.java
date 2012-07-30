@@ -39,7 +39,7 @@ public class MenuAction extends BaseAction implements Serializable {
 		String URL = request.getRequestURI();
 		this.pageController.setURL(URL);
 		this.pageController.setTotalRowsAmount(totalRows);
-		List<CommMenu> mList = commMenuService.list(new CommMenu(), null, null,
+		List<CommMenu> mList = commMenuService.list(new CommMenu(),this.pageController.getPageStartRow(), pageController.getPageSize(),
 				null, null);
 		List<CommMenu2> tempList = new ArrayList<CommMenu2>();
 		this.save(mList, tempList);
@@ -55,6 +55,7 @@ public class MenuAction extends BaseAction implements Serializable {
 					this.pageController.getPageEndRow());
 		}
 		pageController.setData(tempList);
+		request.setAttribute("pager", pageController);
 		return "list";
 	}
 
