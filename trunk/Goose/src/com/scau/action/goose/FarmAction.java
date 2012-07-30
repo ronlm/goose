@@ -51,6 +51,20 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 			return "list";		
 	}
 
+	public String listAll() throws Exception{
+			farm = new Farm();
+			int totalRows = farmService.list(farm).size();
+			String URL = request.getRequestURI();
+			this.pager.setURL(URL);
+			this.pager.setTotalRowsAmount(totalRows);
+			List<Farm> resourceList = farmService.list(new Farm(),
+					this.pager.getPageStartRow(), pager.getPageSize(), null,null);
+			pager.setData(resourceList);
+			request.setAttribute("pager", pager);
+			request.setAttribute("farmer", null);
+			return "list";		
+	}
+	
 	public String get() {
 		// 点了添加或者点了修改	
 			farm = farmService.get(farm);
