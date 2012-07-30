@@ -27,7 +27,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 @Scope("prototype")
 public class RoleAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(RoleAction.class);
-	private PageController pageController;
+	private PageController pager;
 	private CommRoleService commRoleService;
 	//private CommRole commRole;
 	private List<CommRoleResource> roleResourceList = null;
@@ -40,13 +40,13 @@ public class RoleAction extends BaseAction implements Serializable {
 			// 取列表
 			int totalRows = commRoleService.getRecordCount(new CommRole());
 			String URL = request.getRequestURI();
-			this.pageController.setURL(URL);
-			this.pageController.setTotalRowsAmount(totalRows);
+			this.pager.setURL(URL);
+			this.pager.setTotalRowsAmount(totalRows);
 			List<CommRole> resourceList = commRoleService.list(new CommRole(),
-					this.pageController.getPageStartRow(), pageController.getPageSize(), null,
+					this.pager.getPageStartRow(), pager.getPageSize(), null,
 					null);
-			pageController.setData(resourceList);
-			request.setAttribute("pager", pageController);
+			pager.setData(resourceList);
+			request.setAttribute("pager", pager);
 			return "list";
 	}
 
@@ -118,16 +118,15 @@ public class RoleAction extends BaseAction implements Serializable {
 
 	
 	
-	public PageController getPageController() {
-		return pageController;
+	public PageController getPager() {
+		return pager;
 	}
 
 	@Resource
-	public void setPageController(PageController pageController) {
-		this.pageController = pageController;
+	public void setPager(PageController pager) {
+		this.pager = pager;
 	}
 
-	
 	public CommRole getRole() {
 		return role;
 	}

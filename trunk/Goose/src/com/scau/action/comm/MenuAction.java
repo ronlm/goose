@@ -27,7 +27,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 @Scope("prototype")
 public class MenuAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(MenuAction.class);
-	private PageController pageController;
+	private PageController pager;
 	private CommMenuService commMenuService;
 	private CommMenu menu;
 	private List<CommMenu> menuList = new ArrayList<CommMenu>();
@@ -37,9 +37,9 @@ public class MenuAction extends BaseAction implements Serializable {
 		// 取列表
 		int totalRows = commMenuService.getRecordCount(new CommMenu());
 		String URL = request.getRequestURI();
-		this.pageController.setURL(URL);
-		this.pageController.setTotalRowsAmount(totalRows);
-		List<CommMenu> mList = commMenuService.list(new CommMenu(),this.pageController.getPageStartRow(), pageController.getPageSize(),
+		this.pager.setURL(URL);
+		this.pager.setTotalRowsAmount(totalRows);
+		List<CommMenu> mList = commMenuService.list(new CommMenu(),null, null,
 				null, null);
 		List<CommMenu2> tempList = new ArrayList<CommMenu2>();
 		this.save(mList, tempList);
@@ -47,15 +47,16 @@ public class MenuAction extends BaseAction implements Serializable {
 		this.setMenu(0l, tempList, tempList2);
 		tempList = new ArrayList<CommMenu2>();
 		this.display(tempList2, tempList);
-		if (tempList.size() <= this.pageController.getPageEndRow()) {
-			tempList = tempList.subList(this.pageController.getPageStartRow(),
-					tempList.size());
+		if (tempList.size() <= this.pager.getPageEndRow()) {
+			tempList = tempList.subList(this.pager.getPageStartRow(),
+					tempList.size() );
 		} else {
-			tempList = tempList.subList(this.pageController.getPageStartRow(),
-					this.pageController.getPageEndRow());
+			tempList = tempList.subList(this.pager.getPageStartRow(),
+					this.pager.getPageEndRow());
 		}
-		pageController.setData(tempList);
-		request.setAttribute("pager", pageController);
+		pager.setData(tempList);
+		
+		request.setAttribute("pager", pager);
 		return "list";
 	}
 
@@ -117,7 +118,6 @@ public class MenuAction extends BaseAction implements Serializable {
 	private void setMenu(Long pid, List<CommMenu2> menuList,
 			List<CommMenu2> resultList) {
 		List<CommMenu2> sub = getSubList(pid, menuList);
-		// 取得的subMenu 是空的。。。。擦
 		resultList.addAll(sub);
 		for (CommMenu2 menu : resultList) {
 			setMenu(menu.getId(), menuList, menu.getMenuList());
@@ -204,13 +204,15 @@ public class MenuAction extends BaseAction implements Serializable {
 		return sb.toString();
 	}
 
-	public PageController getPageController() {
-		return pageController;
+	
+
+	public PageController getPager() {
+		return pager;
 	}
 
 	@Resource
-	public void setPageController(PageController pageController) {
-		this.pageController = pageController;
+	public void setPager(PageController pager) {
+		this.pager = pager;
 	}
 
 	public List<CommMenu> getMenuList() {
