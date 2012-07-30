@@ -21,4 +21,13 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,Ser
 	public void setServletRequest(HttpServletRequest arg0) {
 		request = arg0;
 	}
+	
+	/** 取得这个action 执行list方法URL
+	 * @param URL
+	 * @return
+	 */
+	public String getListURL(){
+		StringBuffer URL = new StringBuffer(request.getRequestURI().substring(0, request.getRequestURI().indexOf("!")));
+		return URL.append("!list").toString();
+	}
 }
