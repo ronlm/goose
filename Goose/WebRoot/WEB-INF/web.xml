@@ -113,7 +113,7 @@
 	</error-page>
 	 -->
 	 
-	 <!-- 权限验证过滤器 开始   -->
+	 <!-- 权限验证过滤器 开始  
 	<filter>
 		<filter-name>SecurityFilter</filter-name>
 		<filter-class>cn.com.ege.mvc.security.SecurityFilter</filter-class>
@@ -123,7 +123,7 @@
 		<url-pattern>/*</url-pattern>
 		
 	</filter-mapping>
-	
+	 -->
 	<!-- 权限验证过滤器 结束 -->
 	 
 	 
