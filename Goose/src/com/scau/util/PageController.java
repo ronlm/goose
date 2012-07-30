@@ -4,9 +4,11 @@
 import java.io.Serializable;
 import java.util.Collection;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component(value="pager")
+@Scope("prototype")
 public class PageController implements Serializable{
 
 	// 总行数
