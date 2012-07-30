@@ -39,6 +39,7 @@ public class ResourceAction extends BaseAction implements Serializable {
 				new CommResource(), this.pageController.getPageStartRow(),
 				pageController.getPageSize(), null, null);
 		pageController.setData(resourceList);
+		request.setAttribute("pager", pageController);
 		return "list";
 	}
 

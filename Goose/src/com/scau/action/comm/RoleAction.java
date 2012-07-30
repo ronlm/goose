@@ -46,6 +46,7 @@ public class RoleAction extends BaseAction implements Serializable {
 					this.pageController.getPageStartRow(), pageController.getPageSize(), null,
 					null);
 			pageController.setData(resourceList);
+			request.setAttribute("pager", pageController);
 			return "list";
 	}
 
