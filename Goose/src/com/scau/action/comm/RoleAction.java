@@ -29,7 +29,6 @@ public class RoleAction extends BaseAction implements Serializable {
 	private final static Log logger = LogFactory.getLog(RoleAction.class);
 	private PageController pager;
 	private CommRoleService commRoleService;
-	//private CommRole commRole;
 	private List<CommRoleResource> roleResourceList = null;
 	private List<CommResource> resourceList = null;
 	private CommRoleResourceService commRoleResourceService;
@@ -39,7 +38,7 @@ public class RoleAction extends BaseAction implements Serializable {
 	
 			// 取列表
 			int totalRows = commRoleService.getRecordCount(new CommRole());
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<CommRole> resourceList = commRoleService.list(new CommRole(),

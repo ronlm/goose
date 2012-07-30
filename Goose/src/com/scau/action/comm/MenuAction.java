@@ -36,7 +36,7 @@ public class MenuAction extends BaseAction implements Serializable {
 	public String list() {
 		// 取列表
 		int totalRows = commMenuService.getRecordCount(new CommMenu());
-		String URL = request.getRequestURI();
+		String URL = getListURL();
 		this.pager.setURL(URL);
 		this.pager.setTotalRowsAmount(totalRows);
 		List<CommMenu> mList = commMenuService.list(new CommMenu(),null, null,

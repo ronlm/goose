@@ -32,7 +32,7 @@ public class ResourceAction extends BaseAction implements Serializable {
 	public String list() {
 		// 取列表
 		int totalRows = commResourceService.getRecordCount(new CommResource());
-		String URL = request.getRequestURI();
+		String URL = getListURL();
 		this.pager.setURL(URL);
 		this.pager.setTotalRowsAmount(totalRows);
 		List<CommResource> resourceList = commResourceService.list(
