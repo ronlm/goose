@@ -21,7 +21,7 @@ import com.scau.util.PageController;
 public class GoodAction extends BaseAction{
 	private static final long serialVersionUID = 8299975587235537983L;
 	private final static Log logger = LogFactory.getLog(GoodAction.class);
-	private PageController pageController;
+	private PageController pager;
 	private GoodService goodService;
 	private Good good;
 	
@@ -30,11 +30,11 @@ public class GoodAction extends BaseAction{
 			
 			int totalRows = goodService.listAll(new Good()).size();
 			String URL = request.getRequestURI();
-			this.pageController.setURL(URL);
-			this.pageController.setTotalRowsAmount(totalRows);
+			this.pager.setURL(URL);
+			this.pager.setTotalRowsAmount(totalRows);
 			List<Good> resourceList = goodService.listAll(new Good());
-			pageController.setData(resourceList);
-			request.setAttribute("pageController", pageController);
+			pager.setData(resourceList);
+			request.setAttribute("pager", pager);
 			return "list";		
 	}
 
@@ -73,13 +73,15 @@ public class GoodAction extends BaseAction{
 
 	
 
-	public PageController getPageController() {
-		return pageController;
+	
+
+	public PageController getPager() {
+		return pager;
 	}
 
 	@Resource
-	public void setPageController(PageController pageController) {
-		this.pageController = pageController;
+	public void setPager(PageController pager) {
+		this.pager = pager;
 	}
 
 	public GoodService getGoodService() {

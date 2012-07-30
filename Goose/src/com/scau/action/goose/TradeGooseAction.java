@@ -24,7 +24,7 @@ import com.scau.util.PageController;
 public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private static final long serialVersionUID = 8299975587235537983L;
 	private final static Log logger = LogFactory.getLog(TradeGooseAction.class);
-	private PageController pageController;
+	private PageController pager;
 	private FarmService farmService;
 	private Farm farm ;
 	private TradeGoose tradeGoose;
@@ -36,12 +36,12 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 			tradeGoose.setFarmId(farm.getId());
 			int totalRows = tradeGooseService.list(tradeGoose).size();
 			String URL = request.getRequestURI();
-			this.pageController.setURL(URL);
-			this.pageController.setTotalRowsAmount(totalRows);
+			this.pager.setURL(URL);
+			this.pager.setTotalRowsAmount(totalRows);
 			List<TradeGoose> resourceList = tradeGooseService.list(new TradeGoose(),
-					this.pageController.getPageStartRow(), pageController.getPageSize(), new String[]{"farmId"}, new Long[]{farm.getId()});
-			pageController.setData(resourceList);
-			request.setAttribute("pageController", pageController);
+					this.pager.getPageStartRow(), pager.getPageSize(), new String[]{"farmId"}, new Long[]{farm.getId()});
+			pager.setData(resourceList);
+			request.setAttribute("pager", pager);
 		
 			return "list";		
 	}
@@ -80,17 +80,15 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	}
 
 	
-
-	public PageController getPageController() {
-		return pageController;
+	
+	public PageController getPager() {
+		return pager;
 	}
 
 	@Resource
-	public void setPageController(PageController pageController) {
-		this.pageController = pageController;
+	public void setPager(PageController pager) {
+		this.pager = pager;
 	}
-
-	
 
 	public TradeGooseService getTradeGooseService() {
 		return tradeGooseService;
