@@ -26,7 +26,7 @@ public class UserAction extends BaseAction implements Serializable {
 
 	private static final long serialVersionUID = 8299975587235537983L;
 	private final static Log logger = LogFactory.getLog(UserAction.class);
-	private PageController pageController;
+	private PageController pager;
 	private CommUserService commUserService;
 	private CommUser commUser;
 	private List<CommRole> roleList = null;
@@ -37,12 +37,12 @@ public class UserAction extends BaseAction implements Serializable {
 		// 取列表		
 			int totalRows = commUserService.getRecordCount(new CommUser());
 			String URL = request.getRequestURI();
-			this.pageController.setURL(URL);
-			this.pageController.setTotalRowsAmount(totalRows);
+			this.pager.setURL(URL);
+			this.pager.setTotalRowsAmount(totalRows);
 			List<CommUser> resourceList = commUserService.list(new CommUser(),
-					this.pageController.getPageStartRow(), pageController.getPageSize(), null, null);
-			pageController.setData(resourceList);
-			request.setAttribute("pager", pageController);
+					this.pager.getPageStartRow(), pager.getPageSize(), null, null);
+			pager.setData(resourceList);
+			request.setAttribute("pager", pager);
 			return "list";		
 	}
 
@@ -84,13 +84,13 @@ public class UserAction extends BaseAction implements Serializable {
 
 	
 
-	public PageController getPageController() {
-		return pageController;
+	public PageController getPager() {
+		return pager;
 	}
 
 	@Resource
-	public void setPageController(PageController pageController) {
-		this.pageController = pageController;
+	public void setPager(PageController pager) {
+		this.pager = pager;
 	}
 
 	public CommUserService getCommUserService() {
