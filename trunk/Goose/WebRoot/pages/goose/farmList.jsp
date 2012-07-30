@@ -9,9 +9,13 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="7">
-					<h3>${farmer.name}的农场列表</h3>
+					<h3>${farmer.name !=null ? farmer.name:"全部"}的农场信息列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!add?farmer.id=${farmer.id }'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<c:if test="${farmer.name!=null }">
+							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!add?farmer.id=${farmer.id }'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						</c:if>
+							<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><imgsrc="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png" align="absmiddle" />&nbsp;返回上一页</span>
+							</a>
 					</div>
 				</th>
 			</tr>
