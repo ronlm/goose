@@ -41,7 +41,7 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/goose/farmAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pageController.data}" var="farm">
+			<c:forEach items="${pager.data}" var="farm">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${farm.id}"/></td>
 					<td>${farm.name}</td>
@@ -65,7 +65,7 @@
 				<td colspan="11" align="center">
 					<div class="pageBar">
 						<jsp:include page="../../include/SplitPage.jsp">
-							<jsp:param name="pager" value="${pageController}"/>
+							<jsp:param name="pager" value="${pager}"/>
 						</jsp:include>
 					</div>
 				</td>
