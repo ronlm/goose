@@ -33,7 +33,7 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/Comm/menuAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pageController.data}" var="menu">
+			<c:forEach items="${pager.data}" var="menu">
 			<tr>
 				<td width="20px"><input type="checkbox" name="id" value="${menu.id}"/></td>
 				<td>
@@ -61,7 +61,7 @@
 			<tr  class="tableController_bottom">
 				<td colspan="11" align="center">
 					<jsp:include page="../../include/SplitPage.jsp">
-						<jsp:param name="pager" value="${pageController}"/>
+						<jsp:param name="pager" value="${pager}"/>
 					</jsp:include>
 				</td>
 			</tr>
