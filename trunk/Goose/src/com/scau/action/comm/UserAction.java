@@ -36,7 +36,7 @@ public class UserAction extends BaseAction implements Serializable {
 	public String list() {
 		// 取列表		
 			int totalRows = commUserService.getRecordCount(new CommUser());
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<CommUser> resourceList = commUserService.list(new CommUser(),
