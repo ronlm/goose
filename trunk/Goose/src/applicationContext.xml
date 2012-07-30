@@ -60,13 +60,16 @@
 				<value>com.scau.model.comm.CommResource</value>
 				<value>com.scau.model.comm.CommRole</value>
 				<value>com.scau.model.comm.CommRoleResource</value>
+				<value>com.scau.model.goose.BuyGood</value>
 				<value>com.scau.model.goose.Farm</value>
 				<value>com.scau.model.goose.Farmer</value>
-				<value>com.scau.model.goose.Goose</value>
-				<value>com.scau.model.goose.TradeGoose</value>
-				<value>com.scau.model.goose.ReceiveGoose</value>
-				<value>com.scau.model.goose.TradeGood</value>
 				<value>com.scau.model.goose.Good</value>
+				<value>com.scau.model.goose.Goose</value>
+				<value>com.scau.model.goose.ReceiveGoose</value>
+				<value>com.scau.model.goose.Retailer</value>
+				<value>com.scau.model.goose.SaleGoose</value>
+				<value>com.scau.model.goose.TradeGoose</value>
+				<value>com.scau.model.goose.TradeGood</value>	
 			</list>
 		</property>
 		<property name="hibernateProperties">
