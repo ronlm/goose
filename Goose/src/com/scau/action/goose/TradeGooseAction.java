@@ -35,7 +35,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 			tradeGoose = new TradeGoose();
 			tradeGoose.setFarmId(farm.getId());
 			int totalRows = tradeGooseService.list(tradeGoose).size();
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<TradeGoose> resourceList = tradeGooseService.list(new TradeGoose(),

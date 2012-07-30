@@ -29,7 +29,7 @@ public class FarmerAction extends BaseAction{
 		// 取列表	
 			
 			int totalRows = farmerService.getRecordCount(new Farmer());
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<Farmer> resourceList = farmerService.list(new Farmer(),

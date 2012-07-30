@@ -40,7 +40,7 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 			farm = new Farm();
 			farm.setFarmerId(farmer.getId());
 			int totalRows = farmService.list(farm).size();
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<Farm> resourceList = farmService.list(new Farm(),
