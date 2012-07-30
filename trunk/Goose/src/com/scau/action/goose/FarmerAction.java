@@ -21,7 +21,7 @@ import com.scau.util.PageController;
 public class FarmerAction extends BaseAction{
 	private static final long serialVersionUID = 8299975587235537983L;
 	private final static Log logger = LogFactory.getLog(FarmerAction.class);
-	private PageController pageController;
+	private PageController pager;
 	private FarmerService farmerService;
 	private Farmer farmer;
 		
@@ -30,12 +30,12 @@ public class FarmerAction extends BaseAction{
 			
 			int totalRows = farmerService.getRecordCount(new Farmer());
 			String URL = request.getRequestURI();
-			this.pageController.setURL(URL);
-			this.pageController.setTotalRowsAmount(totalRows);
+			this.pager.setURL(URL);
+			this.pager.setTotalRowsAmount(totalRows);
 			List<Farmer> resourceList = farmerService.list(new Farmer(),
-					this.pageController.getPageStartRow(), pageController.getPageSize(), null, null);
-			pageController.setData(resourceList);
-			request.setAttribute("pageController", pageController);
+					this.pager.getPageStartRow(), pager.getPageSize(), null, null);
+			pager.setData(resourceList);
+			request.setAttribute("pager", pager);
 			return "list";		
 	}
 
@@ -76,13 +76,14 @@ public class FarmerAction extends BaseAction{
 
 	
 
-	public PageController getPageController() {
-		return pageController;
+
+	public PageController getPager() {
+		return pager;
 	}
 
 	@Resource
-	public void setPageController(PageController pageController) {
-		this.pageController = pageController;
+	public void setPager(PageController pager) {
+		this.pager = pager;
 	}
 
 	public FarmerService getFarmerService() {
