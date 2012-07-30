@@ -29,7 +29,7 @@ public class GoodAction extends BaseAction{
 		// 取列表
 			
 			int totalRows = goodService.listAll(new Good()).size();
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<Good> resourceList = goodService.listAll(new Good());

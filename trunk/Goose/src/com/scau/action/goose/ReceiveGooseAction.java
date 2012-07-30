@@ -37,7 +37,7 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			receiveGoose = new ReceiveGoose();
 			receiveGoose.setFarmId(farm.getId());
 			int totalRows = receiveGooseService.list(receiveGoose).size();
-			String URL = request.getRequestURI();
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<ReceiveGoose> resourceList = receiveGooseService.list(new ReceiveGoose(),
