@@ -1,5 +1,6 @@
 package com.scau.action.goose;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,43 +32,44 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private Farm farm ;
 	private ReceiveGoose receiveGoose;
 	private ReceiveGooseService receiveGooseService;
+	private int daysWithin = 7;//默认显示7天内的记录
+	
 	public String list() throws Exception {
-		// 取列表
-			farm = farmService.get(farm);
-			receiveGoose = new ReceiveGoose();
-			receiveGoose.setFarmId(farm.getId());
-			int totalRows = receiveGooseService.list(receiveGoose).size();
-			String URL = getListURL();
+		    // 查看某个农场最近接收的鹅苗信息
+			List<ReceiveGoose> resourceList = null;
+			
+			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
-			this.pager.setTotalRowsAmount(totalRows);
-			List<ReceiveGoose> resourceList = receiveGooseService.list(new ReceiveGoose(),
-					this.pager.getPageStartRow(), pager.getPageSize(), new String[]{"farmId"}, new Long[]{farm.getId()});
+			
+			if(null != request.getParameter("daysWithin")){
+				// 取得要显示的日期条件
+				daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+			}
+			if(null != farm){
+				farm = farmService.get(farm);
+				receiveGoose = new ReceiveGoose();
+				receiveGoose.setFarmId(farm.getId());
+			
+				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + receiveGoose.getFarmId()
+					+" and rg.receiveDate >='" + receiveGooseService.getDaysBefore(daysWithin) + "' order by rg.receiveDate desc";
+				int totalRows = receiveGooseService.findByCondition(hql).size();// 总的记录条数
+				this.pager.setTotalRowsAmount(totalRows);
+				resourceList = receiveGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
+				request.setAttribute("farm", farm);
+	
+			}else if(null == farm){
+				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.receiveDate >='" + 
+						receiveGooseService.getDaysBefore(daysWithin) + "' order by rg.receiveDate desc";
+				int totalRows = receiveGooseService.findByCondition(hql).size();// 总的记录条数
+				this.pager.setTotalRowsAmount(totalRows);
+				resourceList = receiveGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
+			}
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
-		
+			request.setAttribute("daysWithin", daysWithin);
 			return "list";		
 	}
-
-	public String get() {
-		// 点了添加或者点了修改	
-			
-			return "edit";
-	}
-
-	public String save() throws Exception {
-		// 保存表单
-		try {
-			
-			
-		
-			return list();
-		} catch (BusinessException e) {
-			// 保存原来表单已输入的内容
-			
-			return list();
-		}
-	}
-
+	
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
@@ -123,6 +125,18 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 	public Farm getModel() {
 		// TODO Auto-generated method stub
 		return farm;
+	}
+
+
+
+	public int getDaysWithin() {
+		return daysWithin;
+	}
+
+
+
+	public void setDaysWithin(int daysWithin) {
+		this.daysWithin = daysWithin;
 	}
 
 	
