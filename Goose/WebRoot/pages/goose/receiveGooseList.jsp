@@ -3,15 +3,28 @@
 <%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!--  
+	<script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../../js/receiveGoose.js"></script>
+ -->
     <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
+
   <body style="overflow-y: visible;" onload="changeRowColor();">
     	<table class="mainTable">
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>鹅苗交付信息列表</h3>
+					<h3> 鹅苗交付信息列表</h3>
+					
 					<div class="tableControllerButton">
-						查看最近 <input type="text" name="daysWithin" id="daysWithin" width="20px"> 天内交付信息
+						<form id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!list" method="post">
+							<!-- <input type="hidden" id="pager" name="pager" value="${pager }"> -->
+							查看最近 <input type="text" name="daysWithin" id="daysWithin" value="${daysWithin }" style="width: 30px;text-align: center;" >天内交付信息 	
+							<c:if test="${farm.id!=null }">
+									<input type="hidden" id="farm.id" value="${farm.id }"/>
+							</c:if>
+							
+						</form>	
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"	align="absmiddle" />&nbsp;返回上一页</span></a>
 					</div>
 				</th>
@@ -34,21 +47,21 @@
 				</th>                        
 			</tr>
 		</thead>
-		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="receiveGoose">
-				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${receiveGoose.id}"/></td>
-					<td>${receiveGoose.receiveDate}</td>
-					<td>${receiveGoose.amount}</td>
-					<td>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del?id=${receiveGoose.id }'); return false;"><span>删除</span></a>
-					</td>
-					<td>${receiveGoose.comments}</td>
-				</tr> 
-			</c:forEach>
-		</form>
+		<tbody id="contentBody">
+			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
+				<c:forEach items="${pager.data}" var="receiveGoose">
+					<tr>
+						<td width="20px"><input type="checkbox" name="id" value="${receiveGoose.id}"/></td>
+						<td>${receiveGoose.receiveDate}</td>
+						<td>${receiveGoose.amount}</td>
+						<td>
+							<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>修改</span></a>
+							<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del?id=${receiveGoose.id }'); return false;"><span>删除</span></a>
+						</td>
+						<td>${receiveGoose.comments}</td>
+					</tr> 
+				</c:forEach>
+			</form>
 		</tbody>
 		<tfoot>
 			<tr  class="tableController_bottom">
@@ -63,4 +76,9 @@
 		</tfoot>
 	</table>
   </body>
+  <script type="text/javascript">
+  	function changeDays(){
+  		document.getElementById("changeDayForm").submit();
+  	}
+  </script>
 </html>
