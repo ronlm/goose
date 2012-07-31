@@ -61,6 +61,9 @@ public class BaseService<T> {
 		return baseDao.findByCondition(queryString);
 	}
 	
+	public  List<T> findByCondition(Integer start, Integer size,String queryString){
+		return baseDao.findByCondition(start, size, queryString);
+	}
 	public int getRecordCount(T entity) {
 		return this.baseDao.getRecordCount(entity);
 	}
@@ -79,8 +82,8 @@ public class BaseService<T> {
 	 * @param daysBefore 与今天相隔的天数
 	 * @return
 	 */
-	public static Date getDaysBefore(int daysBefore){
-			int millisecondsInterval = daysBefore * 24 * 3600 * 1000;
+	public static Date getDaysBefore(long daysBefore){
+			long millisecondsInterval = daysBefore * 24 * 3600 * 1000;
 			java.util.Date today = new java.util.Date();
 			Date tar = new Date(today.getTime() - millisecondsInterval);
 			return tar;	
