@@ -31,15 +31,19 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private TradeGooseService tradeGooseService;
 	public String list() throws Exception {
 		// 取列表
-			farm = farmService.get(farm);
-			tradeGoose = new TradeGoose();
-			tradeGoose.setFarmId(farm.getId());
-			int totalRows = tradeGooseService.list(tradeGoose).size();
-			String URL = getListURL();
-			this.pager.setURL(URL);
-			this.pager.setTotalRowsAmount(totalRows);
-			List<TradeGoose> resourceList = tradeGooseService.list(new TradeGoose(),
-					this.pager.getPageStartRow(), pager.getPageSize(), new String[]{"farmId"}, new Long[]{farm.getId()});
+			List<TradeGoose> resourceList = null;
+			if(null != farm){
+				farm = farmService.get(farm);
+				tradeGoose = new TradeGoose();
+				tradeGoose.setFarmId(farm.getId());
+				int totalRows = tradeGooseService.list(tradeGoose).size();
+				String URL = getListURL();
+				this.pager.setURL(URL);
+				this.pager.setTotalRowsAmount(totalRows);
+				resourceList = tradeGooseService.list(new TradeGoose(),
+						this.pager.getPageStartRow(), pager.getPageSize(), new String[]{"farmId"}, new Long[]{farm.getId()});
+			}
+			
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
 		
@@ -47,8 +51,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	}
 
 	public String get() {
-		// 点了添加或者点了修改	
-			
+		// 点了添加或者点了修改		
 			return "edit";
 	}
 
@@ -56,8 +59,6 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 		// 保存表单
 		try {
 			
-			
-		
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
