@@ -209,6 +209,29 @@ public class BaseDao<T> {
 		return hibernateTemplate.find(queryString);
 	}
 
+	/** 使用支持分页查询的hql查询方式
+	 * @param start 定义从第几条开始查询 
+	 * @param size 定义返回的记录数 
+	 * @param queryString
+	 * @return
+	 */
+	public List<T> findByCondition(final Integer start, final Integer size,final String queryString) {
+		   @SuppressWarnings("unchecked")
+		List<T> list = hibernateTemplate.executeFind(new HibernateCallback() {  
+	             public Object doInHibernate(Session session)  
+	             throws HibernateException, SQLException {  
+	             org.hibernate.Query query = (org.hibernate.Query) session.createQuery(queryString);  
+	             if(null != start || null != size){
+	            	 query.setFirstResult(start);//定义从第几条开始查询  
+	            	 query.setMaxResults(size);//定义返回的记录数  
+	             }
+	             List list = query.list();  
+	             return list;  
+	             }  
+	        }); 
+		   return list;
+	}
+	
 	public int getRecordCount(T entity) throws DataAccessException {
 		List<T> list = this.listAll(entity);
 		return list.size();
