@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -106,6 +107,15 @@ public class BaseDao<T> {
 	}
 
 	
+	/**
+	 * @param entity
+	 * @param start
+	 * @param size 结果的条数
+	 * @param propertyNames 查询所需要的属性名
+	 * @param values	属性相应的值
+	 * @return
+	 * @throws DataAccessException
+	 */
 	@SuppressWarnings("unchecked")
 	public List<T> list(final T entity,   final Integer start, final Integer size,String[] propertyNames,Object[] values) 
 			throws DataAccessException {
@@ -123,6 +133,8 @@ public class BaseDao<T> {
 			for(int i = 0 ;i < propertyNames.length;i++ ){
 				criteria.add( Property.forName(propertyNames[i]).eq(values[i]) );
 			}
+			
+			// 执行查询
 			return (List) hibernateTemplate.execute(new HibernateCallback() {
 				  public Object doInHibernate(Session session) { 
 					  if(null == start || null == size){
@@ -137,6 +149,62 @@ public class BaseDao<T> {
 		}
 	}
 
+	
+	/**
+	 * @param entity
+	 * @param start
+	 * @param size	结果的条数
+	 * @param propertyNames 查询所需要的属性名
+	 * @param values	属性相应的值
+	 * @param orderedProperty 要按次序查询的属性（有先后）
+	 * @param orders  相应属性的次序 取值：desc 或asc
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> listByOrder(final T entity,   final Integer start, final Integer size,
+			String[] propertyNames,Object[] values,String[] orderedProperty,String orders[]) throws DataAccessException {
+		if(null == propertyNames || null == values){
+			propertyNames = new String[0];
+			values = new String[0];
+		}
+		if(null == orderedProperty || null == orders){
+			orderedProperty = new String[0];
+			orders = new String[0];
+		}
+		if(propertyNames.length != values.length || orderedProperty.length != orders.length){
+			logger.error("发生以下错误：1.要查询的属性个数和属性值的个数不相等！\n 2.次序的排序的属性个数与相应的次序个数不相等！");
+			throw  new DataAccessException("执行分页查询出错！");
+		}
+		else {
+			final DetachedCriteria criteria = DetachedCriteria.forClass(entity.getClass());
+			// 加上查询的约束条件
+			for(int i = 0 ;i < propertyNames.length;i++ ){
+				criteria.add( Property.forName(propertyNames[i]).eq(values[i]) );
+			}
+			for(int i = 0 ;i< orderedProperty.length;i++){
+				if(orders.equals("desc")){
+					criteria.addOrder(Order.desc(orderedProperty[i]));
+				}
+				else if(orders.equals("asc")){
+					criteria.addOrder(Order.asc(orderedProperty[i]));
+				}
+			}
+			// 执行查询
+			return (List) hibernateTemplate.execute(new HibernateCallback() {
+				  public Object doInHibernate(Session session) { 
+					  if(null == start || null == size){
+						 return criteria.getExecutableCriteria(session).list();
+					  }
+					  else{
+						  return criteria.getExecutableCriteria(session).setMaxResults(size).setFirstResult(start).list();
+					  }
+				  }
+			});
+	
+		}
+		
+	}
+	
 	public List<T> findByCondition(String queryString) {
 		return hibernateTemplate.find(queryString);
 	}
