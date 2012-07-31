@@ -8,8 +8,8 @@
     	<table class="mainTable">
 		<thead>
 			<tr class="tableController">
-				<th colspan="7">
-					<h3>鹅苗交付信息列表</h3>
+				<th colspan="8">
+					<h3>${farm.name != null?farm.name:" "} 成品鹅收购信息列表</h3>
 					<div class="tableControllerButton">
 						最近 <input type="text" name="daysWithin" id="daysWithin" width="20px"> 天内收购信息
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"	align="absmiddle" />&nbsp;返回上一页</span></a>
