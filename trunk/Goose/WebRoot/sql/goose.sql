@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-07-30 14:03:13
+Date: 2012-08-02 14:44:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -61,11 +61,16 @@ INSERT INTO `comm_menu` VALUES ('6', '农户农场管理', 'javascript:void(0)',
 INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('9', '物资信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('10', '农场信息管理', '/pages/goose/farmAction!listAll', '6', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('11', '物资基本信息', '/pages/goose/goodAction!list', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('11', '物资品种信息', '/pages/goose/goodAction!list', '9', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('13', '供应商信息', 'test', '9', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('14', '物资销售管理', 'test', '9', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('15', '鹅只信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('16', '信息搜索', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
+INSERT INTO `comm_menu` VALUES ('21', '销售商信息', '/pages/goose/retailerAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('22', '鹅苗交付信息', '/pages/goose/receiveGooseAction!list?daysWithin=3', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('23', '成品鹅收购管理', '/pages/goose/tradeGooseAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('24', '成品鹅销售管理', 'test', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('25', '鹅只信息统计', 'test', '15', '/images/main/null.png', '3');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -143,7 +148,7 @@ CREATE TABLE `comm_user` (
   `roleId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_user
@@ -172,7 +177,7 @@ CREATE TABLE `farm` (
 -- ----------------------------
 -- Records of farm
 -- ----------------------------
-INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', '			');
+INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', '				');
 INSERT INTO `farm` VALUES ('2', '牛牛', '1', '南海', null, '2000', '硬件考察中	');
 INSERT INTO `farm` VALUES ('3', '猪镇', '2', '南海', null, '1000', null);
 INSERT INTO `farm` VALUES ('4', 'testtes', '1', '234', null, '234234', '硬件考察中		');
@@ -243,12 +248,25 @@ CREATE TABLE `receive_goose` (
   `receiveDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receive_goose
 -- ----------------------------
 INSERT INTO `receive_goose` VALUES ('1', '1', '100', '2012-07-19', '木有');
+INSERT INTO `receive_goose` VALUES ('2', '1', '2000', '2012-01-24', 'fsdfs');
+INSERT INTO `receive_goose` VALUES ('3', '1', '500', '2012-06-19', 'ghigui');
+INSERT INTO `receive_goose` VALUES ('4', '1', '1000', '2012-08-02', 'tyfgrgf');
+INSERT INTO `receive_goose` VALUES ('5', '2', '2100', '2012-08-02', 'dsgsd');
+INSERT INTO `receive_goose` VALUES ('6', '2', '600', '2012-07-10', 'dfydfy');
+INSERT INTO `receive_goose` VALUES ('7', '2', '800', '2012-06-29', 'dgh5646');
+INSERT INTO `receive_goose` VALUES ('8', '3', '900', '2012-05-24', 'dsgdsfgdsf');
+INSERT INTO `receive_goose` VALUES ('9', '2', '2444', '2012-07-29', 'eyeyyy');
+INSERT INTO `receive_goose` VALUES ('10', '1', '577', '2012-07-26', 'tytyer');
+INSERT INTO `receive_goose` VALUES ('11', '2', '3000', '2012-07-28', 'rfewrwqe');
+INSERT INTO `receive_goose` VALUES ('12', '1', '300', '2012-07-29', 'fdhf');
+INSERT INTO `receive_goose` VALUES ('13', '1', '4000', '2011-02-08', 'fghdsgf');
+INSERT INTO `receive_goose` VALUES ('14', '1', '200', '2011-04-22', 'sdfasdf');
 
 -- ----------------------------
 -- Table structure for `retailer`
@@ -261,11 +279,12 @@ CREATE TABLE `retailer` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of retailer
 -- ----------------------------
+INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '123465', '茜需要', '霏霏 城	');
 
 -- ----------------------------
 -- Table structure for `sale_goose`
@@ -277,7 +296,7 @@ CREATE TABLE `sale_goose` (
   `amount` int(11) NOT NULL,
   `unitPrice` double DEFAULT NULL,
   `totalWeight` double DEFAULT NULL,
-  `tradeDate` date DEFAULT NULL,
+  `saleDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
@@ -317,9 +336,19 @@ CREATE TABLE `trade_goose` (
   `tradeDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_goose
 -- ----------------------------
-INSERT INTO `trade_goose` VALUES ('1', '1', '1000', '15.399999618530273', '6000', '2012-07-27', '木有');
+INSERT INTO `trade_goose` VALUES ('1', '1', '1000', '15.6', '6000.12', '2012-07-27', '木有');
+INSERT INTO `trade_goose` VALUES ('2', '1', '2000', '16.14', '12000.44', '2012-08-02', 'hgjhj');
+INSERT INTO `trade_goose` VALUES ('3', '1', '300', '17.24', '18000', '2012-07-18', 'ghjjg');
+INSERT INTO `trade_goose` VALUES ('4', '2', '500', '15.4', '3000.44', '2012-07-24', 'ghjhg');
+INSERT INTO `trade_goose` VALUES ('5', '1', '500', '15.7', '3144.7', '2012-07-17', 'ghjghf');
+INSERT INTO `trade_goose` VALUES ('6', '2', '1000', '16.45', '7000', '2011-06-20', 'jhkqweq');
+INSERT INTO `trade_goose` VALUES ('7', '3', '2000', '18.15', '13000.11', '2011-12-29', 'jhgh');
+INSERT INTO `trade_goose` VALUES ('8', '1', '1500', '20', '90000', '2012-07-08', 'tgd y');
+INSERT INTO `trade_goose` VALUES ('9', '2', '1000', '19.2', '6500', '2012-05-21', 'jkjkhjk');
+INSERT INTO `trade_goose` VALUES ('10', '3', '3500', '15.5', '18400', '2012-07-15', 'gfdgfxg');
+INSERT INTO `trade_goose` VALUES ('11', '2', '800', '17', '5100', '2012-06-25', 'hhhhhf');
