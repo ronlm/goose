@@ -14,6 +14,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
+import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.TradeGoose;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.TradeGooseService;
@@ -29,24 +30,46 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private Farm farm ;
 	private TradeGoose tradeGoose;
 	private TradeGooseService tradeGooseService;
+	private int daysWithin;
+	
 	public String list() throws Exception {
-		// 取列表
+		   
 			List<TradeGoose> resourceList = null;
+			String URL = request.getRequestURI();
+			this.pager.setURL(URL);
+
+			// 取得要显示的日期条件
+			if(null != request.getParameter("daysWithin")){
+				daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+				request.getSession().removeAttribute("daysWithin");
+			}
+			else if(null != request.getSession().getAttribute("daysWithin")){
+				daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
+			}
 			if(null != farm){
+				 // 查看某个农场最近接收的鹅苗信息
 				farm = farmService.get(farm);
 				tradeGoose = new TradeGoose();
 				tradeGoose.setFarmId(farm.getId());
-				int totalRows = tradeGooseService.list(tradeGoose).size();
-				String URL = getListURL();
-				this.pager.setURL(URL);
-				this.pager.setTotalRowsAmount(totalRows);
-				resourceList = tradeGooseService.list(new TradeGoose(),
-						this.pager.getPageStartRow(), pager.getPageSize(), new String[]{"farmId"}, new Long[]{farm.getId()});
-			}
 			
+				String hql = "select rg from com.scau.model.goose.TradeGoose rg where rg.farmId=" + tradeGoose.getFarmId()
+					+" and rg.tradeDate >='" + tradeGooseService.getDaysBefore(daysWithin) + "' order by rg.tradeDate desc";
+				int totalRows = tradeGooseService.findByCondition(hql).size();// 总的记录条数
+				this.pager.setTotalRowsAmount(totalRows);
+				resourceList = tradeGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
+				request.setAttribute("farm", farm);
+	
+			}else if(null == farm){
+				 // 查看全部农场最近接收的鹅苗信息
+				String hql = "select rg from com.scau.model.goose.TradeGoose rg where rg.tradeDate >='" + 
+						tradeGooseService.getDaysBefore(daysWithin) + "' order by rg.tradeDate desc";
+				int totalRows = tradeGooseService.findByCondition(hql).size();// 总的记录条数
+				this.pager.setTotalRowsAmount(totalRows);
+				resourceList = tradeGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
+			}
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
-		
+			request.getSession().setAttribute("daysWithin", daysWithin);
 			return "list";		
 	}
 
