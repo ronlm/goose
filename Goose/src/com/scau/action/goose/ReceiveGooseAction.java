@@ -32,20 +32,24 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private Farm farm ;
 	private ReceiveGoose receiveGoose;
 	private ReceiveGooseService receiveGooseService;
-	private int daysWithin = 7;//默认显示7天内的记录
+	private int daysWithin;
 	
 	public String list() throws Exception {
-		    // 查看某个农场最近接收的鹅苗信息
+		   
 			List<ReceiveGoose> resourceList = null;
-			
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
-			
+
+			// 取得要显示的日期条件
 			if(null != request.getParameter("daysWithin")){
-				// 取得要显示的日期条件
 				daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+				request.getSession().removeAttribute("daysWithin");
+			}
+			else if(null != request.getSession().getAttribute("daysWithin")){
+				daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
 			}
 			if(null != farm){
+				 // 查看某个农场最近接收的鹅苗信息
 				farm = farmService.get(farm);
 				receiveGoose = new ReceiveGoose();
 				receiveGoose.setFarmId(farm.getId());
@@ -58,6 +62,7 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 				request.setAttribute("farm", farm);
 	
 			}else if(null == farm){
+				 // 查看全部农场最近接收的鹅苗信息
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.receiveDate >='" + 
 						receiveGooseService.getDaysBefore(daysWithin) + "' order by rg.receiveDate desc";
 				int totalRows = receiveGooseService.findByCondition(hql).size();// 总的记录条数
@@ -66,7 +71,7 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			}
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
-			request.setAttribute("daysWithin", daysWithin);
+			request.getSession().setAttribute("daysWithin", daysWithin);
 			return "list";		
 	}
 	
@@ -82,8 +87,6 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			}
 			return list();//返回取列表页面，并刷新列表
 	}
-
-	
 
 	public PageController getPager() {
 		return pager;
@@ -127,13 +130,9 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 		return farm;
 	}
 
-
-
 	public int getDaysWithin() {
 		return daysWithin;
 	}
-
-
 
 	public void setDaysWithin(int daysWithin) {
 		this.daysWithin = daysWithin;
