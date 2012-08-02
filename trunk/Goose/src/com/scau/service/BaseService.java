@@ -79,13 +79,18 @@ public class BaseService<T> {
 	
 	
 	/**取得与今天相隔n天的那个时间（YY:MM:DD）
-	 * @param daysBefore 与今天相隔的天数
+	 * @param daysBefore 与今天相隔的天数，当为负数时，返回1970：01：01
 	 * @return
 	 */
 	public static Date getDaysBefore(long daysBefore){
-			long millisecondsInterval = daysBefore * 24 * 3600 * 1000;
-			java.util.Date today = new java.util.Date();
-			Date tar = new Date(today.getTime() - millisecondsInterval);
-			return tar;	
+			if(daysBefore < 0){
+				return new Date(0);
+			}
+			else {
+				long millisecondsInterval = daysBefore * 24 * 3600 * 1000;
+				java.util.Date today = new java.util.Date();
+				Date tar = new Date(today.getTime() - millisecondsInterval);
+				return tar;	
+			}
 		}
 }
