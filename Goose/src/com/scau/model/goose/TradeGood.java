@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
 
@@ -12,8 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TradeGood {
 	private Long id;
-	private Long farmId;
-	private Long goodId;
+	private Long farmerId;
+	private Long GoodId;
+	private double unitPrice;
 	private Date tradeDate;
 	private Long amount;
 	private String comments;
@@ -26,17 +29,11 @@ public class TradeGood {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getFarmId() {
-		return farmId;
+	public double getUnitPrice() {
+		return unitPrice;
 	}
-	public void setFarmId(Long farmId) {
-		this.farmId = farmId;
-	}
-	public Long getGoodId() {
-		return goodId;
-	}
-	public void setGoodId(Long goodId) {
-		this.goodId = goodId;
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 	public Date getTradeDate() {
 		return tradeDate;
@@ -55,6 +52,18 @@ public class TradeGood {
 	}
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	public Long getFarmerId() {
+		return farmerId;
+	}
+	public void setFarmerId(Long farmerId) {
+		this.farmerId = farmerId;
+	}
+	public Long getGoodId() {
+		return GoodId;
+	}
+	public void setGoodId(Long goodId) {
+		GoodId = goodId;
 	}
 	
 	
