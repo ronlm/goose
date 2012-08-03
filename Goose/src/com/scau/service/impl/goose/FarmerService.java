@@ -9,13 +9,13 @@ import com.scau.model.goose.Farmer;
 import com.scau.service.BaseService;
 
 @Component
-public class FarmerService extends BaseService<Farmer>{
-	public void save(Farmer farmer) throws BusinessException{
-		if (null != farmer && null != farmer.getName()) {
-			if(null != farmer.getId() && 0 != farmer.getId()){
-				update(farmer);
+public class FarmerService extends BaseService<Farmer>{	
+	public void save(Farmer entity) throws BusinessException{
+		if (null != entity && null != entity.getName()) {
+			if(null != entity.getId() && 0 != entity.getId()){
+				update(entity);
 			}else{
-				add(farmer);
+				add(entity);
 			}
 		}else {
 			throw new BusinessException("用户名不能为空!");
