@@ -13,11 +13,12 @@ import org.springframework.stereotype.Component;
 public class BuyGood {
 	private Long id;
 	private Long goodId;
+	private Long retailerId;
 	private Long batchNum;
 	private Double unitPrice;
 	private Long amount;
 	private String orgin;
-	private Date Date;
+	private Date date;
 	private String comments;
 	
 	@Id
@@ -33,6 +34,12 @@ public class BuyGood {
 	}
 	public void setGoodId(Long goodId) {
 		this.goodId = goodId;
+	}
+	public Long getRetailerId() {
+		return retailerId;
+	}
+	public void setRetailerId(Long retailerId) {
+		this.retailerId = retailerId;
 	}
 	public Long getBatchNum() {
 		return batchNum;
@@ -59,10 +66,10 @@ public class BuyGood {
 		this.orgin = orgin;
 	}
 	public Date getDate() {
-		return Date;
+		return date;
 	}
 	public void setDate(Date date) {
-		Date = date;
+		this.date = date;
 	}
 	public String getComments() {
 		return comments;
