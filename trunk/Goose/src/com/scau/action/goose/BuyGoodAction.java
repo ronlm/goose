@@ -15,13 +15,12 @@ import cn.com.ege.mvc.exception.BusinessException;
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.model.goose.BuyGood;
-import com.scau.model.goose.Retailer;
+import com.scau.model.goose.GoodSupplier;
 import com.scau.model.goose.Good;
 import com.scau.model.goose.BuyGood;
 import com.scau.service.impl.goose.BuyGoodService;
-import com.scau.service.impl.goose.RetailerService;
+import com.scau.service.impl.goose.GoodSupplierService;
 import com.scau.service.impl.goose.GoodService;
-import com.scau.service.impl.goose.RetailerService;
 import com.scau.util.PageController;
 
 @Component
@@ -33,24 +32,26 @@ public class BuyGoodAction extends BaseAction implements ModelDriven<BuyGood>{
 	private BuyGood buyGood;
 	private BuyGoodService buyGoodService;
 	private GoodService goodService;
-	private RetailerService retailerService;
+	private GoodSupplierService goodSupplierService;
 	
 	public String add() throws Exception {
 		// 添加记录
 		List<Good> goodList=goodService.listAll(new Good());
-		List<Retailer> retailerList=retailerService.listAll(new Retailer());
+		List<GoodSupplier> goodSupplierList=goodSupplierService.listAll(new GoodSupplier());
 		request.setAttribute("goodList", goodList);
-		request.setAttribute("retailerList", retailerList);
+		request.setAttribute("goodSupplierList", goodSupplierList);
+		System.out.println("test--------------test,"+goodSupplierList.get(0).getName());
+		System.out.println("test--------------test,"+goodSupplierList.get(1).getName());
 			return "edit";		
 	}
 	
 	public String save() throws Exception {
 		// 保存表单
 		try {
-			String goodName=request.getParameter("goodName");
-			String retailerName=request.getParameter("retailerName");
+			String goodName=goodService.get(new Good(), buyGood.getGoodId()).getName();
+			String goodSupplierName=goodSupplierService.get(new GoodSupplier(), buyGood.getGoodSupplierId()).getName();
 			request.setAttribute("goodName", goodName);
-			request.setAttribute("retailerName", retailerName);
+			request.setAttribute("goodSupplierName", goodSupplierName);
 			buyGoodService.save(buyGood);
 			return show();
 		} catch (Exception e) {
@@ -121,13 +122,13 @@ public class BuyGoodAction extends BaseAction implements ModelDriven<BuyGood>{
 		this.goodService = goodService;
 	}
 
-	public RetailerService getRetailerService() {
-		return retailerService;
+	public GoodSupplierService getGoodSupplierService() {
+		return goodSupplierService;
 	}
 
 	@Resource
-	public void setRetailerService(RetailerService retailerService) {
-		this.retailerService = retailerService;
+	public void setGoodSupplierService(GoodSupplierService goodSupplierService) {
+		this.goodSupplierService = goodSupplierService;
 	}
 
 	@Override
