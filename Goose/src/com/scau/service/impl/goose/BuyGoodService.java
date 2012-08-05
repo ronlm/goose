@@ -12,7 +12,7 @@ public class BuyGoodService extends BaseService<BuyGood>{
 	
 	public void save(BuyGood entity) throws BusinessException{
 		if (null != entity ) {
-			if(null != entity.getGoodId() && null != entity.getRetailerId()){
+			if(null != entity.getGoodId() && null != entity.getGoodSupplierId()){
 				if( null != entity.getId()){
 					update(entity);
 				}else{
