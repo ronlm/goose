@@ -14,6 +14,7 @@ import cn.com.ege.mvc.exception.BusinessException;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
+import com.scau.model.goose.Farmer;
 import com.scau.model.goose.TradeGood;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Good;
@@ -47,8 +48,8 @@ public class TradeGoodAction extends BaseAction implements ModelDriven<TradeGood
 		// 保存表单
 		try {
 			// 用于显示goodId对应的goodName,以及farmerId对应的farmerName
-			String goodName=request.getParameter("goodName");
-			String farmerName=request.getParameter("farmerName");
+			String goodName=goodService.get(new Good(), tradeGood.getGoodId()).getName();
+			String farmerName=farmerService.get(new Farmer(), tradeGood.getFarmerId()).getName();
 			request.setAttribute("goodName", goodName);
 			request.setAttribute("farmerName", farmerName);
 			tradeGoodService.save(tradeGood);
