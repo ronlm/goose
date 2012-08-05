@@ -26,6 +26,9 @@
 					<h3>供应商</h3>
 				</th>
 				<th>
+					<h3>产地</h3>
+				</th>
+				<th>
 					<h3>单价</h3>
 				</th>
 				<th>
@@ -37,7 +40,7 @@
 				<th>
 					<h3>时间</h3>
 				</th>
-				<th width="30%">
+				<th width="20%">
 					<h3>备注</h3>
 				</th>   
 				<th width="20%">
@@ -51,7 +54,8 @@
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${buyGood.id}"/></td>
 					<td>${goodName}</td>
-					<td>${retailerName}</td>
+					<td>${goodSupplierName}</td>
+					<td>${buyGood.orgin}</td>
 					<td>${buyGood.unitPrice}</td>
 					<td>${buyGood.amount}</td>
 					<td>${buyGood.unitPrice * buyGood.amount}</td>

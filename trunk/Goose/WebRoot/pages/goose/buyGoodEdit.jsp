@@ -36,22 +36,23 @@
 				<tr>
 					<td width="200" align="right">资源名称:</td>
 					<td><select name="buyGood.goodId">
-						<c:forEach items="${goodList}" var="good">
-							<option value="${good.id}">${good.name}
-								<input type="hidden" name="goodName" value="${good.name}"/>
-							</option>
+						<c:forEach items="${goodList}" var="item">
+							<option value="${item.id }" >${item.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">供应商姓名:</td>
-					<td><select name="buyGood.retailerId">
-						<c:forEach items="${retailerList}" var="retailer">
-							<option value="${retailer.id}">${retailer.name}
-								<input type="hidden" name="retailerName" value="${retailer.name}"/>
-							</option>
+					<td><select name="buyGood.goodSupplierId">
+						<c:forEach items="${goodSupplierList}" var="goodSupplier">
+							<option value="${goodSupplier.id}">${goodSupplier.name}</option>
 						</c:forEach>
 					</select></td>
+				</tr>
+				<tr>
+					<td width="200" align="right">产地:</td>
+					<td><input type="text" name="buyGood.orgin" id="unit" 
+						 /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">单价:</td>

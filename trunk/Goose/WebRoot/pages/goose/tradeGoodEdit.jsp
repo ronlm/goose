@@ -34,9 +34,7 @@
 					<td width="200" align="right">资源名称:</td>
 					<td><select name="tradeGood.goodId">
 						<c:forEach items="${goodList}" var="good">
-							<option value="${good.id}">${good.name}
-								<input type="hidden" name="goodName" value="${good.name}"/>
-							</option>
+							<option value="${good.id}">${good.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
@@ -44,9 +42,7 @@
 					<td width="200" align="right">农户姓名:</td>
 					<td><select name="tradeGood.farmerId">
 						<c:forEach items="${farmerList}" var="farmer">
-							<option value="${farmer.id}">${farmer.name}
-								<input type="hidden" name="farmerName" value="${farmer.name}"/>
-							</option>
+							<option value="${farmer.id}">${farmer.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
