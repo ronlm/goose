@@ -53,7 +53,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 				tradeGoose.setFarmId(farm.getId());
 			
 				String hql = "select rg from com.scau.model.goose.TradeGoose rg where rg.farmId=" + tradeGoose.getFarmId()
-					+" and rg.tradeDate >='" + tradeGooseService.getDaysBefore(daysWithin) + "' order by rg.tradeDate desc";
+					+" and rg.tradeDate >='" + tradeGooseService.getDateBefore(daysWithin) + "' order by rg.tradeDate desc";
 				int totalRows = tradeGooseService.findByCondition(hql).size();// 总的记录条数
 				this.pager.setTotalRowsAmount(totalRows);
 				resourceList = tradeGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
@@ -62,7 +62,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 			}else if(null == farm){
 				 // 查看全部农场最近接收的鹅苗信息
 				String hql = "select rg from com.scau.model.goose.TradeGoose rg where rg.tradeDate >='" + 
-						tradeGooseService.getDaysBefore(daysWithin) + "' order by rg.tradeDate desc";
+						tradeGooseService.getDateBefore(daysWithin) + "' order by rg.tradeDate desc";
 				int totalRows = tradeGooseService.findByCondition(hql).size();// 总的记录条数
 				this.pager.setTotalRowsAmount(totalRows);
 				resourceList = tradeGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
