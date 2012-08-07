@@ -14,12 +14,16 @@
 			<result name="list">/pages/goose/search.jsp</result>
 		</action>
 		<!-- 使用通配符 对农户，养殖场配置配置 结束-->
+		
+		<!-- 鹅只信息统计  -->
+		<action name="gooseStatisticAction" class="gooseStatisticAction">
+			<result name="market">/pages/goose/marketList.jsp</result>
+			<result name="stock">/pages/goose/stockList.jsp</result>
+			<result name="dead">/pages/goose/deadList.jsp</result>
+		</action>
 	</package>
 
-	<!-- 搜索功能
-	<action name="searchAction" class="searchAction">
-		<result name=""></result>
-	</action>
-	 -->
+	
+	
 </struts>
 	
