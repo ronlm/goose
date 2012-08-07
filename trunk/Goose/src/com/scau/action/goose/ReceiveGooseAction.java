@@ -55,7 +55,7 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 				receiveGoose.setFarmId(farm.getId());
 			
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + receiveGoose.getFarmId()
-					+" and rg.receiveDate >='" + receiveGooseService.getDaysBefore(daysWithin) + "' order by rg.receiveDate desc";
+					+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(daysWithin) + "' order by rg.receiveDate desc";
 				int totalRows = receiveGooseService.findByCondition(hql).size();// 总的记录条数
 				this.pager.setTotalRowsAmount(totalRows);
 				resourceList = receiveGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
@@ -64,7 +64,7 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			}else if(null == farm){
 				 // 查看全部农场最近接收的鹅苗信息
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.receiveDate >='" + 
-						receiveGooseService.getDaysBefore(daysWithin) + "' order by rg.receiveDate desc";
+						receiveGooseService.getDateBefore(daysWithin) + "' order by rg.receiveDate desc";
 				int totalRows = receiveGooseService.findByCondition(hql).size();// 总的记录条数
 				this.pager.setTotalRowsAmount(totalRows);
 				resourceList = receiveGooseService.findByCondition(this.pager.getPageStartRow(), pager.getPageSize(),hql);
