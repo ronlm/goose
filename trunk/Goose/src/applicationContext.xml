@@ -70,6 +70,9 @@
 				<value>com.scau.model.goose.SaleGoose</value>
 				<value>com.scau.model.goose.TradeGoose</value>
 				<value>com.scau.model.goose.TradeGood</value>	
+				
+				<!-- 以下为视图类 -->
+				<value>com.scau.view.goose.Market</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
