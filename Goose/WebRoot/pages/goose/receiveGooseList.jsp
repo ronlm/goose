@@ -14,7 +14,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>鹅苗交付信息列表</h3>
+					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>鹅苗交付信息列表</h3>
 						<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!list" method="post">
 							最近
