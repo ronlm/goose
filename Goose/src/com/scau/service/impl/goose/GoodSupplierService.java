@@ -1,6 +1,7 @@
 package com.scau.service.impl.goose;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.ege.mvc.exception.BusinessException;
 
@@ -10,6 +11,7 @@ import com.scau.service.BaseService;
 
 @Component
 public class GoodSupplierService extends BaseService<GoodSupplier>{
+	@Transactional
 	public void save(GoodSupplier entity) throws BusinessException{
 		if (null != entity && null != entity.getName()) {
 			if(null != entity.getId() && 0 != entity.getId()){
