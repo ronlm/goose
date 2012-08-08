@@ -2,7 +2,7 @@
  <%@page isELIgnored="false" %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>管理后台</title>
+        <title>农友公司管理后台</title>
 		<link charset="UTF-8" rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/Main.css"/>
 		<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath }/js/Main.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
