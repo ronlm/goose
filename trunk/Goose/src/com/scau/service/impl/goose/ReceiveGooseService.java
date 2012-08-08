@@ -1,6 +1,7 @@
 package com.scau.service.impl.goose;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.ege.mvc.exception.BusinessException;
 
@@ -10,6 +11,7 @@ import com.scau.service.BaseService;
 
 @Component
 public class ReceiveGooseService extends BaseService<ReceiveGoose>{
+	@Transactional
 	public void save(ReceiveGoose receive) throws BusinessException{
 		if (null != receive && null != receive.getFarmId()) {
 			if(null != receive.getId() && 0 != receive.getFarmId()){
