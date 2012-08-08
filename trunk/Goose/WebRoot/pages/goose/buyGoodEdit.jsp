@@ -15,7 +15,7 @@
 			<thead>
 				<tr class="tableController">
 					<th colspan="2">
-						<h3>添加物资采购记录</h3></th>
+						<h3>物资采购记录编辑</h3></th>
 				</tr>
 				<tr>
 					<th>&nbsp;</th>
@@ -35,43 +35,45 @@
 			<tbody>
 				<tr>
 					<td width="200" align="right">资源名称:</td>
-					<td><select name="buyGood.goodId">
-						<c:forEach items="${goodList}" var="item">
-							<option value="${item.id }" >${item.name}</option>
+					<td>
+						<input type="hidden" name="buyGood.id" value="${buyGood.id }"/>
+						<select name="buyGood.goodId" style="width: 100px">
+						<c:forEach items="${goodList}" var="good">
+							<option value="${good.id }" <c:if test="${buyGood.goodId == good.id }"> selected="selected"</c:if>>${good.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">供应商姓名:</td>
-					<td><select name="buyGood.goodSupplierId">
-						<c:forEach items="${goodSupplierList}" var="goodSupplier">
-							<option value="${goodSupplier.id}">${goodSupplier.name}</option>
+					<td><select name="buyGood.goodSupplierId" style="width: 100px">
+						<c:forEach items="${supplierList}" var="supplier">
+							<option value="${supplier.id}" <c:if test="${buyGood.goodSupplierId == supplier.id }"> selected="selected"</c:if>>${supplier.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">产地:</td>
-					<td><input type="text" name="buyGood.orgin" id="unit" 
-						 /></td>
+					<td><input type="text" name="buyGood.origin" id="origin" value="${buyGood.origin }" /></td>
+				</tr>
+				<tr>
+					<td width="200" align="right">批号:</td>
+					<td><input type="text" name="buyGood.batchNum" id="batchNum"  value="${buyGood.batchNum }"/></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">单价:</td>
-					<td><input type="text" name="buyGood.unitPrice" id="unit" validation="required"
-						 /></td>
+					<td><input type="text" name="buyGood.unitPrice"  value="${buyGood.unitPrice }" id="unitPrice" validation="required" /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">数量:</td>
-					<td><input type="text" name="buyGood.amount" id="unit" validation="required" "
-						 /></td>
+					<td><input type="text" name="buyGood.amount" value="${buyGood.amount }" id="amount" validation="required" " /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">时间:</td>
-					<td><input type="text"  validation="date" readonly="readonly" name="buyGood.date" id="signDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/></td>
+					<td><input type="text"  validation="date" readonly="readonly" name="buyGood.date" value="${buyGood.date }"id=date  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">备注:</td>
-					<td><textarea rows="5" cols="50" name="buyGood.comments"
-							id="comments">	</textarea></td>
+					<td><textarea rows="5" cols="50" name="buyGood.comments" value="${buyGood.comments }" id="comments">	</textarea></td>
 				</tr>
 
 			</tbody>

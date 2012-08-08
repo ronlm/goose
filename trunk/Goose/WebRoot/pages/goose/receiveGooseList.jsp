@@ -28,9 +28,7 @@
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
 							天内交付信息
-							<c:if test="${farm.id!=null }">
-								<input type="hidden" id="farm.id" value="${farm.id }" />
-							</c:if>
+							<input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" />
 						</form>
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
@@ -49,10 +47,10 @@
 					<h3>日期</h3></th>
 				<th>
 					<h3>数量</h3></th>
-				<th width="20%">
-					<h3>操作</h3></th>
-				<th width="30%">
+				<th width="15%">
 					<h3>备注</h3></th>
+				<th width="40%">
+					<h3>操作</h3></th>
 			</tr>
 		</thead>
 		<tbody id="contentBody">
@@ -64,12 +62,8 @@
 						</td>
 						<td>${receiveGoose.receiveDate}</td>
 						<td>${receiveGoose.amount}</td>
-						<td><a class="button-small" href="javascript:void(0)"
-							onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>修改</span>
-						</a> <a class="button-small" href="javascript:void(0)"
-							onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del?id=${receiveGoose.id }'); return false;"><span>删除</span>
-						</a></td>
 						<td>${receiveGoose.comments}</td>
+						<td><a id="getFarmInfo" class="button-small"><span>获取相关农户农场资料</span></td>
 					</tr>
 				</c:forEach>
 			</form>
