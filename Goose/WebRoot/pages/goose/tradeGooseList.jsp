@@ -10,8 +10,8 @@
     	<table class="mainTable">
 		<thead>
 				<tr class="tableController">
-				<th colspan="8">
-					<h3>收购成品鹅信息列表</h3>
+				<th colspan="10">
+					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>收购成品鹅信息列表</h3>
 						<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/tradeGooseAction!list" method="post">
 							最近
@@ -25,9 +25,7 @@
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
 							天内收购信息
-							<c:if test="${farm.id!=null }">
-								<input type="hidden" id="farm.id" value="${farm.id }" />
-							</c:if>
+							<input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" />
 						</form>
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
@@ -41,27 +39,13 @@
 				<th>
 					<h3><input type="checkbox" onclick="selectAll(this);" /></h3>
 				</th>
-				<th>
-					<h3>日期</h3>
-				</th>
-				<th>
-					<h3>数量</h3>
-				</th>
-				<th>
-					<h3>单价</h3>
-				</th>
-				<th>
-					<h3>总重量</h3>
-				</th>
-				<th>
-					<h3>金额合计</h3>
-				</th>
-				<th width="20%">
-					<h3>操作</h3>
-				</th>
-				<th width="30%">
-					<h3>备注</h3>
-				</th>
+				<th><h3>日期</h3></th>
+				<th><h3>数量</h3></th>
+				<th><h3>单价</h3></th>
+				<th><h3>总重量</h3></th>
+				<th><h3>金额合计</h3></th>
+				<th width="25%"><h3>操作</h3></th>
+				<th ><h3>备注</h3></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -73,14 +57,8 @@
 					<td>${tradeGoose.amount}</td>
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.totalWeight }" maxFractionDigits="3"/></td>
-						<td><fmt:formatNumber value="${tradeGoose.unitPrice * tradeGoose.totalWeight}" maxFractionDigits="3"/></td>
-				<!-- <td>${tradeGoose.unitPrice * tradeGoose.totalWeight}</td>  -->
-					<td>
-					<!-- 
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGooseAction!get?tradeGoose.id=${tradeGoose.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/tradeGooseAction!del?id=${tradeGoose.id }'); return false;"><span>删除</span></a>
-					 -->
-					</td>
+					<td><fmt:formatNumber value="${tradeGoose.unitPrice * tradeGoose.totalWeight}" maxFractionDigits="3"/></td>
+					<td><a class="button-small" ><span>查看农户联系方式</span></td>
 					<td>${tradeGoose.comments}</td>
 				</tr> 
 			</c:forEach>

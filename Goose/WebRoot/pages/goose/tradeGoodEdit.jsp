@@ -5,14 +5,12 @@
 <html style="overflow-y: visible;">
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 <body style="overflow-y: visible !important; overflow-y: scroll;">
-	<form
-		action="${pageContext.request.contextPath }/pages/goose/tradeGoodAction!save"
-		name="myForm" id="myForm" method="post">
+	<form action="${pageContext.request.contextPath }/pages/goose/tradeGoodAction!save" name="myForm" id="myForm" method="post">
 		<table class="mainTable">
 			<thead>
 				<tr class="tableController">
 					<th colspan="3">
-						<h3>添加物资销售记录</h3></th>
+						<h3>编辑物资销售记录</h3></th>
 				</tr>
 				<tr>
 					<th>&nbsp;</th>
@@ -31,39 +29,38 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td width="200px" align="right">资源名称:</td>
-					<td><select name="tradeGood.goodId">
+					<td width="200px" align="right">物资品名:</td>
+					<td>
+					<input type="hidden" name="tradeGood.id" id="id" value="${tradeGood.id }"/>
+					<select name="tradeGood.goodId"  style="width: 100px">
 						<c:forEach items="${goodList}" var="good">
-							<option value="${good.id}">${good.name}</option>
+							<option value="${good.id}" <c:if test="${tradeGood.goodId == good.id }"> selected="selected"</c:if>>${good.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
-					<td width="200px" align="right">农户姓名:</td>
-					<td><select name="tradeGood.farmerId">
+					<td width="200px" align="right" >农户姓名:</td>
+					<td><select name="tradeGood.farmerId" style="width: 80px">
 						<c:forEach items="${farmerList}" var="farmer">
-							<option value="${farmer.id}">${farmer.name}</option>
+							<option value="${farmer.id}" <c:if test="${tradeGood.farmerId == farmer.id }"> selected="selected"</c:if>>${farmer.name}</option>
 						</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">单价:</td>
-					<td><input type="text" name="tradeGood.unitPrice" id="unit" validation="required"
-						 /></td>
+					<td><input type="text" name="tradeGood.unitPrice" id="unit" value="${tradeGood.unitPrice }" validation="required" /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">数量:</td>
-					<td><input type="text" name="tradeGood.amount" id="unit" validation="required"
-						 /></td>
+					<td><input type="text" name="tradeGood.amount" id="unit" value="${tradeGood.amount }" validation="required" /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">时间:</td>
-					<td><input type="text"  validation="date" readonly="readonly" name="tradeGood.tradeDate" id="tradeDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/></td>
+					<td><input type="text"  value="${tradeGood.tradeDate }" validation="date" readonly="readonly" name="tradeGood.tradeDate" id="tradeDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">备注:</td>
-					<td><textarea rows="5" cols="50" name="tradeGood.comments"
-							id="comments">	</textarea></td>
+					<td><textarea rows="5" cols="50" name="tradeGood.comments" value="${tradeGood.comments }"id="comments">	</textarea></td>
 				</tr>
 
 			</tbody>

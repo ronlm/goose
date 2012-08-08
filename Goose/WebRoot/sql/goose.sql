@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-08-02 14:44:46
+Date: 2012-08-08 16:02:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,19 +21,23 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `buy_good`;
 CREATE TABLE `buy_good` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存',
+  `goodSupplierId` int(11) NOT NULL,
   `goodId` varchar(255) NOT NULL,
   `batchNum` int(11) DEFAULT NULL COMMENT '批号，可选填',
-  `unitPriace` varchar(255) DEFAULT NULL,
+  `unitPrice` double(255,0) DEFAULT NULL,
   `amount` int(11) NOT NULL DEFAULT '0',
-  `Orgin` varchar(255) DEFAULT NULL,
+  `origin` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of buy_good
 -- ----------------------------
+INSERT INTO `buy_good` VALUES ('1', '1', '1', '33243', '2', '23', '广州', '2012-07-03', '	');
+INSERT INTO `buy_good` VALUES ('2', '3', '2', '3242', '2', '25', '台山', '2012-08-14', '	');
+INSERT INTO `buy_good` VALUES ('3', '4', '3', '24324', '34', '34', null, '2012-08-16', '423423423	2342');
 
 -- ----------------------------
 -- Table structure for `comm_menu`
@@ -47,7 +51,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -61,16 +65,19 @@ INSERT INTO `comm_menu` VALUES ('6', '农户农场管理', 'javascript:void(0)',
 INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('9', '物资信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('10', '农场信息管理', '/pages/goose/farmAction!listAll', '6', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('11', '物资品种信息', '/pages/goose/goodAction!list', '9', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('13', '供应商信息', 'test', '9', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('14', '物资销售管理', 'test', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('11', '物资基本信息', '/pages/goose/goodAction!list', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('13', '供应商信息', '/pages/goose/goodSupplierAction!list', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('14', '物资销售信息', '/pages/goose/tradeGoodAction!list', '9', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('15', '鹅只信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('16', '信息搜索', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
-INSERT INTO `comm_menu` VALUES ('21', '销售商信息', '/pages/goose/retailerAction!list', '15', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('22', '鹅苗交付信息', '/pages/goose/receiveGooseAction!list?daysWithin=3', '15', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('23', '成品鹅收购管理', '/pages/goose/tradeGooseAction!list', '15', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('24', '成品鹅销售管理', 'test', '15', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('25', '鹅只信息统计', 'test', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('17', '物资采购信息', '/pages/goose/buyGoodAction!list', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('18', '销售商信息', '/pages/goose/retailerAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('19', '鹅苗交付信息', '/pages/goose/receiveGooseAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('20', '成品鹅收购管理', '/pages/goose/tradeGooseAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('21', '成品鹅销售管理', '/pages/goose/saleGooseAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('22', '鹅只上市统计', '/pages/goose/gooseStatisticAction!market', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('23', '农场存栏鹅只统计', '/pages/goose/gooseStatisticAction!stock', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('24', '鹅只死亡统计', '/pages/goose/gooseStatisticAction!dead', '15', '/images/main/null.png', '3');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -178,7 +185,7 @@ CREATE TABLE `farm` (
 -- Records of farm
 -- ----------------------------
 INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', '				');
-INSERT INTO `farm` VALUES ('2', '牛牛', '1', '南海', null, '2000', '硬件考察中	');
+INSERT INTO `farm` VALUES ('2', '牛牛', '1', '南海', '2012-07-01', '2000', '硬件考察中	');
 INSERT INTO `farm` VALUES ('3', '猪镇', '2', '南海', null, '1000', null);
 INSERT INTO `farm` VALUES ('4', 'testtes', '1', '234', null, '234234', '硬件考察中		');
 
@@ -193,13 +200,14 @@ CREATE TABLE `farmer` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of farmer
 -- ----------------------------
 INSERT INTO `farmer` VALUES ('1', '张三', '123456', '广州', '无');
 INSERT INTO `farmer` VALUES ('2', '李四', '123456', '南海', '未签约');
+INSERT INTO `farmer` VALUES ('3', '朱八', '3345879', '台山', '	');
 
 -- ----------------------------
 -- Table structure for `good`
@@ -211,7 +219,7 @@ CREATE TABLE `good` (
   `unit` varchar(255) DEFAULT NULL,
   `stock` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
@@ -219,6 +227,27 @@ CREATE TABLE `good` (
 INSERT INTO `good` VALUES ('1', '油麦菜种', '包', '0');
 INSERT INTO `good` VALUES ('2', '大叶槐苗', '棵', '0');
 INSERT INTO `good` VALUES ('3', 'XX消毒水', '瓶', '0');
+INSERT INTO `good` VALUES ('4', '百毒杀', '瓶', '0');
+
+-- ----------------------------
+-- Table structure for `goodsupplier`
+-- ----------------------------
+DROP TABLE IF EXISTS `goodsupplier`;
+CREATE TABLE `goodsupplier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of goodsupplier
+-- ----------------------------
+INSERT INTO `goodsupplier` VALUES ('1', '张三', '111111', '广州', null);
+INSERT INTO `goodsupplier` VALUES ('3', '李四', '222222', '广州', '	');
+INSERT INTO `goodsupplier` VALUES ('4', '鑫鑫农资店', '432423', '在砝码城', '	');
 
 -- ----------------------------
 -- Table structure for `goose`
@@ -229,13 +258,68 @@ CREATE TABLE `goose` (
   `receiveId` int(11) NOT NULL,
   `tradeId` int(11) DEFAULT NULL COMMENT '收购批号',
   `saleId` int(11) DEFAULT NULL COMMENT '销售批号',
-  `isValid` tinyint(1) DEFAULT NULL COMMENT '是否消号,0为没有消号，表示鹅只没死或没被销售',
+  `isValid` tinyint(2) DEFAULT '1' COMMENT '0表示鹅只非正常死亡，1 为正在养殖状态，2为已出售',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of goose
 -- ----------------------------
+INSERT INTO `goose` VALUES ('1', '1', null, null, '0');
+INSERT INTO `goose` VALUES ('2', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('3', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('4', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('5', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('6', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('7', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('8', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('9', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('10', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('11', '2', null, null, '0');
+INSERT INTO `goose` VALUES ('12', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('13', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('14', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('15', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('16', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('17', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('18', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('19', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('20', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('21', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('22', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('23', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('24', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('25', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('26', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('27', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('28', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('29', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('30', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('56', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('57', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('58', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('59', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('60', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('61', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('62', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('63', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('64', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('65', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('66', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('67', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('68', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('69', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('70', '1', null, null, '1');
+INSERT INTO `goose` VALUES ('71', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('72', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('73', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('74', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('75', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('76', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('77', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('78', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('79', '2', null, null, '1');
+INSERT INTO `goose` VALUES ('80', '2', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `receive_goose`
@@ -248,25 +332,15 @@ CREATE TABLE `receive_goose` (
   `receiveDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receive_goose
 -- ----------------------------
-INSERT INTO `receive_goose` VALUES ('1', '1', '100', '2012-07-19', '木有');
-INSERT INTO `receive_goose` VALUES ('2', '1', '2000', '2012-01-24', 'fsdfs');
-INSERT INTO `receive_goose` VALUES ('3', '1', '500', '2012-06-19', 'ghigui');
-INSERT INTO `receive_goose` VALUES ('4', '1', '1000', '2012-08-02', 'tyfgrgf');
-INSERT INTO `receive_goose` VALUES ('5', '2', '2100', '2012-08-02', 'dsgsd');
-INSERT INTO `receive_goose` VALUES ('6', '2', '600', '2012-07-10', 'dfydfy');
-INSERT INTO `receive_goose` VALUES ('7', '2', '800', '2012-06-29', 'dgh5646');
-INSERT INTO `receive_goose` VALUES ('8', '3', '900', '2012-05-24', 'dsgdsfgdsf');
-INSERT INTO `receive_goose` VALUES ('9', '2', '2444', '2012-07-29', 'eyeyyy');
-INSERT INTO `receive_goose` VALUES ('10', '1', '577', '2012-07-26', 'tytyer');
-INSERT INTO `receive_goose` VALUES ('11', '2', '3000', '2012-07-28', 'rfewrwqe');
-INSERT INTO `receive_goose` VALUES ('12', '1', '300', '2012-07-29', 'fdhf');
-INSERT INTO `receive_goose` VALUES ('13', '1', '4000', '2011-02-08', 'fghdsgf');
-INSERT INTO `receive_goose` VALUES ('14', '1', '200', '2011-04-22', 'sdfasdf');
+INSERT INTO `receive_goose` VALUES ('1', '1', '10', '2012-05-06', 'dgsdgf');
+INSERT INTO `receive_goose` VALUES ('2', '2', '20', '2012-08-02', 'fdhhdg');
+INSERT INTO `receive_goose` VALUES ('16', '1', '15', '2012-06-13', 'adsfasd');
+INSERT INTO `receive_goose` VALUES ('17', '2', '10', '2012-07-11', 'fdfa');
 
 -- ----------------------------
 -- Table structure for `retailer`
@@ -279,12 +353,13 @@ CREATE TABLE `retailer` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of retailer
 -- ----------------------------
 INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '123465', '茜需要', '霏霏 城	');
+INSERT INTO `retailer` VALUES ('2', '张三鹅肉加工厂', '9527', '珠海', '鞢夺	桔柑');
 
 -- ----------------------------
 -- Table structure for `sale_goose`
@@ -299,11 +374,15 @@ CREATE TABLE `sale_goose` (
   `saleDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of sale_goose
 -- ----------------------------
+INSERT INTO `sale_goose` VALUES ('1', '1', '1000', '22.35', '6833.55', '2012-08-01', 'dfasfdasf');
+INSERT INTO `sale_goose` VALUES ('2', '1', '1200', '25.55', '7028.77', '2012-07-18', 'dfsafdsa');
+INSERT INTO `sale_goose` VALUES ('3', '1', '1130', '24.22', '7500.2', '2012-06-27', 'dasfqqqrwe');
+INSERT INTO `sale_goose` VALUES ('4', '2', '1000', '23.5', '7350', '2012-08-04', 'adfasdf');
 
 -- ----------------------------
 -- Table structure for `trade_good`
@@ -314,14 +393,18 @@ CREATE TABLE `trade_good` (
   `farmerId` int(11) NOT NULL,
   `goodId` int(11) NOT NULL,
   `tradeDate` date DEFAULT NULL,
+  `unitPrice` double DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_good
 -- ----------------------------
+INSERT INTO `trade_good` VALUES ('1', '1', '1', '2012-08-01', '10', '20', '大规模fs	');
+INSERT INTO `trade_good` VALUES ('2', '2', '3', '2012-08-07', '20', '434', '	');
+INSERT INTO `trade_good` VALUES ('4', '3', '4', null, '15', '13', '131243	');
 
 -- ----------------------------
 -- Table structure for `trade_goose`
@@ -352,3 +435,21 @@ INSERT INTO `trade_goose` VALUES ('8', '1', '1500', '20', '90000', '2012-07-08',
 INSERT INTO `trade_goose` VALUES ('9', '2', '1000', '19.2', '6500', '2012-05-21', 'jkjkhjk');
 INSERT INTO `trade_goose` VALUES ('10', '3', '3500', '15.5', '18400', '2012-07-15', 'gfdgfxg');
 INSERT INTO `trade_goose` VALUES ('11', '2', '800', '17', '5100', '2012-06-25', 'hhhhhf');
+
+-- ----------------------------
+-- View structure for `buygoodview`
+-- ----------------------------
+DROP VIEW IF EXISTS `buygoodview`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `buygoodview` AS select `buy_good`.`id` AS `id`,`buy_good`.`goodSupplierId` AS `supplierId`,`buy_good`.`goodId` AS `goodId`,`buy_good`.`batchNum` AS `batchNum`,`buy_good`.`unitPrice` AS `unitPrice`,`buy_good`.`amount` AS `amount`,`buy_good`.`origin` AS `origin`,`buy_good`.`date` AS `date`,`buy_good`.`comments` AS `comments`,`good`.`name` AS `goodName`,`good`.`unit` AS `unit`,`goodsupplier`.`name` AS `supplierName`,`goodsupplier`.`phone` AS `supplierPhone` from ((`buy_good` join `good`) join `goodsupplier`) where ((`buy_good`.`goodId` = `good`.`id`) and (`buy_good`.`goodSupplierId` = `goodsupplier`.`id`)) ;
+
+-- ----------------------------
+-- View structure for `market`
+-- ----------------------------
+DROP VIEW IF EXISTS `market`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `market` AS select `farm`.`id` AS `farmId`,`receive_goose`.`id` AS `receiveId`,`farm`.`name` AS `farmName`,`farm`.`farmerId` AS `farmerId`,`farm`.`address` AS `address`,`receive_goose`.`amount` AS `amount`,`receive_goose`.`receiveDate` AS `receiveDate`,`receive_goose`.`comments` AS `comments` from (`farm` join `receive_goose`) where (`farm`.`id` = `receive_goose`.`farmId`) ;
+
+-- ----------------------------
+-- View structure for `tradegoodview`
+-- ----------------------------
+DROP VIEW IF EXISTS `tradegoodview`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tradegoodview` AS select `farmer`.`id` AS `farmId`,`farmer`.`name` AS `farmerName`,`farmer`.`phone` AS `phone`,`trade_good`.`id` AS `id`,`trade_good`.`goodId` AS `goodId`,`trade_good`.`tradeDate` AS `tradeDate`,`trade_good`.`unitPrice` AS `unitPrice`,`trade_good`.`amount` AS `amount`,`trade_good`.`comments` AS `comments`,`good`.`name` AS `goodName`,`good`.`unit` AS `goodUnit` from ((`farmer` join `trade_good` on(('' = ''))) join `good`) where ((`farmer`.`id` = `trade_good`.`farmerId`) and (`trade_good`.`goodId` = `good`.`id`)) ;

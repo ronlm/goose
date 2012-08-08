@@ -24,12 +24,15 @@
 					<h3>姓名</h3>
 				</th>
 				<th>
+					<h3>地址</h3>
+				</th>
+				<th>
 					<h3>联系电话</h3>
 				</th>		
-				<th width="20%">
+				<th width="15%">
 					<h3>操作</h3>
 				</th>   
-				<th width="30%">
+				<th width="20%">
 					<h3 >备注</h3>
 				</th>                        
 			</tr>
@@ -40,11 +43,11 @@
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${retailer.id}"/></td>
 					<td>${retailer.name}</td>
+					<td>${retailer.address}</td>
 					<td>${retailer.phone}</td>
 					<td>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!list?retailer.id=${retailer.id }'; return false;"><span>查看近期销售记录</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/saleGooseAction!list?retailer.id=${retailer.id }'; return false;"><span>查看近期销售记录</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/retailerAction!get?retailer.id=${retailer.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/retailerAction!del?id=${retailer.id }'); return false;"><span>删除</span></a>
 					</td>
 					<td>${retailer.comments}</td>
 				</tr> 
