@@ -1,6 +1,5 @@
 package com.scau.action.goose;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,81 +11,94 @@ import org.springframework.stereotype.Component;
 
 import cn.com.ege.mvc.exception.BusinessException;
 
-import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.model.goose.BuyGood;
-import com.scau.model.goose.GoodSupplier;
+import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Good;
-import com.scau.model.goose.BuyGood;
+import com.scau.model.goose.GoodSupplier;
+import com.scau.model.goose.TradeGood;
 import com.scau.service.impl.goose.BuyGoodService;
-import com.scau.service.impl.goose.GoodSupplierService;
+import com.scau.service.impl.goose.BuyGoodViewService;
+import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GoodService;
+import com.scau.service.impl.goose.GoodSupplierService;
+import com.scau.service.impl.goose.TradeGoodService;
+import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
+import com.scau.view.goose.BuyGoodView;
 
 @Component
 @Scope("prototype")
-public class BuyGoodAction extends BaseAction implements ModelDriven<BuyGood>{
+public class BuyGoodAction extends BaseAction{
 	private static final long serialVersionUID = 8299975587235537983L;
 	private final static Log logger = LogFactory.getLog(BuyGoodAction.class);
 	private PageController pager;
-	private BuyGood buyGood;
 	private BuyGoodService buyGoodService;
-	private GoodService goodService;
-	private GoodSupplierService goodSupplierService;
+	private BuyGood buyGood;
+	private BuyGoodViewService buyGoodViewService;
+	private BuyGoodView buyGoodView;
 	
-	public String add() throws Exception {
-		// 添加记录
-		List<Good> goodList=goodService.listAll(new Good());
-		List<GoodSupplier> goodSupplierList=goodSupplierService.listAll(new GoodSupplier());
-		request.setAttribute("goodList", goodList);
-		request.setAttribute("goodSupplierList", goodSupplierList);
-		System.out.println("test--------------test,"+goodSupplierList.get(0).getName());
-		System.out.println("test--------------test,"+goodSupplierList.get(1).getName());
-			return "edit";		
-	}
-	
-	public String save() throws Exception {
-		// 保存表单
-		try {
-			String goodName=goodService.get(new Good(), buyGood.getGoodId()).getName();
-			String goodSupplierName=goodSupplierService.get(new GoodSupplier(), buyGood.getGoodSupplierId()).getName();
-			request.setAttribute("goodName", goodName);
-			request.setAttribute("goodSupplierName", goodSupplierName);
-			buyGoodService.save(buyGood);
-			return show();
-		} catch (Exception e) {
-			// 保存原来表单已输入的内容
-			return "error";
-		}
-	}
-	
-	public String list() throws Exception {
-		// 取列表
-			
-			int totalRows = buyGoodService.listAll(new BuyGood()).size();
-			String URL = request.getRequestURI();
+	public String list() {
+		// 取列表		
+			int totalRows = buyGoodViewService.getRecordCount(new BuyGoodView());
+			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<BuyGood> resourceList = buyGoodService.listAll(new BuyGood());
+			List<BuyGoodView> resourceList = buyGoodViewService.list(new BuyGoodView(),
+					this.pager.getPageStartRow(), pager.getPageSize(), null, null);
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
 			return "list";		
 	}
-	
-	private String show() {
-		// TODO Auto-generated method stub
-		int totalRows = 1;
-		String URL = request.getRequestURI();
-		this.pager.setURL(URL);
-		this.pager.setTotalRowsAmount(totalRows);
-		List<BuyGood> resourceList = new ArrayList<BuyGood>();
-		resourceList.add(buyGood);
-		pager.setData(resourceList);
-		request.setAttribute("pager", pager);
-		return "list";	
+
+	public String get() {
+		// 点了添加或者点了修改	
+			buyGood = buyGoodService.get(buyGood);
+			GoodService goodService = (GoodService) BeansUtil.get("goodService");
+			GoodSupplierService goodSupplierService = (GoodSupplierService) BeansUtil.get("goodSupplierService");
+			
+			List<Good> goodList = goodService.list(new Good());
+			List<GoodSupplier> supplierList = goodSupplierService.list(new GoodSupplier());
+			request.setAttribute("goodList", goodList);
+			request.setAttribute("supplierList", supplierList);
+			request.setAttribute("buyGood", buyGood);
+			return "edit";
 	}
 
-	
+	public String save() {
+		// 保存表单
+		try {
+			
+			buyGoodService.save(buyGood);
+			return list();
+		} catch (BusinessException e) {
+			// 保存原来表单已输入的内容
+			GoodService goodService = (GoodService) BeansUtil.get("goodService");
+			GoodSupplierService goodSupplierService = (GoodSupplierService) BeansUtil.get("goodSupplierService");
+			
+			List<Good> goodList = goodService.list(new Good());
+			List<GoodSupplier> supplierList = goodSupplierService.list(new GoodSupplier());
+			request.setAttribute("goodList", goodList);
+			request.setAttribute("supplierList", supplierList);
+			request.setAttribute("buyGood", buyGood);
+			request.setAttribute("message", e.getMessage());
+			return "edit";
+		}
+	}
+
+	public String del() {
+		// 删除	
+			String[] ids = request.getParameterValues("id");
+			for (String id : ids) {
+				BuyGood buyGood= new BuyGood();
+				if (null != id && !("".equals(id))) {
+					buyGood.setId(Long.valueOf(id));
+					buyGoodService.delete(buyGood);
+				}
+			}
+			return list();//返回取列表页面，并刷新列表
+	}
+
 	public PageController getPager() {
 		return pager;
 	}
@@ -94,14 +106,6 @@ public class BuyGoodAction extends BaseAction implements ModelDriven<BuyGood>{
 	@Resource
 	public void setPager(PageController pager) {
 		this.pager = pager;
-	}
-	
-	public BuyGood getBuyGood() {
-		return buyGood;
-	}
-
-	public void setBuyGood(BuyGood buyGood) {
-		this.buyGood = buyGood;
 	}
 
 	public BuyGoodService getBuyGoodService() {
@@ -112,30 +116,32 @@ public class BuyGoodAction extends BaseAction implements ModelDriven<BuyGood>{
 	public void setBuyGoodService(BuyGoodService buyGoodService) {
 		this.buyGoodService = buyGoodService;
 	}
-	
-	public GoodService getGoodService() {
-		return goodService;
-	}
 
-	@Resource
-	public void setGoodService(GoodService goodService) {
-		this.goodService = goodService;
-	}
-
-	public GoodSupplierService getGoodSupplierService() {
-		return goodSupplierService;
-	}
-
-	@Resource
-	public void setGoodSupplierService(GoodSupplierService goodSupplierService) {
-		this.goodSupplierService = goodSupplierService;
-	}
-
-	@Override
-	public BuyGood getModel() {
-		// TODO Auto-generated method stub
+	public BuyGood getBuyGood() {
 		return buyGood;
 	}
+
+	public void setBuyGood(BuyGood buyGood) {
+		this.buyGood = buyGood;
+	}
+
+	public BuyGoodViewService getBuyGoodViewService() {
+		return buyGoodViewService;
+	}
+
+	@Resource
+	public void setBuyGoodViewService(BuyGoodViewService buyGoodViewService) {
+		this.buyGoodViewService = buyGoodViewService;
+	}
+
+	public BuyGoodView getBuyGoodView() {
+		return buyGoodView;
+	}
+
+	public void setBuyGoodView(BuyGoodView buyGoodView) {
+		this.buyGoodView = buyGoodView;
+	}
+
 
 	
 }

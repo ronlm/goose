@@ -47,7 +47,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 				daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
 			}
 			if(null != farm){
-				 // 查看某个农场最近接收的鹅苗信息
+				 // 查看从某个农场最近收购的成品鹅信息
 				farm = farmService.get(farm);
 				tradeGoose = new TradeGoose();
 				tradeGoose.setFarmId(farm.getId());

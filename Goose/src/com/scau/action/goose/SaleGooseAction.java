@@ -52,7 +52,7 @@ public class SaleGooseAction extends BaseAction {
 				saleGoose = new SaleGoose();
 				saleGoose.setRetailerId(retailer.getId());
 			
-				String hql = "select rg from com.scau.model.goose.SaleGoose rg where rg.retailerId=" + saleGoose.getRetailerId()
+				String hql = "select rg from com.scau.model.goose.SaleGoose rg where rg.retailerId=" + retailer.getId()
 					+" and rg.saleDate >='" + saleGooseService.getDateBefore(daysWithin) + "' order by rg.saleDate desc";
 				int totalRows = saleGooseService.findByCondition(hql).size();// 总的记录条数
 				this.pager.setTotalRowsAmount(totalRows);
