@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 public class TradeGood {
 	private Long id;
 	private Long farmerId;
-	private Long GoodId;
-	private double unitPrice;
+	private Long goodId;
+	private Double unitPrice;
 	private Date tradeDate;
 	private Long amount;
 	private String comments;
@@ -29,10 +29,12 @@ public class TradeGood {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public double getUnitPrice() {
+
+	
+	public Double getUnitPrice() {
 		return unitPrice;
 	}
-	public void setUnitPrice(double unitPrice) {
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 	public Date getTradeDate() {
@@ -60,10 +62,10 @@ public class TradeGood {
 		this.farmerId = farmerId;
 	}
 	public Long getGoodId() {
-		return GoodId;
+		return goodId;
 	}
 	public void setGoodId(Long goodId) {
-		GoodId = goodId;
+		this.goodId = goodId;
 	}
 	
 	
