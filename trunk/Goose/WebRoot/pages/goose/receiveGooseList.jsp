@@ -5,7 +5,7 @@
 <html>
  
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
-
+<script type="text/javascript" src="../../js/getInfo.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 
 
@@ -28,7 +28,8 @@
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
 							天内交付信息
-							<input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" />
+							<c:if test="${farm != null }"><input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" /></c:if>
+							
 						</form>
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
@@ -55,15 +56,14 @@
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
+			<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
 				<c:forEach items="${pager.data}" var="receiveGoose">
 					<tr>
-						<td width="20px"><input type="checkbox" name="id"
-							value="${receiveGoose.id}" />
-						</td>
+						<td width="20px"><input type="checkbox" name="id" value="${receiveGoose.id}" /></td>
 						<td>${receiveGoose.receiveDate}</td>
 						<td>${receiveGoose.amount}</td>
 						<td>${receiveGoose.comments}</td>
-						<td><a id="getFarmInfo" class="button-small"><span>获取相关农户农场资料</span></td>
+						<td ><a class="button-small" value="${receiveGoose.farmId }"><span>获取相关农户农场资料</span></a></td>
 					</tr>
 				</c:forEach>
 			</form>

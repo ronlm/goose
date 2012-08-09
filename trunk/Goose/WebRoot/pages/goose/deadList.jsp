@@ -3,9 +3,8 @@
 <%@page isELIgnored="false"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
- 
-<script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 
+<script type="text/javascript" src="../../js/getInfo.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 
 
@@ -47,14 +46,13 @@
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
+				<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
 				<c:forEach items="${pager.data}" var="deadInfo">
 					<tr>
 						<td>${deadInfo.farm.name}</td>
 						<td>${deadInfo.deadNum}</td>
 						<td><c:forEach items="${deadInfo.deadGooses }" var="goose"><p>${goose.id }&nbsp;;</p></c:forEach></td>
-						<td><a class="button-small" href="javascript:void(0)"
-							onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>查看农场主信息</span>
-						</td>
+						<td ><a class="button-small" value="${deadInfo.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span></a></td>
 					</tr>
 				</c:forEach>
 			</form>

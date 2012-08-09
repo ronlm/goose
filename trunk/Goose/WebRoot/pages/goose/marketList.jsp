@@ -7,7 +7,7 @@
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
-
+<script type="text/javascript" src="../../js/getInfo.js"></script>
 
 <body style="overflow-y: visible;" onload="changeRowColor();">
 	<table class="mainTable" id="table" >
@@ -31,13 +31,14 @@
 				<th><h3>交付数量</h3></th>
 				<th><h3>现存数量</h3></th>
 				<th><h3>离90天上市相差天数</h3></th>
-				<th width="20%">
-					<h3>操作</h3></th>
 				<th width="30%">
+					<h3>操作</h3></th>
+				<th width="20%">
 					<h3>备注</h3></th>
 			</tr>
 		</thead>
 		<tbody id="contentBody">
+				<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
 				<c:forEach items="${pager.data}" var="appearOnMarket" >
 					<tr>
 						<td>${appearOnMarket.market.farmName}</td>
@@ -45,9 +46,7 @@
 						<td>${appearOnMarket.market.amount}</td>			
 						<td>${appearOnMarket.gooseNum}</td>
 						<td>${appearOnMarket.dayTo90}</td>
-						<td><a class="button-small" href="javascript:void(0)"
-							onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>查看农户联系方式</span>
-						</td>
+						<td ><a class="button-small" value="${appearOnMarket.market.farmId }"><span>获取所属农户农场资料</span></a></td>
 						<td>${market.comments}</td>
 					</tr>
 				</c:forEach>
