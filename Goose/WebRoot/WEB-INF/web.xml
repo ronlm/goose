@@ -91,6 +91,20 @@
 		<servlet-name>proxool</servlet-name>
 		<url-pattern>/Admin/proxool/</url-pattern>
 	</servlet-mapping>
+ 
+	<!-- 以下用于ajax 异步获取农户和农场 -->
+  <servlet>
+    <description>use it with ajax to get farm and farmer info </description>
+    <display-name>GetInfoServlet</display-name>
+    <servlet-name>GetInfoServlet</servlet-name>
+    <servlet-class>com.scau.servlet.goose.GetInfoServlet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>GetInfoServlet</servlet-name>
+    <url-pattern>/GetInfo</url-pattern>
+  </servlet-mapping>
+  <!-- 以下用于ajax 异步获取农户和农场结束 -->
+  
 	<!-- 连接池配置信息结束 -->
 
 	<!--Error Page 
@@ -135,7 +149,7 @@
 
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
 	<!-- struts2 的过滤器 结束 -->
 	
