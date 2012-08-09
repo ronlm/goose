@@ -4,9 +4,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
-<script type="text/javascript" src="../../js/getInfo.js"></script>
+ 
+<script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
-
+<script type="text/javascript" src="../../js/getInfo.js"></script>
 
 <body style="overflow-y: visible;" onload="changeRowColor();">
 	<table class="mainTable" id="table">
@@ -41,8 +42,7 @@
 				<th><h3>农场</h3></th>
 				<th><h3>数量</h3></th>
 				<th><h3>所有鹅只脚环ID号</h3></th>
-				<th width="20%">
-					<h3>操作</h3></th>
+				<th width="25%"><h3>操作</h3></th>
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
