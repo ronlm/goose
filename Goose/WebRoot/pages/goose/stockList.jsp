@@ -7,7 +7,7 @@
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
-
+<script type="text/javascript" src="../../js/getInfo.js"></script>
 
 <body style="overflow-y: visible;" onload="changeRowColor();">
 	<table class="mainTable" id="table">
@@ -33,20 +33,19 @@
 				<th width="20%">
 					<h3>操作</h3></th>
 				<th width="30%">
-					<h3>备注</h3></th>
+					<h3>农场备注信息</h3></th>
 			</tr>
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
+				<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
 				<c:forEach items="${pager.data}" var="stock">
 					<tr>
 						
 						<td>${stock.farm.name}</td>
 						<td>${stock.stock}</td>
-						<td><a class="button-small" href="javascript:void(0)"
-							onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>查看农场主信息</span>
-						</td>
-						<td>${receiveGoose.comments}</td>
+						<td ><a class="button-small" value="${stock.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span></a></td>
+						<td>${stock.farm.comments}</td>
 					</tr>
 				</c:forEach>
 			</form>

@@ -6,6 +6,7 @@
 <html>
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
     <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
+    <script type="text/javascript" src="../../js/getInfo.js"></script>
   <body style="overflow-y: visible;" onload="changeRowColor();">
     	<table class="mainTable">
 		<thead>
@@ -25,7 +26,7 @@
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
 							天内收购信息
-							<input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" />
+							<c:if test="${farm != null }"><input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" /></c:if>
 						</form>
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
@@ -39,17 +40,18 @@
 				<th>
 					<h3><input type="checkbox" onclick="selectAll(this);" /></h3>
 				</th>
-				<th><h3>日期</h3></th>
+				<th width="80px"><h3>日期</h3></th>
 				<th><h3>数量</h3></th>
 				<th><h3>单价</h3></th>
 				<th><h3>总重量</h3></th>
 				<th><h3>金额合计</h3></th>
-				<th width="25%"><h3>操作</h3></th>
-				<th ><h3>备注</h3></th>
+				<th width="30%"><h3>操作</h3></th>
+				<th width="20%"><h3>备注</h3></th>
 			</tr>
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/goose/tradeGooseAction!del" name="myForm" id="myForm" method="post">
+			<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
 			<c:forEach items="${pager.data}" var="tradeGoose">
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${tradeGoose.id}"/></td>
@@ -58,7 +60,7 @@
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.totalWeight }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice * tradeGoose.totalWeight}" maxFractionDigits="3"/></td>
-					<td><a class="button-small" ><span>查看农户联系方式</span></td>
+					<td ><a class="button-small" value="${tradeGoose.farmId }"><span>获取相关农户农场资料</span></a></td>
 					<td>${tradeGoose.comments}</td>
 				</tr> 
 			</c:forEach>
