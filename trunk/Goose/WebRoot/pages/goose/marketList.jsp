@@ -38,7 +38,6 @@
 			</tr>
 		</thead>
 		<tbody id="contentBody">
-				<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
 				<c:forEach items="${pager.data}" var="appearOnMarket" >
 					<tr>
 						<td>${appearOnMarket.market.farmName}</td>
