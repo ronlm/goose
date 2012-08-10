@@ -32,7 +32,7 @@ public class GoodAction extends BaseAction{
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<Good> resourceList = goodService.listAll(new Good());
+			List<Good> resourceList = goodService.list(new Good(),this.pager.getPageStartRow(),this.pager.getPageSize(),null,null);
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
 			return "list";		
