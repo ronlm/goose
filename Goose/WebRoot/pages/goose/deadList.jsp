@@ -39,6 +39,7 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
+				<th><h3>序号</h3></th>
 				<th><h3>农场</h3></th>
 				<th><h3>数量</h3></th>
 				<th><h3>所有鹅只脚环ID号</h3></th>
@@ -46,11 +47,16 @@
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
-				<c:forEach items="${pager.data}" var="deadInfo">
+				<c:forEach items="${pager.data}" var="deadInfo" varStatus="status">
 					<tr>
+						<td>${status.count}</td>
 						<td>${deadInfo.farm.name}</td>
 						<td>${deadInfo.deadNum}</td>
-						<td><c:forEach items="${deadInfo.deadGooses }" var="goose"><p>${goose.id }&nbsp;;</p></c:forEach></td>
+						<td><c:forEach items="${deadInfo.deadGooses }" var="goose" varStatus="num">
+								${goose.id }&nbsp;;
+								<c:if test="${num.count % 10 == 0 }"></br></c:if>
+							</c:forEach>
+							</td>
 						<td ><a class="button-small" value="${deadInfo.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span></a></td>
 					</tr>
 				</c:forEach>

@@ -26,21 +26,18 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3>农场</h3></th>
-				<th>
-					<h3>当前存栏数量</h3></th>
-				<th width="20%">
-					<h3>操作</h3></th>
-				<th width="30%">
-					<h3>农场备注信息</h3></th>
+				<th width="30px"><h3>序号</h3></th>
+				<th><h3>农场</h3></th>
+				<th><h3>当前存栏数量</h3></th>
+				<th width="20%"><h3>操作</h3></th>
+				<th width="30%"><h3>农场备注信息</h3></th>
 			</tr>
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
-				<c:forEach items="${pager.data}" var="stock">
+				<c:forEach items="${pager.data}" var="stock" varStatus="status">
 					<tr>
-						
+						<td>${status.count}</td>
 						<td>${stock.farm.name}</td>
 						<td>${stock.stock}</td>
 						<td ><a class="button-small" value="${stock.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span></a></td>
