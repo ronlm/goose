@@ -6,7 +6,7 @@ $(function(){
 	$("a.button-small").click(function(){
 		var buttonObj = $(this);
 		var Id = buttonObj.attr("value");;
-		var url = $("#GetInfoContextPath").val();
+		var url = "/Goose/pages/goose/getInfo.jsp";
 		if(buttonObj.attr("name") == "farmerId"){
 			url = url + "?infoType=farmerInfo&&farmerId=" + Id;
 		}else{	
