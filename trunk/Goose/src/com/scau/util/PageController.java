@@ -14,7 +14,7 @@ public class PageController implements Serializable{
 	// 总行数
 	private int totalRowsAmount;
 	// 每页行数
-	private int pageSize = 10;
+	private int pageSize = 15;
 	// 总页数
 	private int totalPages = 1;
 	// 当前页码
