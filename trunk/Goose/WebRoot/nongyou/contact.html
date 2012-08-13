@@ -6,118 +6,82 @@
 <link href="./css/style.css" rel="stylesheet" type="text/css" />
 <link href="./css/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript">
-// <![CDATA[
-jQuery(document).ready(function(){
-	$('#contactform').submit(function(){				  
-		var action = $(this).attr('action');
-		$.post(action, { 
-			name: $('#name').val(),
-			email: $('#email').val(),
-			company: $('#company').val(),
-			subject: $('#subject').val(),
-			message: $('#message').val()
-		},
-			function(data){
-				$('#contactform #submit').attr('disabled','');
-				$('.response').remove();
-				$('#contactform').before('<p class="response">'+data+'</p>');
-				$('.response').slideDown();
-				if(data=='Message sent!') $('#contactform').slideUp();
-			}
-		); 
-		return false;
-	});
-});
-// ]]>
-</script>
 </head>
 <body>
-<div class="main">
-  <div class="header">
-    <div class="block_header">
-      <div class="logo"><a href="index.html"><img src="images/logo.gif" width="220" height="100" border="0" alt="logo" /></a></div>
-      <div class="menu">
-        <ul>
-          <li><a href="index.html" ><span>主页</span></a></li>
-          <li><a href="about.html"><span> 关于农友</span></a></li>
-          <li><a href="faq.html"><span>技术解答</span></a></li>
-          <li><a href="feedback.html"><span>信息反馈 </span></a></li>
-          <li><a href="contact.html" class="active"><span> 联系我们 </span></a></li>
-        </ul>
-        <div class="clr"></div>
-      </div>
-  </div>
-  </div>
-  <div class="top_bg2">
-   <div class="clr"></div>
-  </div>
-  <div class="clr"></div>
-   <div class="body">
-    <div class="body_resize">
-      <div class="left">
-        <h2>Contact to company<br />
-        <span>Ideal Choice Hotel and Resort</span></h2>
-        <p>Thank you for your advices. We promise that we would actually listen your voice.</p>
-		<form action="#" method="post" id="contactform">
-          <ol>
-            <li>
-              <label for="name">First Name * </label>
-              <input id="name" name="name" class="text" />
-            </li>
-            <li>
-              <label for="email">Your email * </label>
-              <input id="email" name="email" class="text" />
-            </li>
-            <li>
-              <label for="company">Company</label>
-              <input id="company" name="company" class="text" />
-            </li>
-            <li>
-              <label for="subject">Subject</label>
-              <input id="subject" name="subject" class="text" />
-            </li>
-            <li>
-              <label for="message">Message * </label>
-              <textarea id="message" name="message" rows="6" cols="50"></textarea>
-            </li>
-            <li class="buttons">
-              <input type="image" name="imageField" id="imageField" src="images/send.gif" />
-            </li>
-          </ol>
-        </form>
-      </div>
-      <div class="right">
-        <h2>Get in touch<br />
-       <span> near me, near you</span></h2>
-        <p><strong>Ideal Choice Hotel, your best choice for hotels.</strong><br />
-        contact us please, thank you for your support.</p>
-        <p><strong>Address</strong>:          xxx XXX Road, XXX, 12<br />
-          <strong>Telephone</strong>:      +123-1234-5678<br />
-          <strong>FAX</strong>:                  +458-4578<br />
-          <strong>Others</strong>:            +301 - 0125 - 01258<br />
-          <strong>E-mail</strong>:              <strong>XXX@yoursitename.com</strong></p>
-          <div class="bg"></div>
-			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_1.gif" alt="picture" class="floated" /></a>
-			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_2.gif" alt="picture" class="floated" /></a>
-			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_3.gif" alt="picture" class="floated" /></a>
-			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_4.gif" alt="picture" class="floated" /></a>
-			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_5.gif" alt="picture" class="floated" /></a>
-			<a style="color:#ebebeb;text-decoration:none;" href="#"><img src="images/cont_6.gif" alt="picture" class="floated" /></a>
-      </div>
-      <div class="clr"></div>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <div class="footer">
-  	<div class="footer_resize">
-  		<p class="leftt">© Copyright  2003 - 2011. All Rights Reserved<br />
-    		<a href="#">Home</a> | <a href="#">Contact</a> | <a href="#">RSS </a></p>
-    	<div class="clr"></div>
-  		<div class="clr"></div>
-   </div>
-</div>
-</div>
+	<div class="main">
+		<div class="header">
+			<div class="block_header">
+				<div class="logo"><a href="index.html"><img src="images/logo.png" width="350" height="140" border="0" alt="logo" /></a></div>
+				<div class="menu">
+					<ul>
+						<li><a href="index.html"><span>主页</span></a></li>
+						<li><a href="about.html"><span> 关于农友</span></a></li>
+						<li><a href="faq.html"><span>养鹅技术解答</span></a></li>
+						<li><a href="faq.html"><span>养鹅投入与回报</span></a></li>
+						<li><a href="feedback.html"><span>信息反馈 </span></a></li>
+						<li><a href="contact.html" class="active"><span>联系我们 </span></a></li>
+					</ul>
+					<div class="clr"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clr"></div>
+		<div class="body">
+			<div class="body_resize">
+				<div class="left">
+					<h2>
+						你可以通过以下方式联系我们<br /> <span>农友农林牧公司</span>
+					</h2>
+					<p>Thank you for your advices. We promise that we would
+						actually listen your voice.</p>
+					<table style="width: 954px">
+						<tr>
+							<td><h2>电话：</h2></td>
+							<td><h2>0763-2637777</h2></td>
+						</tr>
+						<tr>
+							<td><h2>传真：</h2></td>
+							<td><h2>0763-2637444</h2></td>
+						</tr>
+						<tr>
+							<td ><h2>地址：</h2></td>
+							<td><h2>英德市英城浈阳路南刘屋村对面C幢5座<font size="2px">(即城西派出所往西500米)</font></h2></td>
+						</tr>
+						<tr>
+							<td ><h2>联系人:</h2></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><h3>梁生:13828512345 15992049938</h3></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><h3>林生:1382851822</h3></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><h3>林生:13926637799</h3></td>
+						</tr>
+					</table>
+				</div>
+			
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="footer">
+			<div class="footer_resize">
+				<p class="leftt">
+					© Copyright 2003 - 2011. All Rights Reserved<br /> <a href="#">Home</a>
+					| <a href="#">Contact</a> | <a href="#">RSS </a>
+				</p>
+				<div class="clr"></div>
+				<div class="clr"></div>
+			</div>
+		</div>
+	</div>
 
 
 </body>
