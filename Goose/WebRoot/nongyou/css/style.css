@@ -16,12 +16,12 @@ html {
 	width: 100%;
 	padding: 0;
 	margin: 0 auto;
-	background: #ebebeb;
+	background: #C2A366;/* background: #ebebeb; */
 }
 
 /********** header **********/
 .header {
-	background: #e1ecef;
+	background: #B59147;/* background: #e1ecef; */
 	padding: 0;
 	margin: 0 auto;
 }
@@ -85,7 +85,7 @@ html {
 /* menu */
 .menu {
 	float: right;
-	padding: 65px 0 0 0;
+	padding: 105px 0 0 0;
 	margin: 0;
 	width: 560px;
 	width: 580px \9; /** for ie  **/
@@ -144,7 +144,7 @@ html {
 .slider_top {
 	margin: 0 auto;
 	padding: 0;
-	background: #e1ecef;
+	background: #C2A366;
 }
 
 /*header_text*/
@@ -229,18 +229,18 @@ html {
 
 /* top_bg */
 .top_bg {
-	background: url(../images/top_bg.gif) top repeat-x;
+	background: url(../images/top_bg.jpg) top repeat-x;
 	margin: 0;
 	padding: 0;
 }
-
+/*
 .top_bg2 {
 	background: url(../images/top_bg2.gif) top repeat-x;
 	margin: 0;
 	padding: 0;
 	height: 23px
 }
-
+*/
 .top_bg_resize {
 	width: 986px;
 	margin: 0 auto;
@@ -389,7 +389,7 @@ html {
 }
 
 .left {
-	width: 565px;
+	width: 564px;
 	float: left;
 	margin: 0;
 	padding: 10px 10px;
@@ -408,10 +408,11 @@ html {
 	padding: 5px 10px;
 }
 
+/*
 #contactform * {
 	color: #F00;
 }
-
+*/
 #contactform ol {
 	margin: 0;
 	padding: 0;
@@ -491,7 +492,7 @@ p.response {
 	padding: 0;
 	margin: 0;
 	height: 55px;
-	background: #d7d7d7 url(../images/footer_bg.gif) repeat-x;
+	background: #AD8533 url(../images/footer_bg.png) repeat-x;
 }
 
 .footer p {
