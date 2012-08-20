@@ -21,7 +21,7 @@
 					<h3><input type="checkbox" onclick="selectAll(this);"/></h3>
 				</th>
 				<th>
-					<h3>姓名</h3>
+					<h3>名称</h3>
 				</th>
 				<th>
 					<h3>联系电话</h3>

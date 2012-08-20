@@ -44,7 +44,7 @@
 				<tbody>
 					<tr>
 						<td width="200" align="right">
-							姓名:
+							名称:
 						</td>
 						<td>
 							<input type="text" validation="required" name="goodSupplier.name"

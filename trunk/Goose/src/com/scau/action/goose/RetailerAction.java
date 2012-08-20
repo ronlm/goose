@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.action.BaseAction;
-import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Retailer;
-import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.RetailerService;
 import com.scau.util.PageController;
 
@@ -31,7 +29,7 @@ public class RetailerAction extends BaseAction{
 		// 取列表	
 			
 			int totalRows = retailerService.getRecordCount(new Retailer());
-			String URL = getListURL();
+			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<Retailer> resourceList = retailerService.list(new Retailer(),
@@ -44,20 +42,22 @@ public class RetailerAction extends BaseAction{
 	public String get() {
 		// 点了添加或者点了修改	
 			retailer = retailerService.get(retailer);
-			request.setAttribute("retailer", retailer);
+			request.setAttribute("Retailer", retailer);
 			return "edit";
 	}
 
 	public String save() {
 		// 保存表单
 		try {
+			
 			retailerService.save(retailer);
+		
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
-			request.setAttribute("retailer", retailer);
+			request.setAttribute("user", retailer);
 			request.setAttribute("message", e.getMessage());
-			return "edit";
+			return list();
 		}
 	}
 
@@ -65,9 +65,9 @@ public class RetailerAction extends BaseAction{
 		// 删除	
 			String[] ids = request.getParameterValues("id");
 			for (String id : ids) {
-				Farmer farmer= new Farmer();
+				Retailer retailer= new Retailer();
 				if (null != id && !("".equals(id))) {
-					farmer.setId(Long.valueOf(id));
+					retailer.setId(Long.valueOf(id));
 					retailerService.delete(retailer);
 				}
 			}
@@ -91,19 +91,18 @@ public class RetailerAction extends BaseAction{
 	}
 
 	@Resource
-	public void setRetailerService(RetailerService retailerService) {
-		this.retailerService = retailerService;
+	public void setRetailerService(RetailerService RetailerService) {
+		this.retailerService = RetailerService;
 	}
 
 	public Retailer getRetailer() {
 		return retailer;
 	}
 
-	public void setRetailer(Retailer retailer) {
-		this.retailer = retailer;
-	}
-
 	
+	public void setRetailer(Retailer Retailer) {
+		this.retailer = Retailer;
+	}
 
 	
 }
