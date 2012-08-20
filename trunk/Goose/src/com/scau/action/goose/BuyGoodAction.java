@@ -68,7 +68,6 @@ public class BuyGoodAction extends BaseAction{
 	public String save() {
 		// 保存表单
 		try {
-			
 			buyGoodService.save(buyGood);
 			return list();
 		} catch (BusinessException e) {
