@@ -36,7 +36,6 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 				farmer = (Farmer) request.getAttribute("farmer");
 			}
 			farmer = farmerService.get(farmer);
-			
 			farm = new Farm();
 			farm.setFarmerId(farmer.getId());
 			int totalRows = farmService.list(farm).size();

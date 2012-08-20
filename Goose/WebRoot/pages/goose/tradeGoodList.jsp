@@ -38,13 +38,13 @@
 					<td>${tradeGoodView.unitPrice}</td>
 					<td>${tradeGoodView.amount}</td>
 					<td>${tradeGoodView.goodUnit}</td>
-					<td>${tradeGoodView.unitPrice * tradeGood.amount}</td>
+					<td>${tradeGoodView.unitPrice * tradeGoodView.amount}</td>
 					<td>${tradeGoodView.tradeDate}</td>
+					<td>${tradeGoodView.comments}</td>
 					<td>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGoodAction!get?tradeGood.id=${tradeGoodView.id }'; return false;"><span>修改</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/tradeGoodAction!del?id=${tradeGoodView.id }'); return false;"><span>删除</span></a>
 					</td>
-					<td>${tradeGoodView.comments}</td>
 				</tr> 
 			</c:forEach>
 		</form>
