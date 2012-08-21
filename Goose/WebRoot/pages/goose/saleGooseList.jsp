@@ -5,6 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../../js/getInfo.js"></script>
     <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
   <body style="overflow-y: visible;" onload="changeRowColor();">
     	<table class="mainTable">
@@ -54,10 +55,10 @@
 				<th>
 					<h3>金额合计</h3>
 				</th>
-				<th width="20%">
+				<th width="30%">
 					<h3>操作</h3>
 				</th>
-				<th width="30%">
+				<th width="20%">
 					<h3>备注</h3>
 				</th>
 			</tr>
@@ -71,14 +72,8 @@
 					<td>${saleGoose.amount}</td>
 					<td><fmt:formatNumber value="${saleGoose.unitPrice }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${saleGoose.totalWeight }" maxFractionDigits="3"/></td>
-						<td><fmt:formatNumber value="${saleGoose.unitPrice * saleGoose.totalWeight}" maxFractionDigits="3"/></td>
-				<!-- <td>${saleGoose.unitPrice * saleGoose.totalWeight}</td>  -->
-					<td>
-					<!-- 
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/saleGooseAction!get?saleGoose.id=${saleGoose.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/saleGooseAction!del?id=${saleGoose.id }'); return false;"><span>删除</span></a>
-					 -->
-					</td>
+					<td><fmt:formatNumber value="${saleGoose.unitPrice * saleGoose.totalWeight}" maxFractionDigits="3"/></td>
+					<td ><a class="button-small" value="${saleGoose.retailerId }" name="retailerId"><span>获取相关销售商资料</span></a></td>
 					<td>${saleGoose.comments}</td>
 				</tr> 
 			</c:forEach>
