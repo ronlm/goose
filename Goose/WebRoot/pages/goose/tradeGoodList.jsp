@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -24,8 +25,8 @@
 				<th><h3>单位</h3></th>
 				<th><h3>总价</h3></th>
 				<th><h3>时间</h3></th>
-				<th width="30%"><h3>备注</h3></th>   
-				<th width="20%"><h3 >操作</h3></th>                        
+				<th width="30%"><h3>操作</h3></th>   
+				<th width="20%"><h3 >备注</h3></th>                        
 			</tr>
 		</thead>
 		<tbody>
@@ -35,16 +36,16 @@
 					<td width="20px"><input type="checkbox" name="id" value="${tradeGoodView.id}"/></td>
 					<td>${tradeGoodView.goodName}</td>
 					<td>${tradeGoodView.farmerName}</td>
-					<td>${tradeGoodView.unitPrice}</td>
+					<td><fmt:formatNumber value="${tradeGoodView.unitPrice}" maxFractionDigits="3"/></td>
 					<td>${tradeGoodView.amount}</td>
 					<td>${tradeGoodView.goodUnit}</td>
-					<td>${tradeGoodView.unitPrice * tradeGoodView.amount}</td>
+					<td><fmt:formatNumber value="${tradeGoodView.unitPrice * tradeGoodView.amount }" maxFractionDigits="3"/></td>
 					<td>${tradeGoodView.tradeDate}</td>
-					<td>${tradeGoodView.comments}</td>
 					<td>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGoodAction!get?tradeGood.id=${tradeGoodView.id }'; return false;"><span>修改</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/tradeGoodAction!del?id=${tradeGoodView.id }'); return false;"><span>删除</span></a>
 					</td>
+					<td>${tradeGoodView.comments}</td>
 				</tr> 
 			</c:forEach>
 		</form>
