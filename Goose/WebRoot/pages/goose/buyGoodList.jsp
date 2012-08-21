@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -38,9 +39,9 @@
 					<td>${buyGoodView.supplierName}</td>
 					<td>${buyGoodView.origin}</td>
 					<td>${buyGoodView.batchNum}</td>
-					<td>${buyGoodView.unitPrice}</td>
+					<td><fmt:formatNumber value="${buyGoodView.unitPrice}" maxFractionDigits="3"/></td>
 					<td>${buyGoodView.amount}</td>
-					<td>${buyGoodView.unitPrice * buyGoodView.amount}</td>
+					<td><fmt:formatNumber value="${buyGoodView.unitPrice * buyGoodView.amount}" maxFractionDigits="3"/></td>
 					<td>${buyGoodView.date}</td>
 					<td>${buyGoodView.comments}</td>
 					<td>
