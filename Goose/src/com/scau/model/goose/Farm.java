@@ -1,5 +1,6 @@
 package com.scau.model.goose;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class Farm {
+public class Farm implements Serializable{
 	private Long id;
 	private String name;
 	private String address;
