@@ -62,7 +62,7 @@
 						<td>${receiveGoose.receiveDate}</td>
 						<td>${receiveGoose.amount}</td>
 						<td>${receiveGoose.comments}</td>
-						<td ><a class="button-small" value="${receiveGoose.farmId }"><span>获取相关农户农场资料</span></a></td>
+						<td ><a class="button-small" value="${receiveGoose.farmId }" name="farmId"><span>获取相关农户农场资料</span></a></td>
 					</tr>
 				</c:forEach>
 			</form>
