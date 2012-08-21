@@ -66,7 +66,7 @@
 						</c:choose>
 					</td>
 					<td><a class="button-small"
-						value="${appearOnMarket.market.farmId }"><span>获取所属农户农场资料</span>
+						value="${appearOnMarket.market.farmId }" name="farmId"><span>获取所属农户农场资料</span>
 					</a>
 					</td>
 					<td>${market.comments}</td>
