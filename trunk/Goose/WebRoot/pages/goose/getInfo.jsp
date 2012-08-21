@@ -1,3 +1,6 @@
+<%@page import="java.lang.annotation.Retention"%>
+<%@page import="com.scau.model.goose.Retailer"%>
+<%@page import="com.scau.service.impl.goose.RetailerService"%>
 <%@page import="com.scau.model.goose.Farm"%>
 <%@page import="com.scau.model.goose.Farmer"%>
 <%@page import="com.scau.service.impl.goose.FarmService"%>
@@ -19,12 +22,12 @@
 	FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
 
 	try {
+		Long id =  Long.parseLong(request.getParameter("Id"));
+		
 		if (request.getParameter("infoType").equals("farmInfo")) {
-			Long farmId = Long
-					.parseLong(request.getParameter("farmId"));
-			farm.setId(farmId);
+			// 获得农户农场信息
+			farm.setId(id);
 			farm = farmService.get(farm);
-
 			farmer.setId(farm.getFarmerId());
 			farmer = farmerService.get(farmer);
 			out.print("农户名:" + farmer.getName() + "&nbsp;&nbsp;电话:"
@@ -32,16 +35,22 @@
 					+ farm.getName() + "&nbsp;&nbsp;地址:"
 					+ farm.getAddress());
 
-		} else if (request.getParameter("infoType")
-				.equals("farmerInfo")) {
-			Long farmerId = Long.parseLong(request
-					.getParameter("farmerId"));
-			farmer.setId(farmerId);
+		} else if (request.getParameter("infoType").equals("farmerInfo")) {
+			//获得农户信息
+			farmer.setId(id);
 			farmer = farmerService.get(farmer);
 			out.print("农户名:" + farmer.getName() + "&nbsp;&nbsp;电话:"
 					+ farmer.getPhone() + "&nbsp;&nbsp;住址:"
 					+ farmer.getAddress());
-		} else {
+		} else if (request.getParameter("infoType").equals("retailerInfo")){
+			// 获得销售商信息
+			RetailerService retailerService = (RetailerService)BeansUtil.get("retailerService");
+			Retailer retailer = new Retailer();
+			retailer.setId(id);
+			retailer = retailerService.get(retailer);
+			out.print("销售商名:" + retailer.getName() + "&nbsp;&nbsp;联系电话:" + retailer.getPhone() );
+		}
+		else {
 			out.print("暂无相关资料");
 		}
 	} catch (Exception e) {
