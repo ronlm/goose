@@ -60,7 +60,7 @@
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.totalWeight }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice * tradeGoose.totalWeight}" maxFractionDigits="3"/></td>
-					<td ><a class="button-small" value="${tradeGoose.farmId }"><span>获取相关农户农场资料</span></a></td>
+					<td ><a class="button-small" value="${tradeGoose.farmId }" name="farmId"><span>获取相关农户农场资料</span></a></td>
 					<td>${tradeGoose.comments}</td>
 				</tr> 
 			</c:forEach>
