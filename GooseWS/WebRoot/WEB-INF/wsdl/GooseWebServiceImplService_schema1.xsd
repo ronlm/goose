@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://impl.webService.scau.com/" targetNamespace="http://impl.webService.scau.com/" version="1.0">
+
+  <xs:element name="Authenticate" type="tns:Authenticate"/>
+
+  <xs:element name="AuthenticateResponse" type="tns:AuthenticateResponse"/>
+
+  <xs:element name="addReceiveGoose" type="tns:addReceiveGoose"/>
+
+  <xs:element name="addReceiveGooseResponse" type="tns:addReceiveGooseResponse"/>
+
+  <xs:element name="addSaleGoose" type="tns:addSaleGoose"/>
+
+  <xs:element name="addSaleGooseResponse" type="tns:addSaleGooseResponse"/>
+
+  <xs:element name="addTradeGoose" type="tns:addTradeGoose"/>
+
+  <xs:element name="addTradeGooseResponse" type="tns:addTradeGooseResponse"/>
+
+  <xs:element name="getFarmList" type="tns:getFarmList"/>
+
+  <xs:element name="getFarmListResponse" type="tns:getFarmListResponse"/>
+
+  <xs:element name="login" type="tns:login"/>
+
+  <xs:element name="loginResponse" type="tns:loginResponse"/>
+
+  <xs:element name="setInvalid" type="tns:setInvalid"/>
+
+  <xs:element name="setInvalidResponse" type="tns:setInvalidResponse"/>
+
+  <xs:complexType name="addSaleGoose">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addSaleGooseResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getFarmList">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getFarmListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:farmWs"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="farmWs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="farmerId" type="xs:long"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addTradeGoose">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addTradeGooseResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setInvalid">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setInvalidResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addReceiveGoose">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addReceiveGooseResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Authenticate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthenticateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
