@@ -3,7 +3,7 @@ package com.scau.webService.impl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebMethod;
-import javax.jws.WebService;
+import com.scau.model.goose.Retailer;
 import com.scau.model.webService.FarmWs;
 import com.scau.webService.IGooseService;
 
@@ -20,6 +20,10 @@ public class GooseWebServiceImplDelegate {
 		return gooseWebServiceImpl.getFarmList();
 	}
 
+	public List<Retailer> getRetailerList() {
+		return gooseWebServiceImpl.getRetailerList();
+	}
+
 	public int addReceiveGoose(int farmId, ArrayList<String> gooseList) {
 		return gooseWebServiceImpl.addReceiveGoose(farmId, gooseList);
 	}
@@ -32,8 +36,8 @@ public class GooseWebServiceImplDelegate {
 		return gooseWebServiceImpl.addSaleGoose(retailerId, gooseList);
 	}
 
-	public int Authenticate(String gooseId) {
-		return gooseWebServiceImpl.Authenticate(gooseId);
+	public int authenticate(String gooseId) {
+		return gooseWebServiceImpl.authenticate(gooseId);
 	}
 
 	public int setInvalid(String gooseId) {

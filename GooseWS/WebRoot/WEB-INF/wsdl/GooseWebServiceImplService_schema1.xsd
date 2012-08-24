@@ -21,6 +21,10 @@
 
   <xs:element name="getFarmListResponse" type="tns:getFarmListResponse"/>
 
+  <xs:element name="getRetailerList" type="tns:getRetailerList"/>
+
+  <xs:element name="getRetailerListResponse" type="tns:getRetailerListResponse"/>
+
   <xs:element name="login" type="tns:login"/>
 
   <xs:element name="loginResponse" type="tns:loginResponse"/>
@@ -39,6 +43,26 @@
   <xs:complexType name="addSaleGooseResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRetailerList">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getRetailerListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:retailer"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="retailer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element minOccurs="0" name="comments" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="phone" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
