@@ -35,8 +35,8 @@ public interface IGooseService {
 	/** 获得全部销售商信息
 	 * @return
 	 */
-	//@WebMethod
-	//public List<Retailer> getRetailerList();
+	@WebMethod
+	public List<Retailer> getRetailerList();
 	
 	/** 添加一个批次的鹅苗交付记录
 	 * @param farmId
@@ -67,7 +67,7 @@ public interface IGooseService {
 	 * @return 1：真品   0：假的
 	 */
 	@WebMethod
-	public int Authenticate(String gooseId);
+	public int authenticate(String gooseId);
 	
 	/** 设置鹅只脚环无效，当鹅只死亡时，用些方法写上脚环失效标志
 	 * @param gooseId
