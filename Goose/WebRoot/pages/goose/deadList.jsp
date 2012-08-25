@@ -53,7 +53,7 @@
 						<td>${deadInfo.farm.name}</td>
 						<td>${deadInfo.deadNum}</td>
 						<td><c:forEach items="${deadInfo.deadGooses }" var="goose" varStatus="num">
-								${goose.id }&nbsp;;
+								${goose.ringId }&nbsp;;
 								<c:if test="${num.count % 10 == 0 }"></br></c:if>
 							</c:forEach>
 							</td>
