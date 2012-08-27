@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 
 import org.hibernate.mapping.Value;
 
@@ -30,7 +31,7 @@ import com.scau.webService.IGooseService;
 public class GooseWebServiceImpl implements IGooseService{
 	
 	@WebMethod
-	public boolean login(String name, String password)  {
+	public boolean login(@WebParam(name="userName")String name, @WebParam(name="password")String password)  {
 		
 		CommUserService commUserService = (CommUserService)BeansUtil.get("commUserService");
 		CommUser user = new CommUser();
@@ -82,7 +83,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
-	public int addReceiveGoose(long farmId, ArrayList<String> gooseList ,String comments) {
+	public int addReceiveGoose(@WebParam(name="farmId")long farmId, @WebParam(name="gooseRingList")ArrayList<String> gooseList ,@WebParam(name="comments")String comments) {
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
@@ -116,7 +117,8 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
-	public int addTradeGoose(long farmId, ArrayList<String> gooseList,Double totalWeight,Double unitPrice,String comments) {
+	public int addTradeGoose(@WebParam(name="farmId")long farmId, @WebParam(name="gooseRingList")ArrayList<String> gooseList 
+			,@WebParam(name="totalWeight")Double totalWeight, @WebParam(name="unitPrice")Double unitPrice,@WebParam(name="comments")String comments) {
 		
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 		TradeGooseService tradeGooseService = (TradeGooseService) BeansUtil.get("tradeGooseService");
@@ -148,7 +150,9 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
-	public int addSaleGoose(long retailerId,ArrayList<String> gooseList,Double totalWeight,Double unitPrice,String comments) {
+	public int addSaleGoose(@WebParam(name="retailerId")long retailerId , @WebParam(name="gooseRingList")ArrayList<String> gooseList,
+			@WebParam(name="totalWeight")Double totalWeight , @WebParam(name="unitPrice")Double unitPrice ,
+			@WebParam(name="comments")String comments) {
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 		SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
@@ -182,7 +186,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
-	public int authenticate(String gooseId) {
+	public int authenticate(@WebParam(name="gooseRing")String gooseId) {
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 		Goose goose = new Goose();
 		goose.setRingId(gooseId);
@@ -193,7 +197,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
-	public int setInvalid(String gooseId) {
+	public int setInvalid(@WebParam(name="gooseRing")String gooseId) {
 		try {
 			GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 			Goose goose = new Goose();

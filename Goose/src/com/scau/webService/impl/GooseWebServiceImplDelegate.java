@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import org.hibernate.mapping.Value;
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.Farm;
