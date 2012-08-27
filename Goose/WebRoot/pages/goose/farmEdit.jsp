@@ -3,7 +3,7 @@
 <%@page isELIgnored="false"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html style="overflow-y: visible;">
-<script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
 	<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<form

@@ -4,6 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html style="overflow-y: visible;">
 	<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
+	<script language="javascript" type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<form
 			action="${pageContext.request.contextPath }/pages/goose/farmerAction!save"
