@@ -105,7 +105,7 @@ public class GooseWebServiceImpl implements IGooseService{
 				Goose g = new Goose();
 				g.setRingId(ringId);
 				g.setReceiveId(receiveGooseId);
-				g.setIsValid(1);//设置脚环有效
+				g.setIsValid(1);//设置脚环有效，正在养殖状态
 				gooses.add(g);
 			}
 			gooseService.batchAdd(gooses);//批量写入数据库
@@ -141,6 +141,7 @@ public class GooseWebServiceImpl implements IGooseService{
 				g.setRingId(ringId);
 				g = gooseService.get(g);//查出该个脚环号的goose，写上tradeId
 				g.setTradeId(tradeId);
+				g.setIsValid(2);//设置鹅只状态为已出售
 				gooseService.update(g);
 			}
 		} catch (Exception e) {
