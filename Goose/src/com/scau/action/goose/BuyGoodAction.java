@@ -37,16 +37,27 @@ public class BuyGoodAction extends BaseAction{
 	private BuyGood buyGood;
 	private BuyGoodViewService buyGoodViewService;
 	private BuyGoodView buyGoodView;
+	private int daysWithin ;
 	
 	public String list() {
-		// 取列表		
-			int totalRows = buyGoodViewService.getRecordCount(new BuyGoodView());
+			// 取列表
+			// 取得要显示的日期条件
+			if(null != request.getParameter("daysWithin")){
+					daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+					request.getSession().removeAttribute("daysWithin");
+			}
+			else if(null != request.getSession().getAttribute("daysWithin")){
+					daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
+			}
+			String hql = "from com.scau.view.goose.BuyGoodView t where t.date >='" + buyGoodViewService.getDateBefore(daysWithin) + "' order by t.date desc";
+			int totalRows = buyGoodViewService.findByCondition(hql).size();// 总的记录条数
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<BuyGoodView> resourceList = buyGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), "from com.scau.view.goose.BuyGoodView t order by t.date desc");
+			List<BuyGoodView> resourceList = buyGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), hql);
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
+			request.getSession().setAttribute("daysWithin", daysWithin);
 			return "list";		
 	}
 
