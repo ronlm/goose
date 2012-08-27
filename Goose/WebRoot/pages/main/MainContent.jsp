@@ -169,41 +169,6 @@
 			</tbody>
 		</table>
 		<br />
-		<table class="mainTable">
-			<thead>
-				<tr class="tableController">
-					<th colspan="2">
-						<h3>
-							【技术支持】
-						</h3>
-					</th>
-				</tr>
-				<tr>
-					<th class="InstructionInfo" colspan="2">
-						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;亲爱的用户，如果您在使用过程中遇到解决不了的问题，可咨询
-							<a href="http://www.ege.com.cn" target="_blank">EnGinE</a>，官方网站：ege.com.cn。
-						</p>
-						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;EGE小组
-							<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-						</p>
-					</th>
-				</tr>
-				<tr class="tableTitle">
-					<th>
-						<h3>
-							&nbsp;
-						</h3>
-					</th>
-					<th>
-						<h3>
-							&nbsp;
-						</h3>
-					</th>
-				</tr>
-			</thead>
-		</table>
+		
 	</body>
 </html>
