@@ -154,7 +154,6 @@ public class GooseWebServiceImpl implements IGooseService{
 	public int addSaleGoose(@WebParam(name="retailerId")long retailerId , @WebParam(name="gooseRingList")ArrayList<String> gooseList,
 			@WebParam(name="totalWeight")Double totalWeight , @WebParam(name="unitPrice")Double unitPrice ,
 			@WebParam(name="comments")String comments) {
-		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 		SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
 		
