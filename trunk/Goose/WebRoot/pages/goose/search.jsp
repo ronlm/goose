@@ -6,7 +6,7 @@
 <html style="overflow-y: visible;">
 	
 		<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
-		<link type="text/css" rel="stylesheet" href="/css/tab.css" />
+		<link charset="UTF-8" rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/tap.css"/>
 		<script type="text/javascript" src="/js/tab.js"></script>
 		<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
 		<script language="javascript" type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>

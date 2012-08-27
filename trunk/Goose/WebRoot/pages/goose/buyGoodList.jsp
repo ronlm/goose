@@ -5,6 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
+    <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
   <body style="overflow-y: visible;" onload="changeRowColor();">
     	<table class="mainTable">
 		<thead>
@@ -13,6 +14,20 @@
 					<h3>物资采购记录</h3>
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/buyGoodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/buyGoodAction!list" method="post">
+							最近
+							<select name="daysWithin" id="daysWithin" style="width: 70px" onchange="changeDay();" >
+								<option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3天</option>
+								<option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7天</option>
+								<option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>两周</option>
+								<option value="30" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30天</option>
+								<option value="60" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>60天</option>
+								<option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90天</option>
+								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
+								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
+							</select>
+							天内采购记录				
+						</form>
 					</div>
 				</th>
 			</tr>
@@ -65,4 +80,9 @@
 		</tfoot>
 	</table>
   </body>
+    <script type="text/javascript">
+	function changeDay(){
+			$("#changeDayForm").submit();
+	}
+</script>
 </html>
