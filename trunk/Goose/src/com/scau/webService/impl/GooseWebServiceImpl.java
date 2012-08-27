@@ -141,7 +141,7 @@ public class GooseWebServiceImpl implements IGooseService{
 				g.setRingId(ringId);
 				g = gooseService.get(g);//查出该个脚环号的goose，写上tradeId
 				g.setTradeId(tradeId);
-				g.setIsValid(2);//设置鹅只状态为已出售
+				
 				gooseService.update(g);
 			}
 		} catch (Exception e) {
@@ -176,8 +176,9 @@ public class GooseWebServiceImpl implements IGooseService{
 				Goose g = new Goose();
 				g.setRingId(ringId);
 				
-				g = gooseService.get(g);//查出该个脚环号的goose，写上tradeId
+				g = gooseService.get(g);//查出该个脚环号的goose，写上saleId
 				g.setSaleId(saleId);
+				g.setIsValid(2);//设置鹅只状态为已出售
 				gooseService.update(g);
 			}
 		} catch (Exception e) {
@@ -204,7 +205,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			Goose goose = new Goose();
 			goose.setRingId(gooseId);
 			goose = gooseService.get(goose);
-			goose.setIsValid(0);
+			goose.setIsValid(0);//设置鹅只状态为死亡
 			gooseService.update(goose);//完成销号操作
 		} catch (Exception e) {
 			return 1;//操作出错
