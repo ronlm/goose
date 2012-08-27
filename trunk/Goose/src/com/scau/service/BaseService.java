@@ -75,6 +75,26 @@ public class BaseService<T> {
 	public  List<T> findByCondition(Integer start, Integer size,String queryString){
 		return baseDao.findByCondition(start, size, queryString);
 	}
+	
+	/** 按输入的属性值获取记录，按一定的顺序排序
+	 * @param entity
+	 * @param start
+	 * @param size
+	 * @param propertyNames
+	 * @param values
+	 * @param orderedProperty 要排序的属性
+	 * @param orders 相应的顺序，只能写asc或desc
+	 * @return
+	 */
+	public List<T> listByOrder(final T entity,   final Integer start, final Integer size,
+			String[] propertyNames,Object[] values,String[] orderedProperty,String orders[]){
+		return baseDao.listByOrder(entity, start, size, propertyNames, values, orderedProperty, orders);
+	}
+	
+	/** 获取记录的总数
+	 * @param entity
+	 * @return
+	 */
 	public int getRecordCount(T entity) {
 		return this.baseDao.getRecordCount(entity);
 	}
