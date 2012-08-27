@@ -21,6 +21,13 @@
 			<result name="stock">/pages/goose/stockList.jsp</result>
 			<result name="dead">/pages/goose/deadList.jsp</result>
 		</action>
+		<!-- 鹅只信息统计结束  -->
+		
+		<!-- 信息检索功能 开始 -->
+		<action name="searchAction" class="searchAction">
+			<result name="success">/pages/goose/search.jsp</result>
+		</action>
+		<!-- 信息检索功能 结束 -->
 	</package>
 
 	
