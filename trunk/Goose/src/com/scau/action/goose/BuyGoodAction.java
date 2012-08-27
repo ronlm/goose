@@ -44,8 +44,7 @@ public class BuyGoodAction extends BaseAction{
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<BuyGoodView> resourceList = buyGoodViewService.list(new BuyGoodView(),
-					this.pager.getPageStartRow(), pager.getPageSize(), null, null);
+			List<BuyGoodView> resourceList = buyGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), "from com.scau.view.goose.BuyGoodView t order by t.date desc");
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
 			return "list";		

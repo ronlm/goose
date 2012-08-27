@@ -40,8 +40,7 @@ public class TradeGoodAction extends BaseAction{
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<TradeGoodView> resourceList = tradeGoodViewService.list(new TradeGoodView(),
-					this.pager.getPageStartRow(), pager.getPageSize(), null, null);
+			List<TradeGoodView> resourceList = tradeGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), "from com.scau.view.goose.TradeGoodView t order by t.tradeDate desc");
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
 			return "list";		
