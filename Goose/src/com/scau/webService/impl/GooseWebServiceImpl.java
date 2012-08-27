@@ -39,7 +39,7 @@ public class GooseWebServiceImpl implements IGooseService{
 		user.setPassword(password);
 		try {
 			if(null != commUserService.checkUser(user)){
-				//�ɹ���¼
+				//成功登录
 				return true;
 			}
 		} catch (Exception e) {
