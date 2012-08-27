@@ -33,16 +33,30 @@ public class TradeGoodAction extends BaseAction{
 	private TradeGood tradeGood;
 	private TradeGoodViewService tradeGoodViewService;
 	private TradeGoodView tradeGoodView;
+	private int daysWithin ;
 	
 	public String list() {
-		// 取列表		
-			int totalRows = tradeGoodViewService.getRecordCount(new TradeGoodView());
+		// 取列表
+		// 取得要显示的日期条件
+			if(null != request.getParameter("daysWithin")){
+				daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+				request.getSession().removeAttribute("daysWithin");
+			}
+			else if(null != request.getSession().getAttribute("daysWithin")){
+				daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
+			}
+			String hql = "select t from com.scau.view.goose.TradeGoodView t where t.tradeDate >='"
+						+ tradeGoodViewService.getDateBefore(daysWithin) + "' order by t.tradeDate desc";
+					
+			int totalRows = tradeGoodViewService.findByCondition(hql).size();
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<TradeGoodView> resourceList = tradeGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), "from com.scau.view.goose.TradeGoodView t order by t.tradeDate desc");
+			List<TradeGoodView> resourceList = tradeGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), 
+					hql);
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
+			request.getSession().setAttribute("daysWithin", daysWithin);
 			return "list";		
 	}
 
