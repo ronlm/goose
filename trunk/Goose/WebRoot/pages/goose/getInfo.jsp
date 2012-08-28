@@ -15,6 +15,9 @@
 			+ path + "/";
 %>
 <html>
+<%-- 
+		这个jsp 页面是用于用户在养殖的模块中，点击获取农场、农户、销售商信息时作结果返回的
+ --%>
 <%
 	Farm farm = new Farm();
 	FarmService farmService = (FarmService) BeansUtil.get("farmService");
