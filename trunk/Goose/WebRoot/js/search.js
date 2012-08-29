@@ -4,14 +4,13 @@
 $(function(){
 	
 	  $("#numEditDiv").hide();
-	  
-	  
-	  
+	 
 	  /*提交数据
 	   * */
 	  $("#submit").click(function(){
-		  var searchType = $("input:radio[name='searchType']:checked").val()
-		  var url = "/Goose/pages/goose/getSearchResult.jsp?searchType=" + searchType;
+  
+		  var searchType = $("input:radio[name='searchType']:checked").val();
+		  var url = "/Goose/servlet/SearchResultServlet?searchType=" + searchType;
 		  var fromNum = $("#fromNum").val();
 		  var toNum = $("#toNum").val();
 		  if(fromNum != "不限" && toNum != "不限"){
@@ -21,6 +20,7 @@ $(function(){
 		  var toDate = $("#toDate").val();
 		  
 		  url = url + "&&fromDate=" + fromDate + "&&toDate=" + toDate;
+
 		  $.post(url,function(response){
 				$("#tbody").html(response);
 			});
