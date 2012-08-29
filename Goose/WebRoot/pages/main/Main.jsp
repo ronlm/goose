@@ -9,7 +9,7 @@
        	  <tr>
         	<td id="header" height="62" colspan="2" valign="middle" background="${pageContext.request.contextPath }/images/main/BodyBG.gif">
         		<div id="headerLogo">
-        			<img src="${pageContext.request.contextPath }/images/main/Logo.jpg"/>
+        			<img src="${pageContext.request.contextPath }/images/main/logo.gif"/>
         		</div>
         		<div id="headerMsg">
         			<br/>欢迎您：${sessionScope.loginUser.userName }&nbsp;&nbsp;您的身份是： ${sessionScope.role.name }
