@@ -8,7 +8,8 @@
 		<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 		<script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="../../js/search.js"></script>
-		<script language="javascript" type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../js/getInfo.js"></script>
+		<script  type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
 
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<table class="mainTable">
@@ -17,7 +18,6 @@
 				<th colspan="11">
 					<h3>记录检索</h3>
 					<div class="tableControllerButton">
-						<form action="" method="post"></form>
 						记录类型:
 							<input type="radio" name="searchType" value="receiveGoose" checked="checked">鹅苗交付&nbsp;
 							<input type="radio" name="searchType" value="tradeGoose">成品鹅收购&nbsp;
@@ -26,7 +26,7 @@
 							<input type="radio" name="searchType" value="tradeGood">物资出售
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							鹅（物资）数量&nbsp;
-							<a class="button-small" id="numberEdit" name="numberEdit"><span>&nbsp;不限&nbsp;</span> </a>
+							<a class="button" id="numberEdit" name="numberEdit"><span>&nbsp;不限&nbsp;</span> </a>
 							<span id="numEditDiv">
 								<input type="text" id="fromNum" name="fromNum" value="不限" validation="number" style="width: 80px"/>&nbsp;
 								~&nbsp;
@@ -37,25 +37,19 @@
 							&nbsp;
 							到&nbsp;<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate" value="2012-08-29" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
 							&nbsp;&nbsp;
-							<a class="button-small" id="submit"><span>&nbsp;确 定&nbsp;</span> </a>
+							<a class="button" id="submit"><span>&nbsp;确 定&nbsp;</span> </a>
 					</div>
 				</th>
 			</tr>
-			<tr class="tableTitle">
-				    <th><h3>检索结果</h3></th>               
+			<tr class="tableTitle" >
+				    <th colspan="11"><h3>检索结果</h3></th>               
 			</tr>
 		</thead>
-		<tbody id="tbody">
-			
+		<tbody id="tbody" style="border-style: solid;border: 1px;">	
 		</tbody>
 		<tfoot>
 			
 		</tfoot>
 	</table>
 	</body>
-	<script type="text/javascript">
-	function changeDay(){
-			$("#changeDayForm").submit();
-	}
-</script>
 </html>
