@@ -94,11 +94,21 @@ public class BaseService<T> {
 	/** 获取记录的总数
 	 * @param entity
 	 * @return
+	 * @throws Exception 
 	 */
 	public int getRecordCount(T entity) {
 		return this.baseDao.getRecordCount(entity);
 	}
 
+	/**用含count(函数) 的hql语句特定查询记录的条数
+	 * @param queryString
+	 * @return
+	 * @throws Exception
+	 */
+	public long getRecordCount(String queryString) throws Exception{
+		return this.baseDao.getRecordCount(queryString);
+	}
+	
 	public BaseDao<T> getBaseDao() {
 		return baseDao;
 	}

@@ -22,6 +22,12 @@ public class testCommUserService {
 	protected CommUser u = new CommUser(); 
 	
 	
+	@Test
+	public void testCountFunction() throws BusinessException{
+		List<CommUser> result = service.findByCondition("select count(*) from com.scau.model.comm.CommUser u");
+		System.out.println(result.get(0));
+	}
+	
 	//@Test
 	public void testCheckUser() throws BusinessException {
 		u.setUserName("test");

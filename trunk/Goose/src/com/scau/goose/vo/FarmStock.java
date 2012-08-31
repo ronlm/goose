@@ -8,20 +8,18 @@ import com.scau.model.goose.Farm;
  */
 public class FarmStock {
 	private Farm farm;
-	private Integer stock;
+	private Long stock;
 	public Farm getFarm() {
 		return farm;
 	}
 	public void setFarm(Farm farm) {
 		this.farm = farm;
 	}
-	public Integer getStock() {
+	public Long getStock() {
 		return stock;
 	}
-	public void setStock(Integer stock) {
+	public void setStock(Long stock) {
 		this.stock = stock;
 	}
-	
-	
 	
 }

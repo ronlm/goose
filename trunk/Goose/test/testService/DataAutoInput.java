@@ -11,12 +11,14 @@ import com.scau.model.goose.ReceiveGoose;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.TradeGooseService;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public class testGooseService {
+public class DataAutoInput {
 	protected static ApplicationContext  ctx = new  ClassPathXmlApplicationContext("applicationContext.xml");
 	static GooseService gooseService = (GooseService) ctx.getBean("gooseService");
 	static ReceiveGooseService receiveGooseService = (ReceiveGooseService) ctx.getBean("receiveGooseService");
 	static TradeGooseService tradeGooseService = (TradeGooseService) ctx.getBean("tradeGooseService");
+	static char[] CHARS = "0123456789ABCDEF".toCharArray();
 	
 	//以下用于输入测试数据 新建一条鹅苗交付记录
 	public static void addGooseReceive(long farmId,int num,Date date){
@@ -31,6 +33,7 @@ public class testGooseService {
 		for(int i = 0;i< num;i++){
 			Goose g = new Goose();
 			g.setIsValid(1);
+			g.setRingId(genernateRingId());
 			g.setReceiveId(rg.getId());
 			gooses.add(g);
 		}
@@ -39,21 +42,32 @@ public class testGooseService {
 	
 	
 	public static void main(String[] args) {
-		for(int i=0;i<140;i++){
+		for(int i=0;i<720;i++){
+			// 从今天的前720天内自动生成数据
 			if(i%3 == 0){
-				int farmId = (int) (Math.random() * 50 % 8);	
-				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 30, getDateBefore(i));
-			}
-			if(i%4 == 0){
-				int farmId = (int) (Math.random() * 50 % 8);	
-				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 30, getDateBefore(i));
+				int farmId = (int) (Math.random() * 50 % 11) + 1;	
+				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 44, getDateBefore(i));
 			}
 			if(i%5 == 0){
-				int farmId = (int) (Math.random() * 50 % 8);	
+				int farmId = (int) (Math.random() * 50 % 11) + 1;	
+				//加入n*100只鹅
+				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 34, getDateBefore(i));
+			}
+			if(i%7 == 0){
+				int farmId = (int) (Math.random() * 50 % 11) + 1;	
 				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 30, getDateBefore(i));
 			}
 		}
 		System.out.println("自动数据录入完成！！！！！！");
+	}
+	
+	
+	public static String genernateRingId(){
+		StringBuffer ringIdBuffer = new StringBuffer();
+		for (int i = 0; i < 8; i++) {
+			ringIdBuffer.append(CHARS[(int) (Math.random()*100%16)]);
+		}
+		return ringIdBuffer.toString();
 	}
 	
 	public static Date getDateBefore(long daysBefore){

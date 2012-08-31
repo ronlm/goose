@@ -232,11 +232,29 @@ public class BaseDao<T> {
 		   return list;
 	}
 	
-	public int getRecordCount(T entity) throws DataAccessException {
-		List<T> list = this.listAll(entity);
-		return list.size();
+	public int getRecordCount(T entity) {
+		List<T> list;
+		try {
+			list = this.list(entity);
+			return list.size();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		
 	}
 
+	/** 用含count(函数) 的hql语句特定查询记录的条数
+	 * @param queryString
+	 * @return
+	 * @throws Exception
+	 */
+	public long getRecordCount(String queryString) throws Exception {
+		
+		return (Long)this.findByCondition(queryString).get(0);
+	}
+	
 	public void batchUpdate(List<T> list) throws DataAccessException {
 		for (T object : list) {
 			this.update(object);
