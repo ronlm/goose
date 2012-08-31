@@ -61,8 +61,8 @@ public class GooseStatisticAction extends BaseAction {
 					+ "g.isValid ='1'";
 			long gooseNum = gooseService.getRecordCount(gooseCondition);
 				
-			// 只显示30天内可上市的批次
-			if( !checkTraded(market.getReceiveId()) && day < 30){
+			// 只显示45天内可上市的批次
+			if( !checkTraded(market.getReceiveId()) && day < 45){
 				AppearOnMarket a = new AppearOnMarket();
 				a.setDayTo90(day);
 				a.setGooseNum(gooseNum);
@@ -153,6 +153,7 @@ public class GooseStatisticAction extends BaseAction {
 				List<ReceiveGoose> receiveGooseList = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where"
 						+ " rg.farmId='" + f.getId() +"' and rg.receiveDate >='" + receiveGooseService.getDateBefore(daysWithin) +"'");
 				if(receiveGooseList.size() > 0){
+					
 					DeadInfo dead = new DeadInfo();
 					dead.setFarm(f);
 					List<Goose> gooseList = new ArrayList<Goose>();
@@ -220,7 +221,7 @@ public class GooseStatisticAction extends BaseAction {
 			if( null != gList.get(i).getTradeId()){
 				return true;
 			}
-			i = i + 5;
+			i = i + 10;
 		}
 		return false;
 	}
