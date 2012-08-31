@@ -99,10 +99,17 @@ public class GooseStatisticAction extends BaseAction {
 			
 			List<FarmStock> resourceList = new ArrayList<FarmStock>();
 			for(Farm f :farmList){
-				//找出所有属于某个农场的所有接收鹅苗批次
-				ReceiveGoose rg = new ReceiveGoose();
-				rg.setFarmId(f.getId());	
-				List<ReceiveGoose>	receiveList = receiveGooseService.list(rg);
+				
+				
+				/*ReceiveGoose rg = new ReceiveGoose();
+				rg.setFarmId(f.getId());
+				rg.setReceiveDate(receiveGooseService.getDateBefore(150));
+				List<ReceiveGoose>	receiveList = receiveGooseService.list(rg);*/
+				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天+吧）
+				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
+						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
+				List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
+				
 				long gooseNum = 0;
 				for(ReceiveGoose receiveGoose : receiveList){
 					String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
@@ -213,7 +220,7 @@ public class GooseStatisticAction extends BaseAction {
 			if( null != gList.get(i).getTradeId()){
 				return true;
 			}
-			i = i + 3;
+			i = i + 5;
 		}
 		return false;
 	}
