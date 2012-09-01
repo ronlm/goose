@@ -5,18 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.mapping.Value;
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.Farm;
+import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleGoose;
 import com.scau.model.goose.TradeGoose;
 import com.scau.model.webService.FarmWs;
+import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.service.impl.goose.FarmService;
+import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.RetailerService;
@@ -59,12 +63,12 @@ public class GooseWebServiceImplDelegate {
 				totalWeight, unitPrice, comments);
 	}
 
-	public int authenticate(String gooseId) {
-		return gooseWebServiceImpl.authenticate(gooseId);
-	}
-
 	public int setInvalid(String gooseId) {
 		return gooseWebServiceImpl.setInvalid(gooseId);
+	}
+
+	public ReceiveGooseWs getReceiveInfo(String gooseId) {
+		return gooseWebServiceImpl.getReceiveInfo(gooseId);
 	}
 
 }

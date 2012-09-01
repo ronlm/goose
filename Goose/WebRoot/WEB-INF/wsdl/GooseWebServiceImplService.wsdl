@@ -6,23 +6,11 @@
       <xsd:import namespace="http://impl.webService.scau.com/" schemaLocation="GooseWebServiceImplService_schema1.xsd"/>
     </xsd:schema>
   </types>
-  <message name="authenticate">
-    <part element="tns:authenticate" name="parameters"/>
-  </message>
-  <message name="authenticateResponse">
-    <part element="tns:authenticateResponse" name="parameters"/>
-  </message>
   <message name="login">
     <part element="tns:login" name="parameters"/>
   </message>
   <message name="loginResponse">
     <part element="tns:loginResponse" name="parameters"/>
-  </message>
-  <message name="setInvalid">
-    <part element="tns:setInvalid" name="parameters"/>
-  </message>
-  <message name="setInvalidResponse">
-    <part element="tns:setInvalidResponse" name="parameters"/>
   </message>
   <message name="getFarmList">
     <part element="tns:getFarmList" name="parameters"/>
@@ -54,18 +42,22 @@
   <message name="addSaleGooseResponse">
     <part element="tns:addSaleGooseResponse" name="parameters"/>
   </message>
+  <message name="setInvalid">
+    <part element="tns:setInvalid" name="parameters"/>
+  </message>
+  <message name="setInvalidResponse">
+    <part element="tns:setInvalidResponse" name="parameters"/>
+  </message>
+  <message name="getReceiveInfo">
+    <part element="tns:getReceiveInfo" name="parameters"/>
+  </message>
+  <message name="getReceiveInfoResponse">
+    <part element="tns:getReceiveInfoResponse" name="parameters"/>
+  </message>
   <portType name="GooseWebServiceImplDelegate">
-    <operation name="authenticate">
-      <input message="tns:authenticate"/>
-      <output message="tns:authenticateResponse"/>
-    </operation>
     <operation name="login">
       <input message="tns:login"/>
       <output message="tns:loginResponse"/>
-    </operation>
-    <operation name="setInvalid">
-      <input message="tns:setInvalid"/>
-      <output message="tns:setInvalidResponse"/>
     </operation>
     <operation name="getFarmList">
       <input message="tns:getFarmList"/>
@@ -87,28 +79,18 @@
       <input message="tns:addSaleGoose"/>
       <output message="tns:addSaleGooseResponse"/>
     </operation>
+    <operation name="setInvalid">
+      <input message="tns:setInvalid"/>
+      <output message="tns:setInvalidResponse"/>
+    </operation>
+    <operation name="getReceiveInfo">
+      <input message="tns:getReceiveInfo"/>
+      <output message="tns:getReceiveInfoResponse"/>
+    </operation>
   </portType>
   <binding name="GooseWebServiceImplPortBinding" type="tns:GooseWebServiceImplDelegate">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <operation name="authenticate">
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
     <operation name="login">
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="setInvalid">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -154,6 +136,24 @@
       </output>
     </operation>
     <operation name="addSaleGoose">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="setInvalid">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getReceiveInfo">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>

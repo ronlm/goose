@@ -7,6 +7,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.scau.model.webService.FarmWs;
+import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
 
 
@@ -62,12 +63,12 @@ public interface IGooseService {
 	@WebMethod
 	public int addSaleGoose(long retailerId,ArrayList<String> gooseList,Double totalWeight,Double unitPrice,String comments);
 	
-	/** 脚环防伪
+	/** 读取脚环，获得该鹅苗批次的信息
 	 * @param gooseId
-	 * @return 1：为公司所发放的脚环  0：非本公司发放脚环
+	 * @return 
 	 */
 	@WebMethod
-	public int authenticate(String gooseId);
+	public ReceiveGooseWs getReceiveInfo(String gooseId);
 	
 	/** 鹅脚环的销号处理־
 	 * @param gooseId
