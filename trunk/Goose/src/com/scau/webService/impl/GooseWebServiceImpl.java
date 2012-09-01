@@ -7,19 +7,23 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.mapping.Value;
 
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.Farm;
+import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleGoose;
 import com.scau.model.goose.TradeGoose;
 import com.scau.model.webService.FarmWs;
+import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.service.impl.goose.FarmService;
+import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.RetailerService;
@@ -186,17 +190,7 @@ public class GooseWebServiceImpl implements IGooseService{
 		return 0;
 	}
 
-	@WebMethod
-	public int authenticate(@WebParam(name="gooseRing")String gooseId) {
-		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
-		Goose goose = new Goose();
-		goose.setRingId(gooseId);
-		if(null != gooseService.get(goose))
-			return 1;
-		
-		return 0;
-	}
-
+	
 	@WebMethod
 	public int setInvalid(@WebParam(name="gooseRing")String gooseId) {
 		try {
@@ -213,8 +207,48 @@ public class GooseWebServiceImpl implements IGooseService{
 		return 0;
 	}
 
+	@WebMethod
+	public ReceiveGooseWs getReceiveInfo(String gooseId) {
+		try {
+			GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+			ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
+			FarmService farmService = (FarmService) BeansUtil.get("farmService");
+			FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
+			
+			Goose goose = new Goose();
+			goose.setRingId(gooseId);
+			goose = gooseService.get(goose);
+			
+			ReceiveGoose rg = new ReceiveGoose();//获得所属鹅苗接收批次信息
+			rg.setId(goose.getReceiveId());
+			rg = receiveGooseService.get(rg);
+			
+			Farm farm = new Farm();
+			farm.setId(rg.getFarmId());
+			farm = farmService.get(farm);//获得所属农场信息
+			
+			Farmer farmer = new Farmer();
+			farmer.setId(farm.getFarmerId());
+			farmer  = farmerService.get(farmer);//获得所属农户信息
+			
+			//装入信息
+			ReceiveGooseWs receiveGooseWs = new ReceiveGooseWs();
+			receiveGooseWs.setAddress(farm.getAddress());
+			receiveGooseWs.setAmount(rg.getAmount());
+			receiveGooseWs.setComments(rg.getComments());
+			receiveGooseWs.setFarmerName(farmer.getName());
+			receiveGooseWs.setFarmName(farm.getName());
+			receiveGooseWs.setPhone(farmer.getPhone());
+			receiveGooseWs.setReceiveDate(rg.getReceiveDate().toString());
+			
+			return receiveGooseWs;
+			
+			
+		} catch (Exception e) {
+			return null;//操作出错
+		}
 	
+	}
 
-	
 
 }

@@ -13,13 +13,13 @@
 
   <xs:element name="addTradeGooseResponse" type="tns:addTradeGooseResponse"/>
 
-  <xs:element name="authenticate" type="tns:authenticate"/>
-
-  <xs:element name="authenticateResponse" type="tns:authenticateResponse"/>
-
   <xs:element name="getFarmList" type="tns:getFarmList"/>
 
   <xs:element name="getFarmListResponse" type="tns:getFarmListResponse"/>
+
+  <xs:element name="getReceiveInfo" type="tns:getReceiveInfo"/>
+
+  <xs:element name="getReceiveInfoResponse" type="tns:getReceiveInfoResponse"/>
 
   <xs:element name="getRetailerList" type="tns:getRetailerList"/>
 
@@ -44,18 +44,6 @@
   </xs:complexType>
 
   <xs:complexType name="addSaleGooseResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="authenticate">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="authenticateResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int"/>
     </xs:sequence>
@@ -148,6 +136,30 @@
   <xs:complexType name="addReceiveGooseResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getReceiveInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getReceiveInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:receiveGooseWs"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="receiveGooseWs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element name="amount" type="xs:int"/>
+      <xs:element minOccurs="0" name="comments" type="xs:string"/>
+      <xs:element minOccurs="0" name="farmName" type="xs:string"/>
+      <xs:element minOccurs="0" name="farmerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="phone" type="xs:string"/>
+      <xs:element minOccurs="0" name="receiveDate" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>
