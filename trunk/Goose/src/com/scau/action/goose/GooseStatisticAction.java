@@ -58,11 +58,11 @@ public class GooseStatisticAction extends BaseAction {
 			//查找出属于该个接收鹅苗批次，又未死亡和未交易的鹅只数量
 		
 			String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
-					+ "g.isValid ='1'";
+					+ "g.isValid ='1' and g.tradeId=null";
 			long gooseNum = gooseService.getRecordCount(gooseCondition);
 				
 			// 只显示45天内可上市的批次
-			if( !checkTraded(market.getReceiveId()) && day < 45){
+			if( day < 45){
 				AppearOnMarket a = new AppearOnMarket();
 				a.setDayTo90(day);
 				a.setGooseNum(gooseNum);
@@ -100,12 +100,7 @@ public class GooseStatisticAction extends BaseAction {
 			List<FarmStock> resourceList = new ArrayList<FarmStock>();
 			for(Farm f :farmList){
 				
-				
-				/*ReceiveGoose rg = new ReceiveGoose();
-				rg.setFarmId(f.getId());
-				rg.setReceiveDate(receiveGooseService.getDateBefore(150));
-				List<ReceiveGoose>	receiveList = receiveGooseService.list(rg);*/
-				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天+吧）
+				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天 + 吧）
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
 						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
 				List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
@@ -113,7 +108,7 @@ public class GooseStatisticAction extends BaseAction {
 				long gooseNum = 0;
 				for(ReceiveGoose receiveGoose : receiveList){
 					String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
-							+ "g.isValid ='1'";
+							+ "g.isValid ='1' and g.tradeId=null";
 					gooseNum += gooseService.getRecordCount(gooseCondition);
 				}
 				FarmStock stock = new FarmStock();
@@ -211,12 +206,14 @@ public class GooseStatisticAction extends BaseAction {
 	/** 检查该批次的鹅只是否已被收购
 	 * @param receiveId
 	 * @return true:已经被公司收购 false:还在农户手中
-	 */
+	 *//*
 	public boolean checkTraded(long receiveId){
-		//选出该批次还存活的鹅只
-		String queryStr = "select g from com.scau.model.goose.Goose g where g.receiveId=" + receiveId +
+		//选出该批次还存活的鹅只数
+		String totalQuery = "select count(*) from com.scau.model.goose.Goose g where g.receiveId=" + receiveId ;
+		//查出该批次还存活并没有交易的鹅只数
+		String tradeQuery = "select count(*) from com.scau.model.goose.Goose g where g.receiveId=" + receiveId +
 				" and g.isValid= 1";
-		List<Goose> gList = gooseService.findByCondition(queryStr);
+		List<Goose> gList = gooseService.findByCondition(totalQuery);
 		for(int i = 0 ;i<gList.size();){
 			if( null != gList.get(i).getTradeId()){
 				return true;
@@ -224,7 +221,7 @@ public class GooseStatisticAction extends BaseAction {
 			i = i + 10;
 		}
 		return false;
-	}
+	}*/
 
 	public ReceiveGooseService getReceiveGooseService() {
 		return receiveGooseService;
