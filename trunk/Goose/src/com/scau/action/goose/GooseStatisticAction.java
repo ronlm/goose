@@ -27,12 +27,12 @@ import com.scau.util.PageController;
 import com.scau.view.goose.Market;
 
 @Component
-@Scope("prototype")
 public class GooseStatisticAction extends BaseAction {
 	private final static Log logger = LogFactory
 			.getLog(GooseStatisticAction.class);
 	private PageController pager;
 	private MarketService marketService;
+	private FarmService farmService;
 	private GooseService gooseService;
 	private Goose goose;
 	private int onMarketDay = 90;//设定的鹅只成熟日期
@@ -91,7 +91,6 @@ public class GooseStatisticAction extends BaseAction {
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
 			
-			FarmService farmService = (FarmService) BeansUtil.get("farmService");
 			int totalRowCount = farmService.list(new Farm()).size();
 			this.pager.setTotalRowsAmount(totalRowCount);
 			
@@ -128,7 +127,6 @@ public class GooseStatisticAction extends BaseAction {
 		   	int daysWithin = 100;
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
-			FarmService farmService = (FarmService) BeansUtil.get("farmService");
 			
 			// 取得要显示 的日期条件
 			if(null != request.getParameter("daysWithin")){
@@ -230,6 +228,15 @@ public class GooseStatisticAction extends BaseAction {
 	@Resource
 	public void setReceiveGooseService(ReceiveGooseService receiveGooseService) {
 		this.receiveGooseService = receiveGooseService;
+	}
+
+	public FarmService getFarmService() {
+		return farmService;
+	}
+
+	@Resource
+	public void setFarmService(FarmService farmService) {
+		this.farmService = farmService;
 	}
 	
 }

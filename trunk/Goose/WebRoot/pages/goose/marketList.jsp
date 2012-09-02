@@ -61,7 +61,7 @@
 							</c:when>
 							<c:when
 								test="${appearOnMarket.dayTo90 >15 }">
-								+ ${appearOnMarket.dayTo90}天&nbsp;够期上市
+								${appearOnMarket.dayTo90}天&nbsp;够期上市
 							</c:when>
 						</c:choose>
 					</td>
