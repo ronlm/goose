@@ -34,6 +34,8 @@ import com.scau.webService.IGooseService;
 
 public class GooseWebServiceImpl implements IGooseService{
 	
+	private GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+	
 	@WebMethod
 	public boolean login(@WebParam(name="userName")String name, @WebParam(name="password")String password)  {
 		
@@ -89,7 +91,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	@WebMethod
 	public int addReceiveGoose(@WebParam(name="farmId")long farmId, @WebParam(name="gooseRingList")ArrayList<String> gooseList ,@WebParam(name="comments")String comments) {
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
-		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+		
 		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
 		try{
 			Farm farm = new Farm();
@@ -124,7 +126,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	public int addTradeGoose(@WebParam(name="farmId")long farmId, @WebParam(name="gooseRingList")ArrayList<String> gooseList 
 			,@WebParam(name="totalWeight")Double totalWeight, @WebParam(name="unitPrice")Double unitPrice,@WebParam(name="comments")String comments) {
 		
-		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+	
 		TradeGooseService tradeGooseService = (TradeGooseService) BeansUtil.get("tradeGooseService");
 		try {
 
@@ -158,7 +160,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	public int addSaleGoose(@WebParam(name="retailerId")long retailerId , @WebParam(name="gooseRingList")ArrayList<String> gooseList,
 			@WebParam(name="totalWeight")Double totalWeight , @WebParam(name="unitPrice")Double unitPrice ,
 			@WebParam(name="comments")String comments) {
-		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+		
 		SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
 		
 		try {
@@ -194,7 +196,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	@WebMethod
 	public int setInvalid(@WebParam(name="gooseRing")String gooseId) {
 		try {
-			GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+		
 			Goose goose = new Goose();
 			goose.setRingId(gooseId);
 			goose = gooseService.get(goose);
@@ -210,7 +212,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	@WebMethod
 	public ReceiveGooseWs getReceiveInfo(String gooseId) {
 		try {
-			GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+		
 			ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
 			FarmService farmService = (FarmService) BeansUtil.get("farmService");
 			FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
