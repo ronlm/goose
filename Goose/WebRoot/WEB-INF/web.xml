@@ -125,7 +125,7 @@
   
 	
 
-	<!--Error Page -->
+	<!--Error Page 
 	<error-page>
 		<error-code>403</error-code>
 		<location>/error/403.jsp</location>
@@ -143,7 +143,7 @@
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/error/Error.jsp</location>
 	</error-page>
-	 
+	 -->
 	 
 	 <!-- 权限验证过滤器 开始   -->
 	<filter>

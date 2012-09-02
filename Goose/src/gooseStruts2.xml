@@ -10,9 +10,6 @@
 			<result name="error">/error/WebError.jsp</result>
 			<result name="list">/pages/goose/{1}List.jsp</result>
 		</action>
-		<action name="searchAction" class="searchAction">
-			<result name="list">/pages/goose/search.jsp</result>
-		</action>
 		<!-- 使用通配符 对农户，养殖场配置配置 结束-->
 		
 		<!-- 鹅只信息统计  -->
@@ -26,6 +23,13 @@
 		<!-- 信息检索功能 开始 -->
 		<action name="searchAction" class="searchAction">
 			<result name="success">/pages/goose/search.jsp</result>
+		</action>
+		<!-- 信息检索功能 结束 -->
+		
+		<!-- 信息检索功能 开始 -->
+		<action name="deleteAction" class="deleteGooseAction">
+			<result name="list">/pages/goose/deleteGooseRing.jsp</result>
+			<result name="success">/pages/goose/deleteGooseRing.jsp</result>
 		</action>
 		<!-- 信息检索功能 结束 -->
 	</package>
