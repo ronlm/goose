@@ -44,7 +44,6 @@ public class SecurityFilter implements Filter {
 		
 		String path = request.getServletPath();
 		
-		System.out.println(path);
 		if(path.startsWith(interceptPaths[0])){
 			//获取当前登录用户的信息
 			CommUser user = (CommUser)request.getSession().getAttribute("loginUser");
