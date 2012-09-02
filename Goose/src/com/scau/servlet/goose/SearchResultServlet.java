@@ -75,10 +75,11 @@ public class SearchResultServlet extends HttpServlet {
 				ReceiveGooseService receiveGooseService = (ReceiveGooseService)BeansUtil.get("receiveGooseService");
 				List<ReceiveGoose> resultList = receiveGooseService.findByCondition(queryString);
 				
-				result.append("<tr><td>日期</td><td>数量</td><td width=\"15%\">"+
+				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td width=\"15%\">"+
 								"备注</td><td width=\"40%\">操作</td></tr>");
+				int i = 1;
 				for (ReceiveGoose receiveGoose : resultList) {
-					result.append("<tr><td>" + receiveGoose.getReceiveDate() + "</td><td>" + receiveGoose.getAmount()+ "</td><td>" + receiveGoose.getComments() 
+					result.append("<tr><td>" + (i++) + "</td><td>" + receiveGoose.getReceiveDate() + "</td><td>" + receiveGoose.getAmount()+ "</td><td>" + receiveGoose.getComments() 
 							+ "&nbsp;</td><td >" + getFarmerAndFarmInfo(receiveGoose.getFarmId()) + "</td></tr>");
 				}
 				out.print(result);
@@ -94,11 +95,12 @@ public class SearchResultServlet extends HttpServlet {
 				TradeGooseService tradeGooseService = (TradeGooseService) BeansUtil.get("tradeGooseService");
 				List<TradeGoose> resultList = tradeGooseService.findByCondition(queryString);
 				
-				result.append("<tr><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
+				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
 				
+				int i = 1;
 				for (TradeGoose tradeGoose : resultList) {
-					result.append("<tr><td>" + tradeGoose.getTradeDate() + "</td><td>" + tradeGoose.getAmount()+ "</td><td>" + tradeGoose.getUnitPrice()+ "</td><td>" + tradeGoose.getTotalWeight()+ "</td><td>" + (tradeGoose.getAmount()*tradeGoose.getUnitPrice())+ "</td><td>" + tradeGoose.getComments() 
+					result.append("<tr><td>" + (i++) + "</td><td>" + tradeGoose.getTradeDate() + "</td><td>" + tradeGoose.getAmount()+ "</td><td>" + tradeGoose.getUnitPrice()+ "</td><td>" + tradeGoose.getTotalWeight()+ "</td><td>" + (tradeGoose.getAmount()*tradeGoose.getUnitPrice())+ "</td><td>" + tradeGoose.getComments() 
 					+ "&nbsp;</td><td >" + getFarmerAndFarmInfo(tradeGoose.getFarmId()) + "</td></tr>");
 				}
 				out.print(result);
@@ -114,11 +116,11 @@ public class SearchResultServlet extends HttpServlet {
 				SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
 				List<SaleGoose> resultList = saleGooseService.findByCondition(queryString);
 				
-				result.append("<tr><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
+				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
-				
+				int i = 1;
 				for (SaleGoose saleGoose : resultList) {
-					result.append("<tr><td>" + saleGoose.getSaleDate() + "</td><td>" + saleGoose.getAmount()+ "</td><td>" + saleGoose.getUnitPrice()+ "</td><td>" + saleGoose.getTotalWeight()+ "</td><td>" + (saleGoose.getAmount()*saleGoose.getUnitPrice())+ "</td><td>" + saleGoose.getComments() 
+					result.append("<tr><td>" + (i++) + "</td><td>" + saleGoose.getSaleDate() + "</td><td>" + saleGoose.getAmount()+ "</td><td>" + saleGoose.getUnitPrice()+ "</td><td>" + saleGoose.getTotalWeight()+ "</td><td>" + (saleGoose.getAmount()*saleGoose.getUnitPrice())+ "</td><td>" + saleGoose.getComments() 
 					+ "&nbsp;</td><td >" + getRetailerInfo(saleGoose.getRetailerId()) + "</td></tr>");
 				}
 				out.print(result);
@@ -134,11 +136,11 @@ public class SearchResultServlet extends HttpServlet {
 				BuyGoodViewService buyGoodViewService = (BuyGoodViewService) BeansUtil.get("buyGoodViewService");
 				List<BuyGoodView> resultList = buyGoodViewService.findByCondition(queryString);
 				
-				result.append("<tr><td>资源名称</td><td>供应商</td><td>产地</td><td>批号</td><td>单价</td><td>数量</td><td>总价</td>" + 
+				result.append("<tr><td>序号</td><td>资源名称</td><td>供应商</td><td>产地</td><td>批号</td><td>单价</td><td>数量</td><td>总价</td>" + 
 				"<td>时间</td><td width=\"15%\">备注</td>");
-				
+				int i =1;
 				for (BuyGoodView buyGoodView : resultList) {
-					result.append("<tr><td>" + buyGoodView.getGoodName() + "</td><td>" + buyGoodView.getSupplierName() + "</td><td>" + buyGoodView.getOrigin()+ "</td><td>" 
+					result.append("<tr><td>" + (i++) + "</td><td>" + buyGoodView.getGoodName() + "</td><td>" + buyGoodView.getSupplierName() + "</td><td>" + buyGoodView.getOrigin()+ "</td><td>" 
 							+ buyGoodView.getBatchNum()+ "</td><td>"+ buyGoodView.getUnitPrice() +"</td><td>"+ buyGoodView.getAmount() + "</td><td>"+ buyGoodView.getAmount() * buyGoodView.getUnitPrice() +
 							"</td><td>"+ buyGoodView.getDate() +"</td><td>"+ buyGoodView.getComments() +"&nbsp;</td></tr>");
 						}
@@ -156,11 +158,11 @@ public class SearchResultServlet extends HttpServlet {
 				TradeGoodViewService tradeGoodViewService = (TradeGoodViewService) BeansUtil.get("tradeGoodViewService");
 				List<TradeGoodView> resultList = tradeGoodViewService.findByCondition(queryString);
 				
-				result.append("<tr><td>资源名称</td><td>农户</td><td>单价</td><td>数量</td><td>单位</td><td>总价</td>" + 
+				result.append("<tr><td>序号</td><td>资源名称</td><td>农户</td><td>单价</td><td>数量</td><td>单位</td><td>总价</td>" + 
 						"<td>时间</td><td width=\"15%\">备注</td>");
-				
+				int i = 1;
 				for (TradeGoodView tradeGoodView : resultList) {
-					result.append("<tr><td>" + tradeGoodView.getGoodName() + "</td><td>" + tradeGoodView.getFarmerName() + 
+					result.append("<tr><td>" + (i++) + "</td><td>" + tradeGoodView.getGoodName() + "</td><td>" + tradeGoodView.getFarmerName() + 
 							"</td><td>"+ tradeGoodView.getUnitPrice() +"</td><td>"+ tradeGoodView.getAmount() + "</td><td>"+ tradeGoodView.getGoodUnit() +"</td><td>"+ tradeGoodView.getAmount() * tradeGoodView.getUnitPrice() +
 							"</td><td>"+ tradeGoodView.getTradeDate() +"</td><td>"+ tradeGoodView.getComments() +"&nbsp;</td></tr>");
 				}

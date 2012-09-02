@@ -42,8 +42,8 @@ public class DataAutoInput {
 	
 	
 	public static void main(String[] args) {
-		for(int i=0;i<720;i++){
-			// 从今天的前720天内自动生成数据
+		for(int i=0;i<1200;i++){
+			// 从今天的前1200天内自动生成数据
 			if(i%3 == 0){
 				int farmId = (int) (Math.random() * 50 % 11) + 1;	
 				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 44, getDateBefore(i));
