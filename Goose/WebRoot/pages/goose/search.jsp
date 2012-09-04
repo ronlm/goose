@@ -35,7 +35,7 @@
 							从&nbsp;&nbsp;
 							<input type="text"  validation="date" readonly="readonly" id="fromDate" name="fromDate" value="2012-01-01" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/> 
 							&nbsp;
-							到&nbsp;<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate" value="2012-08-29" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
+							到&nbsp;<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
 							&nbsp;&nbsp;
 							<a class="button" id="submit"><span>&nbsp;确 定&nbsp;</span> </a>
 					</div>
@@ -52,4 +52,18 @@
 		</tfoot>
 	</table>
 	</body>
+	<script type="text/javascript">
+		 var date = getdate();
+		function getdate(){ 
+			var now = new Date();
+			y = now.getFullYear() ;
+			m = now.getMonth()+1;
+			d = now.getDate();
+			m = m < 10 ? "0"+ m : m;
+			d = d < 10 ? "0"+ d : d ;
+			return y+ "-"+m+ "-"+d ;
+			};
+			
+		 $("#toDate").val(date);		
+	</script>
 </html>

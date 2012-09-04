@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html style="overflow-y: visible;">
 	<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
-	<script language="javascript" type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+	<script language="javascript" type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 <body style="overflow-y: visible !important; overflow-y: scroll;">
 	<form
@@ -13,7 +13,7 @@
 		<table class="mainTable">
 			<thead>
 				<tr class="tableController">
-					<th colspan="2">
+					<th colspan="3">
 						<h3>物资采购记录编辑</h3></th>
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@
 				</tr>
 				<tr>
 					<td width="200" align="right">时间:</td>
-					<td><input type="text"  validation="date" readonly="readonly" name="buyGood.date" value="${buyGood.date }"id=date  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/></td>
+					<td><input type="text"  validation="date" readonly="readonly" name="buyGood.date" value="${buyGood.date }" id="date"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">备注:</td>
