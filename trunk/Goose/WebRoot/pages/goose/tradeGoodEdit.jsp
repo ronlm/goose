@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<td width="200" align="right">备注:</td>
-					<td><textarea rows="5" cols="50" name="tradeGood.comments" value="${tradeGood.comments }"id="comments">	</textarea></td>
+					<td><textarea rows="5" cols="50" name="tradeGood.comments" id="comments">${tradeGood.comments }	</textarea></td>
 				</tr>
 
 			</tbody>

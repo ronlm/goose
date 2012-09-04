@@ -64,7 +64,7 @@
 				</tr>
 				<tr>
 					<td width="200" align="right">数量:</td>
-					<td><input type="text" name="buyGood.amount" value="${buyGood.amount }" id="amount" validation="required" " /></td>
+					<td><input type="text" name="buyGood.amount" value="${buyGood.amount }" id="amount" validation="required" /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">时间:</td>
@@ -72,7 +72,7 @@
 				</tr>
 				<tr>
 					<td width="200" align="right">备注:</td>
-					<td><textarea rows="5" cols="50" name="buyGood.comments" value="${buyGood.comments }" id="comments">	</textarea></td>
+					<td><textarea rows="5" cols="50" name="buyGood.comments" id="comments">${buyGood.comments }</textarea></td>
 				</tr>
 
 			</tbody>
