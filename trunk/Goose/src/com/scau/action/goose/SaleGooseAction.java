@@ -32,7 +32,7 @@ public class SaleGooseAction extends BaseAction {
 	private SaleGooseService saleGooseService;
 	private int daysWithin;
 	
-	public String list() throws Exception {
+	public String list()  {
 		   //查看列表
 			List<SaleGoose> resourceList = null;
 			String URL = request.getRequestURI();
@@ -46,9 +46,10 @@ public class SaleGooseAction extends BaseAction {
 			else if(null != request.getSession().getAttribute("daysWithin")){
 				daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
 			}
+			
+			retailer = retailerService.get(retailer);
 			if(null != retailer){
-				 // 查看某个农场最近接收的鹅苗信息
-				retailer = retailerService.get(retailer);
+				 // 查看某个农场最近接收的鹅苗信息	
 				saleGoose = new SaleGoose();
 				saleGoose.setRetailerId(retailer.getId());
 			
@@ -74,23 +75,22 @@ public class SaleGooseAction extends BaseAction {
 	}
 
 	public String get() {
-		// 点了添加或者点了修改		
-		saleGoose = saleGooseService.get(saleGoose);
-		RetailerService retailerService = (RetailerService)BeansUtil.get("retailerService");
-		List<Retailer> retailerList = retailerService.listAll(new Retailer());
-		request.setAttribute("retailerList", retailerList);
-		request.setAttribute("saleGoose", saleGoose);
-		return "edit";
+		// 点了添加或者点了修改	
+			saleGoose = saleGooseService.get(saleGoose);
+			request.setAttribute("saleGoose", saleGoose);
+			return "edit";
 	}
 
-	public String save() throws Exception {
+	public String save() {
 		// 保存表单
 		try {
 			
+			saleGooseService.save(saleGoose);
 			return list();
-		} catch (BusinessException e) {
+		} catch (Exception e) {
 			// 保存原来表单已输入的内容
-			
+			request.setAttribute("saleGoose", saleGoose);
+			request.setAttribute("message", e.getMessage());
 			return list();
 		}
 	}
