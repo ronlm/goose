@@ -32,7 +32,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private TradeGooseService tradeGooseService;
 	private int daysWithin;
 	
-	public String list() throws Exception {
+	public String list() {
 		   
 			List<TradeGoose> resourceList = null;
 			String URL = request.getRequestURI();
@@ -74,18 +74,22 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	}
 
 	public String get() {
-		// 点了添加或者点了修改		
+		// 点了添加或者点了修改	
+			tradeGoose = tradeGooseService.get(tradeGoose);
+			request.setAttribute("tradeGoose", tradeGoose);
 			return "edit";
 	}
 
-	public String save() throws Exception {
+	public String save() {
 		// 保存表单
 		try {
 			
+			tradeGooseService.save(tradeGoose);
 			return list();
-		} catch (BusinessException e) {
+		} catch (Exception e) {
 			// 保存原来表单已输入的内容
-			
+			request.setAttribute("tradeGoose", tradeGoose);
+			request.setAttribute("message", e.getMessage());
 			return list();
 		}
 	}
@@ -145,6 +149,14 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	public Farm getModel() {
 		// TODO Auto-generated method stub
 		return farm;
+	}
+
+	public TradeGoose getTradeGoose() {
+		return tradeGoose;
+	}
+
+	public void setTradeGoose(TradeGoose tradeGoose) {
+		this.tradeGoose = tradeGoose;
 	}
 
 	
