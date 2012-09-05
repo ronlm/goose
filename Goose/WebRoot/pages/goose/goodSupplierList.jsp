@@ -43,7 +43,6 @@
 					<td>${goodSupplier.phone}</td>
 					<td>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/goodSupplierAction!get?goodSupplier.id=${goodSupplier.id }'; return false;"><span>修改</span></a>
-						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/goodSupplierAction!del?id=${goodSupplier.id }'); return false;"><span>删除</span></a>
 					</td>
 					<td>${goodSupplier.comments}</td>
 				</tr> 
