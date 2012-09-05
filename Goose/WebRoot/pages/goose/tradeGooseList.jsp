@@ -47,7 +47,7 @@
 				<th><h3>总重量</h3></th>
 				<th><h3>金额合计</h3></th>
 				<th width="30%"><h3>操作</h3></th>
-				<th width="20%"><h3>备注</h3></th>
+				<th width="25%"><h3>备注</h3></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,7 +61,10 @@
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.totalWeight }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice * tradeGoose.totalWeight}" maxFractionDigits="3"/></td>
-					<td ><a class="button-small" value="${tradeGoose.farmId }" name="farmId"><span>获取相关农户农场资料</span></a></td>
+					<td >
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/tradeGooseAction!get?tradeGoose.id=${tradeGoose.id }'; return false;"><span>修改备注</span></a>
+						<a class="button-small" value="${tradeGoose.farmId }" name="farmId"><span>获取农户农场资料</span></a>
+					</td>
 					<td>${tradeGoose.comments}</td>
 				</tr> 
 			</c:forEach>

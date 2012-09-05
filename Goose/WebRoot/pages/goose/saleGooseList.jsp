@@ -27,7 +27,7 @@
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
 							天内收购信息
-							<input type="hidden" name="retailer.id" id="retailer.id" value="${retailer.id }" />
+							<c:if test="${retailer != null }"><input type="hidden" name="retailer.id" id="retailer.id" value="${retailer.id }" /></c:if>
 						</form>
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
@@ -59,7 +59,7 @@
 				<th width="30%">
 					<h3>操作</h3>
 				</th>
-				<th width="20%">
+				<th width="25%">
 					<h3>备注</h3>
 				</th>
 			</tr>
@@ -74,7 +74,10 @@
 					<td><fmt:formatNumber value="${saleGoose.unitPrice }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${saleGoose.totalWeight }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${saleGoose.unitPrice * saleGoose.totalWeight}" maxFractionDigits="3"/></td>
-					<td ><a class="button-small" value="${saleGoose.retailerId }" name="retailerId"><span>获取相关销售商资料</span></a></td>
+					<td >
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/saleGooseAction!get?saleGoose.id=${saleGoose.id }'; return false;"><span>修改备注</span></a>
+						<a class="button-small" value="${saleGoose.retailerId }" name="retailerId"><span>获取销售商资料</span></a>
+					</td>
 					<td>${saleGoose.comments}</td>
 				</tr> 
 			</c:forEach>
