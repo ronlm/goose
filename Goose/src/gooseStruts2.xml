@@ -26,12 +26,12 @@
 		</action>
 		<!-- 信息检索功能 结束 -->
 		
-		<!-- 信息检索功能 开始 -->
+		<!-- 信息删除功能 开始 -->
 		<action name="deleteAction" class="deleteGooseAction">
 			<result name="list">/pages/goose/deleteGooseRing.jsp</result>
 			<result name="success">/pages/goose/deleteGooseRing.jsp</result>
 		</action>
-		<!-- 信息检索功能 结束 -->
+		<!-- 信息删除功能 结束 -->
 	</package>
 
 	
