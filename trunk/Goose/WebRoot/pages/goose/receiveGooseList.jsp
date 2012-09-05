@@ -42,16 +42,15 @@
 			</tr>
 			<tr class="tableTitle">
 				<th>
-					<h3>
-						<input type="checkbox" onclick="selectAll(this);" />
-					</h3></th>
-				<th>
+					<h3><input type="checkbox" onclick="selectAll(this);" /></h3>
+				</th>
+				<th >
 					<h3>日期</h3></th>
 				<th>
 					<h3>数量</h3></th>
-				<th width="15%">
+				<th width="30%">
 					<h3>备注</h3></th>
-				<th width="40%">
+				<th width="45%">
 					<h3>操作</h3></th>
 			</tr>
 		</thead>
@@ -63,7 +62,9 @@
 						<td>${receiveGoose.receiveDate}</td>
 						<td>${receiveGoose.amount}</td>
 						<td>${receiveGoose.comments}</td>
-						<td ><a class="button-small" value="${receiveGoose.farmId }" name="farmId"><span>获取相关农户农场资料</span></a></td>
+						<td >
+							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/receiveGooseAction!get?receiveGoose.id=${receiveGoose.id }'; return false;"><span>修改备注</span></a>
+							<a class="button-small" value="${receiveGoose.farmId }" name="farmId"><span>获取农户农场资料</span></a></td>
 					</tr>
 				</c:forEach>
 			</form>
