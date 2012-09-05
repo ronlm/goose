@@ -34,7 +34,7 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private ReceiveGooseService receiveGooseService;
 	private int daysWithin;
 	
-	public String list() throws Exception {
+	public String list() {
 		   
 			List<ReceiveGoose> resourceList = null;
 			String URL = request.getRequestURI();
@@ -47,10 +47,11 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			}
 			else if(null != request.getSession().getAttribute("daysWithin")){
 				daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
-			}
+			}	
+			farm = farmService.get(farm);
 			if(null != farm){
 				 // 查看某个农场最近接收的鹅苗信息
-				farm = farmService.get(farm);
+				
 				receiveGoose = new ReceiveGoose();
 				receiveGoose.setFarmId(farm.getId());
 			
@@ -88,6 +89,28 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			return list();//返回取列表页面，并刷新列表
 	}
 
+	
+	public String get() {
+		// 点了添加或者点了修改	
+			receiveGoose = receiveGooseService.get(receiveGoose);
+			request.setAttribute("receiveGoose", receiveGoose);
+			return "edit";
+	}
+
+	public String save() {
+		// 保存表单
+		try {
+			
+			receiveGooseService.save(receiveGoose);
+			return list();
+		} catch (Exception e) {
+			// 保存原来表单已输入的内容
+			request.setAttribute("receiveGoose", receiveGoose);
+			request.setAttribute("message", e.getMessage());
+			return list();
+		}
+	}
+	
 	public PageController getPager() {
 		return pager;
 	}
@@ -136,6 +159,14 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 
 	public void setDaysWithin(int daysWithin) {
 		this.daysWithin = daysWithin;
+	}
+
+	public ReceiveGoose getReceiveGoose() {
+		return receiveGoose;
+	}
+
+	public void setReceiveGoose(ReceiveGoose receiveGoose) {
+		this.receiveGoose = receiveGoose;
 	}
 
 	
