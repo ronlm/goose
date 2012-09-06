@@ -75,7 +75,7 @@
 					<td><fmt:formatNumber value="${saleGoose.totalWeight }" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${saleGoose.unitPrice * saleGoose.totalWeight}" maxFractionDigits="3"/></td>
 					<td >
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/saleGooseAction!get?saleGoose.id=${saleGoose.id }'; return false;"><span>修改备注</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/saleGooseAction!get?saleGoose.id=${saleGoose.id }'; return false;"><span>修改</span></a>
 						<a class="button-small" value="${saleGoose.retailerId }" name="retailerId"><span>获取销售商资料</span></a>
 					</td>
 					<td>${saleGoose.comments}</td>
