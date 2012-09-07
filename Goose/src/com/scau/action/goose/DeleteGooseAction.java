@@ -28,18 +28,21 @@ public class DeleteGooseAction extends BaseAction{
 	public String delete() {
 		List<ReceiveGoose> receiveGooses = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where rg.receiveDate <'"
 											+ receiveGooseService.getDateBefore(365*2) + "'");
-		for (ReceiveGoose receiveGoose : receiveGooses) {
-			Goose goose = new Goose();
-			goose.setReceiveId(receiveGoose.getId());
-			List<Goose> gooseList = gooseService.list(goose);
-			
-			for (Goose goose2 : gooseList) {
-				gooseService.delete(goose2);
+		try {
+			for (ReceiveGoose receiveGoose : receiveGooses) {
+				Goose goose = new Goose();
+				goose.setReceiveId(receiveGoose.getId());
+				List<Goose> gooseList = gooseService.list(goose);
+				
+				for (Goose goose2 : gooseList) {
+					gooseService.delete(goose2);
+				}
 			}
-			
+			request.setAttribute("message", "成功删除两年前鹅只脚环信息！");
+			return "success";
+		} catch (Exception e) {
+			return "error";
 		}
-		request.setAttribute("message", "成功删除两年前鹅只脚环信息！");
-		return "success";
 	}
 
 	public ReceiveGooseService getReceiveGooseService() {
