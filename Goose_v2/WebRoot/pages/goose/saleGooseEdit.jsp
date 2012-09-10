@@ -66,7 +66,7 @@
 							单价:
 						</td>
 						<td>
-							<input type="text" name="saleGoose.unitPrice" id="unitPrice" value="${saleGoose.unitPrice}" />
+							<input type="text"  validation="required,number" name="saleGoose.unitPrice" id="unitPrice" value="${saleGoose.unitPrice}" />
 						</td>
 					</tr>
 					<tr>
@@ -74,7 +74,7 @@
 							总重量:
 						</td>
 						<td>
-							<input type="text"  name="saleGoose.totalWeight" id="totalWeight" value="${saleGoose.totalWeight}" />
+							<input type="text"  validation="required,number" name="saleGoose.totalWeight" id="totalWeight" value="${saleGoose.totalWeight}" />
 						</td>
 					</tr>
 					<tr>
