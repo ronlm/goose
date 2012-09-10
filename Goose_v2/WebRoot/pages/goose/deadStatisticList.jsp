@@ -10,8 +10,7 @@
 <script type="text/javascript" src="../../js/getInfo.js"></script>
 
 <body  onload="changeRowColor();">
-	<div  style="overflow-y:scroll;">
-	<table class="mainTable" id="table"  >
+	<table class="mainTable" id="table" >
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
@@ -56,7 +55,7 @@
 				<th width="20%"><h3>操作</h3>
 				</th>
 		</thead>
-		<tbody id="contentBody">
+		<tbody id="contentBody" style="overflow: auto;height:1200px">
 			<form
 				action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del"
 				name="myForm" id="myForm" method="post">
@@ -65,13 +64,14 @@
 						<td>${status.count}</td>
 						<td>${deadInfo.farm.name}</td>
 						<td>${deadInfo.deadNum}</td>
-						<td><c:forEach items="${deadInfo.deadGooses }" var="goose"
-								varStatus="num">
-								${goose.ringId }&nbsp;;
-								<c:if test="${num.count % 10 == 0 }">
-									</br>
-								</c:if>
-							</c:forEach></td>
+						<td >
+							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:150px;</c:if>">
+								<c:forEach items="${deadInfo.deadGooses }" var="goose"varStatus="num">
+									${goose.ringId }&nbsp;;
+								<c:if test="${num.count % 10 == 0 }"></br></c:if>
+								</c:forEach>
+							</div>
+						</td>
 						<td><a class="button-small"
 							value="${deadInfo.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span>
 						</a>
@@ -92,7 +92,6 @@
 			</tr>
 		</tfoot>
 	</table>
-	</div>
 </body>
 <script type="text/javascript">
 	function changeDay() {
