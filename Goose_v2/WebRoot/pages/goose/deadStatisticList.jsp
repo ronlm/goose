@@ -52,7 +52,7 @@
 				</th>
 				<th><h3>所有鹅只脚环ID号</h3>
 				</th>
-				<th width="20%"><h3>操作</h3>
+				<th width="25%"><h3>操作</h3>
 				</th>
 		</thead>
 		<tbody id="contentBody" style="overflow: auto;height:1200px">
