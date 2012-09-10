@@ -148,9 +148,9 @@ public class GooseStatisticAction extends BaseAction {
 				//查找每个农场的相关信息
 				List<ReceiveGoose> receiveGooseList = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where"
 						+ " rg.farmId='" + f.getId() +"' and rg.receiveDate >='" + receiveGooseService.getDateBefore(daysWithin) +"'");
+				DeadInfo dead = new DeadInfo();
+				dead.setFarm(f);
 				if(receiveGooseList.size() > 0){
-					
-					DeadInfo dead = new DeadInfo();
 					dead.setFarm(f);
 					List<Goose> gooseList = new ArrayList<Goose>();
 					for(ReceiveGoose rg:receiveGooseList){
@@ -164,10 +164,13 @@ public class GooseStatisticAction extends BaseAction {
 					}
 					dead.setDeadNum(gooseList.size());
 					dead.setDeadGooses(gooseList);
-					resourceList.add(dead);// 加入到结果
+					
 				}
+				else{
+					dead.setDeadNum(0);
+				}
+				resourceList.add(dead);// 加入到结果
 			}
-			
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
 			request.setAttribute("today", new Date(new java.util.Date().getTime()));
