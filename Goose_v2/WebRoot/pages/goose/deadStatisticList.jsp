@@ -65,10 +65,10 @@
 						<td>${deadInfo.farm.name}</td>
 						<td>${deadInfo.deadNum}</td>
 						<td >
-							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:150px;</c:if>">
-								<c:forEach items="${deadInfo.deadGooses }" var="goose"varStatus="num">
+							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:100px;</c:if>">
+								<c:forEach items="${deadInfo.deadGooses }" var="goose" varStatus="num">
 									${goose.ringId }&nbsp;;
-								<c:if test="${num.count % 10 == 0 }"></br></c:if>
+								<c:if test="${num.count % 9 == 0 }"></br></c:if>
 								</c:forEach>
 							</div>
 						</td>
