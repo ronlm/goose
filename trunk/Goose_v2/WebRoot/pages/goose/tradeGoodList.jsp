@@ -21,7 +21,7 @@
 								<option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7天</option>
 								<option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>两周</option>
 								<option value="30" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30天</option>
-								<option value="60" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>60天</option>
+								<option value="60" <c:if test="${daysWithin == 60 }">selected="selected"</c:if>>60天</option>
 								<option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90天</option>
 								<option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120天</option>
 								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
