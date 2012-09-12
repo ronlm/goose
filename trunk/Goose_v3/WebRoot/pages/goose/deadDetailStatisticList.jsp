@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page isELIgnored="false"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -14,10 +15,10 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>${farm.name} xx 农场存栏鹅只批次死亡信息统计</h3>
+					<h3>${farm.name}&nbsp;农场存栏鹅只批次死亡信息统计</h3>
 					<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm"
-							action="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!dead"
+							action="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail"
 							method="post">
 							查看最近 <select name="daysWithin" id="daysWithin"
 								style="width: 70px" onchange="changeDay();">
@@ -31,7 +32,7 @@
 								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select> 天内所有农场鹅只非正常死亡信息&nbsp;&nbsp;&nbsp;
-
+							<input type="hidden" name="farm.id" id="FarmId" value="${farm.id }"/>
 						</form>
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
@@ -42,41 +43,34 @@
 			<tr class="tableTitle">
 				<th><h3>序号</h3></th>
 				<th><h3>交付鹅苗时间</h3></th>
-				<th><h3>数量</h3></th>
+				<th><h3>交付数量</h3></th>
 				<th><h3>现存数量</h3></th>
 				<th><h3>死亡数量</h3></th>
 				<th><h3>存活率</h3></th>
 				<th><h3>死亡的鹅只脚环ID号</h3></th>
-				<th width="25%"><h3>操作</h3></th>
+				<th width="10%"><h3>操作</h3></th>
 		</thead>
-		<tbody id="contentBody" style="overflow: auto;height:1200px">
-		<!-- 
-			<form
-				action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del"
-				name="myForm" id="myForm" method="post">
-				<c:forEach items="${pager.data}" var="deadInfo" varStatus="status">
+		<tbody id="contentBody" style="overflow: auto;height:1200px"> 
+				<c:forEach items="${pager.data}" var="deadDetail" varStatus="status">
 					<tr >
 						<td>${status.count}</td>
-						<td>${deadInfo.farm.name}</td>
-						<td>${deadInfo.deadNum}</td>
+						<td>${deadDetail.receiveGoose.receiveDate}</td>
+						<td>${deadDetail.receiveGoose.amount}</td>
+						<td>${deadDetail.currentNum}</td>
+						<td>${deadDetail.deadNum}</td>
+						<td><fmt:formatNumber value="${deadDetail.surviveRate}" maxFractionDigits="4"/></td>
 						<td >
-							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:150px;</c:if>">
-								<c:forEach items="${deadInfo.deadGooses }" var="goose"varStatus="num">
+							<div style="overflow:auto;<c:if test="${deadDetail.deadNum >10 }">height:150px;</c:if>">
+								<c:forEach items="${deadDetail.deadGooses }" var="goose"varStatus="num">
 									${goose.ringId }&nbsp;;
-								<c:if test="${num.count % 9 == 0 }"></br></c:if>
+								<c:if test="${num.count % 8 == 0 }"></br></c:if>
 								</c:forEach>
 							</div>
 						</td>
-						<td><a class="button"
-							value="${deadInfo.farm.farmerId }" name="farmerId" href=""><span>存栏明细</span>
-						</a><a class="button-small"
-							value="${deadInfo.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span>
-						</a>
-						</td>
 					</tr>
 				</c:forEach>
-			</form>
-			 -->
+			
+			
 		</tbody>
 		<tfoot>
 			<tr class="tableController_bottom">
