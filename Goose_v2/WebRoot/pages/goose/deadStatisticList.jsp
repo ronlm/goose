@@ -31,6 +31,7 @@
 									<c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30天</option>
 								<option value="90"
 									<c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90天</option>
+								<option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120天</option>
 								<option value="365"
 									<c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
 								<!-- <option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>  -->
@@ -65,14 +66,16 @@
 						<td>${deadInfo.farm.name}</td>
 						<td>${deadInfo.deadNum}</td>
 						<td >
-							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:100px;</c:if>">
-								<c:forEach items="${deadInfo.deadGooses }" var="goose" varStatus="num">
+							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:150px;</c:if>">
+								<c:forEach items="${deadInfo.deadGooses }" var="goose"varStatus="num">
 									${goose.ringId }&nbsp;;
 								<c:if test="${num.count % 9 == 0 }"></br></c:if>
 								</c:forEach>
 							</div>
 						</td>
-						<td><a class="button-small"
+						<td><a class="button"
+							value="${deadInfo.farm.farmerId }" name="farmerId" href=""><span>存栏明细</span>
+						</a><a class="button-small"
 							value="${deadInfo.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span>
 						</a>
 						</td>
