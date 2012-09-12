@@ -58,7 +58,8 @@ public class GooseWebServiceImpl implements IGooseService{
 	@WebMethod
 	public List<FarmWs> getFarmList() {
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
-		List<Farm> farmList = farmService.findByCondition("from com.scau.model.goose.Farm f order by f.name");
+		//获取已经签约的农户
+		List<Farm> farmList = farmService.findByCondition("from com.scau.model.goose.Farm f where f.signDate !=null order by f.name");
 		
 		List<FarmWs> resultList = new ArrayList<FarmWs>();
 		for (Farm farm : farmList) {
