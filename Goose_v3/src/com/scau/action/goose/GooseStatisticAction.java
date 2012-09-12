@@ -26,6 +26,7 @@ import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 import com.scau.view.goose.Market;
 import com.scau.vo.goose.AppearOnMarket;
+import com.scau.vo.goose.DeadDetail;
 import com.scau.vo.goose.DeadInfo;
 import com.scau.vo.goose.FarmStock;
 
@@ -41,6 +42,7 @@ public class GooseStatisticAction extends BaseAction {
 	private int onMarketDay = 90;//设定的鹅只成熟日期
 	private int interval = 15;
 	private ReceiveGooseService receiveGooseService;
+	private Farm farm;
 	
 	public String market() throws Exception{
 		String URL = request.getRequestURI();
@@ -178,6 +180,60 @@ public class GooseStatisticAction extends BaseAction {
 			return "dead";
 	}
 		
+	public String deadDetail(){
+		//查看一个指定农场的所以存栏 的receiveGoose 的死亡信息和存活率
+		int daysWithin = 0;
+		farm = farmService.get(farm);
+		
+		// 取得要显示的日期条件
+		if(null != request.getParameter("daysWithin")){
+			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+			request.getSession().removeAttribute("daysWithin");
+		}
+		else if(null != request.getSession().getAttribute("daysWithin")){
+			daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
+		}	
+		List<DeadDetail> resourceList = new ArrayList<DeadDetail>();
+		if(null != farm){
+			 // 查看某个农场最近接收的鹅苗交付信息
+			ReceiveGoose receiveGoose = new ReceiveGoose();
+			receiveGoose.setFarmId(farm.getId());
+		
+			String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + receiveGoose.getFarmId()
+				+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(daysWithin) + "' order by rg.receiveDate desc";
+			
+			List<ReceiveGoose> receiveGooseList = receiveGooseService.findByCondition(hql);
+			int totalRows = receiveGooseList.size();// 总的记录条数
+			this.pager.setTotalRowsAmount(totalRows);
+			int toIndex = receiveGooseList.size() <= pager.getPageStartRow() + pager.getPageSize() ? receiveGooseList.size() : pager.getPageStartRow() + pager.getPageSize();
+			for (ReceiveGoose receiveGoose2 : receiveGooseList.subList(this.pager.getPageStartRow(), toIndex)) {
+				// 迭代要显示在页面的所有批次
+				Goose goose = new Goose();
+				goose.setReceiveId(receiveGoose2.getId());//查找出所属该批次的已死亡鹅只
+				goose.setIsValid(0);
+				goose.setTradeId(null);
+				List<Goose> deadGooseList = gooseService.list(goose);
+					
+				DeadDetail deadDetail = new DeadDetail();
+				deadDetail.setDeadGooses(deadGooseList);
+				deadDetail.setReceiveGoose(receiveGoose2);
+				deadDetail.setCurrentNum(receiveGoose2.getAmount() - deadGooseList.size());
+				deadDetail.setDeadNum(deadGooseList.size());
+				deadDetail.setSurviveRate((float) (1.00000 - deadGooseList.size()*1.00000/receiveGoose2.getAmount()));
+				resourceList.add(deadDetail);	
+			}
+			
+
+		}
+		
+		pager.setData(resourceList);
+		request.setAttribute("farm", farm);
+		request.setAttribute("pager", pager);
+		request.getSession().setAttribute("daysWithin", daysWithin);
+		return "deadDetail";
+	}
+	
+	
 	public String sale(){
 		/*这里完成销售统计页面的一些数据初始化工作，数据计算交由类com.servlet.goose.SaleStatisticServlet完成，以异步加载形式
 		 * */
@@ -221,26 +277,6 @@ public class GooseStatisticAction extends BaseAction {
 		this.marketService = marketService;
 	}
 
-	/** 检查该批次的鹅只是否已被收购
-	 * @param receiveId
-	 * @return true:已经被公司收购 false:还在农户手中
-	 *//*
-	public boolean checkTraded(long receiveId){
-		//选出该批次还存活的鹅只数
-		String totalQuery = "select count(*) from com.scau.model.goose.Goose g where g.receiveId=" + receiveId ;
-		//查出该批次还存活并没有交易的鹅只数
-		String tradeQuery = "select count(*) from com.scau.model.goose.Goose g where g.receiveId=" + receiveId +
-				" and g.isValid= 1";
-		List<Goose> gList = gooseService.findByCondition(totalQuery);
-		for(int i = 0 ;i<gList.size();){
-			if( null != gList.get(i).getTradeId()){
-				return true;
-			}
-			i = i + 10;
-		}
-		return false;
-	}*/
-
 	public ReceiveGooseService getReceiveGooseService() {
 		return receiveGooseService;
 	}
@@ -257,6 +293,14 @@ public class GooseStatisticAction extends BaseAction {
 	@Resource
 	public void setFarmService(FarmService farmService) {
 		this.farmService = farmService;
+	}
+
+	public Farm getFarm() {
+		return farm;
+	}
+
+	public void setFarm(Farm farm) {
+		this.farm = farm;
 	}
 	
 }
