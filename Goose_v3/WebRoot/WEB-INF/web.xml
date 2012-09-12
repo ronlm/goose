@@ -29,10 +29,14 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  <!-- Spring 的上下文配置 开始 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
+  <!-- Spring 的上下文配置 结束 -->
+  
+  <!--  Spring 的编码过滤器 开始-->
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -45,6 +49,8 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!--  Spring 的编码过滤器结束-->
+  
   <filter>
     <filter-name>openSessionInView</filter-name>
     <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -63,7 +69,7 @@
   </filter>
   <filter-mapping>
     <filter-name>openSessionInView</filter-name>
-    <url-pattern>/pages/*</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
   <servlet>
     <servlet-name>ServletConfigurator</servlet-name>
@@ -75,6 +81,7 @@
     </init-param>
     <load-on-startup>0</load-on-startup>
   </servlet>
+  <!-- 连接池配置 开始 -->
   <servlet>
     <servlet-name>proxool</servlet-name>
     <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
@@ -83,6 +90,8 @@
     <servlet-name>proxool</servlet-name>
     <url-pattern>/Admin/proxool/</url-pattern>
   </servlet-mapping>
+    <!-- 连接池配置 结束 -->
+  <!-- 用于搜索鹅只记录的Servlet 开始 -->
   <servlet>
     <description>A Servlet for return goose record</description>
     <display-name>A Servlet for return search goose record</display-name>
@@ -104,6 +113,9 @@
     <servlet-name>SaleStatisticServlet</servlet-name>
     <url-pattern>/servlet/SaleStatisticServlet</url-pattern>
   </servlet-mapping>
+  <!-- 用于搜索鹅只记录的Servlet 开始 -->
+  
+  <!-- 权限管理 开始 -->
   <filter>
     <filter-name>SecurityFilter</filter-name>
     <filter-class>cn.com.ege.mvc.security.SecurityFilter</filter-class>
@@ -112,6 +124,9 @@
     <filter-name>SecurityFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!-- 权限管理 结束 -->
+  
+  <!-- Struts 2的过滤器 开始 -->
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -124,10 +139,33 @@
     <filter-name>struts2</filter-name>
     <url-pattern>/login/*</url-pattern>
   </filter-mapping>
+    <!-- Struts 2的过滤器 开始 -->
+  
   <mime-mapping>
     <extension>rar</extension>
     <mime-type>application/rar</mime-type>
   </mime-mapping>
+  
+  <!--Error Page 
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/Error.jsp</location>
+	</error-page>
+	java.lang.Exception异常错误,依据这个标记可定义多个类似错误提示
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/error/Error.jsp</location>
+	</error-page>
+	 -->
+  
   <listener>
     <listener-class>
 			com.sun.xml.ws.transport.http.servlet.WSServletContextListener
