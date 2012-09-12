@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
+import com.scau.model.webService.FarmWs;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
@@ -27,7 +28,7 @@ public class testGooseStatistic {
 	static FarmService farmService = (FarmService) BeansUtil.get("farmService");
 	static char[] CHARS = "0123456789ABCDEF".toCharArray();
 	
-	@Test
+	//@Test
 	public void testGetGooseStock(){
 		List<Farm> farmList = farmService.findByCondition(1,10,"from com.scau.model.goose.Farm f order by f.id asc");
 		String farmHql = "select f from com.scau.model.goose.Farm f order by f.id asc limit 0,10";
@@ -56,5 +57,26 @@ public class testGooseStatistic {
 				System.out.println(gooseNum);
 		
 		}
+	}
+	
+	@Test
+	public void  getlist(){
+		
+			FarmService farmService = (FarmService) BeansUtil.get("farmService");
+			List<Farm> farmList = farmService.findByCondition("from com.scau.model.goose.Farm f where f.signDate !=null order by f.name");
+			
+			List<FarmWs> resultList = new ArrayList<FarmWs>();
+			for (Farm farm : farmList) {
+				FarmWs farmWs = new FarmWs();
+				farmWs.setId(farm.getId());
+				farmWs.setFarmerId(farm.getFarmerId());
+				farmWs.setName(farm.getName());
+				
+				resultList.add(farmWs);
+			}
+			for (FarmWs farmWs : resultList) {
+				System.out.println(farmWs.getName());
+			}
+			System.out.println(resultList.size());
 	}
 }
