@@ -87,8 +87,8 @@ public class SearchResultServlet extends HttpServlet {
 								"备注</td><td width=\"40%\">操作</td></tr>");
 				int i = 1;
 				for (ReceiveGoose receiveGoose : resultList) {
-					result.append("<tr><td>" + (i++) + "</td><td>" + receiveGoose.getReceiveDate() + "</td><td>" + receiveGoose.getAmount()+ "</td><td>" + receiveGoose.getComments() 
-							+ "&nbsp;</td><td >" + getFarmerAndFarmInfo(receiveGoose.getFarmId()) + "</td></tr>");
+					result.append("<tr><td>" + (i++) + "</td><td>" + receiveGoose.getReceiveDate() + "</td><td>" + receiveGoose.getAmount()+ "</td><td>" +
+							(receiveGoose.getComments() == null ? "":receiveGoose.getComments()) + "&nbsp;</td><td >" + getFarmerAndFarmInfo(receiveGoose.getFarmId()) + "</td></tr>");
 				}
 				out.print(result);
 				
@@ -108,8 +108,8 @@ public class SearchResultServlet extends HttpServlet {
 				
 				int i = 1;
 				for (TradeGoose tradeGoose : resultList) {
-					result.append("<tr><td>" + (i++) + "</td><td>" + tradeGoose.getTradeDate() + "</td><td>" + tradeGoose.getAmount()+ "</td><td>" + tradeGoose.getUnitPrice()+ "</td><td>" + tradeGoose.getTotalWeight()+ "</td><td>" + (tradeGoose.getAmount()*tradeGoose.getUnitPrice())+ "</td><td>" + tradeGoose.getComments() 
-					+ "&nbsp;</td><td >" + getFarmerAndFarmInfo(tradeGoose.getFarmId()) + "</td></tr>");
+					result.append("<tr><td>" + (i++) + "</td><td>" + tradeGoose.getTradeDate() + "</td><td>" + tradeGoose.getAmount()+ "</td><td>" + tradeGoose.getUnitPrice()+ "</td><td>" + tradeGoose.getTotalWeight()+ "</td><td>" + (tradeGoose.getAmount()*tradeGoose.getUnitPrice())+ "</td><td>" 
+									+ (tradeGoose.getComments() == null ?"":tradeGoose.getComments()) + "&nbsp;</td><td >" + getFarmerAndFarmInfo(tradeGoose.getFarmId()) + "</td></tr>");
 				}
 				out.print(result);
 				
@@ -128,8 +128,8 @@ public class SearchResultServlet extends HttpServlet {
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
 				int i = 1;
 				for (SaleGoose saleGoose : resultList) {
-					result.append("<tr><td>" + (i++) + "</td><td>" + saleGoose.getSaleDate() + "</td><td>" + saleGoose.getAmount()+ "</td><td>" + saleGoose.getUnitPrice()+ "</td><td>" + saleGoose.getTotalWeight()+ "</td><td>" + (saleGoose.getAmount()*saleGoose.getUnitPrice())+ "</td><td>" + saleGoose.getComments() 
-					+ "&nbsp;</td><td >" + getRetailerInfo(saleGoose.getRetailerId()) + "</td></tr>");
+					result.append("<tr><td>" + (i++) + "</td><td>" + saleGoose.getSaleDate() + "</td><td>" + saleGoose.getAmount()+ "</td><td>" + saleGoose.getUnitPrice()+ "</td><td>" + saleGoose.getTotalWeight()+ "</td><td>" + (saleGoose.getAmount()*saleGoose.getUnitPrice())+ "</td><td>" + 
+							(saleGoose.getComments() == null ?"":saleGoose.getComments()) + "&nbsp;</td><td >" + getRetailerInfo(saleGoose.getRetailerId()) + "</td></tr>");
 				}
 				out.print(result);
 			}
@@ -183,12 +183,16 @@ public class SearchResultServlet extends HttpServlet {
 				if(null != ringId){
 					GooseWebServiceImpl gooseWebService = new GooseWebServiceImpl();
 					ReceiveGooseWs receiveGooseWs = gooseWebService.getReceiveInfo(ringId);
-					result.append("<tr><td>所属农场主</td><td>电话</td><td>所属农场</td><td>农场地址</td><td>交付农场日期</td><td>该批次交付数量</td><td>备注</td></tr>"+
-							"<tr><td>" + receiveGooseWs.getFarmerName() + "</td><td>" + receiveGooseWs.getPhone()+ "</td><td>" +receiveGooseWs.getFarmName() + 
-							"</td><td>" +receiveGooseWs.getAddress() + "</td><td>" + receiveGooseWs.getReceiveDate()+ "</td><td>" + receiveGooseWs.getAmount()+ "</td><td>" + receiveGooseWs.getComments()+ "</td></tr>");
-					out.print(result);
+					if(null != receiveGooseWs){
+						result.append("<tr><td>所属农场主</td><td>电话</td><td>所属农场</td><td>农场地址</td><td>交付农场日期</td><td>该批次交付数量</td><td>备注</td></tr>"+
+								"<tr><td>" + receiveGooseWs.getFarmerName() + "</td><td>" + receiveGooseWs.getPhone()+ "</td><td>" +receiveGooseWs.getFarmName() + 
+								"</td><td>" +receiveGooseWs.getAddress() + "</td><td>" + receiveGooseWs.getReceiveDate()+ "</td><td>" + receiveGooseWs.getAmount()+ "</td><td>" + 
+								(receiveGooseWs.getComments() == null?"":receiveGooseWs.getComments() )+ "</td></tr>");
+						out.print(result);
+					}
+					else out.print("查无此脚环，请确认后重新输入！");
 				}
-				else out.print("查无此脚环，请确认后重新输入！");
+				
 			}
 			else{
 				out.print("暂无相关资料");
