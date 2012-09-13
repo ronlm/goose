@@ -26,7 +26,14 @@ $(function(){
 			});
 	  });
 	  
-	  	  
+	  $("#ringSubmit").click(function(){
+		  var url = "/Goose/servlet/SearchResultServlet?searchType=gooseRingId&&ringId=" + $("#ringId").val();
+		  $.post(url,function(response){
+			  $("#tbody").html(response);
+		  });
+	  });	
+	  
+	  
 	  /*展示数量输入功能
 	   * */
 	  $("#numberEdit").click(function(){
