@@ -48,7 +48,6 @@
 				<th><h3>死亡数量</h3></th>
 				<th><h3>存活率</h3></th>
 				<th><h3>死亡的鹅只脚环ID号</h3></th>
-				<th width="10%"><h3>操作</h3></th>
 		</thead>
 		<tbody id="contentBody" style="overflow: auto;height:1200px"> 
 				<c:forEach items="${pager.data}" var="deadDetail" varStatus="status">
@@ -63,7 +62,7 @@
 							<div style="overflow:auto;<c:if test="${deadDetail.deadNum >10 }">height:150px;</c:if>">
 								<c:forEach items="${deadDetail.deadGooses }" var="goose"varStatus="num">
 									${goose.ringId }&nbsp;;
-								<c:if test="${num.count % 8 == 0 }"></br></c:if>
+								<c:if test="${num.count % 10 == 0 }"></br></c:if>
 								</c:forEach>
 							</div>
 						</td>
