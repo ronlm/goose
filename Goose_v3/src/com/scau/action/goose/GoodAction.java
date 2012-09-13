@@ -13,7 +13,9 @@ import cn.com.ege.mvc.exception.BusinessException;
 import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Good;
+import com.scau.model.goose.GoodType;
 import com.scau.service.impl.goose.GoodService;
+import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.util.PageController;
 
 @Component
@@ -23,6 +25,7 @@ public class GoodAction extends BaseAction{
 	private final static Log logger = LogFactory.getLog(GoodAction.class);
 	private PageController pager;
 	private GoodService goodService;
+	private GoodTypeService goodTypeService;
 	private Good good;
 	
 	public String list() throws Exception {
@@ -34,6 +37,8 @@ public class GoodAction extends BaseAction{
 			this.pager.setTotalRowsAmount(totalRows);
 			List<Good> resourceList = goodService.list(new Good(),this.pager.getPageStartRow(),this.pager.getPageSize(),null,null);
 			pager.setData(resourceList);
+			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
+			request.setAttribute("goodTypeList", goodTypeList);
 			request.setAttribute("pager", pager);
 			return "list";		
 	}
@@ -41,6 +46,8 @@ public class GoodAction extends BaseAction{
 	public String get() {
 		// 点了添加或者点了修改	
 			good = goodService.get(good);
+			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
+			request.setAttribute("goodTypeList", goodTypeList);
 			request.setAttribute("good", good);
 			return "edit";
 	}
@@ -52,6 +59,8 @@ public class GoodAction extends BaseAction{
 			return list();
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
+			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
+			request.setAttribute("goodTypeList", goodTypeList);
 			request.setAttribute("good", good);
 			request.setAttribute("message", e.getMessage());
 			return list();
@@ -95,6 +104,15 @@ public class GoodAction extends BaseAction{
 
 	public void setGood(Good good) {
 		this.good = good;
+	}
+
+	public GoodTypeService getGoodTypeService() {
+		return goodTypeService;
+	}
+
+	@Resource
+	public void setGoodTypeService(GoodTypeService goodTypeService) {
+		this.goodTypeService = goodTypeService;
 	}
 
 
