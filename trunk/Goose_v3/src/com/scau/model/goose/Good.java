@@ -6,12 +6,19 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.scau.service.impl.goose.GoodTypeService;
+import com.scau.service.impl.goose.SaleRegionService;
+import com.scau.util.BeansUtil;
+
 @Entity
 @Component
 public class Good {
 	private Long id;
 	private String name;
+	private Long goodTypeId;
+	private String goodTypeName;
 	private String unit;
+	private int stock;
 	
 	@Id
 	@GeneratedValue
@@ -33,5 +40,30 @@ public class Good {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+	public Long getGoodTypeId() {
+		return goodTypeId;
+	}
+	public void setGoodTypeId(Long goodTypeId) {
+		this.goodTypeId = goodTypeId;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getGoodTypeName() {
+		return goodTypeName;
+	}
+	public void setGoodTypeName(String goodTypeName) {
+		this.goodTypeName = goodTypeName;
+	}
 	
+	public void setGoodTypeName(){
+		GoodTypeService goodTypeService = (GoodTypeService) BeansUtil.get("goodTypeService");
+		GoodType gt = new GoodType();
+		gt.setId(this.getGoodTypeId());
+		gt = goodTypeService.get(gt);
+		this.setGoodTypeName(gt.getName());
+	}
 }
