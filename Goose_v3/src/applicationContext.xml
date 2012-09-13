@@ -72,6 +72,7 @@
 				<value>com.scau.model.goose.TradeGood</value>	
 				<value>com.scau.model.goose.GoodSupplier</value>
 				<value>com.scau.model.goose.SaleRegion</value>
+				<value>com.scau.model.goose.GoodType</value>
 				<!-- 以下为视图类 -->
 				<value>com.scau.view.goose.Market</value>
 				<value>com.scau.view.goose.TradeGoodView</value>
