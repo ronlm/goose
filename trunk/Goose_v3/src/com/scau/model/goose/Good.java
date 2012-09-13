@@ -1,13 +1,17 @@
 package com.scau.model.goose;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.scau.service.impl.goose.BuyGoodService;
 import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.service.impl.goose.SaleRegionService;
+import com.scau.service.impl.goose.TradeGoodService;
 import com.scau.util.BeansUtil;
 
 @Entity
@@ -18,7 +22,7 @@ public class Good {
 	private Long goodTypeId;
 	private String goodTypeName;
 	private String unit;
-	private int stock;
+	private Long stock;
 	
 	@Id
 	@GeneratedValue
@@ -46,10 +50,15 @@ public class Good {
 	public void setGoodTypeId(Long goodTypeId) {
 		this.goodTypeId = goodTypeId;
 	}
-	public int getStock() {
-		return stock;
+	/** 返回当前的存货量
+	 * @return
+	 */
+	public Long getStock() {
+		return this.stock;
 	}
-	public void setStock(int stock) {
+	
+	
+	public void setStock(Long stock) {
 		this.stock = stock;
 	}
 	public String getGoodTypeName() {
@@ -66,4 +75,5 @@ public class Good {
 		gt = goodTypeService.get(gt);
 		this.setGoodTypeName(gt.getName());
 	}
+	
 }
