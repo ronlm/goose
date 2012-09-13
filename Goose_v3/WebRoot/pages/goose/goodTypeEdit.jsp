@@ -6,14 +6,14 @@
 	<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 	<body style="overflow-y: visible !important; overflow-y: scroll;">
 		<form
-			action="${pageContext.request.contextPath }/pages/goose/goodAction!save"
+			action="${pageContext.request.contextPath }/pages/goose/goodTypeAction!save"
 			name="myForm" id="myForm" method="post">
 			<table class="mainTable">
 				<thead>
 					<tr class="tableController">
 						<th colspan="2">
 							<h3>
-								物资信息编辑
+								物资种类编辑
 							</h3>
 						</th>
 					</tr>
@@ -44,33 +44,14 @@
 				<tbody>
 					<tr>
 						<td width="200" align="right">
-							品名:
+							物资种类名:
 						</td>
 						<td>
-							<input type="text" validation="required" name="good.name"
-								id="name" value="${good.name}" />
-							<input type="hidden" name="good.id" id="id" value="${good.id}" />
+							<input type="text" validation="required" name="goodType.name"
+								id="name" value="${goodType.name}" />
+							<input type="hidden" name="goodType.id" id="id" value="${goodType.id}" />
 						</td>
 					</tr>
-					<tr>
-					<td width="200px" align="right" >所属物资种类:</td>
-					<td><select name="good.goodTypeId" id="goodTypeId" style="width: 150px" >
-						<c:forEach items="${goodTypeList}" var="goodType">
-							<option value="${goodType.id}" 
-								<c:if test="${good.goodTypeId == goodType.id }">selected="selected" 
-								</c:if>>${goodType.name}</option>
-						</c:forEach>
-					</select></td>
-					</tr>
-					<tr>
-						<td width="200" align="right">
-							单位:
-						</td>
-						<td>
-							<input type="text"  name="good.unit" id="unit" value="${good.unit}" />
-						</td>
-					</tr>
-					
 				</tbody>
 				<tfoot>
 					<tr class="tableController_bottom">
