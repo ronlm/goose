@@ -55,7 +55,7 @@
 								</c:if>>${saleRegion.region}</option>
 						</c:forEach>
 					</select></td>
-				</tr>
+					</tr>
 					<tr>
 						<td width="200" align="right">
 							联系电话:

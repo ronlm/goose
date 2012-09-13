@@ -11,7 +11,8 @@
 				<th colspan="7">
 					<h3>农用物资列表</h3>
 					<div class="tableControllerButton">
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/goodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/goodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加新物资</span></a>
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/goodTypeAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部物资分类信息</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll();  return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
@@ -24,7 +25,13 @@
 					<h3>品名</h3>
 				</th>
 				<th>
+					<h3>所属种类</h3>
+				</th>
+				<th>
 					<h3>单位</h3>
+				</th>
+				<th>
+					<h3>当前库存</h3>
 				</th>		
 				<th width="20%">
 					<h3>操作</h3>
@@ -38,7 +45,9 @@
 				<tr>
 					<td width="20px"><input type="checkbox" name="id" value="${good.id}"/></td>
 					<td>${good.name}</td>
+					<td>${good.goodTypeName}</td>
 					<td>${good.unit}</td>
+					<td>${good.stock}</td>
 					<td>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/goodAction!get?good.id=${good.id }'; return false;"><span>修改</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/goose/goodAction!del?id=${good.id }'); return false;"><span>删除</span></a>
