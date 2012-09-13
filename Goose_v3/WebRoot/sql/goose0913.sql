@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : MySql
-Source Server Version : 50524
-Source Host           : localhost:3305
+Source Server Version : 50527
+Source Host           : localhost:3306
 Source Database       : goose
 
 Target Server Type    : MYSQL
-Target Server Version : 50524
+Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2012-09-09 23:26:38
+Date: 2012-09-13 10:40:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,7 +51,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -61,7 +61,7 @@ INSERT INTO `comm_menu` VALUES ('2', '系统用户管理', '/pages/Comm/userActi
 INSERT INTO `comm_menu` VALUES ('3', '系统资源管理', '/pages/Comm/resourceAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('4', '系统菜单管理', '/pages/Comm/menuAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('5', '系统角色管理', '/pages/Comm/roleAction!list', '1', '/images/main/null.png', '2');
-INSERT INTO `comm_menu` VALUES ('6', '农户农场管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '2');
+INSERT INTO `comm_menu` VALUES ('6', '农户农场管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/goose/farmerAction!list', '6', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('9', '物资信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('10', '农场信息管理', '/pages/goose/farmAction!listAll', '6', '/images/main/null.png', '3');
@@ -78,7 +78,7 @@ INSERT INTO `comm_menu` VALUES ('22', '鹅只上市统计', '/pages/goose/gooseS
 INSERT INTO `comm_menu` VALUES ('23', '农场存栏鹅只统计', '/pages/goose/gooseStatisticAction!stock', '15', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('24', '鹅只死亡统计', '/pages/goose/gooseStatisticAction!dead', '15', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('26', '信息检索', '/pages/goose/search.jsp', '30', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('27', '删除脚环信息', '/pages/goose/deleteAction!list', '30', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('27', '删除脚环信息', '/pages/goose/deleteAction!list', '30', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('28', '销售信息管理', 'javascript:void(0);', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('29', '销售信息统计', '/pages/goose/gooseStatisticAction!sale', '28', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('30', '附加功能', 'javascript:void(0);', '0', '/images/main/MenuIcon.png', '3');
@@ -117,7 +117,7 @@ CREATE TABLE `comm_role` (
 -- Records of comm_role
 -- ----------------------------
 INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '			');
-INSERT INTO `comm_role` VALUES ('2', '超级管理员', '				超级管理员										');
+INSERT INTO `comm_role` VALUES ('2', '超级管理员', '超级管理员											');
 INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户	');
 
 -- ----------------------------
@@ -131,7 +131,7 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
@@ -143,6 +143,8 @@ INSERT INTO `comm_role_resource` VALUES ('4', '2', '1');
 INSERT INTO `comm_role_resource` VALUES ('5', '2', '3');
 INSERT INTO `comm_role_resource` VALUES ('6', '3', '1');
 INSERT INTO `comm_role_resource` VALUES ('126', '3', '3');
+INSERT INTO `comm_role_resource` VALUES ('127', '2', '1');
+INSERT INTO `comm_role_resource` VALUES ('128', '2', '3');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -159,16 +161,14 @@ CREATE TABLE `comm_user` (
   `roleId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_user
 -- ----------------------------
 INSERT INTO `comm_user` VALUES ('1', 'admin', '引擎小组', 'admin', '123', '123@d.com', '123', '1');
-INSERT INTO `comm_user` VALUES ('2', 'engine', '', 'engine', '', '', '', '2');
-INSERT INTO `comm_user` VALUES ('3', 'test', null, 'test', null, null, null, '1');
-INSERT INTO `comm_user` VALUES ('4', 'user', '', '111111', '', '', '', '3');
-INSERT INTO `comm_user` VALUES ('5', 'zjh', '', '111111', '', '', '', '3');
+INSERT INTO `comm_user` VALUES ('2', 'engine', '', '123456', '', '', '', '2');
+INSERT INTO `comm_user` VALUES ('4', 'user', '', '123456', '', '', '', '3');
 
 -- ----------------------------
 -- Table structure for `farm`
@@ -188,7 +188,7 @@ CREATE TABLE `farm` (
 -- ----------------------------
 -- Records of farm
 -- ----------------------------
-INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', 'sgsdffgdsfg');
+INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', 'sgsdffgdsfg	');
 INSERT INTO `farm` VALUES ('2', '牛牛', '2', '南海', '2012-07-01', '2000', 'dfyfyh');
 INSERT INTO `farm` VALUES ('3', '明德', '3', '南海', '2012-01-02', '1000', 'trdstrt');
 INSERT INTO `farm` VALUES ('4', '天天农场', '4', '清远', '2012-01-08', '234234', 'gfhdrr');
@@ -231,6 +231,8 @@ INSERT INTO `farmer` VALUES ('7', '周七', '234324456667', '阳山', '夺震城
 DROP TABLE IF EXISTS `good`;
 CREATE TABLE `good` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存',
+  `goodTypeId` int(11) DEFAULT NULL,
+  `goodTypeName` varchar(30) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `unit` varchar(255) DEFAULT NULL,
   `stock` int(11) DEFAULT '0',
@@ -240,10 +242,10 @@ CREATE TABLE `good` (
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '油麦菜种', 'bao', '0');
-INSERT INTO `good` VALUES ('2', '大叶槐苗', '棵', '0');
-INSERT INTO `good` VALUES ('3', 'XX消毒水', '瓶', '0');
-INSERT INTO `good` VALUES ('4', '百毒杀', '瓶', '0');
+INSERT INTO `good` VALUES ('1', '3', '农药', '油麦菜种', 'bao', '0');
+INSERT INTO `good` VALUES ('2', '4', '树苗', '大叶槐苗', '棵', '0');
+INSERT INTO `good` VALUES ('3', '3', '农药', 'XX消毒水', '瓶', '0');
+INSERT INTO `good` VALUES ('4', '3', '农药', '百毒杀', '瓶', '0');
 
 -- ----------------------------
 -- Table structure for `goodsupplier`
@@ -264,6 +266,26 @@ CREATE TABLE `goodsupplier` (
 INSERT INTO `goodsupplier` VALUES ('1', '张三', '111111', '广州', '	dfsadfsdafasf');
 INSERT INTO `goodsupplier` VALUES ('3', '李四', '222222', '广州', 'fadsfadsfdas		');
 INSERT INTO `goodsupplier` VALUES ('4', '鑫鑫农资店', '432423', '在砝码城', '	');
+
+-- ----------------------------
+-- Table structure for `good_type`
+-- ----------------------------
+DROP TABLE IF EXISTS `good_type`;
+CREATE TABLE `good_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL COMMENT '农用物资的所属种类',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of good_type
+-- ----------------------------
+INSERT INTO `good_type` VALUES ('1', '饲料');
+INSERT INTO `good_type` VALUES ('2', '化肥');
+INSERT INTO `good_type` VALUES ('3', '农药');
+INSERT INTO `good_type` VALUES ('4', '树苗');
+INSERT INTO `good_type` VALUES ('5', '种子');
+INSERT INTO `good_type` VALUES ('6', '其他');
 
 -- ----------------------------
 -- Table structure for `goose`
@@ -292,38 +314,38 @@ INSERT INTO `goose` VALUES ('205', '3029804204', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('206', '3029804205', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('207', '3029804206', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('208', '3029804207', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('209', '3029804208', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('209', '3029804208', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('210', '3029804209', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('211', '3029804210', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('211', '3029804210', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('212', '3029804211', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('213', '3029804212', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('214', '3029804213', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('214', '3029804213', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('215', '3029804214', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('216', '3029804215', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('217', '3029804216', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('218', '3029804217', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('219', '3029804218', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('219', '3029804218', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('220', '3029804219', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('221', '3029804220', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('222', '3029804221', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('222', '3029804221', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('223', '3029804222', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('224', '3029804223', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('225', '3029804224', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('226', '3029804225', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('227', '3029804226', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('228', '3029804227', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('229', '3029804228', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('229', '3029804228', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('230', '3029804229', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('231', '3029804230', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('232', '3029804231', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('233', '3029804232', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('233', '3029804232', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('234', '3029804233', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('235', '3029804234', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('236', '3029804235', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('237', '3029804236', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('238', '3029804237', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('239', '3029804238', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('240', '3029804239', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('240', '3029804239', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('241', '3029804240', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('242', '3029804241', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('243', '3029804242', '1', '15', '11', '0');
@@ -331,123 +353,123 @@ INSERT INTO `goose` VALUES ('244', '3029804243', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('245', '3029804244', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('246', '3029804245', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('247', '3029804246', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('248', '3029804247', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('248', '3029804247', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('249', '3029804248', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('250', '3029804249', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('251', '3029804250', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('252', '3029804251', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('253', '3029804252', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('254', '3029804253', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('254', '3029804253', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('255', '3029804254', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('256', '3029804255', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('257', '3029804256', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('258', '3029804257', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('259', '3029804258', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('260', '3029804259', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('261', '3029804260', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('261', '3029804260', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('262', '3029804261', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('263', '3029804262', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('264', '3029804263', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('265', '3029804264', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('266', '3029804265', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('267', '3029804266', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('267', '3029804266', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('268', '3029804267', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('269', '3029804268', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('270', '3029804269', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('271', '3029804270', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('272', '3029804271', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('273', '3029804272', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('273', '3029804272', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('274', '3029804273', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('275', '3029804274', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('276', '3029804275', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('277', '3029804276', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('278', '3029804277', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('279', '3029804278', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('279', '3029804278', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('280', '3029804279', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('281', '3029804280', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('282', '3029804281', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('283', '3029804282', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('284', '3029804283', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('284', '3029804283', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('285', '3029804284', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('286', '3029804285', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('287', '3029804286', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('288', '3029804287', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('289', '3029804288', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('290', '3029804289', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('291', '3029804290', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('291', '3029804290', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('292', '3029804291', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('293', '3029804292', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('294', '3029804293', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('295', '3029804294', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('296', '3029804295', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('297', '3029804296', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('297', '3029804296', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('298', '3029804297', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('299', '3029804298', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('300', '3029804299', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('301', '3029804300', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('301', '3029804300', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('302', '3029804301', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('303', '3029804302', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('304', '3029804303', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('305', '3029804304', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('305', '3029804304', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('306', '3029804305', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('307', '3029804306', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('308', '3029804307', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('309', '3029804308', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('310', '3029804309', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('311', '3029804310', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('311', '3029804310', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('312', '3029804311', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('313', '3029804312', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('314', '3029804313', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('315', '3029804314', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('316', '3029804315', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('317', '3029804316', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('317', '3029804316', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('318', '3029804317', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('319', '3029804318', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('320', '3029804319', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('321', '3029804320', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('322', '3029804321', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('323', '3029804322', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('323', '3029804322', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('324', '3029804323', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('325', '3029804324', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('326', '3029804325', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('327', '3029804326', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('328', '3029804327', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('329', '3029804328', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('329', '3029804328', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('330', '3029804329', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('331', '3029804330', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('332', '3029804331', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('333', '3029804332', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('334', '3029804333', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('335', '3029804334', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('335', '3029804334', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('336', '3029804335', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('337', '3029804336', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('338', '3029804337', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('339', '3029804338', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('340', '3029804339', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('341', '3029804340', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('341', '3029804340', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('342', '3029804341', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('343', '3029804342', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('344', '3029804343', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('345', '3029804344', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('346', '3029804345', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('347', '3029804346', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('347', '3029804346', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('348', '3029804347', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('349', '3029804348', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('350', '3029804349', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('351', '3029804350', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('352', '3029804351', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('353', '3029804352', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('353', '3029804352', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('354', '3029804353', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('355', '3029804354', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('356', '3029804355', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('357', '3029804356', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('358', '3029804357', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('359', '3029804358', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('359', '3029804358', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('360', '3029804359', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('361', '3029804360', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('362', '3029804361', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('363', '3029804362', '1', '15', '11', '0');
-INSERT INTO `goose` VALUES ('364', '3029804363', '1', '15', '11', '0');
+INSERT INTO `goose` VALUES ('364', '3029804363', '1', '15', '11', '1');
 INSERT INTO `goose` VALUES ('365', '3029804364', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('366', '3029804365', '1', '15', '11', '0');
 INSERT INTO `goose` VALUES ('367', '3029804366', '1', '15', '11', '0');
@@ -8107,10 +8129,10 @@ CREATE TABLE `receive_goose` (
 -- ----------------------------
 -- Records of receive_goose
 -- ----------------------------
-INSERT INTO `receive_goose` VALUES ('1', '1', '500', '2012-09-07', '');
-INSERT INTO `receive_goose` VALUES ('2', '1', '500', '2012-09-07', '');
-INSERT INTO `receive_goose` VALUES ('3', '8', '500', '2012-09-07', '');
-INSERT INTO `receive_goose` VALUES ('4', '8', '2000', '2012-09-07', '');
+INSERT INTO `receive_goose` VALUES ('1', '1', '500', '2012-07-05', '');
+INSERT INTO `receive_goose` VALUES ('2', '2', '500', '2012-07-01', '');
+INSERT INTO `receive_goose` VALUES ('3', '8', '500', '2012-06-29', '');
+INSERT INTO `receive_goose` VALUES ('4', '8', '2000', '2012-06-13', '');
 INSERT INTO `receive_goose` VALUES ('5', '1', '1', '2012-09-07', ' ');
 INSERT INTO `receive_goose` VALUES ('6', '1', '2', '2012-09-07', ' ');
 INSERT INTO `receive_goose` VALUES ('7', '1', '500', '2012-09-07', '');
@@ -8145,7 +8167,7 @@ CREATE TABLE `retailer` (
 INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '1', '华南地区', '123465', '茜需要', 'afasdfasdfadsfd					');
 INSERT INTO `retailer` VALUES ('2', '张三鹅肉加工厂', '1', '华南地区', '9527', '珠海', '鞢夺	桔柑			');
 INSERT INTO `retailer` VALUES ('3', '白水酒店', '1', '华南地区', '13431243', '左膨胀', '			');
-INSERT INTO `retailer` VALUES ('4', 'qqere', '4', '华中区', '123', '广州', '地 模压 		');
+INSERT INTO `retailer` VALUES ('4', 'qqShop', '4', '华中区', '123', '广州', '地 模压 			');
 INSERT INTO `retailer` VALUES ('5', '鞢在砝码夺', '5', '西南区', '2344', '广州', '无可奈何花落去		');
 
 -- ----------------------------
@@ -8162,14 +8184,14 @@ CREATE TABLE `sale_goose` (
   `saleDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of sale_goose
 -- ----------------------------
 INSERT INTO `sale_goose` VALUES ('1', '1', '10', '25', '100', '2500', '2012-09-03', 'dafdsafdsf');
 INSERT INTO `sale_goose` VALUES ('2', '1', '10', '25', '100', '2500', '2012-08-01', 'fsadfafd');
-INSERT INTO `sale_goose` VALUES ('3', '2', '20', '25', '200', '5000', '2012-09-04', 'fsdfasdf');
+INSERT INTO `sale_goose` VALUES ('3', '2', '20', '25', '200', '5000', '2012-09-04', 'fsdfasdf	');
 INSERT INTO `sale_goose` VALUES ('4', '3', '30', '25', '300', '7500', '2012-08-07', 'poiuytre');
 INSERT INTO `sale_goose` VALUES ('5', '4', '40', '25', '160', '10000', '2012-07-03', 'hgfd');
 INSERT INTO `sale_goose` VALUES ('6', '2', '50', '25', '200', '50000', '2012-08-23', 'vfgdsfgfdsg');
@@ -8237,7 +8259,7 @@ CREATE TABLE `trade_goose` (
 -- ----------------------------
 INSERT INTO `trade_goose` VALUES ('1', '1', '15', '26.22', '56', '2012-08-07', '');
 INSERT INTO `trade_goose` VALUES ('12', '1', '4', '25.533', '20', '2012-08-25', 'oooooooooooooooo	');
-INSERT INTO `trade_goose` VALUES ('13', '0', '500', '5.5', '125.6', '2012-09-07', '');
+INSERT INTO `trade_goose` VALUES ('13', '0', '500', '5.5', '125', '2012-09-07', 'afdsafasdf	');
 INSERT INTO `trade_goose` VALUES ('14', '8', '500', '5.5', '125.6', '2012-09-07', '');
 INSERT INTO `trade_goose` VALUES ('15', '11', '500', '5.99', '895.23', '2012-09-07', '');
 
