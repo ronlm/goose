@@ -36,6 +36,9 @@ public class GoodAction extends BaseAction{
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
 			List<Good> resourceList = goodService.list(new Good(),this.pager.getPageStartRow(),this.pager.getPageSize(),null,null);
+			for (Good good : resourceList) {
+				good.setStock(goodService.currentStock(good));//更新库存
+			}
 			pager.setData(resourceList);
 			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
 			request.setAttribute("goodTypeList", goodTypeList);
