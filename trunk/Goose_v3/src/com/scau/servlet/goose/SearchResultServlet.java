@@ -19,6 +19,7 @@ import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleGoose;
 import com.scau.model.goose.TradeGoose;
+import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.service.impl.goose.BuyGoodViewService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
@@ -30,6 +31,7 @@ import com.scau.service.impl.goose.TradeGooseService;
 import com.scau.util.BeansUtil;
 import com.scau.view.goose.BuyGoodView;
 import com.scau.view.goose.TradeGoodView;
+import com.scau.webService.impl.GooseWebServiceImpl;
 
 /** 用于搜索鹅只的鹅苗交付，成品鹅收购，销售记录
  * @author jianhao
@@ -55,12 +57,14 @@ public class SearchResultServlet extends HttpServlet {
 			Date toDate = new Date(new java.util.Date().getTime());//默认今天
 			long fromNum = 0,toNum = 0;
 			
-			try{
-				fromDate = Date.valueOf(request.getParameter("fromDate"));
-				toDate = Date.valueOf(request.getParameter("toDate"));
-				System.out.println(fromDate.toString() + "  " + toDate.toString());
-			}catch(Exception e){
-				out.print("<font color=\"red\">日期查询相关资料出错!</font>");
+			if(null != request.getParameter("fromDate") && null != request.getParameter("toDate")){
+				try {
+					fromDate = Date.valueOf(request.getParameter("fromDate"));
+					toDate = Date.valueOf(request.getParameter("toDate"));
+				} catch (Exception e) {
+					out.print("<font color=\"red\">日期格式输入有误，请重新输入！</font>");
+					e.printStackTrace();
+				}
 			}
 			
 			if(null != request.getParameter("fromNum") && null != request.getParameter("toNum")){
@@ -173,11 +177,25 @@ public class SearchResultServlet extends HttpServlet {
 				
 				out.print(result);
 				
-			}else{
+			}
+			else if(searchType.equals("gooseRingId")){
+				String ringId = request.getParameter("ringId").trim();//去除误输入的空格
+				if(null != ringId){
+					GooseWebServiceImpl gooseWebService = new GooseWebServiceImpl();
+					ReceiveGooseWs receiveGooseWs = gooseWebService.getReceiveInfo(ringId);
+					result.append("<tr><td>所属农场主</td><td>电话</td><td>所属农场</td><td>农场地址</td><td>交付农场日期</td><td>该批次交付数量</td><td>备注</td></tr>"+
+							"<tr><td>" + receiveGooseWs.getFarmerName() + "</td><td>" + receiveGooseWs.getPhone()+ "</td><td>" +receiveGooseWs.getFarmName() + 
+							"</td><td>" +receiveGooseWs.getAddress() + "</td><td>" + receiveGooseWs.getReceiveDate()+ "</td><td>" + receiveGooseWs.getAmount()+ "</td><td>" + receiveGooseWs.getComments()+ "</td></tr>");
+					out.print(result);
+				}
+				else out.print("查无此脚环，请确认后重新输入！");
+			}
+			else{
 				out.print("暂无相关资料");
 			}
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			out.print("<font color=\"red\">查询相关资料出错!</font>");
 		}
 	}
