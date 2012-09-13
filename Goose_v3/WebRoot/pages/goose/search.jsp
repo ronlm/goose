@@ -39,10 +39,12 @@
 							&nbsp;&nbsp;
 							<a class="button" id="submit"><span>&nbsp;确 定&nbsp;</span> </a>
 					</div>
+					<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;">
+					<div>输入鹅只脚环：<input type="text" name="goose.ringId" id="ringId"/>  <a class="button" id="ringSubmit"><span>&nbsp;确 定&nbsp;</span> </a></div>
 				</th>
 			</tr>
 			<tr class="tableTitle" >
-				    <th colspan="11"><h3>检索结果</h3></th>               
+				    <th colspan="11"><h3>检索结果</h3></th>
 			</tr>
 		</thead>
 		<tbody id="tbody" style="border-style: solid;border: 1px;">	
