@@ -14,17 +14,23 @@ import org.springframework.stereotype.Component;
 
 import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
+import com.scau.model.goose.Farmer;
+import com.scau.model.goose.GoodType;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.SaleRegion;
 import com.scau.service.impl.goose.FarmService;
+import com.scau.service.impl.goose.FarmerService;
+import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.MarketService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
+import com.scau.service.impl.goose.TradeGoodViewService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 import com.scau.view.goose.Market;
+import com.scau.view.goose.TradeGoodView;
 import com.scau.vo.goose.AppearOnMarket;
 import com.scau.vo.goose.DeadDetail;
 import com.scau.vo.goose.DeadInfo;
@@ -43,6 +49,10 @@ public class GooseStatisticAction extends BaseAction {
 	private int interval = 15;
 	private ReceiveGooseService receiveGooseService;
 	private Farm farm;
+	private int daysWithin;
+	private Farmer selectedFarmer;
+	private FarmerService farmerService;
+	private TradeGoodViewService tradeGoodViewService;
 	
 	public String market() throws Exception{
 		String URL = request.getRequestURI();
@@ -95,10 +105,8 @@ public class GooseStatisticAction extends BaseAction {
 			// 查看全部农场的存栏量
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
-			
 			int totalRowCount = farmService.list(new Farm()).size();
 			this.pager.setTotalRowsAmount(totalRowCount);
-			
 			List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
 			
 			List<FarmStock> resourceList = new ArrayList<FarmStock>();
@@ -126,7 +134,88 @@ public class GooseStatisticAction extends BaseAction {
 			request.setAttribute("today", new Date(new java.util.Date().getTime()));
 			return "stock";
 	}
+	
+	public String stockAndGood() throws Exception{
+		//对比当前农户所有鹅的存栏量与物资（饲料）购买记录
+		GoodTypeService goodTypeService = (GoodTypeService) BeansUtil.get("goodTypeService");
+		int totalStock = 0;
+		int totalGood = 0;
+		if(null != request.getParameter("daysWithin")){
+			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+			request.getSession().removeAttribute("daysWithin");
+		}
+		else if(null != request.getSession().getAttribute("daysWithin")){
+			daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
+		}
 		
+		selectedFarmer = farmerService.get(selectedFarmer);
+		if(null != selectedFarmer){
+			//先计算农户名下所有农场的存栏数
+			Farm farm = new Farm();
+			farm.setFarmerId(selectedFarmer.getId());
+			List<Farm> farmList = farmService.list(farm);
+			List<FarmStock> stockList = new ArrayList<FarmStock>();
+			for (Farm f : farmList) {
+				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天 + 吧）
+				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
+						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
+				List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
+				
+				long gooseNum = 0;
+				for(ReceiveGoose receiveGoose : receiveList){
+					String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
+							+ "g.isValid ='1' and g.tradeId=null";
+					gooseNum += gooseService.getRecordCount(gooseCondition);
+				}
+				FarmStock stock = new FarmStock();
+				stock.setFarm(f);
+				stock.setStock(gooseNum);
+				totalStock += gooseNum;
+				stockList.add(stock);
+			}
+					
+			//查找物资购买信息		
+			List<TradeGoodView> tradeGoodViewList = new ArrayList<TradeGoodView>();
+			StringBuffer hql = new StringBuffer("select t from com.scau.view.goose.TradeGoodView t where 1=1 ");
+			int goodTypeId = -1;
+			if(null != request.getParameter("goodTypeId")){
+				goodTypeId = Integer.parseInt(request.getParameter("goodTypeId"));
+			}
+			if(0 < goodTypeId)
+			{
+				//输入物资种类id >0 
+				hql.append(" and t.goodTypeId =" + goodTypeId) ;
+			}
+			
+			if(null != selectedFarmer){
+				hql.append(" and t.farmerId = '" + selectedFarmer.getId() + "'");
+			}
+			
+			hql.append(" and t.tradeDate >='"+ tradeGoodViewService.getDateBefore(daysWithin) + "' order by t.tradeDate desc");
+			tradeGoodViewList = tradeGoodViewService.findByCondition(hql.toString());
+			
+			for (TradeGoodView tradeGoodView : tradeGoodViewList) {
+				totalGood += tradeGoodView.getAmount();
+			}
+			
+			request.setAttribute("tradeGoodViewList", tradeGoodViewList);
+			request.setAttribute("selectGoodTypeId", goodTypeId);
+			request.setAttribute("stockList", stockList);
+		}
+		List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
+		List<Farmer> farmerList = farmerService.list(new Farmer());
+		
+		request.setAttribute("totalStock", totalStock);
+		request.setAttribute("totalGood", totalGood);
+		request.setAttribute("goodTypeList", goodTypeList);
+		request.setAttribute("farmerList", farmerList);
+		request.setAttribute("selectedFarmer", selectedFarmer);
+		request.getSession().setAttribute("daysWithin", daysWithin);
+		
+		
+		return "stockAndGood";		
+	}
+	
 	public String dead() {
 			// 查看鹅只非正常死亡信息
 		   	int daysWithin = 100;
@@ -222,8 +311,6 @@ public class GooseStatisticAction extends BaseAction {
 				deadDetail.setSurviveRate((float) (1.00000 - deadGooseList.size()*1.00000/receiveGoose2.getAmount()));
 				resourceList.add(deadDetail);	
 			}
-			
-
 		}
 		
 		pager.setData(resourceList);
@@ -232,7 +319,6 @@ public class GooseStatisticAction extends BaseAction {
 		request.getSession().setAttribute("daysWithin", daysWithin);
 		return "deadDetail";
 	}
-	
 	
 	public String sale(){
 		/*这里完成销售统计页面的一些数据初始化工作，数据计算交由类com.servlet.goose.SaleStatisticServlet完成，以异步加载形式
@@ -302,5 +388,29 @@ public class GooseStatisticAction extends BaseAction {
 	public void setFarm(Farm farm) {
 		this.farm = farm;
 	}
-	
+	public Farmer getSelectedFarmer() {
+		return selectedFarmer;
+	}
+
+	public void setSelectedFarmer(Farmer selectedFarmer) {
+		this.selectedFarmer = selectedFarmer;
+	}
+
+	public FarmerService getFarmerService() {
+		return farmerService;
+	}
+
+	@Resource
+	public void setFarmerService(FarmerService farmerService) {
+		this.farmerService = farmerService;
+	}
+
+	public TradeGoodViewService getTradeGoodViewService() {
+		return tradeGoodViewService;
+	}
+
+	@Resource
+	public void setTradeGoodViewService(TradeGoodViewService tradeGoodViewService) {
+		this.tradeGoodViewService = tradeGoodViewService;
+	}
 }
