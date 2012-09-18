@@ -101,6 +101,4 @@ public class BuyGoodView {
 	public void setGoodName(String goodName) {
 		this.goodName = goodName;
 	}
-	
-	
 }
