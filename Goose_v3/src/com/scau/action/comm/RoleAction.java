@@ -84,14 +84,21 @@ public class RoleAction extends BaseAction implements Serializable {
 				CommRoleResource crr = new CommRoleResource();
 				crr.setRoleId(role.getId());
 				// 首先把当前获取的这个角色记录全部删除,然后再新增
-				commRoleResourceService.delete(crr);
+				List<CommRoleResource> crrList = commRoleResourceService.list(crr);
+				for (CommRoleResource commRoleResource : crrList) {
+					commRoleResourceService.delete(commRoleResource);
+				}
+				
+				
 				if (null != resources) {
 					for (String string : resources) {
-						crr.setResourceId(Long.valueOf(string));
-						commRoleResourceService.add(crr);
+						CommRoleResource commRoleResource = new CommRoleResource();
+						commRoleResource.setRoleId(role.getId());
+						commRoleResource.setResourceId(Long.parseLong(string));
+						commRoleResourceService.add(commRoleResource);
 					}
 				}
-			}
+			} 
 			return list();// 重新取列表
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
