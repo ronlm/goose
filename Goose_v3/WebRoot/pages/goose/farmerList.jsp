@@ -26,7 +26,7 @@
 				<th>
 					<h3>联系电话</h3>
 				</th>		
-				<th width="20%">
+				<th>
 					<h3>操作</h3>
 				</th>   
 				<th width="30%">
@@ -42,9 +42,9 @@
 					<td>${farmer.name}</td>
 					<td>${farmer.phone}</td>
 					<td>
-					<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!list?farmer.id=${farmer.id }'; return false;"><span>查看所有农场</span></a>
+						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmAction!list?farmer.id=${farmer.id }'; return false;"><span>查看所有农场</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/farmerAction!get?farmer.id=${farmer.id }'; return false;"><span>修改</span></a>
-						</td>
+					</td>
 					<td>${farmer.comments}</td>
 				</tr> 
 			</c:forEach>
