@@ -25,9 +25,7 @@
 			<result name="error">/error/WebError.jsp</result>
 			<result name="list">/pages/comm/{1}List.jsp</result>
 		</action>
-		<!-- 使用通配符 对菜单，用户，资源，角色配置 结束-->
-		
-			
+		<!-- 使用通配符 对菜单，用户，资源，角色配置 结束-->		
 	</package>
 </struts>
 	
