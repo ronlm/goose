@@ -40,7 +40,10 @@
 						<td>${status.count}</td>
 						<td>${stock.farm.name}</td>
 						<td>${stock.stock}</td>
-						<td ><a class="button-small" value="${stock.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span></a></td>
+						<td >
+							<a class="button" value="${deadInfo.farm.farmerId }" name="farmerId" href="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail?farm.id=${stock.farm.id}"><span>存栏明细</span>
+						</a>
+							<a class="button-small" value="${stock.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span></a></td>
 						<td>${stock.farm.comments}</td>
 					</tr>
 				</c:forEach>
