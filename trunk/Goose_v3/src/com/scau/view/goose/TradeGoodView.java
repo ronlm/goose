@@ -12,6 +12,13 @@ public class TradeGoodView {
 	private String farmerName;
 	private String phone;
 	private Long goodId;
+	private Long goodTypeId;
+	public Long getGoodTypeId() {
+		return goodTypeId;
+	}
+	public void setGoodTypeId(Long goodTypeId) {
+		this.goodTypeId = goodTypeId;
+	}
 	private String goodName;
 	private String goodUnit;
 	private Date tradeDate;
