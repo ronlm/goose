@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class TradeGoodView {
 	private Long id;
-	private Long farmId;
+	private Long farmerId;
 	private String farmerName;
 	private String phone;
 	private Long goodId;
@@ -26,11 +26,11 @@ public class TradeGoodView {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getFarmId() {
-		return farmId;
+	public Long getFarmerId() {
+		return farmerId;
 	}
-	public void setFarmId(Long farmId) {
-		this.farmId = farmId;
+	public void setFarmerId(Long farmerId) {
+		this.farmerId = farmerId;
 	}
 	public String getFarmerName() {
 		return farmerName;
