@@ -60,8 +60,12 @@ public class BaseDao<T> {
 			throw new DataAccessException("尝试删除空对象！请至少有一个属性被赋值。entity==null");
 		}
 		try {
-			hibernateTemplate.delete(entity);
-			logger.info("成功删除");
+			List<T> entities = this.list(entity);//获得与已有属性一样的所有 entity
+			for (T t : entities) {
+				//迭代删除所有相同属性的 entity
+				hibernateTemplate.delete(t);
+				logger.info("成功删除");
+			}
 		} catch (Exception e) {
 			logger.error("删除记录出错！");
 			e.printStackTrace();
