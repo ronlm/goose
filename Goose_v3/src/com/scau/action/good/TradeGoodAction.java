@@ -16,10 +16,12 @@ import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Good;
+import com.scau.model.goose.GoodType;
 import com.scau.model.goose.TradeGood;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GoodService;
+import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.service.impl.goose.TradeGoodService;
 import com.scau.service.impl.goose.TradeGoodViewService;
 import com.scau.util.BeansUtil;
@@ -53,23 +55,35 @@ public class TradeGoodAction extends BaseAction{
 			
 			selectedFarmer = farmerService.get(selectedFarmer);
 			List<TradeGoodView> resourceList = new ArrayList<TradeGoodView>();
-			String hql = "";
-			if(null == selectedFarmer){
-				 hql = "select t from com.scau.view.goose.TradeGoodView t where t.tradeDate >='"
-							+ tradeGoodViewService.getDateBefore(daysWithin) + "' order by t.tradeDate desc";
+			StringBuffer hql = new StringBuffer("select t from com.scau.view.goose.TradeGoodView t where 1=1 ");
+			int goodTypeId = -1;
+			if(null != request.getParameter("goodTypeId")){
+				goodTypeId = Integer.parseInt(request.getParameter("goodTypeId"));
 			}
-			else{
-				hql = "select t from com.scau.view.goose.TradeGoodView t where t.farmerId = '" + selectedFarmer.getId() +"' and t.tradeDate >='"
-						+ tradeGoodViewService.getDateBefore(daysWithin) + "' order by t.tradeDate desc";
+			if(0 < goodTypeId)
+			{
+				//输入物资种类id >0 
+				hql.append(" and t.goodTypeId =" + goodTypeId) ;
 			}
-			int totalRows = tradeGoodViewService.findByCondition(hql).size();
+			
+			if(null != selectedFarmer){
+				hql.append(" and t.farmerId = '" + selectedFarmer.getId() + "'");
+			}
+			
+			hql.append(" and t.tradeDate >='"+ tradeGoodViewService.getDateBefore(daysWithin) + "' order by t.tradeDate desc");
+			int totalRows = tradeGoodViewService.findByCondition(hql.toString()).size();
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			resourceList = tradeGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), hql);
+			resourceList = tradeGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), hql.toString());
 			List<Farmer> farmerList = farmerService.list(new Farmer());
+			
+			GoodTypeService goodTypeService = (GoodTypeService) BeansUtil.get("goodTypeService");
+			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
+			request.setAttribute("selectGoodTypeId", goodTypeId);
+			request.setAttribute("goodTypeList", goodTypeList);
 			request.setAttribute("farmerList", farmerList);
 			request.setAttribute("selectedFarmer", selectedFarmer);
 			request.getSession().setAttribute("daysWithin", daysWithin);
