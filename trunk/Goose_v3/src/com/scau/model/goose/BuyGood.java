@@ -14,7 +14,7 @@ public class BuyGood {
 	private Long id;
 	private Long goodId;
 	private Long goodSupplierId;
-	private Long batchNum;
+	private String batchNum;
 	private Double unitPrice;
 	private Long amount;
 	private String origin;
@@ -41,10 +41,12 @@ public class BuyGood {
 	public void setGoodSupplierId(Long goodSupplierId) {
 		this.goodSupplierId = goodSupplierId;
 	}
-	public Long getBatchNum() {
+	
+	
+	public String getBatchNum() {
 		return batchNum;
 	}
-	public void setBatchNum(Long batchNum) {
+	public void setBatchNum(String batchNum) {
 		this.batchNum = batchNum;
 	}
 	public Double getUnitPrice() {
