@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2012-09-18 09:15:36
+Date: 2012-09-18 14:08:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,7 +52,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -83,6 +83,7 @@ INSERT INTO `comm_menu` VALUES ('27', '删除脚环信息', '/pages/goose/delete
 INSERT INTO `comm_menu` VALUES ('28', '销售信息管理', 'javascript:void(0);', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('29', '销售信息统计', '/pages/goose/gooseStatisticAction!sale', '28', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('30', '附加功能', 'javascript:void(0);', '0', '/images/main/MenuIcon.png', '3');
+INSERT INTO `comm_menu` VALUES ('31', '物资与存栏对比', '/pages/goose/gooseStatisticAction!stockAndGood', '30', '/images/main/null.png', '4');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -120,7 +121,7 @@ CREATE TABLE `comm_role` (
 -- ----------------------------
 INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '										');
 INSERT INTO `comm_role` VALUES ('2', '超级管理员', '超级管理员																																		');
-INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户			');
+INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户					');
 
 -- ----------------------------
 -- Table structure for `comm_role_resource`
@@ -133,7 +134,7 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
@@ -146,8 +147,8 @@ INSERT INTO `comm_role_resource` VALUES ('17', '2', '1');
 INSERT INTO `comm_role_resource` VALUES ('18', '2', '2');
 INSERT INTO `comm_role_resource` VALUES ('19', '2', '3');
 INSERT INTO `comm_role_resource` VALUES ('20', '2', '4');
-INSERT INTO `comm_role_resource` VALUES ('21', '3', '3');
-INSERT INTO `comm_role_resource` VALUES ('22', '3', '4');
+INSERT INTO `comm_role_resource` VALUES ('26', '3', '3');
+INSERT INTO `comm_role_resource` VALUES ('27', '3', '4');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -245,7 +246,7 @@ CREATE TABLE `good` (
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '3', '农药', '油麦菜种', 'bao', '0');
+INSERT INTO `good` VALUES ('1', '5', '种子', '油麦菜种', 'bao', null);
 INSERT INTO `good` VALUES ('2', '4', '树苗', '大叶槐苗', '棵', '0');
 INSERT INTO `good` VALUES ('3', '3', '农药', '无敌消毒水', '瓶', null);
 INSERT INTO `good` VALUES ('4', '3', '农药', '百毒杀', '瓶', '0');
@@ -575,13 +576,14 @@ CREATE TABLE `trade_good` (
   `amount` int(11) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_good
 -- ----------------------------
 INSERT INTO `trade_good` VALUES ('7', '5', '1', '2012-09-06', '44', '100', 'TFHFGHXF	');
 INSERT INTO `trade_good` VALUES ('8', '1', '3', '2012-09-17', '30', '10', 'cash	');
+INSERT INTO `trade_good` VALUES ('9', '1', '1', '2012-09-16', '123', '3', '	');
 
 -- ----------------------------
 -- Table structure for `trade_goose`
@@ -623,4 +625,4 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `tradegoodview`
 -- ----------------------------
 DROP VIEW IF EXISTS `tradegoodview`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tradegoodview` AS select `farmer`.`id` AS `farmId`,`farmer`.`name` AS `farmerName`,`farmer`.`phone` AS `phone`,`trade_good`.`id` AS `id`,`trade_good`.`goodId` AS `goodId`,`trade_good`.`tradeDate` AS `tradeDate`,`trade_good`.`unitPrice` AS `unitPrice`,`trade_good`.`amount` AS `amount`,`trade_good`.`comments` AS `comments`,`good`.`name` AS `goodName`,`good`.`unit` AS `goodUnit` from ((`farmer` join `trade_good` on(('' = ''))) join `good`) where ((`farmer`.`id` = `trade_good`.`farmerId`) and (`trade_good`.`goodId` = `good`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tradegoodview` AS select `farmer`.`id` AS `farmerId`,`farmer`.`name` AS `farmerName`,`farmer`.`phone` AS `phone`,`trade_good`.`id` AS `id`,`trade_good`.`goodId` AS `goodId`,`trade_good`.`tradeDate` AS `tradeDate`,`trade_good`.`unitPrice` AS `unitPrice`,`trade_good`.`amount` AS `amount`,`trade_good`.`comments` AS `comments`,`good`.`name` AS `goodName`,`good`.`unit` AS `goodUnit`,`good`.`goodTypeId` AS `goodTypeId` from ((`farmer` join `trade_good` on(('' = ''))) join `good`) where ((`farmer`.`id` = `trade_good`.`farmerId`) and (`trade_good`.`goodId` = `good`.`id`)) ;
