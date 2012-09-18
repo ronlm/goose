@@ -15,8 +15,17 @@
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/tradeGoodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<form name="form" id="form" action="${pageContext.request.contextPath }/pages/good/tradeGoodAction!list" method="post">
+							选择物资类型:&nbsp;
+							<select name="goodTypeId" id="goodTypeId" style="width: 80px" >
+								<option value="-1">全部</option>
+								<c:forEach items="${goodTypeList}" var="goodType">
+								<option value="${goodType.id}" 
+								<c:if test="${selectGoodTypeId == goodType.id }">selected="selected" </c:if>>${goodType.name}</option>
+								</c:forEach>
+							</select>
+							&nbsp;&nbsp;&nbsp;
 							选择农户:&nbsp;
-							<select name="selectedFarmer.id" style="width: 80px">
+							<select name="selectedFarmer.id" style="width: 100px">
 								<option value="-1">全部</option>
 								<c:forEach items="${farmerList}" var="farmer">
 								<option value="${farmer.id}" <c:if test="${selectedFarmer.id == farmer.id }"> selected="selected"</c:if>>${farmer.name}</option>
