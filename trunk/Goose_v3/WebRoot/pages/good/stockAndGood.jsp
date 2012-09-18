@@ -75,6 +75,7 @@
 		<table class="mainTable">
 			<thead>
 				<tr class="tableTitle">
+					<th width="30px"><h3>序号</h3></th>
 					<th><h3>资源名称</h3></th>
 					<th><h3>数量</h3></th>
 					<th><h3>单位</h3></th>
@@ -83,8 +84,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${tradeGoodViewList}" var="tradeGoodView">
+				<c:forEach items="${tradeGoodViewList}" var="tradeGoodView" varStatus="status">
 				<tr>
+					<td>${status.count}</td>
 					<td>${tradeGoodView.goodName}</td>
 					<td>${tradeGoodView.amount}</td>
 					<td>${tradeGoodView.goodUnit}</td>
@@ -92,7 +94,7 @@
 					<td>${tradeGoodView.comments}</td>
 				</tr> 
 				</c:forEach>
-				<tr><td>数量合计</td><td colspan="">${totalGood }</td></tr>		
+				<tr><td>数量合计</td><td></td><td>${totalGood }</td></tr>		
 			</tbody>
 	</table>
   </body>
