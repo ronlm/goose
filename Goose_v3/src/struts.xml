@@ -8,5 +8,7 @@
 	<!-- 包含养鹅后台模块 -->
 	<include file="gooseStruts2.xml"/>
 	
+	<!-- 包含养物资管理 模块 -->
+	<include file="goodStruts.xml"/>
 </struts>
 	
