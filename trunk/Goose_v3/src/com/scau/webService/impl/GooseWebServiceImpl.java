@@ -9,6 +9,7 @@ import javax.jws.WebParam;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.mapping.Value;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.Farm;
@@ -90,6 +91,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
+	@Transactional
 	public int addReceiveGoose(@WebParam(name="farmId")long farmId, @WebParam(name="gooseRingList")ArrayList<String> gooseList ,@WebParam(name="comments")String comments) {
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		
@@ -124,6 +126,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
+	@Transactional
 	public int addTradeGoose(@WebParam(name="farmId")long farmId, @WebParam(name="gooseRingList")ArrayList<String> gooseList 
 			,@WebParam(name="totalWeight")Double totalWeight, @WebParam(name="unitPrice")Double unitPrice,@WebParam(name="comments")String comments) {
 		
@@ -158,6 +161,7 @@ public class GooseWebServiceImpl implements IGooseService{
 	}
 
 	@WebMethod
+	@Transactional
 	public int addSaleGoose(@WebParam(name="retailerId")long retailerId , @WebParam(name="gooseRingList")ArrayList<String> gooseList,
 			@WebParam(name="totalWeight")Double totalWeight , @WebParam(name="unitPrice")Double unitPrice ,
 			@WebParam(name="comments")String comments) {
@@ -195,6 +199,7 @@ public class GooseWebServiceImpl implements IGooseService{
 
 	
 	@WebMethod
+	@Transactional
 	public int setInvalid(@WebParam(name="gooseRing")String gooseId) {
 		try {
 		
