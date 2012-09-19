@@ -20,7 +20,6 @@ public class Good {
 	private Long id;
 	private String name;
 	private Long goodTypeId;
-	private String goodTypeName;
 	private String unit;
 	private Long stock;
 	
@@ -61,19 +60,4 @@ public class Good {
 	public void setStock(Long stock) {
 		this.stock = stock;
 	}
-	public String getGoodTypeName() {
-		return goodTypeName;
-	}
-	public void setGoodTypeName(String goodTypeName) {
-		this.goodTypeName = goodTypeName;
-	}
-	
-	public void setGoodTypeName(){
-		GoodTypeService goodTypeService = (GoodTypeService) BeansUtil.get("goodTypeService");
-		GoodType gt = new GoodType();
-		gt.setId(this.getGoodTypeId());
-		gt = goodTypeService.get(gt);
-		this.setGoodTypeName(gt.getName());
-	}
-	
 }
