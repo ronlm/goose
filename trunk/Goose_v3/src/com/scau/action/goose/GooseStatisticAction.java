@@ -298,7 +298,7 @@ public class GooseStatisticAction extends BaseAction {
 			for (ReceiveGoose receiveGoose2 : receiveGooseList.subList(this.pager.getPageStartRow(), toIndex)) {
 				// 迭代要显示在页面的所有批次
 				Goose goose = new Goose();
-				goose.setReceiveId(receiveGoose2.getId());//查找出所属该批次的已死亡鹅只
+				goose.setReceiveId(receiveGoose2.getId());//查找出所属该批次的已死亡鹅只,未出售
 				goose.setIsValid(0);
 				goose.setTradeId(null);
 				List<Goose> deadGooseList = gooseService.list(goose);
