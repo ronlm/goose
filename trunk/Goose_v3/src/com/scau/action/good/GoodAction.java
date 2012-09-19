@@ -16,7 +16,9 @@ import com.scau.model.goose.Good;
 import com.scau.model.goose.GoodType;
 import com.scau.service.impl.goose.GoodService;
 import com.scau.service.impl.goose.GoodTypeService;
+import com.scau.service.impl.goose.GoodViewService;
 import com.scau.util.PageController;
+import com.scau.view.goose.GoodView;
 
 @Component
 @Scope("prototype")
@@ -25,19 +27,20 @@ public class GoodAction extends BaseAction{
 	private final static Log logger = LogFactory.getLog(GoodAction.class);
 	private PageController pager;
 	private GoodService goodService;
+	private GoodViewService goodViewService;
 	private GoodTypeService goodTypeService;
 	private Good good;
 	
 	public String list() throws Exception {
-		// 取列表
+		// 取列表,用视图 GoodView显示
 			
-			int totalRows = goodService.listAll(new Good()).size();
+			int totalRows = goodViewService.listAll(new GoodView()).size();
 			String URL = getListURL();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<Good> resourceList = goodService.list(new Good(),this.pager.getPageStartRow(),this.pager.getPageSize(),null,null);
-			for (Good good : resourceList) {
-				good.setStock(goodService.currentStock(good));//更新库存
+			List<GoodView> resourceList = goodViewService.list(new GoodView(),this.pager.getPageStartRow(),this.pager.getPageSize(),null,null);
+			for (GoodView good : resourceList) {
+				good.setStock(goodViewService.currentStock(good));//更新库存
 			}
 			pager.setData(resourceList);
 			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
@@ -116,6 +119,15 @@ public class GoodAction extends BaseAction{
 	@Resource
 	public void setGoodTypeService(GoodTypeService goodTypeService) {
 		this.goodTypeService = goodTypeService;
+	}
+
+	public GoodViewService getGoodViewService() {
+		return goodViewService;
+	}
+
+	@Resource
+	public void setGoodViewService(GoodViewService goodViewService) {
+		this.goodViewService = goodViewService;
 	}
 
 
