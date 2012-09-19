@@ -14,9 +14,26 @@
 					<h3>物资采购记录</h3>
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/buyGoodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
-						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/good/buyGoodAction!list" method="post">
+						<form name="form" id="form" action="${pageContext.request.contextPath }/pages/good/buyGoodAction!list" method="post">
+							选择物资类型:&nbsp;
+							<select name="goodTypeId" id="goodTypeId" style="width: 100px" >
+								<option value="-1">全部</option>
+								<c:forEach items="${goodTypeList}" var="goodType">
+								<option value="${goodType.id}" 
+								<c:if test="${selectGoodTypeId == goodType.id }">selected="selected" </c:if>>${goodType.name}</option>
+								</c:forEach>
+							</select>
+							&nbsp;&nbsp;&nbsp;
+							选择供应商:&nbsp;
+							<select name="selectedGoodSupplier.id" style="width: 150px">
+								<option value="-1">全部</option>
+								<c:forEach items="${goodSupplierList}" var="supplier">
+								<option value="${supplier.id}" <c:if test="${selectedGoodSupplier.id == supplier.id }"> selected="selected"</c:if>>${supplier.name}</option>
+								</c:forEach>
+							</select>
+							&nbsp;&nbsp;&nbsp;&nbsp;
 							最近
-							<select name="daysWithin" id="daysWithin" style="width: 70px" onchange="changeDay();" >
+							<select name="daysWithin" id="daysWithin" style="width: 70px" >
 								<option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3天</option>
 								<option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7天</option>
 								<option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>两周</option>
@@ -27,7 +44,8 @@
 								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
-							天内采购记录				
+							天内销售记录
+							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span> </a>			
 						</form>
 					</div>
 				</th>
@@ -82,8 +100,8 @@
 	</table>
   </body>
     <script type="text/javascript">
-	function changeDay(){
-			$("#changeDayForm").submit();
+	function submitForm(){
+			$("#form").submit();
 	}
 </script>
 </html>
