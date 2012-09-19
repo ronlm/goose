@@ -11,24 +11,13 @@ import com.scau.model.goose.Farm;
 import com.scau.model.goose.Good;
 import com.scau.service.BaseService;
 import com.scau.util.BeansUtil;
+import com.scau.view.goose.GoodView;
 
 @Component
-public class GoodService extends BaseService<Good>{
-	@Transactional
-	public void save(Good good) throws BusinessException{
-		if (null != good && null != good.getName()) {
-			if(null != good.getId() && 0 != good.getId()){
-				update(good);
-			}else{
-				add(good);
-			}
-		}else {
-			throw new BusinessException("物资名不能为空!");
-		}
-	}
+public class GoodViewService extends BaseService<GoodView>{
 	
 	@Override
-	public Good get(Good entity) {
+	public GoodView get(GoodView entity) {
 		if(null != entity && null != entity.getId() && 0!= entity.getId()){
 			return super.get(entity, entity.getId());
 		}
@@ -40,7 +29,7 @@ public class GoodService extends BaseService<Good>{
 		}
 	}
 	
-	public long currentStock(Good entity){
+	public long currentStock(GoodView entity){
 		BuyGoodService buyGoodService = (BuyGoodService) BeansUtil.get("buyGoodService");
 		TradeGoodService tradeGoodService = (TradeGoodService) BeansUtil.get("tradeGoodService");
 		List<Object> totalBuyGoodAmount = buyGoodService.getSum("select sum(bg.amount),bg from com.scau.model.goose.BuyGood bg where bg.goodId=" + entity.getId());
