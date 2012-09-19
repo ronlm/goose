@@ -18,7 +18,6 @@ public class Retailer implements Serializable{
 	private Long id;
 	private String name;
 	private Long regionId;
-	private String region;
 	private String phone;
 	private String address;
 	private String comments;
@@ -55,25 +54,11 @@ public class Retailer implements Serializable{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public String getRegion() {
-		return region;
-	}
-	public void setRegion(String region) {
-		this.region = region;
-	}
+	
 	public Long getRegionId() {
 		return regionId;
 	}
 	public void setRegionId(Long regionId) {
 		this.regionId = regionId;
-	}
-	
-	public void setRegion(){
-		SaleRegionService saleRegionService = (SaleRegionService) BeansUtil.get("saleRegionService");
-		SaleRegion saleRegion = new SaleRegion();
-		saleRegion.setId(this.getRegionId());
-		saleRegion = saleRegionService.get(saleRegion);
-		this.setRegion(saleRegion.getRegion());
-		
 	}
 }
