@@ -15,8 +15,10 @@ import com.scau.action.BaseAction;
 import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleRegion;
 import com.scau.service.impl.goose.RetailerService;
+import com.scau.service.impl.goose.RetailerViewService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.PageController;
+import com.scau.view.goose.RetailerView;
 
 @Component
 @Scope("prototype")
@@ -25,16 +27,17 @@ public class RetailerAction extends BaseAction {
 	private final static Log logger = LogFactory.getLog(RetailerAction.class);
 	private PageController pager;
 	private RetailerService retailerService;
+	private RetailerViewService retailerViewService;
 	private SaleRegionService saleRegionService;
 	private Retailer retailer;
 		
 	public String list() {
 		// 取列表		
-			int totalRows = retailerService.getRecordCount(new Retailer());
+			int totalRows = retailerViewService.getRecordCount(new RetailerView());
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
 			this.pager.setTotalRowsAmount(totalRows);
-			List<Retailer> resourceList = retailerService.list(new Retailer(),
+			List<RetailerView> resourceList = retailerViewService.list(new RetailerView(),
 					this.pager.getPageStartRow(), pager.getPageSize(), null, null);
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
@@ -113,5 +116,15 @@ public class RetailerAction extends BaseAction {
 	public void setRetailer(Retailer retailer) {
 		this.retailer = retailer;
 	}
+
+	public RetailerViewService getRetailerViewService() {
+		return retailerViewService;
+	}
+
+	@Resource
+	public void setRetailerViewService(RetailerViewService retailerViewService) {
+		this.retailerViewService = retailerViewService;
+	}
+
 	
 }
