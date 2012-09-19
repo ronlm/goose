@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : MySql
-Source Server Version : 50527
-Source Host           : localhost:3306
+Source Server Version : 50524
+Source Host           : localhost:3305
 Source Database       : goose
 
 Target Server Type    : MYSQL
-Target Server Version : 50527
+Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2012-09-19 09:06:30
+Date: 2012-09-19 17:01:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -235,23 +235,22 @@ INSERT INTO `farmer` VALUES ('7', '周七', '234324456667', '阳山', '夺震城
 -- ----------------------------
 DROP TABLE IF EXISTS `good`;
 CREATE TABLE `good` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `goodTypeId` int(11) DEFAULT NULL,
-  `goodTypeName` varchar(30) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `unit` varchar(255) DEFAULT NULL,
-  `stock` int(11) DEFAULT '0',
+  `stock` int(11) DEFAULT '0' COMMENT '库存',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '5', '种子', '油麦菜种', 'bao', null);
-INSERT INTO `good` VALUES ('2', '4', '树苗', '大叶槐苗', '棵', '0');
-INSERT INTO `good` VALUES ('3', '3', '农药', '无敌消毒水', '瓶', null);
-INSERT INTO `good` VALUES ('4', '3', '农药', '百毒杀', '瓶', '0');
-INSERT INTO `good` VALUES ('5', '1', '饲料', '正大饲料', '包', null);
+INSERT INTO `good` VALUES ('1', '5', '油麦菜种', 'bao', null);
+INSERT INTO `good` VALUES ('2', '4', '大叶槐苗', '棵', '0');
+INSERT INTO `good` VALUES ('3', '3', '无敌消毒水', '瓶', null);
+INSERT INTO `good` VALUES ('4', '3', '百毒杀', '瓶', '0');
+INSERT INTO `good` VALUES ('5', '1', '正大饲料', '包', null);
 
 -- ----------------------------
 -- Table structure for `goodsupplier`
@@ -303,7 +302,7 @@ CREATE TABLE `goose` (
   `ringId` varchar(20) NOT NULL,
   `receiveId` int(11) NOT NULL,
   `tradeId` int(11) DEFAULT NULL COMMENT 'չ',
-  `saleId` int(11) DEFAULT NULL COMMENT '',
+  `saleId` int(11) DEFAULT NULL,
   `isValid` tinyint(2) DEFAULT '1' COMMENT '0ʾֻ1 Ϊֳ״̬2Ϊѳ',
   PRIMARY KEY (`id`),
   KEY `isValid` (`isValid`) USING BTREE,
@@ -342,7 +341,6 @@ CREATE TABLE `retailer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `regionId` int(11) DEFAULT NULL,
-  `region` varchar(30) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
@@ -353,11 +351,11 @@ CREATE TABLE `retailer` (
 -- ----------------------------
 -- Records of retailer
 -- ----------------------------
-INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '1', '华南地区', '123465', '茜需要', 'afasdfasdfadsfd					');
-INSERT INTO `retailer` VALUES ('2', '张三鹅肉加工厂', '1', '华南地区', '9527', '珠海', '鞢夺	桔柑			');
-INSERT INTO `retailer` VALUES ('3', '白水酒店', '1', '华南地区', '13431243', '左膨胀', '			');
-INSERT INTO `retailer` VALUES ('4', 'qqShop', '4', '华中区', '123', '广州', '地 模压 			');
-INSERT INTO `retailer` VALUES ('5', '鞢在砝码夺', '5', '西南区', '2344', '广州', '无可奈何花落去		');
+INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '1', '123465', '茜需要', 'afasdfasdfadsfd					');
+INSERT INTO `retailer` VALUES ('2', '张三鹅肉加工厂', '1', '9527', '珠海', '鞢夺	桔柑			');
+INSERT INTO `retailer` VALUES ('3', '白水酒店', '1', '13431243', '左膨胀', '			');
+INSERT INTO `retailer` VALUES ('4', 'qqShop', '4', '123', '广州', '地 模压 			');
+INSERT INTO `retailer` VALUES ('5', '鞢在砝码夺', '5', '2344', '广州', '无可奈何花落去		');
 
 -- ----------------------------
 -- Table structure for `sale_goose`
@@ -448,10 +446,22 @@ DROP VIEW IF EXISTS `buygoodview`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `buygoodview` AS select `buy_good`.`id` AS `id`,`buy_good`.`goodSupplierId` AS `supplierId`,`buy_good`.`goodId` AS `goodId`,`buy_good`.`batchNum` AS `batchNum`,`buy_good`.`unitPrice` AS `unitPrice`,`buy_good`.`amount` AS `amount`,`buy_good`.`origin` AS `origin`,`buy_good`.`date` AS `date`,`buy_good`.`comments` AS `comments`,`good`.`name` AS `goodName`,`good`.`unit` AS `unit`,`goodsupplier`.`name` AS `supplierName`,`goodsupplier`.`phone` AS `supplierPhone`,`good`.`goodTypeId` AS `goodTypeId` from ((`buy_good` join `good`) join `goodsupplier`) where ((`buy_good`.`goodId` = `good`.`id`) and (`buy_good`.`goodSupplierId` = `goodsupplier`.`id`)) ;
 
 -- ----------------------------
+-- View structure for `goodview`
+-- ----------------------------
+DROP VIEW IF EXISTS `goodview`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `goodview` AS select `good`.`id` AS `id`,`good`.`goodTypeId` AS `goodTypeId`,`good`.`name` AS `name`,`good`.`unit` AS `unit`,`good`.`stock` AS `stock`,`good_type`.`name` AS `goodTypeName` from (`good` join `good_type`) where (`good`.`goodTypeId` = `good_type`.`id`) ;
+
+-- ----------------------------
 -- View structure for `market`
 -- ----------------------------
 DROP VIEW IF EXISTS `market`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `market` AS select `farm`.`id` AS `farmId`,`receive_goose`.`id` AS `receiveId`,`farm`.`name` AS `farmName`,`farm`.`farmerId` AS `farmerId`,`farm`.`address` AS `address`,`receive_goose`.`amount` AS `amount`,`receive_goose`.`receiveDate` AS `receiveDate`,`receive_goose`.`comments` AS `comments` from (`farm` join `receive_goose`) where (`farm`.`id` = `receive_goose`.`farmId`) ;
+
+-- ----------------------------
+-- View structure for `retailerview`
+-- ----------------------------
+DROP VIEW IF EXISTS `retailerview`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `retailerview` AS select `retailer`.`id` AS `id`,`retailer`.`name` AS `name`,`retailer`.`regionId` AS `regionId`,`retailer`.`phone` AS `phone`,`retailer`.`address` AS `address`,`retailer`.`comments` AS `comments`,`sale_region`.`region` AS `region` from (`retailer` join `sale_region`) where (`retailer`.`regionId` = `sale_region`.`id`) ;
 
 -- ----------------------------
 -- View structure for `tradegoodview`
