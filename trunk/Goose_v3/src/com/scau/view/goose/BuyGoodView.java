@@ -10,6 +10,7 @@ public class BuyGoodView {
 	private Long id;
 	private Long supplierId;
 	private Long goodId;
+	private Long goodTypeId;
 	private String batchNum;
 	private double unitPrice;
 	private int amount;
@@ -101,4 +102,12 @@ public class BuyGoodView {
 	public void setGoodName(String goodName) {
 		this.goodName = goodName;
 	}
+	public Long getGoodTypeId() {
+		return goodTypeId;
+	}
+	public void setGoodTypeId(Long goodTypeId) {
+		this.goodTypeId = goodTypeId;
+	}
+	
+	
 }
