@@ -77,6 +77,8 @@
 				<value>com.scau.view.goose.Market</value>
 				<value>com.scau.view.goose.TradeGoodView</value>
 				<value>com.scau.view.goose.BuyGoodView</value>
+				<value>com.scau.view.goose.GoodView</value>
+				<value>com.scau.view.goose.RetailerView</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
