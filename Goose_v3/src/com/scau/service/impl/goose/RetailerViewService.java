@@ -10,25 +10,13 @@ import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleRegion;
 import com.scau.service.BaseService;
 import com.scau.util.BeansUtil;
+import com.scau.view.goose.RetailerView;
 
 @Component
-public class RetailerService extends BaseService<Retailer>{
+public class RetailerViewService extends BaseService<RetailerView>{
 	
-	@Transactional
-	public void save(Retailer entity) throws BusinessException{
-		if (null != entity && null != entity.getName()) {
-			if(null != entity.getId() && 0 != entity.getId()){				
-				update(entity);
-			}else{
-				add(entity);
-			}
-		}else {
-			throw new BusinessException("用户名不能为空!");
-		}
-	}
-
 	@Override
-	public Retailer get(Retailer entity) {
+	public RetailerView get(RetailerView entity) {
 		if(null != entity && null != entity.getId() && 0!= entity.getId()){
 			return super.get(entity, entity.getId());
 		}
