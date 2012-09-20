@@ -25,6 +25,10 @@ import com.scau.service.impl.comm.CommRoleResourceService;
 import com.scau.util.BeansUtil;
 
 
+/** 权限过滤器，根据用户的角色所得的权限，拦截用户访问页面，防止用户访问不在所分配权限内的页面
+ * @author jianhao
+ *
+ */
 public class SecurityFilter implements Filter {
 
 	private final static Logger logger = Logger.getLogger(SecurityFilter.class);
