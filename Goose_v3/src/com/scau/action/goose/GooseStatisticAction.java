@@ -37,6 +37,7 @@ import com.scau.vo.goose.DeadInfo;
 import com.scau.vo.goose.FarmStock;
 
 @Component
+@Scope("prototype")
 public class GooseStatisticAction extends BaseAction {
 	private final static Log logger = LogFactory
 			.getLog(GooseStatisticAction.class);
@@ -44,9 +45,7 @@ public class GooseStatisticAction extends BaseAction {
 	private MarketService marketService;
 	private FarmService farmService;
 	private GooseService gooseService;
-	private Goose goose;
 	private static int ON_MARKET_DAY = 90;//设定的鹅只成熟日期
-	private int interval = 15;
 	private ReceiveGooseService receiveGooseService;
 	private Farm farm;
 	private int daysWithin;
@@ -86,7 +85,7 @@ public class GooseStatisticAction extends BaseAction {
 		int totalRows = totalAppearOnMarkets.size();// 总的记录条数
 		this.pager.setTotalRowsAmount(totalRows);
 		
-		int toIndex = totalAppearOnMarkets.size() <= pager.getPageStartRow() + pager.getPageSize() ? totalAppearOnMarkets.size()  : pager.getPageStartRow() + pager.getPageSize();
+		int toIndex = totalAppearOnMarkets.size() <= pager.getPageStartRow() + pager.getPageSize() ? totalAppearOnMarkets.size() : pager.getPageStartRow() + pager.getPageSize();
 		List<AppearOnMarket> resourceList = totalAppearOnMarkets.subList(this.pager.getPageStartRow(), toIndex);
 			
 		pager.setData(resourceList);
@@ -109,7 +108,7 @@ public class GooseStatisticAction extends BaseAction {
 			List<FarmStock> resourceList = new ArrayList<FarmStock>();
 			for(Farm f :farmList){
 				
-				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天 + 吧）
+				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
 						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
 				List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
