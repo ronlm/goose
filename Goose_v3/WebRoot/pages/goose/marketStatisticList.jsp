@@ -14,7 +14,7 @@
 	<table class="mainTable" id="table">
 		<thead>
 			<tr class="tableController">
-				<th colspan="8">
+				<th colspan="10">
 					<h3>鹅只上市统计信息列表</h3>
 					<div class="tableControllerButton">
 						今天是&nbsp;${today }&nbsp;日&nbsp;&nbsp;&nbsp; <a class="button"
