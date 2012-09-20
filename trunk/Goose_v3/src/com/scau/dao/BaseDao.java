@@ -26,6 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.ege.mvc.exception.DataAccessException;
 
+/** 采用泛型去完成的对所有实体类和视图类完成对数据库执行CRUD等各种方法的基类
+ * @author jianhao
+ *
+ * @param <T>
+ */
 @Component
 @Scope("prototype")
 public class BaseDao<T> {
