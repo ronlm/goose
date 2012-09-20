@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page isELIgnored="false"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -24,17 +25,13 @@
 					</div></th>
 			</tr>
 			<tr class="tableTitle">
-				<th><h3>序号</h3>
-				<th><h3>农场</h3>
-				</th>
-				<th><h3>鹅苗交付日期</h3>
-				</th>
-				<th><h3>交付数量</h3>
-				</th>
-				<th><h3>现存数量</h3>
-				</th>
-				<th><h3>离90天上市相差天数</h3>
-				</th>
+				<th><h3>序号</h3></th>
+				<th><h3>农场</h3></th>
+				<th><h3>鹅苗交付日期</h3></th>
+				<th><h3>交付数量</h3></th>
+				<th><h3>现存数量</h3></th>
+				<th><h3>存活率</h3></th>
+				<th><h3>离90天上市相差天数</h3></th>
 				<th width="30%">
 					<h3>操作</h3>
 				</th>
@@ -51,6 +48,7 @@
 					<td>${appearOnMarket.market.receiveDate}</td>
 					<td>${appearOnMarket.market.amount}</td>
 					<td>${appearOnMarket.gooseNum}</td>
+					<td><fmt:formatNumber value="${appearOnMarket.gooseNum/appearOnMarket.market.amount}" maxFractionDigits="4"/></td>
 					<td><c:choose>
 							<c:when test="${-15 <= appearOnMarket.dayTo90 && appearOnMarket.dayTo90 < 0}">
 								<font color="red">${appearOnMarket.dayTo90} &nbsp;应该强制上市！</font>
