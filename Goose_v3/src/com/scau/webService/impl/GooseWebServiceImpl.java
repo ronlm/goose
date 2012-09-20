@@ -120,6 +120,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			gooseService.batchAdd(gooses);//批量写入数据库
 			
 		}catch (Exception e) {
+			e.printStackTrace();
 			return 1;//操作出错
 		}
 		return 0;
@@ -155,6 +156,7 @@ public class GooseWebServiceImpl implements IGooseService{
 				gooseService.update(g);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 1;
 		}
 		return 0;
@@ -192,6 +194,7 @@ public class GooseWebServiceImpl implements IGooseService{
 				gooseService.update(g);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 1;//操作出错，返回1
 		}
 		return 0;
@@ -209,6 +212,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			goose.setIsValid(0);//设置鹅只状态为死亡
 			gooseService.update(goose);//完成销号操作
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 1;//操作出错
 		}
 		
@@ -253,6 +257,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;//操作出错
 		}
 	
