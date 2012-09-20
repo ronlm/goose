@@ -45,7 +45,7 @@ public class GooseStatisticAction extends BaseAction {
 	private FarmService farmService;
 	private GooseService gooseService;
 	private Goose goose;
-	private int onMarketDay = 90;//设定的鹅只成熟日期
+	private static int ON_MARKET_DAY = 90;//设定的鹅只成熟日期
 	private int interval = 15;
 	private ReceiveGooseService receiveGooseService;
 	private Farm farm;
@@ -59,31 +59,28 @@ public class GooseStatisticAction extends BaseAction {
 		this.pager.setURL(URL);
 
 		/* 查看鹅只可上市信息
-		 *候选条件：从本日起全部 离90 + 15 天内的鹅苗接收批次的鹅只 		
+		 *候选条件：鹅苗接收批次时间在从今天算已养殖45天到105天内
 		*/
-		String hql = "select m from com.scau.view.goose.Market m where m.receiveDate >='"
-				+ marketService.getDateBefore(onMarketDay + interval )+ "' order by m.receiveDate asc";
+		String hql =  "select m from com.scau.view.goose.Market m where m.receiveDate between '" + marketService.getDateBefore(105) + "' and '" +
+					marketService.getDateBefore(45) + "' order by m.receiveDate asc";
 		// 以下的计算是找出记录的总数
 		List<Market> totalList = marketService.findByCondition(hql);
 		List<AppearOnMarket> totalAppearOnMarkets = new ArrayList<AppearOnMarket>();
 		Date today = new Date(new java.util.Date().getTime());
 		for (Market market : totalList) {	
-			long difference = today.getTime() - market.getReceiveDate().getTime();//已养殖天数
-			long day = onMarketDay - difference/(3600*24*1000);//离上市相差的天数
+			long feedDays = today.getTime() - market.getReceiveDate().getTime();//已养殖天数
+			long day = ON_MARKET_DAY - feedDays/(3600*24*1000);//离上市相差的天数
 			//查找出属于该个接收鹅苗批次，又未死亡和未交易的鹅只数量
 		
 			String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
 					+ "g.isValid ='1' and g.tradeId=null";
 			long gooseNum = gooseService.getRecordCount(gooseCondition);
 				
-			// 只显示45天内可上市的批次
-			if( day < 45){
-				AppearOnMarket a = new AppearOnMarket();
-				a.setDayTo90(day);
-				a.setGooseNum(gooseNum);
-				a.setMarket(market);
-				totalAppearOnMarkets.add(a);
-			}
+			AppearOnMarket a = new AppearOnMarket();
+			a.setDayTo90(day);
+			a.setGooseNum(gooseNum);
+			a.setMarket(market);
+			totalAppearOnMarkets.add(a);
 		}
 			
 		int totalRows = totalAppearOnMarkets.size();// 总的记录条数
@@ -273,7 +270,8 @@ public class GooseStatisticAction extends BaseAction {
 		//查看一个指定农场的所以存栏 的receiveGoose 的死亡信息和存活率
 		int daysWithin = 0;
 		farm = farmService.get(farm);
-		
+		String URL = request.getRequestURI();
+		this.pager.setURL(URL);
 		// 取得要显示的日期条件
 		if(null != request.getParameter("daysWithin")){
 			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
