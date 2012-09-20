@@ -111,11 +111,13 @@ public class GooseWebServiceImpl implements IGooseService{
 			List<Goose> gooses = new ArrayList<Goose>();
 			// 脚环号入数据库
 			for (String ringId : gooseList) {
-				Goose g = new Goose();
-				g.setRingId(ringId);
-				g.setReceiveId(receiveGooseId);
-				g.setIsValid(1);//设置脚环有效，正在养殖状态
-				gooses.add(g);
+				if(!ringId.equals("")){
+					Goose g = new Goose();
+					g.setRingId(ringId);
+					g.setReceiveId(receiveGooseId);
+					g.setIsValid(1);//设置脚环有效，正在养殖状态
+					gooses.add(g);
+				}
 			}
 			gooseService.batchAdd(gooses);//批量写入数据库
 			
@@ -147,13 +149,14 @@ public class GooseWebServiceImpl implements IGooseService{
 			tradeGoose = tradeGooseService.get(tradeGoose);// 获得新添加的tradeGoose的id
 			long tradeId = tradeGoose.getId();
 			for (String ringId : gooseList) {
-				Goose g = new Goose();
-				
-				g.setRingId(ringId);
-				g = gooseService.get(g);//查出该个脚环号的goose，写上tradeId
-				g.setTradeId(tradeId);
-				
-				gooseService.update(g);
+				if(!ringId.equals("")){
+					Goose g = new Goose();
+					g.setRingId(ringId);
+					g = gooseService.get(g);//查出该个脚环号的goose，写上tradeId
+					g.setTradeId(tradeId);
+					
+					gooseService.update(g);
+				}	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,13 +188,15 @@ public class GooseWebServiceImpl implements IGooseService{
 			long saleId = saleGoose.getId();
 			for (String ringId : gooseList) {
 				// 为脚环写上 saleGoose的 id号
-				Goose g = new Goose();
-				g.setRingId(ringId);
-				
-				g = gooseService.get(g);//查出该个脚环号的goose，写上saleId
-				g.setSaleId(saleId);
-				g.setIsValid(2);//设置鹅只状态为已出售
-				gooseService.update(g);
+				if(!ringId.equals("")){
+					Goose g = new Goose();  
+					g.setRingId(ringId);
+					
+					g = gooseService.get(g);//查出该个脚环号的goose，写上saleId
+					g.setSaleId(saleId);
+					g.setIsValid(2);//设置鹅只状态为已出售
+					gooseService.update(g);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
