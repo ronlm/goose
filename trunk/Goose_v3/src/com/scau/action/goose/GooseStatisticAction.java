@@ -3,6 +3,7 @@ package com.scau.action.goose;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -64,7 +65,7 @@ public class GooseStatisticAction extends BaseAction {
 					marketService.getDateBefore(45) + "' order by m.receiveDate asc";
 		// 以下的计算是找出记录的总数
 		List<Market> totalList = marketService.findByCondition(hql);
-		List<AppearOnMarket> totalAppearOnMarkets = new ArrayList<AppearOnMarket>();
+		List<AppearOnMarket> totalAppearOnMarkets = new LinkedList<AppearOnMarket>();
 		Date today = new Date(new java.util.Date().getTime());
 		for (Market market : totalList) {	
 			long feedDays = today.getTime() - market.getReceiveDate().getTime();//已养殖天数
@@ -105,7 +106,7 @@ public class GooseStatisticAction extends BaseAction {
 			this.pager.setTotalRowsAmount(totalRowCount);
 			List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
 			
-			List<FarmStock> resourceList = new ArrayList<FarmStock>();
+			List<FarmStock> resourceList = new LinkedList<FarmStock>();
 			for(Farm f :farmList){
 				
 				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
@@ -150,7 +151,7 @@ public class GooseStatisticAction extends BaseAction {
 			Farm farm = new Farm();
 			farm.setFarmerId(selectedFarmer.getId());
 			List<Farm> farmList = farmService.list(farm);
-			List<FarmStock> stockList = new ArrayList<FarmStock>();
+			List<FarmStock> stockList = new LinkedList<FarmStock>();//new ArrayList<FarmStock>();
 			for (Farm f : farmList) {
 				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天 + 吧）
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
