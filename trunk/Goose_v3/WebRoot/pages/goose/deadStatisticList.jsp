@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page isELIgnored="false"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
@@ -53,9 +53,6 @@
 				</th>
 		</thead>
 		<tbody id="contentBody" style="overflow: auto;height:1200px">
-			<form
-				action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del"
-				name="myForm" id="myForm" method="post">
 				<c:forEach items="${pager.data}" var="deadInfo" varStatus="status">
 					<tr >
 						<td>${status.count}</td>
@@ -63,7 +60,7 @@
 						<td>${deadInfo.deadNum}</td>
 						<td >
 							<div style="overflow:auto;<c:if test="${deadInfo.deadNum >10 }">height:150px;</c:if>">
-								<c:forEach items="${deadInfo.deadGooses }" var="goose"varStatus="num">
+								<c:forEach items="${deadInfo.deadGooses }" var="goose" varStatus="num">
 									${goose.ringId }&nbsp;;
 								<c:if test="${num.count % 9 == 0 }"></br></c:if>
 								</c:forEach>
@@ -77,7 +74,6 @@
 						</td>
 					</tr>
 				</c:forEach>
-			</form>
 		</tbody>
 		<tfoot>
 			<tr class="tableController_bottom">
