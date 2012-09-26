@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.scau.action.BaseAction;
+import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommMenu;
 import com.scau.model.comm.CommMenu2;
 import com.scau.model.comm.CommResource;
@@ -21,7 +22,6 @@ import com.scau.service.impl.comm.CommMenuService;
 import com.scau.service.impl.comm.CommResourceService;
 import com.scau.util.PageController;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 @Scope("prototype")

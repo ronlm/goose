@@ -8,9 +8,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.ege.mvc.exception.DataAccessException;
 
 import com.scau.dao.BaseDao;
+import com.scau.exception.DataAccessException;
 
 /** 对 com.scau.dao.BaseDao 的封装，所有的Service类必须继承这一个Service基类
  * @author jianhao

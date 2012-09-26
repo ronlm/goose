@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
+import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommRoleResource;
 import com.scau.model.comm.CommUser;
@@ -20,7 +21,6 @@ import com.scau.service.impl.comm.CommRoleResourceService;
 import com.scau.service.impl.comm.CommRoleService;
 import com.scau.service.impl.comm.CommUserService;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 @Scope("prototype")

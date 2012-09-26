@@ -9,9 +9,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.action.BaseAction;
+import com.scau.exception.BusinessException;
 import com.scau.model.goose.GoodSupplier;
 import com.scau.service.impl.goose.GoodSupplierService;
 import com.scau.util.PageController;

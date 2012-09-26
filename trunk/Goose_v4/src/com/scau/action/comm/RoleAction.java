@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
+import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommResource;
 import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommRoleResource;
@@ -21,7 +22,6 @@ import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 @Scope("prototype")

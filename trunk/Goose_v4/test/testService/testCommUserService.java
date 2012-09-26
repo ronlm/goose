@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 import com.scau.action.comm.UserAction;
+import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.util.PageController;
