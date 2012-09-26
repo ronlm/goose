@@ -64,11 +64,10 @@ public class GoodSupplierAction extends BaseAction{
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			GoodSupplier goodSupplier= new GoodSupplier();
 			for (String id : ids) {
-				GoodSupplier goodSupplier= new GoodSupplier();
 				if (null != id && !("".equals(id))) {
-					goodSupplier.setId(Long.valueOf(id));
-					goodSupplierService.delete(goodSupplier);
+					goodSupplierService.delete(goodSupplier,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

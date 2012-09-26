@@ -17,8 +17,8 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3><input type="checkbox" onclick="selectAll(this);"/></h3>
+				<th width="30px">
+					<h3>序号</h3>
 				</th>
 				<th>
 					<h3>名称</h3>
@@ -35,10 +35,9 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/good/goodSupplierAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="goodSupplier">
+			<c:forEach items="${pager.data}" var="goodSupplier" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${goodSupplier.id}"/></td>
+					<td>${status.count }</td>
 					<td>${goodSupplier.name}</td>
 					<td>${goodSupplier.phone}</td>
 					<td>
@@ -47,7 +46,6 @@
 					<td>${goodSupplier.comments}</td>
 				</tr> 
 			</c:forEach>
-		</form>
 		</tbody>
 		<tfoot>
 			<tr  class="tableController_bottom">

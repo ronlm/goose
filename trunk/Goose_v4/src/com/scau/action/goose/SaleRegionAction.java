@@ -63,11 +63,11 @@ public class SaleRegionAction extends BaseAction{
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			SaleRegion saleRegion = new SaleRegion();
 			for (String id : ids) {
-				SaleRegion saleRegion = new SaleRegion();
 				if (null != id && !("".equals(id))) {
 					saleRegion.setId(Long.valueOf(id));
-					saleRegionService.delete(saleRegion);
+					saleRegionService.delete(saleRegion,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

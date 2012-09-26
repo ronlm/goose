@@ -76,11 +76,10 @@ public class GoodAction extends BaseAction{
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			Good good= new Good();
 			for (String id : ids) {
-				Good good= new Good();
 				if (null != id && !("".equals(id))) {
-					good.setId(Long.valueOf(id));
-					goodService.delete(good);
+					goodService.delete(good,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

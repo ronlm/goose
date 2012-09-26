@@ -71,11 +71,10 @@ public class RetailerAction extends BaseAction {
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
-			for (String id : ids) {
-				Retailer retailer= new Retailer();
+			Retailer retailer= new Retailer();
+			for (String id : ids) {	
 				if (null != id && !("".equals(id))) {
-					retailer.setId(Long.valueOf(id));
-					retailerService.delete(retailer);
+					retailerService.delete(retailer,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

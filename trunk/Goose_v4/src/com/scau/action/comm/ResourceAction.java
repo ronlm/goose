@@ -73,11 +73,10 @@ public class ResourceAction extends BaseAction implements Serializable {
 	public String del() {
 		// 删除
 		String[] ids = request.getParameterValues("id");
+		CommResource resource = new CommResource();
 		for (String id : ids) {
-			CommResource resource = new CommResource();
 			if (null != id && !("".equals(id))) {
-				resource.setId(Long.valueOf(id));
-				commResourceService.delete(resource);
+				commResourceService.delete(resource,Long.parseLong(id));
 			}
 		}
 		return list();
