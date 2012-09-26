@@ -93,10 +93,8 @@ public class MenuAction extends BaseAction implements Serializable {
 		// 删除
 		String[] ids = request.getParameterValues("id");
 		for (String id : ids) {
-			CommMenu menu = new CommMenu();
 			if (null != id && !("".equals(id))) {
-				menu.setId(Long.valueOf(id));
-				commMenuService.delete(menu);
+				commMenuService.delete(menu,Long.parseLong(id));
 			}
 		}
 		return list();

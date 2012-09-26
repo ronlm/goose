@@ -65,11 +65,10 @@ public class GoodTypeAction extends BaseAction{
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			GoodType goodType = new GoodType();
 			for (String id : ids) {
-				GoodType goodType = new GoodType();
 				if (null != id && !("".equals(id))) {
-					goodType.setId(Long.valueOf(id));
-					goodTypeService.delete(goodType);
+					goodTypeService.delete(goodType,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

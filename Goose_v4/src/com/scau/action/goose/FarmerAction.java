@@ -64,11 +64,10 @@ public class FarmerAction extends BaseAction{
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			Farmer farmer= new Farmer();
 			for (String id : ids) {
-				Farmer farmer= new Farmer();
 				if (null != id && !("".equals(id))) {
-					farmer.setId(Long.valueOf(id));
-					farmerService.delete(farmer);
+					farmerService.delete(farmer,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

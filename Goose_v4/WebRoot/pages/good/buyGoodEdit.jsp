@@ -60,11 +60,11 @@
 				</tr>
 				<tr>
 					<td width="200" align="right">单价:</td>
-					<td><input type="text" name="buyGood.unitPrice"  value="${buyGood.unitPrice }" id="unitPrice" validation="required" /></td>
+					<td><input type="text" name="buyGood.unitPrice"  value="${buyGood.unitPrice }" id="unitPrice" validation="required,number" /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">数量:</td>
-					<td><input type="text" name="buyGood.amount" value="${buyGood.amount }" id="amount" validation="required" /></td>
+					<td><input type="text" name="buyGood.amount" value="${buyGood.amount }" id="amount" validation="number" /></td>
 				</tr>
 				<tr>
 					<td width="200" align="right">时间:</td>

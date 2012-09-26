@@ -129,11 +129,10 @@ public class BuyGoodAction extends BaseAction{
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			BuyGood buyGood= new BuyGood();
 			for (String id : ids) {
-				BuyGood buyGood= new BuyGood();
 				if (null != id && !("".equals(id))) {
-					buyGood.setId(Long.valueOf(id));
-					buyGoodService.delete(buyGood);
+					buyGoodService.delete(buyGood,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

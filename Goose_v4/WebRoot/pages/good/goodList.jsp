@@ -13,13 +13,12 @@
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/goodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加新物资</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/goodTypeAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部物资分类信息</span></a>
-						<a class="button" href="javascript:void(0)" onclick="this.blur(); deleteAll();  return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_delete.png" align="absmiddle"/>&nbsp;删除</span></a>
 					</div>
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3><input type="checkbox" onclick="selectAll(this);"/></h3>
+				<th width="30px">
+					<h3>序号</h3>
 				</th>
 				<th>
 					<h3>品名</h3>
@@ -41,9 +40,9 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/good/goodAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="good">
+			<c:forEach items="${pager.data}" var="good" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${good.id}"/></td>
+					<td>${status.count }</td>
 					<td>${good.name}</td>
 					<td>${good.goodTypeName}</td>
 					<td>${good.unit}</td>

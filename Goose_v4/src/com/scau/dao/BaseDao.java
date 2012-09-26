@@ -52,7 +52,7 @@ public class BaseDao<T> {
 		}
 		try {
 			hibernateTemplate.save(entity);
-			logger.info("插入已完成。");
+			logger.info("插入一条"+ entity.getClass().getName() +"已完成。");
 		} catch (Exception e) {
 			logger.error("插入记录出错！");
 			e.printStackTrace();
@@ -74,7 +74,7 @@ public class BaseDao<T> {
 		}
 		try {
 			 hibernateTemplate.delete(entity);
-			
+			 logger.info("成功删除实体"+ entity.getClass().getName());
 		} catch (Exception e) {
 			logger.error("删除记录出错！");
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class BaseDao<T> {
 		}
 		try {
 			hibernateTemplate.saveOrUpdate(entity);
-			logger.info("成功更新");
+			logger.info("成功更新"+ entity.getClass().getName());
 		} catch (Exception e) {
 			logger.error("更新记录出错！");
 			throw new DataAccessException("更新记录出错！");

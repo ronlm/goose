@@ -51,7 +51,7 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th><h3><input type="checkbox" onclick="selectAll(this);"/></h3></th>
+				<th width="30px"><h3>序号</h3></th>
 				<th><h3>资源名称</h3></th>
 				<th><h3>农户</h3></th>
 				<th><h3>单价</h3></th>
@@ -64,10 +64,9 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/good/tradeGoodAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="tradeGoodView">
+			<c:forEach items="${pager.data}" var="tradeGoodView" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${tradeGoodView.id}"/></td>
+					<td>${status.count }</td>
 					<td>${tradeGoodView.goodName}</td>
 					<td>${tradeGoodView.farmerName}</td>
 					<td><fmt:formatNumber value="${tradeGoodView.unitPrice}" maxFractionDigits="3"/></td>
@@ -82,7 +81,6 @@
 					<td>${tradeGoodView.comments}</td>
 				</tr> 
 			</c:forEach>
-		</form>
 		</tbody>
 		<tfoot>
 			<tr  class="tableController_bottom">

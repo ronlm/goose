@@ -98,11 +98,10 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			Farm farm= new Farm();
 			for (String id : ids) {
-				Farm farm= new Farm();
 				if (null != id && !("".equals(id))) {
-					farm.setId(Long.valueOf(id));
-					farmService.delete(farm);
+					farmService.delete(farm,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

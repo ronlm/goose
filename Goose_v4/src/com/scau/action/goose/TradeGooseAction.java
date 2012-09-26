@@ -97,11 +97,10 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
-			for (String id : ids) {
-				Farm farm= new Farm();
+			Farm farm= new Farm();
+			for (String id : ids) {	
 				if (null != id && !("".equals(id))) {
-					farm.setId(Long.valueOf(id));
-					farmService.delete(farm);
+					farmService.delete(farm,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

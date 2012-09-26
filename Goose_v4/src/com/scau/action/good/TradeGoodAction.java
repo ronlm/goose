@@ -124,11 +124,10 @@ public class TradeGoodAction extends BaseAction{
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			TradeGood tradeGood= new TradeGood();
 			for (String id : ids) {
-				TradeGood tradeGood= new TradeGood();
 				if (null != id && !("".equals(id))) {
-					tradeGood.setId(Long.valueOf(id));
-					tradeGoodService.delete(tradeGood);
+					tradeGoodService.delete(tradeGood,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表

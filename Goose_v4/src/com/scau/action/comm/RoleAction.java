@@ -112,11 +112,11 @@ public class RoleAction extends BaseAction implements Serializable {
 	public String del() {
 			// 删除
 			String[] ids = request.getParameterValues("id");
+			CommRole role = new CommRole();
 			for (String id : ids) {
-				CommRole role = new CommRole();
 				if (null != id && !("".equals(id))) {
 					role.setId(Long.valueOf(id));
-					commRoleService.delete(role);
+					commRoleService.delete(role,Long.parseLong(id));
 				}
 			}
 			return list();

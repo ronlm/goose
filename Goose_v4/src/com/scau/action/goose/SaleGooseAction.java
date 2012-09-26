@@ -98,11 +98,10 @@ public class SaleGooseAction extends BaseAction {
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
+			SaleGoose saleGoose= new SaleGoose();
 			for (String id : ids) {
-				SaleGoose saleGoose= new SaleGoose();
 				if (null != id && !("".equals(id))) {
-					saleGoose.setId(Long.valueOf(id));
-					saleGooseService.delete(saleGoose);
+					saleGooseService.delete(saleGoose,Long.parseLong(id));
 				}
 			}
 			return list();//返回取列表页面，并刷新列表
