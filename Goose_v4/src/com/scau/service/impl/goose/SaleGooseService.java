@@ -3,8 +3,8 @@ package com.scau.service.impl.goose;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
+import com.scau.exception.BusinessException;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.SaleGoose;
 import com.scau.model.goose.TradeGoose;

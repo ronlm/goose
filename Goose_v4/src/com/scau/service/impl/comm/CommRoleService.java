@@ -5,11 +5,11 @@ import java.io.Serializable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommUser;
 import com.scau.service.BaseService;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 public class CommRoleService extends BaseService<CommRole> implements Serializable{

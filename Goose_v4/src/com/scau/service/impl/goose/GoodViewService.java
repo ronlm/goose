@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
+import com.scau.exception.BusinessException;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Good;
 import com.scau.service.BaseService;

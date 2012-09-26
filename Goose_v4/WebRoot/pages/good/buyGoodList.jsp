@@ -51,7 +51,7 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th><h3><input type="checkbox" onclick="selectAll(this);"/></h3></th>
+				<th width="30px"><h3>序号</h3></th>
 				<th><h3>资源名称</h3></th>
 				<th><h3>供应商</h3></th>
 				<th><h3>产地</h3></th>
@@ -66,9 +66,9 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/good/tradeGooseAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="buyGoodView">
+			<c:forEach items="${pager.data}" var="buyGoodView" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${buyGoodView.id}"/></td>
+					<td>${status.count }</td>
 					<td>${buyGoodView.goodName}</td>
 					<td>${buyGoodView.supplierName}</td>
 					<td>${buyGoodView.origin}</td>

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.scau.action.BaseAction;
+import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommRole;
 import com.scau.model.comm.CommUser;
 import com.scau.service.impl.comm.CommRoleService;
@@ -18,7 +19,6 @@ import com.scau.service.impl.comm.CommUserService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 
-import cn.com.ege.mvc.exception.BusinessException;
 
 @Component
 @Scope("prototype")
