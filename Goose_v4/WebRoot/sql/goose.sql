@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : MySql
-Source Server Version : 50524
-Source Host           : localhost:3305
+Source Server Version : 50142
+Source Host           : localhost:3306
 Source Database       : goose
 
 Target Server Type    : MYSQL
-Target Server Version : 50524
+Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-09-19 17:01:43
+Date: 2012-09-26 17:32:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `buy_good` (
   `date` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of buy_good
@@ -40,6 +40,7 @@ INSERT INTO `buy_good` VALUES ('5', '4', '3', '13434', '15', '100', 'TW', '2012-
 INSERT INTO `buy_good` VALUES ('6', '1', '5', '322134fsadf', '50', '100', '广州', '2012-08-30', 'adfasfasdf');
 INSERT INTO `buy_good` VALUES ('7', '1', '5', '454', '50', '100', '广州', '2012-09-05', 'adfasfasdf');
 INSERT INTO `buy_good` VALUES ('8', '4', '5', '3143', '100', '100', '珠海', '2012-09-04', '霏霏ffdfdfd');
+INSERT INTO `buy_good` VALUES ('9', '1', '1', '431232', '34', '434', 'fsadf', '2012-09-25', '34343');
 
 -- ----------------------------
 -- Table structure for `comm_menu`
@@ -241,7 +242,7 @@ CREATE TABLE `good` (
   `unit` varchar(255) DEFAULT NULL,
   `stock` int(11) DEFAULT '0' COMMENT '库存',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
@@ -251,6 +252,7 @@ INSERT INTO `good` VALUES ('2', '4', '大叶槐苗', '棵', '0');
 INSERT INTO `good` VALUES ('3', '3', '无敌消毒水', '瓶', null);
 INSERT INTO `good` VALUES ('4', '3', '百毒杀', '瓶', '0');
 INSERT INTO `good` VALUES ('5', '1', '正大饲料', '包', null);
+INSERT INTO `good` VALUES ('6', '1', '幸福饲料', '包', null);
 
 -- ----------------------------
 -- Table structure for `goodsupplier`
