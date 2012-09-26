@@ -42,8 +42,8 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3><input type="checkbox" onclick="selectAll(this);" /></h3>
+				<th width="30px">
+					<h3>序号</h3>
 				</th>
 				<th >
 					<h3>日期</h3></th>
@@ -57,9 +57,9 @@
 		</thead>
 		<tbody id="contentBody">
 			<form action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!del" name="myForm" id="myForm" method="post">
-				<c:forEach items="${pager.data}" var="receiveGoose">
+				<c:forEach items="${pager.data}" var="receiveGoose" varStatus="status">
 					<tr>
-						<td width="20px"><input type="checkbox" name="id" value="${receiveGoose.id}" /></td>
+						<td>${status.count }</td>
 						<td>${receiveGoose.receiveDate}</td>
 						<td>${receiveGoose.amount}</td>
 						<td>${receiveGoose.comments}</td>
