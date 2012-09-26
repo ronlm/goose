@@ -47,9 +47,9 @@
 							角色名称:
 						</td>
 						<td>
-							<input type="text" validation="required" name="role.name"
-								id="name" value="${role.name}" />
-							<input type="hidden" name="role.id" id="id" value="${role.id}" />
+							<input type="text" validation="required" name="commRole.name"
+								id="name" value="${commRole.name}" />
+							<input type="hidden" name="commRole.id" id="id" value="${commRole.id}" />
 						</td>
 					</tr>
 					<tr>
@@ -59,7 +59,7 @@
 						<td>
 							<c:forEach items="${resourceList}" var="res">
 								<input type="checkbox" name="resource" value="${res.id}"
-									<c:forEach items="${roleResourceList}" var="roleResource">
+									<c:forEach items="${commRoleResourceList}" var="roleResource">
 										<c:if test="${roleResource.resourceId == res.id}"> checked=true </c:if>
 									</c:forEach> />${res.name}<br />
 							</c:forEach>
@@ -70,7 +70,7 @@
 							角色描述:
 						</td>
 						<td>
-							<textarea rows="5" cols="50" name="role.comment" id="comment">${role.comment}	</textarea>
+							<textarea rows="5" cols="50" name="commRole.comment" id="comment">${commRole.comment}	</textarea>
 						</td>
 					</tr>
 				</tbody>
