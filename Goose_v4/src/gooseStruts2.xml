@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 这个Struts配置文件用于业务模块 -->	
+	<package name="goose" extends="struts-default" namespace="/pages/goose">	
+		<!-- 使用通配符 对农户，养殖场配置，页面名第一个单词用小写 开始-->
+		<action name="*Action" class="{1}Action" >
+			<result name="edit">/pages/goose/{1}Edit.jsp</result>
+			<result name="error">/error/WebError.jsp</result>
+			<result name="list">/pages/goose/{1}List.jsp</result>
+		</action>
+		<!-- 使用通配符 对农户，养殖场配置配置 结束-->
+		
+		<!-- 鹅只信息统计  -->
+		<action name="gooseStatisticAction" class="gooseStatisticAction">
+			<result name="market">/pages/goose/marketStatisticList.jsp</result>
+			<result name="stock">/pages/goose/stockStatisticList.jsp</result>
+			<result name="sale">/pages/goose/saleStatisticList.jsp</result>
+			<result name="dead">/pages/goose/deadStatisticList.jsp</result>
+			<result name="stockAndGood">/pages/good/stockAndGood.jsp</result>
+			<result name="deadDetail">/pages/goose/deadDetailStatisticList.jsp</result>
+		</action>
+		<!-- 鹅只信息统计结束  -->
+		
+		<!-- 信息检索功能 开始 -->
+		<action name="searchAction" class="searchAction">
+			<result name="success">/pages/goose/search.jsp</result>
+		</action>
+		<!-- 信息检索功能 结束 -->
+		
+		<!-- 信息删除功能 开始 -->
+		<action name="deleteAction" class="deleteGooseAction">
+			<result name="list">/pages/goose/deleteGooseRing.jsp</result>
+			<result name="success">/pages/goose/deleteGooseRing.jsp</result>
+		</action>
+		<!-- 信息删除功能 结束 -->
+	</package>
+
+	
+	
+</struts>
+	
