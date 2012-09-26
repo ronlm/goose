@@ -32,7 +32,7 @@ public class RoleAction extends BaseAction implements Serializable {
 	private List<CommRoleResource> roleResourceList = null;
 	private List<CommResource> resourceList = null;
 	private CommRoleResourceService commRoleResourceService;
-	private CommRole role;
+	private CommRole commRole;
 	
 	public String list() {
 	
@@ -51,13 +51,13 @@ public class RoleAction extends BaseAction implements Serializable {
 
 	public String get() {
 		// 点了添加或者点了修改
-		role = commRoleService.get(role);
+		commRole = commRoleService.get(commRole);
 		
 		//获取该角色的资源
-		if(null != role){
+		if(null != commRole){
 			CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");
 			CommRoleResource crr = new CommRoleResource();
-			crr.setRoleId(role.getId());
+			crr.setRoleId(commRole.getId());
 			try {
 				roleResourceList = commRoleResourceService.listByRoleId(crr);
 				
@@ -68,13 +68,14 @@ public class RoleAction extends BaseAction implements Serializable {
 		//所有资源
 		CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");
 		resourceList = resourceService.listAll(new CommResource());
-		
+		request.setAttribute("commRole", commRole);
+		request.setAttribute("commRoleResourceList", roleResourceList);
 		return "edit";
 	}
 		
 	public String save() {
 		try {
-			Long key = commRoleService.save(role);
+			Long key = commRoleService.save(commRole);
 			// 如果插入或者更新记录成功, 会返回该记录的主键
 			if (null != key) {
 				// 获取选中了的权限资源
@@ -82,18 +83,17 @@ public class RoleAction extends BaseAction implements Serializable {
 				CommRoleResourceService commRoleResourceService = (CommRoleResourceService) BeansUtil.get("commRoleResourceService");
 				// 把选中了的插入中间表
 				CommRoleResource crr = new CommRoleResource();
-				crr.setRoleId(role.getId());
+				crr.setRoleId(commRole.getId());
 				// 首先把当前获取的这个角色记录全部删除,然后再新增
 				List<CommRoleResource> crrList = commRoleResourceService.list(crr);
 				for (CommRoleResource commRoleResource : crrList) {
 					commRoleResourceService.delete(commRoleResource);
 				}
 				
-				
 				if (null != resources) {
 					for (String string : resources) {
 						CommRoleResource commRoleResource = new CommRoleResource();
-						commRoleResource.setRoleId(role.getId());
+						commRoleResource.setRoleId(commRole.getId());
 						commRoleResource.setResourceId(Long.parseLong(string));
 						commRoleResourceService.add(commRoleResource);
 					}
@@ -102,7 +102,7 @@ public class RoleAction extends BaseAction implements Serializable {
 			return list();// 重新取列表
 		} catch (BusinessException e) {
 			// 保存原来表单已输入的内容
-			request.setAttribute("role", role);
+			request.setAttribute("commRole", commRole);
 			request.setAttribute("message", e.getMessage());
 			return "edit";
 		}
@@ -133,12 +133,14 @@ public class RoleAction extends BaseAction implements Serializable {
 		this.pager = pager;
 	}
 
-	public CommRole getRole() {
-		return role;
+	
+
+	public CommRole getCommRole() {
+		return commRole;
 	}
 
-	public void setRole(CommRole role) {
-		this.role = role;
+	public void setCommRole(CommRole commRole) {
+		this.commRole = commRole;
 	}
 
 	public List<CommRoleResource> getRoleResourceList() {
