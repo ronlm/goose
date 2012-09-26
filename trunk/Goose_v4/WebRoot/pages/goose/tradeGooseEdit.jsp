@@ -63,7 +63,7 @@
 					</tr>
 					<tr>
 						<td width="200" align="right">
-							单价:
+							单价(元):
 						</td>
 						<td>
 							<input type="text" validation="required,number" name="tradeGoose.unitPrice" id="unitPrice" value="${tradeGoose.unitPrice}" />
