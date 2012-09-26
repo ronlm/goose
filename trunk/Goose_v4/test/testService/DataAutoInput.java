@@ -42,20 +42,23 @@ public class DataAutoInput {
 	
 	
 	public static void main(String[] args) {
+		
+		int addNumber = 50;//确定添加的基数
+		
 		for(int i=0;i<1200;i++){
 			// 从今天的前1200天内自动生成数据
 			if(i%3 == 0){
 				int farmId = (int) (Math.random() * 50 % 11) + 1;	
-				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 44, getDateBefore(i));
+				addGooseReceive(farmId, (int) (Math.random() * addNumber /1) * 44, getDateBefore(i));
 			}
 			if(i%5 == 0){
 				int farmId = (int) (Math.random() * 50 % 11) + 1;	
 				//加入n*100只鹅
-				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 34, getDateBefore(i));
+				addGooseReceive(farmId, (int) (Math.random() * addNumber /1) * 34, getDateBefore(i));
 			}
 			if(i%7 == 0){
 				int farmId = (int) (Math.random() * 50 % 11) + 1;	
-				addGooseReceive(farmId, (int) (Math.random() * 100 /1) * 30, getDateBefore(i));
+				addGooseReceive(farmId, (int) (Math.random() * addNumber /1) * 30, getDateBefore(i));
 			}
 		}
 		System.out.println("自动数据录入完成！！！！！！");
