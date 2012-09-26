@@ -59,7 +59,7 @@
 					<td><input type="text" name="buyGood.batchNum" id="batchNum" value="${buyGood.batchNum }"/></td>
 				</tr>
 				<tr>
-					<td width="200" align="right">单价:</td>
+					<td width="200" align="right">单价(元):</td>
 					<td><input type="text" name="buyGood.unitPrice"  value="${buyGood.unitPrice }" id="unitPrice" validation="required,number" /></td>
 				</tr>
 				<tr>
