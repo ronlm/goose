@@ -18,8 +18,8 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3><input type="checkbox" onclick="selectAll(this);"/></h3>
+				<th width="30px">
+					<h3>序号</h3>
 				</th>
 				<th>
 					<h3>姓名</h3>
@@ -43,9 +43,9 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/goose/retailerAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="retailer">
+			<c:forEach items="${pager.data}" var="retailer" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${retailer.id}"/></td>
+					<td>${status.count }</td>
 					<td>${retailer.name}</td>
 					<td>${retailer.address}</td>
 					<td>${retailer.phone}</td>

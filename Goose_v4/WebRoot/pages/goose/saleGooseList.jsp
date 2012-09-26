@@ -39,8 +39,8 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3><input type="checkbox" onclick="selectAll(this);" /></h3>
+				<th width="30px">
+					<h3>序号</h3>
 				</th>
 				<th>
 					<h3>日期</h3>
@@ -67,9 +67,9 @@
 		</thead>
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/goose/saleGooseAction!del" name="myForm" id="myForm" method="post">
-			<c:forEach items="${pager.data}" var="saleGoose">
+			<c:forEach items="${pager.data}" var="saleGoose" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${saleGoose.id}"/></td>
+					<td>${status.count }</td>
 					<td>${saleGoose.saleDate}</td>
 					<td>${saleGoose.amount}</td>
 					<td><fmt:formatNumber value="${saleGoose.unitPrice }" maxFractionDigits="3"/></td>

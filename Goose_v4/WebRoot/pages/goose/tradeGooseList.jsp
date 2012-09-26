@@ -39,8 +39,8 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th>
-					<h3><input type="checkbox" onclick="selectAll(this);" /></h3>
+				<th width="30px">
+					<h3>序号</h3>
 				</th>
 				<th width="80px"><h3>日期</h3></th>
 				<th><h3>数量</h3></th>
@@ -54,9 +54,9 @@
 		<tbody>
 		<form action="${pageContext.request.contextPath }/pages/goose/tradeGooseAction!del" name="myForm" id="myForm" method="post">
 			<input type="hidden" name="GetInfoContextPath" id="GetInfoContextPath" value="${pageContext.request.contextPath }/GetInfo"/>
-			<c:forEach items="${pager.data}" var="tradeGoose">
+			<c:forEach items="${pager.data}" var="tradeGoose" varStatus="status">
 				<tr>
-					<td width="20px"><input type="checkbox" name="id" value="${tradeGoose.id}"/></td>
+					<td >${status.count }</td>
 					<td>${tradeGoose.tradeDate}</td>
 					<td>${tradeGoose.amount}</td>
 					<td><fmt:formatNumber value="${tradeGoose.unitPrice }" maxFractionDigits="3"/></td>
