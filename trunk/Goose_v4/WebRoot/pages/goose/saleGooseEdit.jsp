@@ -63,7 +63,7 @@
 					</tr>
 					<tr>
 						<td width="200" align="right">
-							单价:
+							单价(元):
 						</td>
 						<td>
 							<input type="text"  validation="required,number" name="saleGoose.unitPrice" id="unitPrice" value="${saleGoose.unitPrice}" />
@@ -71,7 +71,7 @@
 					</tr>
 					<tr>
 						<td width="200" align="right">
-							总重量:
+							总重量(市斤):
 						</td>
 						<td>
 							<input type="text"  validation="required,number" name="saleGoose.totalWeight" id="totalWeight" value="${saleGoose.totalWeight}" />
