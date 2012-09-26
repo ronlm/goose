@@ -47,7 +47,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<td width="200" align="right">单价:</td>
+					<td width="200" align="right">单价(元):</td>
 					<td><input type="text" name="tradeGood.unitPrice" id="unit" value="${tradeGood.unitPrice }" validation="required" /></td>
 				</tr>
 				<tr>
