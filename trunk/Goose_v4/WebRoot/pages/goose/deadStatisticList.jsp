@@ -41,7 +41,7 @@
 					</div></th>
 			</tr>
 			<tr class="tableTitle">
-				<th><h3>序号</h3>
+				<th width="30px"><h3>序号</h3>
 				</th>
 				<th><h3>农场</h3>
 				</th>
@@ -67,7 +67,7 @@
 							</div>
 						</td>
 						<td><a class="button"
-							value="${deadInfo.farm.farmerId }" name="farmerId" href="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail?farm.id=${deadInfo.farm.id}"><span>存栏明细</span>
+							value="${deadInfo.farm.farmerId }" name="farmerId" href="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadDetail?farm.id=${deadInfo.farm.id}"><span>存栏明细</span>
 						</a><a class="button-small"
 							value="${deadInfo.farm.farmerId }" name="farmerId"><span>获取所属农户资料</span>
 						</a>

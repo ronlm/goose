@@ -7,6 +7,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.mapping.Value;
+import org.springframework.transaction.annotation.Transactional;
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
@@ -18,6 +19,7 @@ import com.scau.model.goose.TradeGoose;
 import com.scau.model.webService.FarmWs;
 import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
+import com.scau.model.webService.SaleGooseWs;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
@@ -69,6 +71,10 @@ public class GooseWebServiceImplDelegate {
 
 	public ReceiveGooseWs getReceiveInfo(String gooseId) {
 		return gooseWebServiceImpl.getReceiveInfo(gooseId);
+	}
+
+	public SaleGooseWs getSaleGooseInfo(String gooseId) {
+		return gooseWebServiceImpl.getSaleGooseInfo(gooseId);
 	}
 
 }

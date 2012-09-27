@@ -22,6 +22,7 @@ import com.scau.model.goose.TradeGoose;
 import com.scau.model.webService.FarmWs;
 import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
+import com.scau.model.webService.SaleGooseWs;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
@@ -266,6 +267,43 @@ public class GooseWebServiceImpl implements IGooseService{
 			return null;//操作出错
 		}
 	
+	}
+
+	@Override
+	@WebMethod
+	public SaleGooseWs getSaleGooseInfo(String gooseId) {
+		try {
+			Goose g = new Goose();
+			g.setRingId(gooseId);
+			g = gooseService.get(g);
+			if(null == g.getSaleId() || 2 !=g.getIsValid()){
+				return null;
+			}else{
+				SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
+				SaleGoose saleGoose = saleGooseService.get(new SaleGoose(), g.getSaleId());
+				RetailerService retailerService = (RetailerService) BeansUtil.get("retailerService");
+				Retailer retailer = retailerService.get(new Retailer(), saleGoose.getRetailerId());
+				
+				SaleGooseWs saleGooseWs = new SaleGooseWs();
+				saleGooseWs.setRetailerId(retailer.getId());
+				saleGooseWs.setAddress(retailer.getAddress());
+				saleGooseWs.setAmount(saleGoose.getAmount());
+				saleGooseWs.setComments(saleGoose.getComments());
+				saleGooseWs.setPhone(retailer.getPhone());
+				saleGooseWs.setRetailerName(retailer.getName());
+				saleGooseWs.setSaleDate(saleGoose.getSaleDate().toString());
+				saleGooseWs.setTotalWeight(saleGoose.getTotalWeight());
+				saleGooseWs.setUnitPrice(saleGoose.getUnitPrice());
+				
+				return saleGooseWs;
+
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 

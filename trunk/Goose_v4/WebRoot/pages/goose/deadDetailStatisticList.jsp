@@ -41,13 +41,14 @@
 					</div></th>
 			</tr>
 			<tr class="tableTitle">
-				<th><h3>序号</h3></th>
+				<th width="30px"><h3>序号</h3></th>
 				<th><h3>交付鹅苗时间</h3></th>
 				<th><h3>交付数量</h3></th>
 				<th><h3>现存数量</h3></th>
 				<th><h3>死亡数量</h3></th>
 				<th><h3>存活率</h3></th>
 				<th><h3>死亡的鹅只脚环ID号</h3></th>
+				<th><h3>操作</h3></th>
 		</thead>
 		<tbody id="contentBody" style="overflow: auto;height:1200px"> 
 				<c:forEach items="${pager.data}" var="deadDetail" varStatus="status">
@@ -65,6 +66,10 @@
 								<c:if test="${num.count % 10 == 0 }"></br></c:if>
 								</c:forEach>
 							</div>
+						</td>
+						<td><a class="button" value="${deadInfo.farm.farmerId }" name="farmerId" 
+						href="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail?farm.id=${deadInfo.farm.id}"><span>死亡鹅只时间</span>
+						</a>
 						</td>
 					</tr>
 				</c:forEach>

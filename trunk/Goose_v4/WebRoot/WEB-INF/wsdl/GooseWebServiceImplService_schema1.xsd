@@ -25,6 +25,10 @@
 
   <xs:element name="getRetailerListResponse" type="tns:getRetailerListResponse"/>
 
+  <xs:element name="getSaleGooseInfo" type="tns:getSaleGooseInfo"/>
+
+  <xs:element name="getSaleGooseInfoResponse" type="tns:getSaleGooseInfoResponse"/>
+
   <xs:element name="login" type="tns:login"/>
 
   <xs:element name="loginResponse" type="tns:loginResponse"/>
@@ -63,6 +67,32 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:long"/>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSaleGooseInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSaleGooseInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:saleGooseWs"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saleGooseWs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element minOccurs="0" name="amount" type="xs:long"/>
+      <xs:element minOccurs="0" name="comments" type="xs:string"/>
+      <xs:element minOccurs="0" name="phone" type="xs:string"/>
+      <xs:element minOccurs="0" name="retailerId" type="xs:long"/>
+      <xs:element minOccurs="0" name="retailerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="saleDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="totalWeight" type="xs:double"/>
+      <xs:element minOccurs="0" name="unitPrice" type="xs:double"/>
     </xs:sequence>
   </xs:complexType>
 

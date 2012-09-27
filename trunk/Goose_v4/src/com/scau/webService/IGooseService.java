@@ -9,6 +9,7 @@ import javax.jws.WebService;
 import com.scau.model.webService.FarmWs;
 import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
+import com.scau.model.webService.SaleGooseWs;
 
 
 
@@ -69,6 +70,14 @@ public interface IGooseService {
 	 */
 	@WebMethod
 	public ReceiveGooseWs getReceiveInfo(String gooseId);
+	
+	/** 读取脚环，获得该鹅只销售批次的信息
+	 * @param gooseId
+	 * @return 
+	 */
+	@WebMethod
+	public SaleGooseWs getSaleGooseInfo(String gooseId);
+	
 	
 	/** 鹅脚环的销号处理־
 	 * @param gooseId
