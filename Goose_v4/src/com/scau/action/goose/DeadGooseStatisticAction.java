@@ -13,15 +13,11 @@ import org.springframework.stereotype.Component;
 
 import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
-import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.service.impl.goose.FarmService;
-import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GooseService;
-import com.scau.service.impl.goose.MarketService;
 import com.scau.service.impl.goose.ReceiveGooseService;
-import com.scau.service.impl.goose.TradeGoodViewService;
 import com.scau.util.PageController;
 import com.scau.vo.goose.DeadDetail;
 import com.scau.vo.goose.DeadInfo;
@@ -160,9 +156,25 @@ public class DeadGooseStatisticAction extends BaseAction {
 		return "deadDetail";
 	}
 
+	
+	/** 查看该个接收鹅苗批次里每只鹅的死亡时间
+	 * @return
+	 */
 	public String deadGooseList() {
 		receiveGoose = receiveGooseService.get(receiveGoose);
-
+		farm = farmService.get(new Farm(), receiveGoose.getFarmId());
+		String URL = request.getRequestURI();
+		this.pager.setURL(URL);
+		List<Goose> resourceList = gooseService.findByCondition(pager.getPageStartRow(), pager.getPageSize(),
+						"select g from com.scau.model.goose.Goose g where g.receiveId=" + receiveGoose.getId() + " and g.isValid=0");
+		pager.setData(resourceList);
+		pager.setTotalRowsAmount(resourceList.size());
+		
+		request.getSession().setAttribute("daysWithin", request.getParameter("daysWithin"));
+		request.setAttribute("total", resourceList.size());
+		request.setAttribute("pager", pager);
+		request.setAttribute("reveiveGoose", receiveGoose);
+		request.setAttribute("farm", farm);
 		return "deadGooseList";
 	}
 

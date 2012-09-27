@@ -22,22 +22,29 @@
 							onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span> </a>
-					</div></th>
-			</tr>
+								</br>
+						
+					</div>
+				</th>
+				<tr>
+					<td>农场:${farm.name }&nbsp;&nbsp;地址:${farm.address }&nbsp;&nbsp;</td>
+				</tr>
+				<tr>
+					<td>该鹅苗批次信息&nbsp;&nbsp;&nbsp;&nbsp;交付日期:${receiveGoose.receiveDate }&nbsp;&nbsp;交付数量:${receiveGoose.amount }&nbsp;&nbsp;&nbsp;&nbsp;合计死亡数量:${total }只</td>
+				</tr>
 			<tr class="tableTitle">
 				<th width="30px"><h3>序号</h3></th>
 				<th><h3>鹅只脚环ID号</h3></th>
 				<th><h3>死亡时间</h3></th>
-				<th><h3>操作</h3></th>
 		</thead>
 		<tbody id="contentBody" style="overflow: auto;height:1200px"> 
-				<c:forEach items="${pager.data}" var="deadDetail" varStatus="status">
-					<tr >
-						
+				<c:forEach items="${pager.data}" var="deadGoose" varStatus="status">
+					<tr>
+						<td>${status.count }</td>
+						<td>${deadGoose.ringId }</td>
+						<td>${deadGoose.deadDate }</td>
 					</tr>
 				</c:forEach>
-			
-			
 		</tbody>
 		<tfoot>
 			<tr class="tableController_bottom">
