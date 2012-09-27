@@ -67,7 +67,7 @@
 								</c:forEach>
 							</div>
 						</td>
-						<td><a class="button" value="${deadInfo.farm.farmerId }" name="farmerId" 
+						<td><a class="button"  name="deadGooselist" 
 						href="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadGooseList?daysWithin=${daysWithin }&&receiveGoose.id=${deadDetail.receiveGoose.id}"><span>死亡鹅只时间</span>
 						</a>
 						</td>
