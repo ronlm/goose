@@ -53,6 +53,7 @@ public class GooseStatisticAction extends BaseAction {
 	private Farmer selectedFarmer;
 	private FarmerService farmerService;
 	private TradeGoodViewService tradeGoodViewService;
+	private ReceiveGoose receiveGoose;
 	
 	public String market() throws Exception{
 		String URL = request.getRequestURI();
@@ -212,112 +213,7 @@ public class GooseStatisticAction extends BaseAction {
 		
 		return "stockAndGood";		
 	}
-	
-	public String dead() {
-			// 查看鹅只非正常死亡信息
-		   	int daysWithin = 100;
-			String URL = request.getRequestURI();
-			this.pager.setURL(URL);
-			
-			// 取得要显示 的日期条件
-			if(null != request.getParameter("daysWithin")){
-					daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
-					request.getSession().removeAttribute("daysWithin");
-			}else if(null != request.getSession().getAttribute("daysWithin")){
-					daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
-			}
-			
-			int totalRowCount = farmService.list(new Farm()).size();
-			this.pager.setTotalRowsAmount(totalRowCount);//设置总记录条数
-			
-			List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
-			List<DeadInfo> resourceList = new ArrayList<DeadInfo>();// 结果列
-			for(Farm f:farmList){
-				//查找每个农场的相关信息
-				List<ReceiveGoose> receiveGooseList = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where"
-						+ " rg.farmId='" + f.getId() +"' and rg.receiveDate >='" + receiveGooseService.getDateBefore(daysWithin) +"'");
-				DeadInfo dead = new DeadInfo();
-				dead.setFarm(f);
-				if(receiveGooseList.size() > 0){
-					dead.setFarm(f);
-					List<Goose> gooseList = new ArrayList<Goose>();
-					for(ReceiveGoose rg:receiveGooseList){
-						// 得到一个批次的死亡鹅只死亡记录
-						Goose g = new Goose();
-						g.setReceiveId(rg.getId());
-						g.setIsValid(0);
-						List<Goose> tempList = gooseService.list(g);
-						
-						gooseList.addAll(tempList);
-					}
-					dead.setDeadNum(gooseList.size());
-					dead.setDeadGooses(gooseList);
-					
-				}
-				else{
-					dead.setDeadNum(0);
-				}
-				resourceList.add(dead);// 加入到结果
-			}
-			pager.setData(resourceList);
-			request.setAttribute("pager", pager);
-			request.setAttribute("today", new Date(new java.util.Date().getTime()));
-			request.getSession().setAttribute("daysWithin", daysWithin);
-			return "dead";
-	}
 		
-	public String deadDetail(){
-		//查看一个指定农场的所以存栏 的receiveGoose 的死亡信息和存活率
-		int daysWithin = 0;
-		farm = farmService.get(farm);
-		String URL = request.getRequestURI();
-		this.pager.setURL(URL);
-		// 取得要显示的日期条件
-		if(null != request.getParameter("daysWithin")){
-			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
-			request.getSession().removeAttribute("daysWithin");
-		}
-		else if(null != request.getSession().getAttribute("daysWithin")){
-			daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
-		}	
-		List<DeadDetail> resourceList = new ArrayList<DeadDetail>();
-		if(null != farm){
-			 // 查看某个农场最近接收的鹅苗交付信息
-			ReceiveGoose receiveGoose = new ReceiveGoose();
-			receiveGoose.setFarmId(farm.getId());
-		
-			String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + receiveGoose.getFarmId()
-				+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(daysWithin) + "' order by rg.receiveDate desc";
-			
-			List<ReceiveGoose> receiveGooseList = receiveGooseService.findByCondition(hql);
-			int totalRows = receiveGooseList.size();// 总的记录条数
-			this.pager.setTotalRowsAmount(totalRows);
-			int toIndex = receiveGooseList.size() <= pager.getPageStartRow() + pager.getPageSize() ? receiveGooseList.size() : pager.getPageStartRow() + pager.getPageSize();
-			for (ReceiveGoose receiveGoose2 : receiveGooseList.subList(this.pager.getPageStartRow(), toIndex)) {
-				// 迭代要显示在页面的所有批次
-				Goose goose = new Goose();
-				goose.setReceiveId(receiveGoose2.getId());//查找出所属该批次的已死亡鹅只,未出售
-				goose.setIsValid(0);
-				goose.setTradeId(null);
-				List<Goose> deadGooseList = gooseService.list(goose);
-					
-				DeadDetail deadDetail = new DeadDetail();
-				deadDetail.setDeadGooses(deadGooseList);
-				deadDetail.setReceiveGoose(receiveGoose2);
-				deadDetail.setCurrentNum(receiveGoose2.getAmount() - deadGooseList.size());
-				deadDetail.setDeadNum(deadGooseList.size());
-				deadDetail.setSurviveRate((float) (1.00000 - deadGooseList.size()*1.00000/receiveGoose2.getAmount()));
-				resourceList.add(deadDetail);	
-			}
-		}
-		
-		pager.setData(resourceList);
-		request.setAttribute("farm", farm);
-		request.setAttribute("pager", pager);
-		request.getSession().setAttribute("daysWithin", daysWithin);
-		return "deadDetail";
-	}
-	
 	public String sale(){
 		/*这里完成销售统计页面的一些数据初始化工作，数据计算交由类com.servlet.goose.SaleStatisticServlet完成，以异步加载形式
 		 * */
@@ -411,4 +307,14 @@ public class GooseStatisticAction extends BaseAction {
 	public void setTradeGoodViewService(TradeGoodViewService tradeGoodViewService) {
 		this.tradeGoodViewService = tradeGoodViewService;
 	}
+
+	public ReceiveGoose getReceiveGoose() {
+		return receiveGoose;
+	}
+
+	public void setReceiveGoose(ReceiveGoose receiveGoose) {
+		this.receiveGoose = receiveGoose;
+	}
+	
+	
 }
