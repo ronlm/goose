@@ -32,7 +32,6 @@ public class DeadGooseStatisticAction extends BaseAction {
 	private GooseService gooseService;
 	private ReceiveGooseService receiveGooseService;
 	private Farm farm;
-	private int daysWithin;
 	private ReceiveGoose receiveGoose;
 
 	public String dead() {
@@ -46,8 +45,7 @@ public class DeadGooseStatisticAction extends BaseAction {
 			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
 			request.getSession().removeAttribute("daysWithin");
 		} else if (null != request.getSession().getAttribute("daysWithin")) {
-			daysWithin = (Integer) request.getSession().getAttribute(
-					"daysWithin");
+			daysWithin = (Integer) request.getSession().getAttribute("daysWithin");
 		}
 
 		int totalRowCount = farmService.list(new Farm()).size();
@@ -165,13 +163,23 @@ public class DeadGooseStatisticAction extends BaseAction {
 		farm = farmService.get(new Farm(), receiveGoose.getFarmId());
 		String URL = request.getRequestURI();
 		this.pager.setURL(URL);
+		
+		int daysWithin = 0;
+		// 取得要显示的日期条件
+		if (null != request.getParameter("daysWithin")) {
+			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
+			request.getSession().removeAttribute("daysWithin");
+		} else if (null != request.getSession().getAttribute("daysWithin")) {
+				daysWithin = (Integer) request.getSession().getAttribute("daysWithin");
+		}
+		
 		List<Goose> resourceList = gooseService.findByCondition(pager.getPageStartRow(), pager.getPageSize(),
 						"select g from com.scau.model.goose.Goose g where g.receiveId=" + receiveGoose.getId() + " and g.isValid=0");
 		pager.setData(resourceList);
 		pager.setTotalRowsAmount(resourceList.size());
 		
-		request.getSession().setAttribute("daysWithin", request.getParameter("daysWithin"));
 		request.setAttribute("total", resourceList.size());
+		request.getSession().setAttribute("daysWithin", daysWithin);
 		request.setAttribute("pager", pager);
 		request.setAttribute("reveiveGoose", receiveGoose);
 		request.setAttribute("farm", farm);
