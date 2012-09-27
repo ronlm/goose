@@ -1,5 +1,7 @@
 package com.scau.model.goose;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +14,8 @@ public class Goose {
 	private Long tradeId;
 	private Long saleId;
 	
-	private Integer isValid;// 记录脚环是否有效
+	private Integer isValid;// 0表示鹅只非正常死亡，1 为正在养殖状态，2为已出售
+	private Date deadDate;//鹅只的死亡时间
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -53,6 +56,12 @@ public class Goose {
 	}
 	public void setSaleId(Long saleId) {
 		this.saleId = saleId;
+	}
+	public Date getDeadDate() {
+		return deadDate;
+	}
+	public void setDeadDate(Date deadDate) {
+		this.deadDate = deadDate;
 	}
 	
 	

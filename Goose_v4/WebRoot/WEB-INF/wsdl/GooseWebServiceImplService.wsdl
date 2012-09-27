@@ -54,6 +54,12 @@
   <message name="getReceiveInfoResponse">
     <part element="tns:getReceiveInfoResponse" name="parameters"/>
   </message>
+  <message name="getSaleGooseInfo">
+    <part element="tns:getSaleGooseInfo" name="parameters"/>
+  </message>
+  <message name="getSaleGooseInfoResponse">
+    <part element="tns:getSaleGooseInfoResponse" name="parameters"/>
+  </message>
   <portType name="GooseWebServiceImplDelegate">
     <operation name="login">
       <input message="tns:login"/>
@@ -86,6 +92,10 @@
     <operation name="getReceiveInfo">
       <input message="tns:getReceiveInfo"/>
       <output message="tns:getReceiveInfoResponse"/>
+    </operation>
+    <operation name="getSaleGooseInfo">
+      <input message="tns:getSaleGooseInfo"/>
+      <output message="tns:getSaleGooseInfoResponse"/>
     </operation>
   </portType>
   <binding name="GooseWebServiceImplPortBinding" type="tns:GooseWebServiceImplDelegate">
@@ -154,6 +164,15 @@
       </output>
     </operation>
     <operation name="getReceiveInfo">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getSaleGooseInfo">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
