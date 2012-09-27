@@ -18,7 +18,7 @@
 					<h3>${farm.name}&nbsp;农场存栏鹅只批次死亡信息统计</h3>
 					<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm"
-							action="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail"
+							action="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadDetail"
 							method="post">
 							查看最近 <select name="daysWithin" id="daysWithin"
 								style="width: 70px" onchange="changeDay();">
