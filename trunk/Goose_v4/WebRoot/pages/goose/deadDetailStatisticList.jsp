@@ -68,7 +68,7 @@
 							</div>
 						</td>
 						<td><a class="button" value="${deadInfo.farm.farmerId }" name="farmerId" 
-						href="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail?farm.id=${deadInfo.farm.id}"><span>死亡鹅只时间</span>
+						href="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadGooseList?daysWithin=${daysWithin }&&receiveGoose.id=${deadDetail.receiveGoose.id}"><span>死亡鹅只时间</span>
 						</a>
 						</td>
 					</tr>

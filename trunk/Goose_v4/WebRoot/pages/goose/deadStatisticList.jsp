@@ -17,7 +17,7 @@
 					<h3>鹅只死亡信息统计</h3>
 					<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm"
-							action="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!dead"
+							action="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!dead"
 							method="post">
 							查看最近 <select name="daysWithin" id="daysWithin"
 								style="width: 70px" onchange="changeDay();">

@@ -13,7 +13,6 @@ public class Goose {
 	private Long receiveId;
 	private Long tradeId;
 	private Long saleId;
-	
 	private Integer isValid;// 0表示鹅只非正常死亡，1 为正在养殖状态，2为已出售
 	private Date deadDate;//鹅只的死亡时间
 	@Id
