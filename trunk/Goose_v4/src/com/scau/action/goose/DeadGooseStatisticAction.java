@@ -22,6 +22,10 @@ import com.scau.util.PageController;
 import com.scau.vo.goose.DeadDetail;
 import com.scau.vo.goose.DeadInfo;
 
+/** 与鹅只死亡相关的统计
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class DeadGooseStatisticAction extends BaseAction {
