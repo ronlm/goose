@@ -216,6 +216,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			goose.setRingId(gooseId);
 			goose = gooseService.get(goose);
 			goose.setIsValid(0);//设置鹅只状态为死亡
+			goose.setDeadDate(new Date(new java.util.Date().getTime()));
 			gooseService.update(goose);//完成销号操作
 		} catch (Exception e) {
 			e.printStackTrace();
