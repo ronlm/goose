@@ -12,7 +12,7 @@
 		</action>
 		<!-- 使用通配符 对农户，养殖场配置配置 结束-->
 		
-		<!-- 鹅只信息统计  -->
+		<!-- 鹅只存栏与上市信息统计  -->
 		<action name="gooseStatisticAction" class="gooseStatisticAction">
 			<result name="market">/pages/goose/marketStatisticList.jsp</result>
 			<result name="stock">/pages/goose/stockStatisticList.jsp</result>
@@ -22,6 +22,14 @@
 			<result name="deadDetail">/pages/goose/deadDetailStatisticList.jsp</result>
 		</action>
 		<!-- 鹅只信息统计结束  -->
+		
+		<!-- 鹅只死亡信息统计  -->
+		<action name="deadGooseStatisticAction" class="deadGooseStatisticAction">
+			<result name="dead">/pages/goose/deadStatisticList.jsp</result>
+			<result name="deadGooseList">/pages/goose/deadGooseList.jsp</result>
+			<result name="deadDetail">/pages/goose/deadDetailStatisticList.jsp</result>
+		</action>
+		<!-- 鹅只死亡信息统计结束  -->
 		
 		<!-- 信息检索功能 开始 -->
 		<action name="searchAction" class="searchAction">
