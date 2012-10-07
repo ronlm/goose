@@ -84,8 +84,9 @@ public class SaleGooseAction extends BaseAction {
 	public String save() {
 		// 保存表单
 		try {
-			
+			saleGoose.setTotalValue(saleGoose.getUnitPrice() * saleGoose.getTotalWeight());
 			saleGooseService.save(saleGoose);
+			
 			return list();
 		} catch (Exception e) {
 			// 保存原来表单已输入的内容
