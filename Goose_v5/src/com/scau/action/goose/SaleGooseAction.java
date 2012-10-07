@@ -84,6 +84,7 @@ public class SaleGooseAction extends BaseAction {
 	public String save() {
 		// 保存表单
 		try {
+			//对于可能出现的修改单价和总重量，更新销售记录的总金额
 			saleGoose.setTotalValue(saleGoose.getUnitPrice() * saleGoose.getTotalWeight());
 			saleGooseService.save(saleGoose);
 			
