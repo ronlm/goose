@@ -183,6 +183,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			saleGoose.setSaleDate(new Date(new java.util.Date().getTime()));
 			saleGoose.setTotalWeight(totalWeight);
 			saleGoose.setUnitPrice(unitPrice);
+			saleGoose.setTotalValue(unitPrice * totalWeight);//添加销售的总金额
 			saleGooseService.add(saleGoose);//完成添加一条销售记录
 			
 			saleGoose = saleGooseService.get(saleGoose);

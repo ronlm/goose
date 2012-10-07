@@ -45,12 +45,14 @@ public class SaleGoose {
 	}
 	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
+		this.totalValue = this.totalWeight * this.unitPrice;
 	}
 	public Double getTotalWeight() {
 		return totalWeight;
 	}
 	public void setTotalWeight(Double totalWeight) {
 		this.totalWeight = totalWeight;
+		this.totalValue = this.totalWeight * this.unitPrice;
 	}
 	public Date getSaleDate() {
 		return saleDate;
