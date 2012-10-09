@@ -63,7 +63,7 @@
 						<td>${stock.farm.name}</td>
 						<td>${stock.stock}</td>
 						<td >
-							<a class="button" value="${deadInfo.farm.farmerId }" name="farmerId" href="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!deadDetail?farm.id=${stock.farm.id}"><span>存栏明细</span>
+							<a class="button" value="${deadInfo.farm.farmerId }" name="farmerId" href="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadDetail?farm.id=${stock.farm.id}"><span>存栏明细</span>
 						</a>
 						</td>
 						<td>${stock.farm.comments}</td>
