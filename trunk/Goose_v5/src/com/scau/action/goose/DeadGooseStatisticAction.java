@@ -2,6 +2,7 @@ package com.scau.action.goose;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -58,7 +59,7 @@ public class DeadGooseStatisticAction extends BaseAction {
 		List<Farm> farmList = farmService.findByCondition(
 				pager.getPageStartRow(), pager.getPageSize(),
 				"from com.scau.model.goose.Farm f order by f.id asc");
-		List<DeadInfo> resourceList = new ArrayList<DeadInfo>();// 结果列
+		List<DeadInfo> resourceList = new LinkedList<DeadInfo>();// 结果列
 		for (Farm f : farmList) {
 			// 查找每个农场的相关信息
 			List<ReceiveGoose> receiveGooseList = receiveGooseService
@@ -67,19 +68,17 @@ public class DeadGooseStatisticAction extends BaseAction {
 							+ f.getId()
 							+ "' and rg.receiveDate >='"
 							+ receiveGooseService.getDateBefore(daysWithin)
-							+ "'");
+							+ "'");	
 			DeadInfo dead = new DeadInfo();
 			dead.setFarm(f);
 			if (receiveGooseList.size() > 0) {
 				dead.setFarm(f);
-				List<Goose> gooseList = new ArrayList<Goose>();
+				List<Goose> gooseList = new LinkedList<Goose>();
 				for (ReceiveGoose rg : receiveGooseList) {
 					// 得到一个批次的死亡鹅只死亡记录
-					Goose g = new Goose();
-					g.setReceiveId(rg.getId());
-					g.setIsValid(0);
-					List<Goose> tempList = gooseService.list(g);
 
+					List<Goose> tempList = gooseService.findByCondition("from com.scau.model.goose.Goose g where " +
+							"g.receiveId = " + rg.getId() + " and g.isValid=0 ");					
 					gooseList.addAll(tempList);
 				}
 				dead.setDeadNum(gooseList.size());
@@ -133,12 +132,9 @@ public class DeadGooseStatisticAction extends BaseAction {
 			for (ReceiveGoose receiveGoose2 : receiveGooseList.subList(
 					this.pager.getPageStartRow(), toIndex)) {
 				// 迭代要显示在页面的所有批次
-				Goose goose = new Goose();
-				goose.setReceiveId(receiveGoose2.getId());// 查找出所属该批次的已死亡鹅只,未出售
-				goose.setIsValid(0);
-				goose.setTradeId(null);
-				List<Goose> deadGooseList = gooseService.list(goose);
-
+				// 查找出所属该批次的已死亡鹅只,未出售
+				List<Goose> deadGooseList = gooseService.findByCondition("from com.scau.model.goose.Goose where " +
+							"g.receiveId = " + receiveGoose2.getId() + " and g.isValid=0 and g.tradeId=null");
 				DeadDetail deadDetail = new DeadDetail();
 				deadDetail.setDeadGooses(deadGooseList);
 				deadDetail.setReceiveGoose(receiveGoose2);
