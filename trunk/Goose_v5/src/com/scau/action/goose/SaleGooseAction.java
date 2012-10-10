@@ -11,13 +11,10 @@ import org.springframework.stereotype.Component;
 
 
 import com.scau.action.BaseAction;
-import com.scau.exception.BusinessException;
-import com.scau.model.comm.CommRole;
 import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleGoose;
 import com.scau.service.impl.goose.RetailerService;
 import com.scau.service.impl.goose.SaleGooseService;
-import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 
 @Component
