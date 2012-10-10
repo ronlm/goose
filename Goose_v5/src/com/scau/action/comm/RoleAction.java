@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
 import com.scau.exception.BusinessException;
 import com.scau.model.comm.CommResource;
@@ -20,7 +19,6 @@ import com.scau.service.impl.comm.CommRoleResourceService;
 import com.scau.service.impl.comm.CommRoleService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 @Component
