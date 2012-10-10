@@ -97,6 +97,7 @@ public class GooseStatisticAction extends BaseAction {
 	 */
 	public String stock() throws Exception{
 			// 查看全部农场的存栏量
+			
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
 			int totalRowCount = farmService.list(new Farm()).size();
@@ -106,21 +107,15 @@ public class GooseStatisticAction extends BaseAction {
 			List<FarmStock> resourceList = new LinkedList<FarmStock>();
 			for(Farm f :farmList){
 				
-				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
-				//String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
-					//	+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
-			//	List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
-				
+				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）	
 				String idHql = "select rg.id from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
 						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
 				
 				long gooseNum = 0;
 				
-				String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId in(" +
-											idHql +") and "
-							+ "g.isValid ='1' and g.tradeId=null" ;
+				String gooseCondition = "select count(id) from com.scau.model.goose.Goose g where g.receiveId in(" +
+											idHql +") and g.isValid =1 and g.tradeId=null and g.saleId=null" ;
 				gooseNum = gooseService.getRecordCount(gooseCondition);
-				
 				FarmStock stock = new FarmStock();
 				stock.setFarm(f);
 				stock.setStock(gooseNum);
