@@ -14,6 +14,10 @@ import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.TradeGooseService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
+/** 利用多线程，为每个农场注入一定的数据作测试
+ * @author jianhao
+ *
+ */
 public class DataAutoInput implements Runnable{
 	protected static ApplicationContext  ctx = new  ClassPathXmlApplicationContext("applicationContext.xml");
 	static GooseService gooseService = (GooseService) ctx.getBean("gooseService");
@@ -51,7 +55,7 @@ public class DataAutoInput implements Runnable{
 		for(int i = 0;i<720;i++){
 			int interval = (int) (Math.random() *2) +7 ;//十天（+-2内一个农场入一批） 
 			if(0 == i%interval){
-				addGooseReceive(this.farmId, (int) (Math.random() * this.ADD_NUMBER /1) * interval, getDateBefore(i));
+				addGooseReceive(this.farmId, (int) ((Math.random()+1) * this.ADD_NUMBER /1) * interval, getDateBefore(i));
 			}
 		}
 	}
