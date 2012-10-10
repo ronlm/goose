@@ -1,6 +1,5 @@
 package com.scau.action.goose;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,12 +12,9 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
-import com.scau.exception.BusinessException;
 import com.scau.model.goose.Farm;
-import com.scau.model.goose.Farmer;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.service.impl.goose.FarmService;
-import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.util.PageController;
 
