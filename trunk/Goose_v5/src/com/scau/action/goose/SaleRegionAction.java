@@ -11,11 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.scau.action.BaseAction;
 import com.scau.exception.BusinessException;
-import com.scau.model.goose.Farm;
-import com.scau.model.goose.Good;
 import com.scau.model.goose.SaleRegion;
-import com.scau.service.impl.goose.GoodService;
-import com.scau.service.impl.goose.SaleGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.PageController;
 
