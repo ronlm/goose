@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.scau.action.BaseAction;
-import com.scau.exception.BusinessException;
 import com.scau.model.goose.Farm;
-import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.TradeGoose;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.TradeGooseService;
