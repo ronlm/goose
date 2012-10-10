@@ -107,16 +107,20 @@ public class GooseStatisticAction extends BaseAction {
 			for(Farm f :farmList){
 				
 				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
-				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
+				//String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
+					//	+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
+			//	List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
+				
+				String idHql = "select rg.id from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
 						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
-				List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
 				
 				long gooseNum = 0;
-				for(ReceiveGoose receiveGoose : receiveList){
-					String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
+				
+				String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId in(" +
+											idHql +") and "
 							+ "g.isValid ='1' and g.tradeId=null" ;
-					gooseNum += gooseService.getRecordCount(gooseCondition);
-				}
+				gooseNum = gooseService.getRecordCount(gooseCondition);
+				
 				FarmStock stock = new FarmStock();
 				stock.setFarm(f);
 				stock.setStock(gooseNum);

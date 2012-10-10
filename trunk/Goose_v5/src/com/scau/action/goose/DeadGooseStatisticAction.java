@@ -126,14 +126,13 @@ public class DeadGooseStatisticAction extends BaseAction {
 					.findByCondition(hql);
 			int totalRows = receiveGooseList.size();// 总的记录条数
 			this.pager.setTotalRowsAmount(totalRows);
-			int toIndex = receiveGooseList.size() <= pager.getPageStartRow()
-					+ pager.getPageSize() ? receiveGooseList.size() : pager
-					.getPageStartRow() + pager.getPageSize();
+			int toIndex = Math.min(receiveGooseList.size(), pager.getPageStartRow() + pager.getPageSize());
+			
 			for (ReceiveGoose receiveGoose2 : receiveGooseList.subList(
 					this.pager.getPageStartRow(), toIndex)) {
 				// 迭代要显示在页面的所有批次
 				// 查找出所属该批次的已死亡鹅只,未出售
-				List<Goose> deadGooseList = gooseService.findByCondition("from com.scau.model.goose.Goose where " +
+				List<Goose> deadGooseList = gooseService.findByCondition("from com.scau.model.goose.Goose g where " +
 							"g.receiveId = " + receiveGoose2.getId() + " and g.isValid=0 and g.tradeId=null");
 				DeadDetail deadDetail = new DeadDetail();
 				deadDetail.setDeadGooses(deadGooseList);
