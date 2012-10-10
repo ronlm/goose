@@ -100,7 +100,6 @@ public class GooseStatisticAction extends BaseAction {
 	 */
 	public String stock() throws Exception{
 			// 查看全部农场的存栏量
-			
 			String URL = request.getRequestURI();
 			this.pager.setURL(URL);
 			int totalRowCount = farmService.list(new Farm()).size();
