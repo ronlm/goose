@@ -7,8 +7,6 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.hibernate.mapping.Value;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.scau.model.comm.CommUser;
