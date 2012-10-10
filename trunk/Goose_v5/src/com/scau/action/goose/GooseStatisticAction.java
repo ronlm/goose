@@ -17,7 +17,6 @@ import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.GoodType;
-import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.SaleRegion;
 import com.scau.service.impl.goose.FarmService;
@@ -33,8 +32,6 @@ import com.scau.util.PageController;
 import com.scau.view.goose.Market;
 import com.scau.view.goose.TradeGoodView;
 import com.scau.vo.goose.AppearOnMarket;
-import com.scau.vo.goose.DeadDetail;
-import com.scau.vo.goose.DeadInfo;
 import com.scau.vo.goose.FarmStock;
 
 @Component
@@ -54,6 +51,7 @@ public class GooseStatisticAction extends BaseAction {
 	private FarmerService farmerService;
 	private TradeGoodViewService tradeGoodViewService;
 	private ReceiveGoose receiveGoose;
+	private Date today = new Date(new java.util.Date().getTime());
 	
 	public String market() throws Exception{
 		String URL = request.getRequestURI();
@@ -66,14 +64,18 @@ public class GooseStatisticAction extends BaseAction {
 					marketService.getDateBefore(45) + "' order by m.receiveDate asc";
 		// 以下的计算是找出记录的总数
 		List<Market> totalList = marketService.findByCondition(hql);
-		List<AppearOnMarket> totalAppearOnMarkets = new LinkedList<AppearOnMarket>();
-		Date today = new Date(new java.util.Date().getTime());
-		for (Market market : totalList) {	
+		
+		int totalRows = totalList.size();// 总的记录条数
+		this.pager.setTotalRowsAmount(totalRows);
+		List<AppearOnMarket> resourceList = new LinkedList<AppearOnMarket>();
+		int toIndex = Math.min(totalList.size(),  this.pager.getPageStartRow() + this.pager.getPageSize());
+		
+		for (Market market : totalList.subList(this.pager.getPageStartRow(), toIndex)) {	
 			long feedDays = today.getTime() - market.getReceiveDate().getTime();//已养殖天数
 			long day = ON_MARKET_DAY - feedDays/(3600*24*1000);//离上市相差的天数
 			//查找出属于该个接收鹅苗批次，又未死亡和未交易的鹅只数量
 		
-			String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
+			String gooseCondition = "select count(id) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
 					+ "g.isValid ='1' and g.tradeId=null and g.deadDate = null";
 			long gooseNum = gooseService.getRecordCount(gooseCondition);
 				
@@ -81,15 +83,9 @@ public class GooseStatisticAction extends BaseAction {
 			a.setDayTo90(day);
 			a.setGooseNum(gooseNum);
 			a.setMarket(market);
-			totalAppearOnMarkets.add(a);
+			resourceList.add(a);
 		}
-			
-		int totalRows = totalAppearOnMarkets.size();// 总的记录条数
-		this.pager.setTotalRowsAmount(totalRows);
-		
-		int toIndex = totalAppearOnMarkets.size() <= pager.getPageStartRow() + pager.getPageSize() ? totalAppearOnMarkets.size() : pager.getPageStartRow() + pager.getPageSize();
-		List<AppearOnMarket> resourceList = totalAppearOnMarkets.subList(this.pager.getPageStartRow(), toIndex);
-			
+	
 		pager.setData(resourceList);
 		request.setAttribute("pager", pager);
 		request.setAttribute("today", new Date(new java.util.Date().getTime()));
@@ -129,7 +125,7 @@ public class GooseStatisticAction extends BaseAction {
 			
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
-			request.setAttribute("today", new Date(new java.util.Date().getTime()));
+			request.setAttribute("today", today);
 			return "stock";
 	}
 	
