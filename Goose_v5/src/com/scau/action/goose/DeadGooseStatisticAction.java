@@ -100,7 +100,7 @@ public class DeadGooseStatisticAction extends BaseAction {
 		// 查看一个指定农场的所以存栏 的receiveGoose 的死亡信息和存活率
 		int daysWithin = 0;
 		farm = farmService.get(farm);
-		String URL = request.getRequestURI();
+		String URL = request.getRequestURI() + "?farm.id=" + farm.getId();
 		this.pager.setURL(URL);
 		// 取得要显示的日期条件
 		if (null != request.getParameter("daysWithin")) {
