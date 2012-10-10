@@ -3,23 +3,18 @@ package com.scau.servlet.goose;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.Null;
-
 import com.scau.model.goose.Retailer;
 import com.scau.model.goose.SaleRegion;
 import com.scau.service.impl.goose.RetailerService;
 import com.scau.service.impl.goose.SaleGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.BeansUtil;
-import com.scau.vo.goose.SaleStatisticInfo;
-import com.sun.org.apache.bcel.internal.generic.Select;
 
 public class SaleStatisticServlet extends HttpServlet {
 
