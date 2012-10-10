@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-10 20:33:07
+Date: 2012-10-10 20:55:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -316,10 +316,9 @@ CREATE TABLE `goose` (
   `isValid` tinyint(2) DEFAULT '1' COMMENT '0ʾֻ1 Ϊֳ״̬2Ϊѳ',
   `deadDate` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `isValid` (`isValid`) USING BTREE,
   KEY `receiveId` (`receiveId`) USING HASH,
   KEY `ringId` (`ringId`)
-) ENGINE=InnoDB AUTO_INCREMENT=131621 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of goose
@@ -336,9 +335,8 @@ CREATE TABLE `receive_goose` (
   `receiveDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id` (`id`),
   KEY `receiveDate` (`receiveDate`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receive_goose
