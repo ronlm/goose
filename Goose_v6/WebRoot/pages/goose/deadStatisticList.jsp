@@ -28,9 +28,6 @@
 								<option value="60" <c:if test="${daysWithin == 60 }">selected="selected"</c:if>>60天</option>
 								<option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90天</option>
 								<option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120天</option>
-								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
-								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
-								<!-- <option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>  -->
 							</select> 天内所有农场鹅只非正常死亡信息&nbsp;&nbsp;&nbsp;
 
 						</form>
