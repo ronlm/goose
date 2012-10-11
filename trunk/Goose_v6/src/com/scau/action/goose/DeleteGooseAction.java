@@ -1,6 +1,7 @@
 package com.scau.action.goose;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import javax.annotation.Resource;
 
@@ -9,59 +10,61 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import com.scau.action.BaseAction;
+import com.scau.model.goose.Farm;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
+import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.GooseService;
+import com.scau.service.impl.goose.MutilThreadGooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 
 @Component
 public class DeleteGooseAction extends BaseAction{
 	private final static Log logger = LogFactory
 			.getLog(DeleteGooseAction.class);
-	private ReceiveGooseService receiveGooseService;
-	private GooseService gooseService;
+	private FarmService farmService;
 	
 	public String list() {
 		return "list";
 	}
 	
 	public String delete() {
-		List<ReceiveGoose> receiveGooses = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where rg.receiveDate <'"
-											+ receiveGooseService.getDateBefore(365*2) + "'");
-		try {
-			for (ReceiveGoose receiveGoose : receiveGooses) {
-				Goose goose = new Goose();
-				goose.setReceiveId(receiveGoose.getId());
-				List<Goose> gooseList = gooseService.list(goose);
-				
-				for (Goose goose2 : gooseList) {
-					gooseService.delete(goose2);
-				}
-			}
-			request.setAttribute("message", "成功删除两年前鹅只脚环信息！");
-			return "success";
-		} catch (Exception e) {
-			return "error";
+		
+		List<Farm> farmList = farmService.list(new Farm());
+		final CountDownLatch begin = new CountDownLatch(1);
+		final CountDownLatch end = new CountDownLatch(farmList.size());
+		for (Farm farm : farmList) {
+			MutilThreadGooseService mutilThreadGooseService = new MutilThreadGooseService(begin, end, farmService.getDateBefore(732), farm);
+			mutilThreadGooseService.start();
 		}
+		
+		begin.countDown();
+		long startTime = System.currentTimeMillis();
+
+		try {
+			end.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return "error";
+		} finally {
+			long endTime = System.currentTimeMillis();
+			System.out.println("delete spend time: " + (endTime - startTime));
+		}
+	
+		request.setAttribute("message", "成功删除两年前鹅只脚环信息！");
+		return "success";
+		
 	}
 
-	public ReceiveGooseService getReceiveGooseService() {
-		return receiveGooseService;
+	public FarmService getFarmService() {
+		return farmService;
 	}
-
+	
 	@Resource
-	public void setReceiveGooseService(ReceiveGooseService receiveGooseService) {
-		this.receiveGooseService = receiveGooseService;
+	public void setFarmService(FarmService farmService) {
+		this.farmService = farmService;
 	}
 
-	public GooseService getGooseService() {
-		return gooseService;
-	}
-
-	@Resource
-	public void setGooseService(GooseService gooseService) {
-		this.gooseService = gooseService;
-	}
 	
 	
 }
