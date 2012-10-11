@@ -104,6 +104,8 @@ public class GooseStatisticAction extends BaseAction {
 			this.pager.setTotalRowsAmount(totalRowCount);
 			List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
 			
+			long startTime = System.currentTimeMillis();
+			
 			List<FarmStock> resourceList = new LinkedList<FarmStock>();
 			for(Farm f :farmList){
 				
@@ -121,6 +123,8 @@ public class GooseStatisticAction extends BaseAction {
 				stock.setStock(gooseNum);
 				resourceList.add(stock);
 			}
+			long endTime = System.currentTimeMillis();
+			System.out.println("spend time: " + (endTime - startTime) + "ms");
 			
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
