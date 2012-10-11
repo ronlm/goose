@@ -32,8 +32,8 @@ public class FarmStockService extends Thread{
 				+" and rg.receiveDate >='" + gooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
 		
 		long gooseNum = 0;
-		String gooseCondition = "select count(id) from com.scau.model.goose.Goose g where g.receiveId in(" +
-									idHql +") and g.isValid =1 and g.tradeId=null and g.saleId=null" ;
+		String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId in(" +
+									idHql +") and g.isValid =1 and g.tradeId is null and g.saleId is null" ;
 		gooseNum = gooseService.getRecordCount(gooseCondition);
 		FarmStock stock = new FarmStock();
 		stock.setFarm(f);
