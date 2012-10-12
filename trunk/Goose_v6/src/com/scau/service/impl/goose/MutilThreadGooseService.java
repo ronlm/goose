@@ -24,13 +24,13 @@ public class MutilThreadGooseService extends Thread{
 	
 	private GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 	private ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
-	private Date daysBefore;//要删除daysBefore天以前的数据
+	private int daysBefore;//要删除daysBefore天以前的数据
 	private Farm farm;
 	
-	public  void DeleteGooseData(Farm f ,Date daysBefore) throws Exception{
+	public  void DeleteGooseData(Farm f ,int daysBefore) throws Exception{
 		//找出所有属于某个农场的所有dayBefore天以前的交付鹅苗批次记录
 		List<ReceiveGoose> receiveGooses = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId() +
-											" and rg.receiveDate <'" + receiveGooseService.getDateBefore(365*2) + "'");
+											" and rg.receiveDate <'" + receiveGooseService.getDateBefore(daysBefore) + "'");
 		try {
 			for (ReceiveGoose receiveGoose : receiveGooses) {
 				Goose goose = new Goose();
@@ -39,13 +39,13 @@ public class MutilThreadGooseService extends Thread{
 				
 				for (Goose goose2 : gooseList) {
 					gooseService.delete(goose2);
-					}
 				}
-			} catch (Exception e) {
-			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			}
 	}
-	//多线程计算每个农场的存栏数
+	//多线程删除每个农场的鹅只数据
 	public void run(){
 		if(null != farm){
 			
@@ -65,7 +65,7 @@ public class MutilThreadGooseService extends Thread{
 	
 	
 	public MutilThreadGooseService(CountDownLatch begin, CountDownLatch end,
-			Date daysBefore, Farm farm) {
+			int daysBefore, Farm farm) {
 		super();
 		this.begin = begin;
 		this.end = end;
