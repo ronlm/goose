@@ -34,7 +34,7 @@ public class DeleteGooseAction extends BaseAction{
 		final CountDownLatch begin = new CountDownLatch(1);
 		final CountDownLatch end = new CountDownLatch(farmList.size());
 		for (Farm farm : farmList) {
-			MutilThreadGooseService mutilThreadGooseService = new MutilThreadGooseService(begin, end, farmService.getDateBefore(732), farm);
+			MutilThreadGooseService mutilThreadGooseService = new MutilThreadGooseService(begin, end, 365*2, farm);
 			mutilThreadGooseService.start();
 		}
 		
