@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.scau.model.goose.Farm;
+import com.scau.model.goose.ReceiveGoose;
 import com.scau.util.BeansUtil;
 import com.scau.vo.goose.FarmStock;
 
@@ -23,18 +24,22 @@ public class FarmStockService extends Thread{
 	final CountDownLatch end;
 	
 	private GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
+	private ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
 	private List<FarmStock> stockList;
 	private Farm farm;
 	
 	public FarmStock getFarmStock(Farm f) throws Exception{
-		//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）	
-		String idHql = "select rg.id from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
-				+" and rg.receiveDate >='" + gooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
+		//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
+		String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
+				+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
+		List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
 		
 		long gooseNum = 0;
-		String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId in(" +
-									idHql +") and g.isValid =1 and g.tradeId is null and g.saleId is null" ;
-		gooseNum = gooseService.getRecordCount(gooseCondition);
+		for(ReceiveGoose receiveGoose : receiveList){
+			String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
+					+ "g.isValid ='1' and g.tradeId=null" ;
+			gooseNum += gooseService.getRecordCount(gooseCondition);
+		}
 		FarmStock stock = new FarmStock();
 		stock.setFarm(f);
 		stock.setStock(gooseNum);
@@ -49,7 +54,6 @@ public class FarmStockService extends Thread{
 					begin.await();
 					stockList.add(getFarmStock(farm));
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				finally{
