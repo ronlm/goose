@@ -99,38 +99,40 @@ public class GooseStatisticAction extends BaseAction {
 	 * @return
 	 */
 	public String stock() throws Exception{
-			// 查看全部农场的存栏量
-			String URL = request.getRequestURI();
-			this.pager.setURL(URL);
-			int totalRowCount = farmService.list(new Farm()).size();
-			this.pager.setTotalRowsAmount(totalRowCount);
-			List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
+		// 查看全部农场的存栏量
+		String URL = request.getRequestURI();
+		this.pager.setURL(URL);
+		int totalRowCount = farmService.list(new Farm()).size();
+		this.pager.setTotalRowsAmount(totalRowCount);
+		List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
+		
+		long startTime = System.currentTimeMillis();
+		
+		List<FarmStock> resourceList = new LinkedList<FarmStock>();
+		for(Farm f :farmList){
 			
-			List<FarmStock> resourceList = new Vector<FarmStock>();
-			final CountDownLatch begin = new CountDownLatch(1);
-			final CountDownLatch end = new CountDownLatch(farmList.size());
+			//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
+			String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
+					+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
+			List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
 			
-			for (Farm farm : farmList) {
-				FarmStockService farmStockService = new FarmStockService(resourceList, farm,begin,end);
-				farmStockService.start();	
+			long gooseNum = 0;
+			for(ReceiveGoose receiveGoose : receiveList){
+				String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
+						+ "g.isValid ='1' and g.tradeId=null" ;
+				gooseNum += gooseService.getRecordCount(gooseCondition);
 			}
-			begin.countDown();
-			long startTime = System.currentTimeMillis();
-
-			try {
-				end.await();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} finally {
-				long endTime = System.currentTimeMillis();
-				System.out.println("spend time: " + (endTime - startTime));
-			}
-			
-			pager.setData(resourceList);
-			request.setAttribute("pager", pager);
-			request.setAttribute("today", today);
-			return "stock";
-	}
+			FarmStock stock = new FarmStock();
+			stock.setFarm(f);
+			stock.setStock(gooseNum);
+			resourceList.add(stock);
+		}
+		System.out.println("spend time:"+ (System.currentTimeMillis()-startTime)+"ms");
+		pager.setData(resourceList);
+		request.setAttribute("pager", pager);
+		request.setAttribute("today", new Date(new java.util.Date().getTime()));
+		return "stock";
+}
 	
 	public String stockAndGood() throws Exception{
 		//对比当前农户所有鹅的存栏量与物资（饲料）购买记录
