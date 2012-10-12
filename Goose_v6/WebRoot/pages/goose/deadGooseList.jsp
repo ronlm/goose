@@ -15,7 +15,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>${farm.name}&nbsp;农场存栏鹅只死亡时间列表</h3>
+					<h3>${farm.name}&nbsp;农场现存栏鹅只死亡时间列表</h3>
 					<div class="tableControllerButton">
 							最近 <select name="daysWithin" id="daysWithin"
 								style="width: 70px" onchange="changeDay();">
