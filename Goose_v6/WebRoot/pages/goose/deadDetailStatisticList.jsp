@@ -9,13 +9,13 @@
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 <script type="text/javascript" src="../../js/getInfo.js"></script>
-<%-- 对每个农场的当前存栏的所以鹅苗接收批次分别作死亡数字统计，同时计算各自的存活率--%>
+<%-- 对每个农场的当前存栏的所以鹅苗接收批次 ReceiveGoose 分别作死亡数字统计，同时计算各自的存活率--%>
 <body  onload="changeRowColor();">
 	<table class="mainTable" id="table" >
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>${farm.name}&nbsp;农场存栏鹅只批次死亡信息统计</h3>
+					<h3>${farm.name}&nbsp;农场现存栏鹅只批次死亡信息统计</h3>
 					<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm"
 							action="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadDetail"
