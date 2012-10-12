@@ -74,7 +74,6 @@ public class GooseStatisticAction extends BaseAction {
 			long feedDays = today.getTime() - market.getReceiveDate().getTime();//已养殖天数
 			long day = ON_MARKET_DAY - feedDays/(3600*24*1000);//离上市相差的天数
 			//查找出属于该个接收鹅苗批次，又未死亡和未交易的鹅只数量
-		
 			String gooseCondition = "select count(id) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
 					+ "g.isValid ='1' and g.tradeId=null and g.deadDate = null";
 			long gooseNum = gooseService.getRecordCount(gooseCondition);
@@ -83,7 +82,7 @@ public class GooseStatisticAction extends BaseAction {
 			a.setDayTo90(day);
 			a.setGooseNum(gooseNum);
 			a.setMarket(market);
-			resourceList.add(a);
+			resourceList.add(a);		
 		}
 	
 		pager.setData(resourceList);
@@ -104,8 +103,6 @@ public class GooseStatisticAction extends BaseAction {
 			this.pager.setTotalRowsAmount(totalRowCount);
 			List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
 			
-			long startTime = System.currentTimeMillis();
-			
 			List<FarmStock> resourceList = new LinkedList<FarmStock>();
 			for(Farm f :farmList){
 				
@@ -123,8 +120,6 @@ public class GooseStatisticAction extends BaseAction {
 				stock.setStock(gooseNum);
 				resourceList.add(stock);
 			}
-			long endTime = System.currentTimeMillis();
-			System.out.println("spend time: " + (endTime - startTime) + "ms");
 			
 			pager.setData(resourceList);
 			request.setAttribute("pager", pager);
