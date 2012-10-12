@@ -27,6 +27,7 @@ import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.MarketService;
+import com.scau.service.impl.goose.MutilThreadGooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.service.impl.goose.TradeGoodViewService;
@@ -105,29 +106,27 @@ public class GooseStatisticAction extends BaseAction {
 		int totalRowCount = farmService.list(new Farm()).size();
 		this.pager.setTotalRowsAmount(totalRowCount);
 		List<Farm> farmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
-		
-		long startTime = System.currentTimeMillis();
-		
+			
+		final CountDownLatch begin = new CountDownLatch(1);
+		final CountDownLatch end = new CountDownLatch(farmList.size());
 		List<FarmStock> resourceList = new LinkedList<FarmStock>();
 		for(Farm f :farmList){
-			
-			//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
-			String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
-					+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
-			List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
-			
-			long gooseNum = 0;
-			for(ReceiveGoose receiveGoose : receiveList){
-				String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
-						+ "g.isValid ='1' and g.tradeId=null" ;
-				gooseNum += gooseService.getRecordCount(gooseCondition);
-			}
-			FarmStock stock = new FarmStock();
-			stock.setFarm(f);
-			stock.setStock(gooseNum);
-			resourceList.add(stock);
+			FarmStockService farmStockService = new FarmStockService(resourceList, f, begin, end);
+			farmStockService.start();
 		}
-		System.out.println("spend time:"+ (System.currentTimeMillis()-startTime)+"ms");
+	
+		begin.countDown();
+		long startTime = System.currentTimeMillis();
+		try {
+			end.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return "error";
+		} finally {
+			long endTime = System.currentTimeMillis();
+			System.out.println("stock spend time: " + (endTime - startTime));
+		}
+		
 		pager.setData(resourceList);
 		request.setAttribute("pager", pager);
 		request.setAttribute("today", new Date(new java.util.Date().getTime()));
