@@ -112,7 +112,7 @@ public class GooseStatisticAction extends BaseAction {
 		List<FarmStock> resourceList = new LinkedList<FarmStock>();
 		for(Farm f :farmList){
 			FarmStockService farmStockService = new FarmStockService(resourceList, f, begin, end);
-			farmStockService.start();
+			farmStockService.start();//启动每个个农户各自的线程
 		}
 	
 		begin.countDown();
@@ -124,7 +124,7 @@ public class GooseStatisticAction extends BaseAction {
 			return "error";
 		} finally {
 			long endTime = System.currentTimeMillis();
-			System.out.println("stock spend time: " + (endTime - startTime));
+			System.out.println("stock spend time: " + (endTime - startTime) +"ms");
 		}
 		
 		pager.setData(resourceList);
