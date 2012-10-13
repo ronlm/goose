@@ -19,7 +19,7 @@
 						<form name="changeDayForm" id="changeDayForm"
 							action="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!dead"
 							method="post">
-							<div style="clear:both;;position:relative;">
+							<div style="position:relative;">
 							最近
 							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;changeDay();">  
 								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
@@ -35,13 +35,15 @@
 							  
 							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" validation="number" style="width:102px;height:24px;border:border:1px solid #fff000;">  
 							天内所有农场鹅只非正常死亡信息&nbsp;&nbsp;&nbsp;
-							</div>
-						</form>
+							
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span> </a>
-					</div></th>
+						</div>
+						</form>
+					</div>
+				</th>
 			</tr>
 			<tr class="tableTitle">
 				<th width="30px"><h3>序号</h3>
