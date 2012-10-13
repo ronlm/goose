@@ -12,9 +12,7 @@
 				<thead>
 					<tr class="tableController">
 						<th colspan="2">
-							<h3>
-								物资信息编辑
-							</h3>
+							<h3>当前页面:物资信息编辑</h3>
 						</th>
 					</tr>
 					<tr>

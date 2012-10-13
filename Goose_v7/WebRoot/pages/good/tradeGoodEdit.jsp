@@ -10,7 +10,7 @@
 			<thead>
 				<tr class="tableController">
 					<th colspan="3">
-						<h3>编辑物资销售记录</h3></th>
+						<h3>当前页面:物资销售编辑</h3></th>
 				</tr>
 				<tr>
 					<th>&nbsp;</th>

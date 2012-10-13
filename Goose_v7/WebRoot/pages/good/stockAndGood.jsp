@@ -12,7 +12,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>鹅只存栏信息与农户购买物资比对</h3>
+					<h3>当前页面:鹅只存栏信息与农户购买物资比对</h3>
 						<div class="tableControllerButton">
 						<form name="form" id="form" action="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!stockAndGood" method="post">
 							选择物资类型:&nbsp;
