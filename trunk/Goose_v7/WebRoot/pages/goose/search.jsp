@@ -16,7 +16,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="11">
-					<h3>记录检索</h3>
+					<h3>当前页面:记录搜索</h3>
 					<div class="tableControllerButton">
 						记录类型:
 							<input type="radio" name="searchType" value="receiveGoose" checked="checked">鹅苗交付&nbsp;
