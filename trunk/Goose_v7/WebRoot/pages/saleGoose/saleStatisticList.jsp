@@ -11,9 +11,9 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3>鹅只销售信息统计</h3>
+					<h3>当前页面:鹅只出售信息统计</h3>
 						<div class="tableControllerButton">
-						销售时间:从&nbsp;&nbsp;
+						出售时间:从&nbsp;&nbsp;
 							<input type="text"  validation="date" readonly="readonly" id="fromDate" name="fromDate" value="${fromDate }" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/> 
 							到&nbsp;&nbsp;<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate" value="${toDate }"onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
 							&nbsp;&nbsp;
@@ -27,7 +27,7 @@
 								<option value="${saleRegion.id}">${saleRegion.region}</option>
 							</c:forEach>
 						</select>
-						区销售情况
+						区出售情况
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"

@@ -13,8 +13,7 @@
 				<thead>
 					<tr class="tableController">
 						<th colspan="2">
-							<h3>
-								成品鹅销售信息编辑
+							<h3>当前页面:成品鹅出售编辑
 							</h3>
 						</th>
 					</tr>

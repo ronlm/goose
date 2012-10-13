@@ -42,8 +42,8 @@
 			</tr>
 			<tr class="tableTitle">
 				<th width="30px"><h3>序号</h3></th>
-				<th><h3>交付鹅苗时间</h3></th>
-				<th><h3>交付数量</h3></th>
+				<th><h3>鹅苗进场时间</h3></th>
+				<th><h3>进场数量</h3></th>
 				<th><h3>现存数量</h3></th>
 				<th><h3>死亡数量</h3></th>
 				<th><h3>存活率</h3></th>

@@ -60,7 +60,7 @@
 					</tr>
 					<tr>
 						<td width="200" align="right">
-							家庭住址:
+							地址:
 						</td>
 						<td>
 							<input type="text"  name="goodSupplier.address" id="address" value="${goodSupplier.address}" />
