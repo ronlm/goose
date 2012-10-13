@@ -9,7 +9,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="7">
-					<h3>农用物资列表</h3>
+					<h3>当前页面:农用物资管理</h3>
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/goodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加新物资</span></a>
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/goodTypeAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部物资分类信息</span></a>

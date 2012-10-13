@@ -11,7 +11,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="12">
-					<h3>物资销售记录</h3>
+					<h3>当前页面:物资销售管理</h3>
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/tradeGoodAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<form name="form" id="form" action="${pageContext.request.contextPath }/pages/good/tradeGoodAction!list" method="post">

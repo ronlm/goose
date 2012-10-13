@@ -9,7 +9,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="7">
-					<h3>供应商列表</h3>
+					<h3>当前页面:供应商管理</h3>
 					<div class="tableControllerButton">
 						<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/goodSupplierAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
 						<!-- <a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/good/goodSupplierAction!get'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;搜索</span></a> -->
