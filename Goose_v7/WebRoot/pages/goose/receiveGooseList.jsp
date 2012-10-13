@@ -14,7 +14,7 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
-					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>鹅苗交付信息列表</h3>
+					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>鹅苗进场信息列表</h3>
 						<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!list" method="post">
 							最近
@@ -29,7 +29,7 @@
 								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
 								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							</select>
-							天内交付信息
+							天内进场批次信息
 							<c:if test="${farm != null }"><input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" /></c:if>
 							
 						</form>
