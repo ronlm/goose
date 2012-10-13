@@ -13,8 +13,8 @@
 				<thead>
 					<tr class="tableController">
 						<th colspan="2">
-							<h3>
-								鹅苗交付信息编辑
+							<h3> 
+								鹅苗入场信息编辑 
 							</h3>
 						</th>
 					</tr>
