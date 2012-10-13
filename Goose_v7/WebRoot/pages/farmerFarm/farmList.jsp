@@ -10,7 +10,7 @@
 			<tr class="tableController">
 				<th colspan="7">
 					<c:if test="${farmer.name!=null }">
-						<h3>${farmer.name}的农场信息列表</h3>
+						<h3>当前页面:农场信息管理&nbsp;&nbsp;&nbsp;&nbsp;${farmer.name}的农场信息列表</h3>
 					</c:if>
 					<c:if test="${farmer.name==null }">
 						<h3>当前页面:农场信息管理&nbsp;&nbsp;&nbsp;&nbsp;全部农场信息列表</h3>
