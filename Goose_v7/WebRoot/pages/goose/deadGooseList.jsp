@@ -41,7 +41,7 @@
 					<td>农场:${farm.name }&nbsp;&nbsp;地址:${farm.address }&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
-					<td>该鹅苗批次信息&nbsp;&nbsp;&nbsp;&nbsp;进场日期:${receiveGoose.receiveDate }&nbsp;&nbsp;进场数量:${receiveGoose.amount }&nbsp;&nbsp;&nbsp;&nbsp;合计死亡数量:${total }只</td>
+					<td>该鹅苗批次信息&nbsp;&nbsp;&nbsp;&nbsp;进场日期:&nbsp;${receiveGoose.receiveDate }&nbsp;&nbsp;进场数量:&nbsp;<font color="green">${receiveGoose.amount }</font>&nbsp;只&nbsp;&nbsp;&nbsp;&nbsp;合计死亡数量:<font color="red">&nbsp;${total }&nbsp;</font>只</td>
 				</tr>
 			<tr class="tableTitle">
 				<th width="30px"><h3>序号</h3></th>
