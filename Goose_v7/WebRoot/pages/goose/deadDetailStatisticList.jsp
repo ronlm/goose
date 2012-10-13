@@ -17,10 +17,11 @@
 				<th colspan="8">
 					<h3>当前页面:存栏明细&nbsp;&nbsp;&nbsp;&nbsp;当前农场:${farm.name}</h3>
 					<div class="tableControllerButton">
+					<div style="clear:both;;position:relative;">
 						<form name="changeDayForm" id="changeDayForm"
 							action="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadDetail"
 							method="post">
-							<div style="clear:both;;position:relative;">
+							
 							最近
 							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;changeDay();">  
 								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
@@ -35,13 +36,13 @@
 							  </select>
 							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" validation="number" style="width:102px;height:24px;border:border:1px solid #fff000;">  
 							 天内所有农场鹅只非正常死亡信息&nbsp;&nbsp;&nbsp;
-							<input type="hidden" name="farm.id" id="FarmId" value="${farm.id }"/>
-							</div>
-						</form>
+							<input type="hidden" name="farm.id" id="FarmId" value="${farm.id }"/>							
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span> </a>
+								</div>
+						</form>
 					</div></th>
 			</tr>
 			<tr class="tableTitle">
