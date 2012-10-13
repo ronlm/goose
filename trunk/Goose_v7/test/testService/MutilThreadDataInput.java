@@ -11,7 +11,7 @@ import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.TradeGooseService;
 
-/** 利用多线程，为每个农场注入一定的数据作测试,有bug!!!!!!!!!!!!!
+/** 利用多线程，为每个农场注入一定的数据作测试!
  * @author jianhao
  *
  */
