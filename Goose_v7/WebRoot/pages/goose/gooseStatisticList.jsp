@@ -13,7 +13,7 @@
 		<thead>
 				<tr class="tableController">
 				<th colspan="1">
-					<h3>鹅只信息统计</h3>
+					<h3>当前页面:鹅只信息统计</h3>
 				</th>
 			</tr>
 		</thead>
