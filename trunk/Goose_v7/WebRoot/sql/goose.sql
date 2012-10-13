@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-10 20:55:33
+Date: 2012-10-13 21:39:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,11 +74,11 @@ INSERT INTO `comm_menu` VALUES ('14', '物资销售信息', '/pages/good/tradeGo
 INSERT INTO `comm_menu` VALUES ('15', '鹅只信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('17', '物资采购信息', '/pages/good/buyGoodAction!list', '9', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('18', '销售商信息', '/pages/saleGoose/retailerAction!list', '28', '/images/main/null.png', '6');
-INSERT INTO `comm_menu` VALUES ('19', '鹅苗交付信息', '/pages/goose/receiveGooseAction!list', '15', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('20', '成品鹅收购管理', '/pages/goose/tradeGooseAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('19', '鹅苗进场管理', '/pages/goose/receiveGooseAction!list', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('20', '成品鹅回购管理', '/pages/goose/tradeGooseAction!list', '15', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('21', '成品鹅销售管理', '/pages/saleGoose/saleGooseAction!list', '28', '/images/main/null.png', '6');
 INSERT INTO `comm_menu` VALUES ('22', '鹅只上市统计', '/pages/goose/gooseStatisticAction!market', '15', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('23', '农场存栏鹅只统计', '/pages/goose/gooseStatisticAction!stock', '15', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('23', '存栏鹅只统计', '/pages/goose/gooseStatisticAction!stock', '15', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('24', '鹅只死亡统计', '/pages/goose/deadGooseStatisticAction!dead', '15', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('26', '信息检索', '/pages/goose/search.jsp', '30', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('27', '删除脚环信息', '/pages/goose/deleteAction!list', '30', '/images/main/null.png', '2');
@@ -237,7 +237,7 @@ INSERT INTO `farmer` VALUES ('3', '朱八', '3345879', '台山', '	');
 INSERT INTO `farmer` VALUES ('4', '赵一', '1345545', '英德', '革要');
 INSERT INTO `farmer` VALUES ('5', '钱二', '214324134', '清远', '奔城');
 INSERT INTO `farmer` VALUES ('6', '吴六', '23423433', '阳山', '厅地');
-INSERT INTO `farmer` VALUES ('7', '周七', '234324456667', '阳山', '夺震城');
+INSERT INTO `farmer` VALUES ('7', '周七1', '234324456667', '阳山', '夺震城');
 
 -- ----------------------------
 -- Table structure for `good`
@@ -318,7 +318,7 @@ CREATE TABLE `goose` (
   PRIMARY KEY (`id`),
   KEY `receiveId` (`receiveId`) USING HASH,
   KEY `ringId` (`ringId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8662 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of goose
@@ -336,11 +336,48 @@ CREATE TABLE `receive_goose` (
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `receiveDate` (`receiveDate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receive_goose
 -- ----------------------------
+INSERT INTO `receive_goose` VALUES ('1', '1', '396', '2010-10-14', null);
+INSERT INTO `receive_goose` VALUES ('2', '5', '238', '2010-10-14', null);
+INSERT INTO `receive_goose` VALUES ('3', '8', '210', '2010-10-14', null);
+INSERT INTO `receive_goose` VALUES ('4', '6', '308', '2010-10-11', null);
+INSERT INTO `receive_goose` VALUES ('5', '1', '68', '2010-10-09', null);
+INSERT INTO `receive_goose` VALUES ('6', '2', '88', '2010-10-08', null);
+INSERT INTO `receive_goose` VALUES ('7', '6', '120', '2010-10-07', null);
+INSERT INTO `receive_goose` VALUES ('8', '11', '352', '2010-10-05', null);
+INSERT INTO `receive_goose` VALUES ('9', '10', '170', '2010-10-04', null);
+INSERT INTO `receive_goose` VALUES ('10', '8', '220', '2010-10-02', null);
+INSERT INTO `receive_goose` VALUES ('11', '3', '270', '2010-09-30', null);
+INSERT INTO `receive_goose` VALUES ('12', '8', '396', '2010-09-29', null);
+INSERT INTO `receive_goose` VALUES ('13', '11', '136', '2010-09-29', null);
+INSERT INTO `receive_goose` VALUES ('14', '11', '220', '2010-09-26', null);
+INSERT INTO `receive_goose` VALUES ('15', '5', '238', '2010-09-24', null);
+INSERT INTO `receive_goose` VALUES ('16', '9', '220', '2010-09-23', null);
+INSERT INTO `receive_goose` VALUES ('17', '7', '90', '2010-09-23', null);
+INSERT INTO `receive_goose` VALUES ('18', '5', '264', '2010-09-20', null);
+INSERT INTO `receive_goose` VALUES ('19', '10', '102', '2010-09-19', null);
+INSERT INTO `receive_goose` VALUES ('20', '6', '396', '2010-09-17', null);
+INSERT INTO `receive_goose` VALUES ('21', '3', '60', '2010-09-16', null);
+INSERT INTO `receive_goose` VALUES ('22', '7', '352', '2010-09-14', null);
+INSERT INTO `receive_goose` VALUES ('23', '5', '340', '2010-09-14', null);
+INSERT INTO `receive_goose` VALUES ('24', '1', '396', '2010-09-11', null);
+INSERT INTO `receive_goose` VALUES ('25', '9', '68', '2010-09-09', null);
+INSERT INTO `receive_goose` VALUES ('26', '5', '300', '2010-09-09', null);
+INSERT INTO `receive_goose` VALUES ('27', '11', '264', '2010-09-08', null);
+INSERT INTO `receive_goose` VALUES ('28', '5', '88', '2010-09-05', null);
+INSERT INTO `receive_goose` VALUES ('29', '10', '102', '2010-09-04', null);
+INSERT INTO `receive_goose` VALUES ('30', '11', '440', '2010-09-02', null);
+INSERT INTO `receive_goose` VALUES ('31', '2', '180', '2010-09-02', null);
+INSERT INTO `receive_goose` VALUES ('32', '7', '396', '2010-08-30', null);
+INSERT INTO `receive_goose` VALUES ('33', '2', '272', '2010-08-30', null);
+INSERT INTO `receive_goose` VALUES ('34', '1', '264', '2010-08-27', null);
+INSERT INTO `receive_goose` VALUES ('35', '2', '180', '2010-08-26', null);
+INSERT INTO `receive_goose` VALUES ('36', '9', '306', '2010-08-25', null);
+INSERT INTO `receive_goose` VALUES ('37', '4', '352', '2010-08-24', null);
 
 -- ----------------------------
 -- Table structure for `retailer`
