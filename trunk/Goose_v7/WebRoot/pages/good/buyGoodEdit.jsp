@@ -14,7 +14,7 @@
 			<thead>
 				<tr class="tableController">
 					<th colspan="3">
-						<h3>物资采购记录编辑</h3></th>
+						<h3>当前页面:物资采购记录编辑</h3></th>
 				</tr>
 				<tr>
 					<th>&nbsp;</th>
