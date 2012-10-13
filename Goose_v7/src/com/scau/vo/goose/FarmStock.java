@@ -25,12 +25,8 @@ public class FarmStock implements Comparator<FarmStock>{
 	}
 	@Override
 	public int compare(FarmStock o1, FarmStock o2) {
-		if (o1.getFarm().getId()> o2.getFarm().getId()) {
-			return 1;
-		}else if(o1.getFarm().getId()< o2.getFarm().getId()){
-			return -1;
-		}
-		else return 0;
+		int falg = o1.getFarm().getId().compareTo(o2.getFarm().getId());
+		return falg;
 	}
 	
 }
