@@ -75,9 +75,7 @@ public class SaleStatisticServlet extends HttpServlet {
 						totalGooseValue += (Double)tempResultList.get(1);
 						totalGooseWeight += (Double)tempResultList.get(2);
 					}
-					
 				}
-				
 				resultHtml.append("<tr><td>" + i + "</td><td>" + saleRegion.getRegion()+ "</td><td>" + totalGooseNum + "</td><td>" + totalGooseWeight +
 						"</td><td>"+ totalGooseValue  + "</td>");
 				i++;
@@ -86,12 +84,10 @@ public class SaleStatisticServlet extends HttpServlet {
 				totalGooseWeight= 0;
 			}
 			
-		
 		}
 		else if (type.equals("single")) {
 			// 查看单个分区所有销售商的销售信息
 			Long regionId = Long.valueOf(request.getParameter("regionId"));
-			
 			Retailer retailer = new Retailer();
 			retailer.setRegionId(regionId);
 			List<Retailer> retailerList = retailerService.list(retailer);
@@ -100,7 +96,8 @@ public class SaleStatisticServlet extends HttpServlet {
 				//迭代该分区内所有的销售商
 				List<Object> tempResultList = saleGooseService.getSum("select sum(sg.amount),sum(sg.totalValue),sum(sg.totalWeight) from com.scau.model.goose.SaleGoose sg" +
 						" where sg.retailerId='" + retailer2.getId() + "' and sg.saleDate between '" + fromDate +"' and '" + toDate + "'" );
-				if(3 >= tempResultList.size()){
+				if(3 == tempResultList.size() && null != tempResultList.get(0) && null != tempResultList.get(1) && 
+						null != tempResultList.get(2)){
 					totalGooseNum += (Long)tempResultList.get(0);
 					totalGooseWeight  += (Double)tempResultList.get(1);
 					totalGooseValue += (Double)tempResultList.get(2);
@@ -108,10 +105,9 @@ public class SaleStatisticServlet extends HttpServlet {
 					resultHtml.append("<tr><td>" + i + "</td><td>" + retailer2.getName() + "</td><td>" + totalGooseNum + "</td><td>" + totalGooseValue +
 							"</td><td>"+ totalGooseWeight + "</td>");
 					i++;
-					totalGooseNum =0;
+					totalGooseNum = 0;
 					totalGooseValue = 0;
 					totalGooseWeight= 0;
-				
 			}
 			
 			
