@@ -15,21 +15,24 @@
 			<tr class="tableController">
 				<th colspan="8">
 					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>鹅苗进场信息列表</h3>
-						<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/receiveGooseAction!list" method="post">
+							<div style="clear:both;;position:relative;">
 							最近
-							<select name="daysWithin" id="daysWithin" style="width: 70px" onchange="changeDay();" >
-								<option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3天</option>
-								<option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7天</option>
-								<option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>两周</option>
-								<option value="30" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30天</option>
-								<option value="60" <c:if test="${daysWithin == 60 }">selected="selected"</c:if>>60天</option>
-								<option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90天</option>
-								<option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120天</option>
-								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
-								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
-							</select>
-							天内进场批次信息
+							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;changeDay();">  
+								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
+								  <option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7</option>
+								  <option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>14</option>
+								  <option value="30" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30</option>
+								  <option value="60" <c:if test="${daysWithin == 60 }">selected="selected"</c:if>>60</option>
+								  <option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90</option>
+								  <option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120</option>
+								  <option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>365</option>
+								  <option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
+							  </select>  
+							  
+							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" validation="number" style="width:102px;height:24px;border:border:1px solid #fff000;">  
+								天内进场批次信息
+							</div>
 							<c:if test="${farm != null }"><input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" /></c:if>
 							
 						</form>
@@ -38,7 +41,7 @@
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span>
 						</a>
-					</div>
+					
 				</th>
 			</tr>
 			<tr class="tableTitle">
@@ -86,6 +89,12 @@
 	function changeDay(){
 			$("#changeDayForm").submit();
 	}
+	var left = document.getElementById("daysSelect").offsetLeft;
+	var top = document.getElementById("daysSelect").offsetTop;
+	//$("#input").css({position: "absolute",left:"\""+ left +"px",top: "\""+ top +"px"}); 
+	// --设置id 为input的控件的位置
+	$("#daysWithin").css("position","absolute"); 
+	$("#daysWithin").css("top",top);
+	$("#daysWithin").css("left",left);
 </script>
-
 </html>
