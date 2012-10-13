@@ -15,7 +15,7 @@
 					<h3>当前页面:成品鹅回购管理&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${farm != null }">当前农场:${farm.name }农场</c:if></h3>
 						<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/tradeGooseAction!list" method="post">
-							<div style="clear:both;;position:relative;">
+							<div style="clear:both;position:relative;">
 							最近
 							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;changeDay();">  
 								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
@@ -31,13 +31,14 @@
 							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" validation="number" style="width:102px;height:24px;border:border:1px solid #fff000;">  
 								天内回购批次信息
 							<c:if test="${farm != null }"><input type="hidden" name="farm.id" id="farm.id" value="${farm.id }" /></c:if>
-							</div>
-						</form>
+							
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span>
 						</a>
+						</div>
+						</form>
 					</div>
 				</th>
 			</tr>
