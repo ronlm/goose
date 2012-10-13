@@ -10,7 +10,7 @@
 				<thead>
 					<tr class="tableController">
 						<th colspan="2">
-							<h3>当前页面:系统资源管理&nbsp;&nbsp;&nbsp;资源编辑</h3>
+							<h3>当前页面:系统资源编辑</h3>
 						</th>
 					</tr>
 					<tr>
