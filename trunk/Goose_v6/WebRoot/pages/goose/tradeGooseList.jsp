@@ -12,7 +12,7 @@
 		<thead>
 				<tr class="tableController">
 				<th colspan="10">
-					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>收购成品鹅信息列表</h3>
+					<h3><c:if test="${farm != null }">${farm.name }农场的</c:if>成品鹅只回购信息列表</h3>
 						<div class="tableControllerButton">
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/tradeGooseAction!list" method="post">
 							最近
