@@ -15,6 +15,7 @@
 					<h3>当前页面:鹅只存栏信息与农户购买物资比对</h3>
 						<div class="tableControllerButton">
 						<form name="form" id="form" action="${pageContext.request.contextPath }/pages/goose/gooseStatisticAction!stockAndGood" method="post">
+							<div style="clear:both;;position:relative;">
 							选择物资类型:&nbsp;
 							<select name="goodTypeId" id="goodTypeId" style="width: 80px" >
 								<c:forEach items="${goodTypeList}" var="goodType">
@@ -31,19 +32,22 @@
 							</select>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							最近
-							<select name="daysWithin" id="daysWithin" style="width: 70px" >
-								<option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3天</option>
-								<option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7天</option>
-								<option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>两周</option>
-								<option value="30" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30天</option>
-								<option value="60" <c:if test="${daysWithin == 60 }">selected="selected"</c:if>>60天</option>
-								<option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90天</option>
-								<option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120天</option>
-								<option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>一年</option>
-								<option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
-							</select>
+							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;changeDay();">  
+								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
+								  <option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7</option>
+								  <option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>14</option>
+								  <option value="30" <c:if test="${daysWithin == 30 }">selected="selected"</c:if>>30</option>
+								  <option value="60" <c:if test="${daysWithin == 60 }">selected="selected"</c:if>>60</option>
+								  <option value="90" <c:if test="${daysWithin == 90 }">selected="selected"</c:if>>90</option>
+								  <option value="120" <c:if test="${daysWithin == 120 }">selected="selected"</c:if>>120</option>
+								  <option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>365</option>
+								  <option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
+							  </select>  
+							  
+							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" validation="number" style="width:102px;height:24px;border:border:1px solid #fff000;">  
 							天内销售记录
-							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span> </a>				
+							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span> </a>
+							</div>				
 						</form>
 					</div>
 				</th>
@@ -102,6 +106,12 @@
 	function submitForm(){
 			$("#form").submit();
 	}
-	
+	var left = document.getElementById("daysSelect").offsetLeft;
+	var top = document.getElementById("daysSelect").offsetTop;
+	//$("#input").css({position: "absolute",left:"\""+ left +"px",top: "\""+ top +"px"}); 
+	// --设置id 为input的控件的位置
+	$("#daysWithin").css("position","absolute"); 
+	$("#daysWithin").css("top",top);
+	$("#daysWithin").css("left",left);
 </script>
 </html>
