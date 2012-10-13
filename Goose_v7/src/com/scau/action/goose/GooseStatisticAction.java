@@ -3,9 +3,9 @@ package com.scau.action.goose;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 
 import javax.annotation.Resource;
@@ -27,7 +27,6 @@ import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.MarketService;
-import com.scau.service.impl.goose.MutilThreadGooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.service.impl.goose.TradeGoodViewService;
@@ -106,14 +105,13 @@ public class GooseStatisticAction extends BaseAction {
 		int totalRowCount = farmService.list(new Farm()).size();
 		this.pager.setTotalRowsAmount(totalRowCount);
 		List<Farm> totalFarmList = farmService.list(new Farm());
-		List<Farm> thisPagerFarmList = farmService.findByCondition(pager.getPageStartRow(),pager.getPageSize(),"from com.scau.model.goose.Farm f order by f.id asc");
 			
 		final CountDownLatch begin = new CountDownLatch(1);
 		final CountDownLatch end = new CountDownLatch(totalFarmList.size());
-		List<FarmStock> resourceList = new LinkedList<FarmStock>();
+		List<FarmStock> totalFarmStockList = new LinkedList<FarmStock>();
 		for(Farm f :totalFarmList){
 			//计算全部农场的存栏量
-			FarmStockService farmStockService = new FarmStockService(resourceList, f, begin, end);
+			FarmStockService farmStockService = new FarmStockService(totalFarmStockList, f, begin, end);
 			farmStockService.start();//启动每个个农户各自的线程
 		}
 		
@@ -131,11 +129,13 @@ public class GooseStatisticAction extends BaseAction {
 		
 		//统计全部农场的存栏量
 		long totalStock = 0;
-		for (FarmStock farmStock : resourceList) {
+		for (FarmStock farmStock : totalFarmStockList) {
 			totalStock += farmStock.getStock();
 		}
-		int toIndex = Math.min(resourceList.size(),  this.pager.getPageStartRow() + this.pager.getPageSize());
-		pager.setData(resourceList.subList(pager.getPageStartRow(),toIndex));
+		int toIndex = Math.min(totalFarmStockList.size(),  this.pager.getPageStartRow() + this.pager.getPageSize());
+		List<FarmStock> resourceList = totalFarmStockList.subList(pager.getPageStartRow(),toIndex);
+		Collections.sort(resourceList,new FarmStock());
+		pager.setData(resourceList);
 		request.setAttribute("pager", pager);
 		request.setAttribute("totalStock", totalStock);
 		request.setAttribute("today", new Date(new java.util.Date().getTime()));
