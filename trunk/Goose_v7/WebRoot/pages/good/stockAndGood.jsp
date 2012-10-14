@@ -32,7 +32,7 @@
 							</select>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							最近
-							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;changeDay();">  
+							  <select name="daysSelect" id="daysSelect" style="width:120px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;">  
 								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
 								  <option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7</option>
 								  <option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>14</option>
@@ -44,7 +44,7 @@
 								  <option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							  </select>  
 							  
-							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" validation="number" style="width:102px;height:24px;border:border:1px solid #fff000;">  
+							  <input id="daysWithin" name="daysWithin" value="${daysWithin }" onchange="changeDay();" style="width:102px;height:24px;border:border:1px solid #fff000;">  
 							天内销售记录
 							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span> </a>
 							</div>				
@@ -104,8 +104,16 @@
   </body>
   <script type="text/javascript">
 	function submitForm(){
+		var re=/^\d{1,3}/;
+		if(re.test($("#daysWithin").val())){
 			$("#form").submit();
+		}
+		alert("只能输入为1-3位的数字,若出错则返回上页重新输入！");
+		$("#daysWithin").val(0);
+		$("#daysWithin:focus");
+		return false;		
 	}
+	
 	var left = document.getElementById("daysSelect").offsetLeft;
 	var top = document.getElementById("daysSelect").offsetTop;
 	//$("#input").css({position: "absolute",left:"\""+ left +"px",top: "\""+ top +"px"}); 
