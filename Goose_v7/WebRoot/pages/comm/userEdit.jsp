@@ -34,7 +34,7 @@
 					<tr>
 						<td width="200" align="right">用户名:</td>
 						<td>
-						<input type="text" validation="required,alpha" name="user.userName" id="userName" value="${user.userName}"/>
+						<input type="text" validation="required" name="user.userName" id="userName" value="${user.userName}"/>
 						<input type="hidden" name="user.id" id="id" value="${user.id==null?"":user.id}"/>
 						</td>
 					</tr> 
