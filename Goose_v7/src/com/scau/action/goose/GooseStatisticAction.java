@@ -19,8 +19,10 @@ import com.scau.action.BaseAction;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.GoodType;
+import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.goose.SaleRegion;
+import com.scau.model.goose.TradeGoose;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmStockService;
 import com.scau.service.impl.goose.FarmerService;
@@ -30,6 +32,7 @@ import com.scau.service.impl.goose.MarketService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.service.impl.goose.TradeGoodViewService;
+import com.scau.service.impl.goose.TradeGooseService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 import com.scau.view.goose.Market;
@@ -200,7 +203,6 @@ public class GooseStatisticAction extends BaseAction {
 			
 			hql.append(" and t.tradeDate >='"+ tradeGoodViewService.getDateBefore(daysWithin) + "' order by t.tradeDate desc");
 			tradeGoodViewList = tradeGoodViewService.findByCondition(hql.toString());
-			
 			for (TradeGoodView tradeGoodView : tradeGoodViewList) {
 				totalGood += tradeGoodView.getAmount();
 			}
@@ -218,15 +220,42 @@ public class GooseStatisticAction extends BaseAction {
 		request.setAttribute("farmerList", farmerList);
 		request.setAttribute("selectedFarmer", selectedFarmer);
 		request.getSession().setAttribute("daysWithin", daysWithin);
-		
-		
 		return "stockAndGood";		
 	}
+	
+	/** 统计公司已向农户回购但又未出售的鹅只
+	 * @return
+	 */
+	public String wareStock(){
+
+		long wareGoose = 0;
+		TradeGooseService tradeGooseService = (TradeGooseService) BeansUtil.get("tradeGooseService");
+		//计算90内公司回购但未出售的鹅只数
+		List<TradeGoose> tradeGooseList = tradeGooseService.findByCondition("select tg from com.scau.model.goose.TradeGoose tg where " +
+				"tg.tradeDate>='" + tradeGooseService.getDateBefore(90) + "'");
+			
+		for (TradeGoose tradeGoose : tradeGooseList) {
+			/*List<Object> tempList = gooseService.getSum("select sum(g.id) from com.scau.model.goose.Goose g where g.tradeId=" + tradeGoose.getId()+
+					" and g.saleId is null and g.isValid =1");
+			if(1 == tempList.size() && null != tempList.get(0)){
+				wareGoose += (Long)tempList.get(0);
+			}*/
+			Goose g = new Goose();
+			g.setTradeId(tradeGoose.getId());
+			g.setIsValid(1);
+			g.setSaleId(null);
+			wareGoose += gooseService.getRecordCount(g);
+		}
 		
+		
+		request.setAttribute("pager", pager);
+		request.setAttribute("wareGoose", wareGoose);
+		return "wareStock";
+	}
+	
 	public String sale(){
 		/*这里完成销售统计页面的一些数据初始化工作，数据计算交由类com.servlet.goose.SaleStatisticServlet完成，以异步加载形式
 		 * */
-
 		String fromDateStr = Calendar.getInstance().get(Calendar.YEAR) + "-01-01";
 		Date fromDate = Date.valueOf(fromDateStr) ;//默认 1970-01-01
 		Date toDate = new Date(new java.util.Date().getTime());//默认今天

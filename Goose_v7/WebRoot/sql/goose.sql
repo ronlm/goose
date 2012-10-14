@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-13 21:39:39
+Date: 2012-10-14 09:27:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,7 +54,7 @@ CREATE TABLE `comm_menu` (
   `image` varchar(100) DEFAULT NULL,
   `resourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_menu
@@ -86,6 +86,7 @@ INSERT INTO `comm_menu` VALUES ('28', '销售信息管理', 'javascript:void(0);
 INSERT INTO `comm_menu` VALUES ('29', '销售信息统计', '/pages/saleGoose/gooseStatisticAction!sale', '28', '/images/main/null.png', '6');
 INSERT INTO `comm_menu` VALUES ('30', '附加功能', 'javascript:void(0);', '0', '/images/main/MenuIcon.png', '3');
 INSERT INTO `comm_menu` VALUES ('31', '物资与存栏对比', '/pages/goose/gooseStatisticAction!stockAndGood', '30', '/images/main/null.png', '4');
+INSERT INTO `comm_menu` VALUES ('32', '鹅只存仓统计', '/pages/goose/gooseStatisticAction!wareStock', '15', '/images/main/null.png', '3');
 
 -- ----------------------------
 -- Table structure for `comm_resource`
@@ -318,66 +319,30 @@ CREATE TABLE `goose` (
   PRIMARY KEY (`id`),
   KEY `receiveId` (`receiveId`) USING HASH,
   KEY `ringId` (`ringId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8662 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of goose
 -- ----------------------------
+INSERT INTO `goose` VALUES ('1', '1', '1', null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for `receive_goose`
 -- ----------------------------
 DROP TABLE IF EXISTS `receive_goose`;
 CREATE TABLE `receive_goose` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `farmId` int(11) NOT NULL,
   `amount` int(11) DEFAULT NULL,
   `receiveDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `receiveDate` (`receiveDate`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receive_goose
 -- ----------------------------
-INSERT INTO `receive_goose` VALUES ('1', '1', '396', '2010-10-14', null);
-INSERT INTO `receive_goose` VALUES ('2', '5', '238', '2010-10-14', null);
-INSERT INTO `receive_goose` VALUES ('3', '8', '210', '2010-10-14', null);
-INSERT INTO `receive_goose` VALUES ('4', '6', '308', '2010-10-11', null);
-INSERT INTO `receive_goose` VALUES ('5', '1', '68', '2010-10-09', null);
-INSERT INTO `receive_goose` VALUES ('6', '2', '88', '2010-10-08', null);
-INSERT INTO `receive_goose` VALUES ('7', '6', '120', '2010-10-07', null);
-INSERT INTO `receive_goose` VALUES ('8', '11', '352', '2010-10-05', null);
-INSERT INTO `receive_goose` VALUES ('9', '10', '170', '2010-10-04', null);
-INSERT INTO `receive_goose` VALUES ('10', '8', '220', '2010-10-02', null);
-INSERT INTO `receive_goose` VALUES ('11', '3', '270', '2010-09-30', null);
-INSERT INTO `receive_goose` VALUES ('12', '8', '396', '2010-09-29', null);
-INSERT INTO `receive_goose` VALUES ('13', '11', '136', '2010-09-29', null);
-INSERT INTO `receive_goose` VALUES ('14', '11', '220', '2010-09-26', null);
-INSERT INTO `receive_goose` VALUES ('15', '5', '238', '2010-09-24', null);
-INSERT INTO `receive_goose` VALUES ('16', '9', '220', '2010-09-23', null);
-INSERT INTO `receive_goose` VALUES ('17', '7', '90', '2010-09-23', null);
-INSERT INTO `receive_goose` VALUES ('18', '5', '264', '2010-09-20', null);
-INSERT INTO `receive_goose` VALUES ('19', '10', '102', '2010-09-19', null);
-INSERT INTO `receive_goose` VALUES ('20', '6', '396', '2010-09-17', null);
-INSERT INTO `receive_goose` VALUES ('21', '3', '60', '2010-09-16', null);
-INSERT INTO `receive_goose` VALUES ('22', '7', '352', '2010-09-14', null);
-INSERT INTO `receive_goose` VALUES ('23', '5', '340', '2010-09-14', null);
-INSERT INTO `receive_goose` VALUES ('24', '1', '396', '2010-09-11', null);
-INSERT INTO `receive_goose` VALUES ('25', '9', '68', '2010-09-09', null);
-INSERT INTO `receive_goose` VALUES ('26', '5', '300', '2010-09-09', null);
-INSERT INTO `receive_goose` VALUES ('27', '11', '264', '2010-09-08', null);
-INSERT INTO `receive_goose` VALUES ('28', '5', '88', '2010-09-05', null);
-INSERT INTO `receive_goose` VALUES ('29', '10', '102', '2010-09-04', null);
-INSERT INTO `receive_goose` VALUES ('30', '11', '440', '2010-09-02', null);
-INSERT INTO `receive_goose` VALUES ('31', '2', '180', '2010-09-02', null);
-INSERT INTO `receive_goose` VALUES ('32', '7', '396', '2010-08-30', null);
-INSERT INTO `receive_goose` VALUES ('33', '2', '272', '2010-08-30', null);
-INSERT INTO `receive_goose` VALUES ('34', '1', '264', '2010-08-27', null);
-INSERT INTO `receive_goose` VALUES ('35', '2', '180', '2010-08-26', null);
-INSERT INTO `receive_goose` VALUES ('36', '9', '306', '2010-08-25', null);
-INSERT INTO `receive_goose` VALUES ('37', '4', '352', '2010-08-24', null);
 
 -- ----------------------------
 -- Table structure for `retailer`

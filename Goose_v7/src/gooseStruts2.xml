@@ -20,6 +20,7 @@
 			<result name="sale">/pages/goose/saleStatisticList.jsp</result>
 			<result name="dead">/pages/goose/deadStatisticList.jsp</result>
 			<result name="stockAndGood">/pages/good/stockAndGood.jsp</result>
+			<result name="wareStock">/pages/goose/wareStock.jsp</result>
 			<result name="deadDetail">/pages/goose/deadDetailStatisticList.jsp</result>
 		</action>
 		<!-- 鹅只信息统计结束  -->
