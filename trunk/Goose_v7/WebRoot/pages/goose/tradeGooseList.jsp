@@ -41,16 +41,14 @@
 				</th>
 			</tr>
 			<tr class="tableTitle">
-				<th width="30px">
-					<h3>序号</h3>
-				</th>
+				<th width="30px"><h3>序号</h3></th>
 				<th width="80px"><h3>日期</h3></th>
 				<th><h3>数量</h3></th>
 				<th><h3>单价(元)</h3></th>
-				<th><h3>总重量(市斤)</h3></th>
+				<th><h3>总量(只数或斤数) </h3></th>
 				<th><h3>金额合计(元)</h3></th>
 				<th width="30%"><h3>操作</h3></th>
-				<th width="25%"><h3>备注</h3></th>
+				<th width="25%"><h3>备注(请注明计量方式)</h3></th>
 			</tr>
 		</thead>
 		<tbody>
