@@ -42,7 +42,7 @@
 								onclick="exportXls();"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
 								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
-							</a>
+							</a>&nbsp;&nbsp;当有检索结果时才能导出EXCEL表格文件！
 					</div>
 					<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;">
 					<div>输入鹅只脚环：<input type="text" name="goose.ringId" id="ringId"/>  <a class="button" id="ringSubmit"><span>&nbsp;确 定&nbsp;</span> </a></div>
