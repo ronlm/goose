@@ -21,7 +21,7 @@ public class MutilThreadDataInput implements Runnable{
 	static ReceiveGooseService receiveGooseService = (ReceiveGooseService) ctx.getBean("receiveGooseService");
 	static TradeGooseService tradeGooseService = (TradeGooseService) ctx.getBean("tradeGooseService");
 	static char[] CHARS = "0123456789ABCDEF".toCharArray();
-	public int ADD_NUMBER = 100;//添加的基数
+	public int ADD_NUMBER = 10;//添加的基数
 	private Long farmId = 1L;
 	
 	public MutilThreadDataInput(Long farmId) {
