@@ -82,8 +82,6 @@ public class DeadGooseStatisticAction extends BaseAction {
 					gooseList.addAll(tempList);
 				}
 				dead.setDeadNum(gooseList.size());
-				dead.setDeadGooses(gooseList);
-
 			} else {
 				dead.setDeadNum(0);
 			}
