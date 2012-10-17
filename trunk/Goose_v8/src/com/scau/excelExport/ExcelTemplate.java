@@ -51,11 +51,10 @@ public abstract class ExcelTemplate<E> {
 	 * 采用Template模式，这个方式是每个继承类必须实现的打印报表内容的方法
 	 */
 	public abstract void printContent();
-
-	public ExcelTemplate(String fileName, String[] titles, List<E> contents) {
+	
+	public ExcelTemplate(String fileName, List<E> contents) {
 		super();
 		this.fileName = fileName;
-		this.titles = titles;
 		this.contents = contents;
 		this.workbook = new HSSFWorkbook();
 		this.sheet = workbook.createSheet();
