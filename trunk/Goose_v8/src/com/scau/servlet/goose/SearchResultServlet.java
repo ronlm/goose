@@ -81,7 +81,7 @@ public class SearchResultServlet extends HttpServlet {
 				List<ReceiveGoose> resultList = receiveGooseService.findByCondition(queryString);
 				
 				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td width=\"15%\">"+
-								"备注</td><td width=\"40%\">操作</td></tr>");
+								"备注</td><td width=\"40%\">相关信息</td></tr>");
 				int i = 1;
 				for (ReceiveGoose receiveGoose : resultList) {
 					result.append("<tr><td>" + (i++) + "</td><td>" + receiveGoose.getReceiveDate() + "</td><td>" + receiveGoose.getAmount()+ "</td><td>" +
