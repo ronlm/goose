@@ -7,11 +7,16 @@ import org.apache.poi.ss.usermodel.Row;
 
 import com.scau.vo.goose.FarmStock;
 
-public class ExportStock extends ExcelTemplate<FarmStock>{
+/**导出农场存栏信息统计的excel报表
+ * @author jianhao
+ *
+ */
+public class ExportFarmStock extends ExcelTemplate<FarmStock>{
 
-	public ExportStock(String fileName, String[] titles,
-			List<FarmStock> contents) {
-		super(fileName, titles, contents);
+	
+	public ExportFarmStock(String fileName, List<FarmStock> contents) {
+		super(fileName, contents);
+		titles = new String[]{"农户姓名","联系电话","农场","当前存栏数量"};
 	}
 
 	@Override
@@ -29,13 +34,16 @@ public class ExportStock extends ExcelTemplate<FarmStock>{
 					cell.setCellValue(rowIndex);
 					break;
 				case 1:
-					cell.setCellValue(contents.get(rowIndex - 1).getFarm().getName());
+					cell.setCellValue(contents.get(rowIndex - 1).getFarmer().getName());
 					break;
 				case 2:
-					cell.setCellValue(contents.get(rowIndex - 1).getStock());
+					cell.setCellValue(contents.get(rowIndex - 1).getFarmer().getPhone());
 					break;
 				case 3:
-					cell.setCellValue(contents.get(rowIndex - 1).getFarm().getAddress());
+					cell.setCellValue(contents.get(rowIndex - 1).getFarm().getName());
+					break;
+				case 4:
+					cell.setCellValue(contents.get(rowIndex - 1).getStock());
 					break;
 				default:
 					cell.setCellValue("");
