@@ -40,6 +40,11 @@ import com.scau.vo.goose.AppearOnMarket;
 import com.scau.vo.goose.DeadInfo;
 import com.scau.vo.goose.FarmStock;
 
+/** 这个类是用于响应页面的导出excel表格的，根据从页面过来的参数type，指定表格数据的类型
+ * 如存栏，农场死亡鹅只，鹅苗进场批次等
+ * @author jianhao
+ *
+ */
 public class ExportData extends HttpServlet {
 
 	private static int ON_MARKET_DAY = 90;//设定的鹅只成熟日期
