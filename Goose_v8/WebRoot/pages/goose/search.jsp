@@ -19,8 +19,8 @@
 					<h3>当前页面:记录搜索</h3>
 					<div class="tableControllerButton">
 						记录类型:
-							<input type="radio" name="searchType" value="receiveGoose" checked="checked">鹅苗交付&nbsp;
-							<input type="radio" name="searchType" value="tradeGoose">成品鹅收购&nbsp;
+							<input type="radio" name="searchType" value="receiveGoose" checked="checked">鹅苗进场&nbsp;
+							<input type="radio" name="searchType" value="tradeGoose">成品鹅回购&nbsp;
 							<input type="radio" name="searchType" value="saleGoose">成品鹅销售&nbsp;
 							<input type="radio" name="searchType" value="buyGood">物资采购&nbsp; 
 							<input type="radio" name="searchType" value="tradeGood">物资出售
