@@ -92,6 +92,13 @@
     <servlet-name>SaleStatisticServlet</servlet-name>
     <servlet-class>com.scau.servlet.goose.SaleStatisticServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is used to export data to excel form</description>
+    <display-name>This is used to export data to excel form</display-name>
+    <servlet-name>ExportData</servlet-name>
+    <servlet-class>com.scau.servlet.goose.ExportData</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>SearchResultServlet</servlet-name>
     <url-pattern>/servlet/SearchResultServlet</url-pattern>
@@ -99,6 +106,10 @@
   <servlet-mapping>
     <servlet-name>SaleStatisticServlet</servlet-name>
     <url-pattern>/servlet/SaleStatisticServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ExportData</servlet-name>
+    <url-pattern>/data/exportData/ExportData</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>SecurityFilter</filter-name>
