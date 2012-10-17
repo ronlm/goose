@@ -192,8 +192,6 @@ public class ExportData extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}finally{
-				
 			}
 			
 		}
