@@ -19,7 +19,13 @@
 						全部农场总存栏:&nbsp;&nbsp;${totalStock } &nbsp;只&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						今天是&nbsp;${today }&nbsp;&nbsp;&nbsp;
 						<a class="button" href="javascript:void(0)"
-							onclick="this.blur(); history.go(-1);return false;"><span><img
+							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=farmStock');"><span><img
+								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
+								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
+							</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;  
+						<a class="button" href="javascript:void(0)"
+							onclick="this.blur(); history.go(-1);"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span>
 						</a>

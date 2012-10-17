@@ -17,9 +17,14 @@
 				<th colspan="10">
 					<h3>当前页面:鹅只上市统计</h3>
 					<div class="tableControllerButton">
-						今天是&nbsp;${today }&nbsp;日&nbsp;&nbsp;&nbsp; <a class="button"
-							href="javascript:void(0)"
-							onclick="this.blur(); history.go(-1);return false;"><span><img
+						今天是&nbsp;${today }&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="button" href="javascript:void(0)"
+							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=market');"><span><img
+								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
+								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
+							</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;  
+						<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span> </a>
 					</div></th>

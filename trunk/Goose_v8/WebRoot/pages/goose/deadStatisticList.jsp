@@ -34,6 +34,12 @@
 							  <input type="text" id="daysWithin" name="daysWithin" value="${daysWithin }" style="width:80px;border:border:1px solid #fff000;">  
 							天&nbsp;&nbsp;&nbsp;&nbsp;
 							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span></a>
+							<a class="button" href="javascript:void(0)"
+							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=deadInfo');"><span><img
+								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
+								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
+							</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;  
 							<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span> </a>
