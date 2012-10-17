@@ -3,6 +3,7 @@ package com.scau.servlet.goose;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -104,13 +105,14 @@ public class SearchResultServlet extends HttpServlet {
 				if(0 != fromNum && 0 != toNum){
 					queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
 				}
-				
+				NumberFormat f=NumberFormat.getInstance();  //创建一个格式化类f
+				f.setMaximumFractionDigits(5);    //设置小数位的格式
 				TradeGooseService tradeGooseService = (TradeGooseService) BeansUtil.get("tradeGooseService");
 				List<TradeGoose> resultList = tradeGooseService.findByCondition(queryString);
 				
-				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
+				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总量(重量或数量)</td><td>金额合计</td><td width=\"15%\">"+
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
-				String[] titles = {"日期","农户","联系电话","农场","地址","数量","单价","总量","金额合计","备注"};
+				String[] titles = {"日期","农户","联系电话","农场","地址","数量","单价","总量(重量或数量)","金额合计","备注"};
 				List<String[]> contentList = new LinkedList<String[]>();
 				int i = 1;
 				for (TradeGoose tradeGoose : resultList) {
@@ -124,6 +126,7 @@ public class SearchResultServlet extends HttpServlet {
 					content.add(tradeGoose.getAmount().toString());
 					content.add(tradeGoose.getUnitPrice().toString());
 					content.add(tradeGoose.getTotalWeight().toString());
+					content.add((f.format(tradeGoose.getTotalWeight() * tradeGoose.getUnitPrice())));
 					content.add(tradeGoose.getComments());
 					String[] temp = new String[content.size()];
 					contentList.add(content.toArray(temp));
