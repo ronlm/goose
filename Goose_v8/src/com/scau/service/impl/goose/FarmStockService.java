@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.scau.model.goose.Farm;
+import com.scau.model.goose.Farmer;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.util.BeansUtil;
 import com.scau.vo.goose.FarmStock;
@@ -25,6 +26,7 @@ public class FarmStockService extends Thread{
 	
 	private GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 	private ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
+	private FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
 	private List<FarmStock> stockList;
 	private Farm farm;
 	
@@ -42,6 +44,7 @@ public class FarmStockService extends Thread{
 		}
 		FarmStock stock = new FarmStock();
 		stock.setFarm(f);
+		stock.setFarmer(farmerService.get(new Farmer(),f.getFarmerId()));
 		stock.setStock(gooseNum);
 		return stock;
 	}
