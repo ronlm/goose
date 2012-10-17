@@ -21,11 +21,11 @@
 						记录类型:
 							<input type="radio" name="searchType" value="receiveGoose" checked="checked">鹅苗进场&nbsp;
 							<input type="radio" name="searchType" value="tradeGoose">成品鹅回购&nbsp;
-							<input type="radio" name="searchType" value="saleGoose">成品鹅销售&nbsp;
+							<input type="radio" name="searchType" value="saleGoose">成品鹅出售&nbsp;
 							<input type="radio" name="searchType" value="buyGood">物资采购&nbsp; 
 							<input type="radio" name="searchType" value="tradeGood">物资出售
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							鹅（物资）数量&nbsp;
+							鹅(物资)数量&nbsp;
 							<a class="button" id="numberEdit" name="numberEdit"><span>&nbsp;不限&nbsp;</span> </a>
 							<span id="numEditDiv">
 								<input type="text" id="fromNum" name="fromNum" value="不限" validation="number" style="width: 80px"/>&nbsp;
@@ -37,7 +37,12 @@
 							&nbsp;
 							到&nbsp;<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
 							&nbsp;&nbsp;
-							<a class="button" id="submit"><span>&nbsp;确 定&nbsp;</span> </a>
+							<a class="button" id="submit"><span>&nbsp;确 定&nbsp;</span> </a></br>
+							<a class="button" href="javascript:void(0)"
+								onclick="exportXls();"><span><img
+								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
+								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
+							</a>
 					</div>
 					<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;">
 					<div>输入鹅只脚环：<input type="text" name="goose.ringId" id="ringId"/>  <a class="button" id="ringSubmit"><span>&nbsp;确 定&nbsp;</span> </a></div>
@@ -66,6 +71,10 @@
 			return y+ "-"+m+ "-"+d ;
 			};
 			
-		 $("#toDate").val(date);		
+		 $("#toDate").val(date);
+		 function exportXls(){
+			 var type = $("input:radio[name='searchType']:checked").val();
+			 window.open("/Goose/data/exportData/ExportData?type="+ type);
+		 }
 	</script>
 </html>
