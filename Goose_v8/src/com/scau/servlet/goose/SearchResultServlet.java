@@ -252,7 +252,7 @@ public class SearchResultServlet extends HttpServlet {
 		farm = farmService.get(farm);
 		farmer.setId(farm.getFarmerId());
 		farmer = farmerService.get(farmer);
-		String farmMsg = "农户名:" + farmer.getName() + "&nbsp;&nbsp;电话:"+ farmer.getPhone() + "&nbsp;&nbsp;农场名:"+ farm.getName() + "&nbsp;&nbsp;地址:"
+		String farmMsg = "农户名:" + farmer.getName() + "     电话:"+ farmer.getPhone() + "      农场名:"+ farm.getName() + "       地址:"
 						+ farm.getAddress();
 		return farmMsg;
 	}
@@ -264,7 +264,7 @@ public class SearchResultServlet extends HttpServlet {
 		Retailer retailer = new Retailer();
 		retailer.setId(retailerId);
 		retailer = retailerService.get(retailer);
-		String msg = "销售商名:" + retailer.getName() + "&nbsp;&nbsp;联系电话:" + retailer.getPhone();
+		String msg = "销售商名:" + retailer.getName() + "   联系电话:" + retailer.getPhone();
 		return msg;
 	}
 	
@@ -272,7 +272,7 @@ public class SearchResultServlet extends HttpServlet {
 		List<String> result = new ArrayList<String>();
 		for (String string : farmAndFarmerInfo.split(".{2,4}:")) {
 			if(!string.equals("")){
-				result.add(string);
+				result.add(string.replaceAll(";...", ""));
 			}
 		}
 		return result;
