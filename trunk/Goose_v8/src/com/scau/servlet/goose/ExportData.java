@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import com.scau.excelExport.ExportAppearOnMarket;
+import com.scau.excelExport.ExportBuyGooseView;
 import com.scau.excelExport.ExportDeadInfo;
 import com.scau.excelExport.ExportFarmStock;
+import com.scau.excelExport.ExportSearchRecord;
+import com.scau.excelExport.ExportTradeGoodView;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
@@ -30,7 +33,9 @@ import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.MarketService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.util.BeansUtil;
+import com.scau.view.goose.BuyGoodView;
 import com.scau.view.goose.Market;
+import com.scau.view.goose.TradeGoodView;
 import com.scau.vo.goose.AppearOnMarket;
 import com.scau.vo.goose.DeadInfo;
 import com.scau.vo.goose.FarmStock;
@@ -173,7 +178,88 @@ public class ExportData extends HttpServlet {
 				e.printStackTrace();
 			}	
 		} 
-
+		else if (type.equals("receiveGoose")) {
+			try {
+			String[] titles = (String[]) request.getSession().getAttribute("titles");	
+			fileName = "鹅苗进场信息汇总.xls";
+			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+			@SuppressWarnings("unchecked")
+			List<String[]> contentList = (List<String[]>) request.getSession().getAttribute("contentList");
+			ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
+			export.setTitles(titles);
+			Workbook workbook= export.exportExcel();
+			workbook.write(out);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				
+			}
+			
+		}
+		else if (type.equals("tradeGoose")) {
+			try {
+			String[] titles = (String[]) request.getSession().getAttribute("titles");
+			fileName = "成品鹅回购信息汇总.xls";
+			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+			@SuppressWarnings("unchecked")
+			List<String[]> contentList = (List<String[]>) request.getSession().getAttribute("contentList");
+			ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
+			export.setTitles(titles);
+			Workbook workbook = export.exportExcel();
+			workbook.write(out);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if (type.equals("saleGoose")) {
+			try {
+				String[] titles = (String[]) request.getSession().getAttribute("titles");
+				fileName = "成品鹅出售信息汇总.xls";
+				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+				@SuppressWarnings("unchecked")
+				List<String[]> contentList = (List<String[]>) request.getSession().getAttribute("contentList");
+				ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
+				export.setTitles(titles);
+				Workbook workbook = export.exportExcel();
+				workbook.write(out);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if (type.equals("buyGood")) {
+			fileName = "采购物资汇总.xls";
+			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+			@SuppressWarnings("unchecked")
+			List<BuyGoodView> contentList = (List<BuyGoodView>) request.getSession().getAttribute("contentList");
+			ExportBuyGooseView export = new ExportBuyGooseView(fileName, contentList);
+			Workbook workbook;
+			try {
+				workbook = export.exportExcel();
+				workbook.write(out);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if (type.equals("tradeGood")) {
+			fileName = "出售物资汇总.xls";
+			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+			@SuppressWarnings("unchecked")
+			List<TradeGoodView> contentList = (List<TradeGoodView>) request.getSession().getAttribute("contentList");
+			ExportTradeGoodView export = new ExportTradeGoodView(fileName, contentList);
+			Workbook workbook;
+			try {
+				workbook = export.exportExcel();
+				workbook.write(out);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		//移除放在session的titles 和内容列表contentList
+		request.getSession().removeAttribute("titles");
+		request.getSession().removeAttribute("contentList");
 		out.close();
 	}
 

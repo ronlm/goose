@@ -3,6 +3,8 @@ package com.scau.servlet.goose;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,15 +37,10 @@ import com.scau.webService.impl.GooseWebServiceImpl;
  *
  */
 public class SearchResultServlet extends HttpServlet {
-
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8"); 
-		Farm farm = new Farm();
-		FarmService farmService = (FarmService) BeansUtil.get("farmService");
-		Farmer farmer = new Farmer();
-		FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
 		PrintWriter out = response.getWriter();
 		
 		try {
@@ -82,11 +79,22 @@ public class SearchResultServlet extends HttpServlet {
 				
 				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td width=\"15%\">"+
 								"备注</td><td width=\"40%\">相关信息</td></tr>");
+				String[] titles = {"日期","农户","联系电话","农场","地址","数量","备注"};
+				List<String[]> contentList = new LinkedList<String[]>();
 				int i = 1;
 				for (ReceiveGoose receiveGoose : resultList) {
 					result.append("<tr><td>" + (i++) + "</td><td>" + receiveGoose.getReceiveDate() + "</td><td>" + receiveGoose.getAmount()+ "</td><td>" +
 							(receiveGoose.getComments() == null ? "":receiveGoose.getComments()) + "&nbsp;</td><td >" + getFarmerAndFarmInfo(receiveGoose.getFarmId()) + "</td></tr>");
+					List<String> content = new ArrayList<String>();
+					content.add(receiveGoose.getReceiveDate().toString());
+					content.addAll(sliptMsg(getFarmerAndFarmInfo(receiveGoose.getFarmId())));
+					content.add(receiveGoose.getAmount().toString());
+					content.add(receiveGoose.getComments());
+					String[] temp = new String[content.size()];
+					contentList.add(content.toArray(temp));
 				}
+				request.getSession().setAttribute("titles", titles);
+				request.getSession().setAttribute("contentList", contentList);
 				out.print(result);
 				
 			}else if(searchType.equals("tradeGoose")){
@@ -102,14 +110,26 @@ public class SearchResultServlet extends HttpServlet {
 				
 				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
-				
+				String[] titles = {"日期","农户","联系电话","农场","地址","数量","单价","总量","金额合计","备注"};
+				List<String[]> contentList = new LinkedList<String[]>();
 				int i = 1;
 				for (TradeGoose tradeGoose : resultList) {
 					result.append("<tr><td>" + (i++) + "</td><td>" + tradeGoose.getTradeDate() + "</td><td>" + tradeGoose.getAmount()+ "</td><td>" + tradeGoose.getUnitPrice() + 
 							"</td><td>" + tradeGoose.getTotalWeight()+ "</td><td>" + (tradeGoose.getTotalWeight()*tradeGoose.getUnitPrice())+ "</td><td>" 
 									+ (tradeGoose.getComments() == null ?"":tradeGoose.getComments()) + "&nbsp;</td><td >" + 
 							getFarmerAndFarmInfo(tradeGoose.getFarmId()) + "</td></tr>");
+					List<String> content = new ArrayList<String>();
+					content.add(tradeGoose.getTradeDate().toString());
+					content.addAll(sliptMsg(getFarmerAndFarmInfo(tradeGoose.getFarmId())));
+					content.add(tradeGoose.getAmount().toString());
+					content.add(tradeGoose.getUnitPrice().toString());
+					content.add(tradeGoose.getTotalWeight().toString());
+					content.add(tradeGoose.getComments());
+					String[] temp = new String[content.size()];
+					contentList.add(content.toArray(temp));
 				}
+				request.getSession().setAttribute("titles", titles);
+				request.getSession().setAttribute("contentList", contentList);
 				out.print(result);
 				
 			}
@@ -123,14 +143,28 @@ public class SearchResultServlet extends HttpServlet {
 				SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
 				List<SaleGoose> resultList = saleGooseService.findByCondition(queryString);
 				
-				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总重量</td><td>金额合计</td><td width=\"15%\">"+
+				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总量</td><td>金额合计</td><td width=\"15%\">"+
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
+				String[] titles = {"日期","销售商","联系电话","数量","单价","总量","金额合计","备注"};
+				List<String[]> contentList = new LinkedList<String[]>();
 				int i = 1;
 				for (SaleGoose saleGoose : resultList) {
 					result.append("<tr><td>" + (i++) + "</td><td>" + saleGoose.getSaleDate() + "</td><td>" + saleGoose.getAmount()+ "</td><td>" + saleGoose.getUnitPrice()+ "</td><td>" + 
 							saleGoose.getTotalWeight()+ "</td><td>" + (saleGoose.getTotalWeight()*saleGoose.getUnitPrice())+ "</td><td>" + 
 							(saleGoose.getComments() == null ?"":saleGoose.getComments()) + "&nbsp;</td><td >" + getRetailerInfo(saleGoose.getRetailerId()) + "</td></tr>");
+					List<String> content = new ArrayList<String>();
+					content.add(saleGoose.getSaleDate().toString());
+					content.addAll(sliptMsg(getRetailerInfo(saleGoose.getRetailerId())));
+					content.add(saleGoose.getAmount().toString());
+					content.add(saleGoose.getUnitPrice().toString());
+					content.add(saleGoose.getTotalWeight().toString());
+					content.add(saleGoose.getTotalValue().toString());
+					content.add(saleGoose.getComments());
+					String[] temp = new String[content.size()];
+					contentList.add(content.toArray(temp));
 				}
+				request.getSession().setAttribute("titles", titles);
+				request.getSession().setAttribute("contentList", contentList);
 				out.print(result);
 			}
 			else if(searchType.equals("buyGood")){
@@ -151,14 +185,13 @@ public class SearchResultServlet extends HttpServlet {
 					result.append("<tr><td>" + (i++) + "</td><td>" + buyGoodView.getGoodName() + "</td><td>" + buyGoodView.getSupplierName() + "</td><td>" + buyGoodView.getOrigin()+ "</td><td>" 
 							+ buyGoodView.getBatchNum()+ "</td><td>"+ buyGoodView.getUnitPrice() +"</td><td>"+ buyGoodView.getAmount() + "</td><td>"+ buyGoodView.getAmount() * buyGoodView.getUnitPrice() +
 							"</td><td>"+ buyGoodView.getDate() +"</td><td>"+ buyGoodView.getComments() +"&nbsp;</td></tr>");
-						}
-				
+				}
+				request.getSession().setAttribute("contentList", resultList);
 				out.print(result);
 			}
 			else if(searchType.equals("tradeGood")){
 				//组装Hql语句
-				String queryString = "select r from com.scau.view.goose.TradeGoodView r where r.tradeDate "
-						+ "between '"+ fromDate + "' and '"+ toDate +"'";
+				String queryString = "select r from com.scau.view.goose.TradeGoodView r where r.tradeDate " + "between '"+ fromDate + "' and '"+ toDate +"'";
 				if(0 != fromNum && 0 != toNum){
 					queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
 				}
@@ -174,7 +207,7 @@ public class SearchResultServlet extends HttpServlet {
 							"</td><td>"+ tradeGoodView.getUnitPrice() +"</td><td>"+ tradeGoodView.getAmount() + "</td><td>"+ tradeGoodView.getGoodUnit() +"</td><td>"+ tradeGoodView.getAmount() * tradeGoodView.getUnitPrice() +
 							"</td><td>"+ tradeGoodView.getTradeDate() +"</td><td>"+ tradeGoodView.getComments() +"&nbsp;</td></tr>");
 				}
-				
+				request.getSession().setAttribute("contentList", resultList);
 				out.print(result);
 				
 			}
@@ -216,14 +249,14 @@ public class SearchResultServlet extends HttpServlet {
 		farm = farmService.get(farm);
 		farmer.setId(farm.getFarmerId());
 		farmer = farmerService.get(farmer);
-		String farmMsg = "农户名:" + farmer.getName() + "&nbsp;&nbsp;电话:"+ farmer.getPhone() + "&nbsp;&nbsp;农场名："+ farm.getName() + "&nbsp;&nbsp;地址:"
+		String farmMsg = "农户名:" + farmer.getName() + "&nbsp;&nbsp;电话:"+ farmer.getPhone() + "&nbsp;&nbsp;农场名:"+ farm.getName() + "&nbsp;&nbsp;地址:"
 						+ farm.getAddress();
 		return farmMsg;
 	}
 	
 	/**获得销售商信息
 	 * */
-	public String getRetailerInfo(long retailerId){
+	private String getRetailerInfo(long retailerId){
 		RetailerService retailerService = (RetailerService)BeansUtil.get("retailerService");
 		Retailer retailer = new Retailer();
 		retailer.setId(retailerId);
@@ -232,19 +265,17 @@ public class SearchResultServlet extends HttpServlet {
 		return msg;
 	}
 	
+	private List<String> sliptMsg(String farmAndFarmerInfo){
+		List<String> result = new ArrayList<String>();
+		for (String string : farmAndFarmerInfo.split(".{2,4}:")) {
+			if(!string.equals("")){
+				result.add(string);
+			}
+		}
+		return result;
+	}
+	
 	public SearchResultServlet() {
 		super();
 	}
-
-	
-	
-	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
-	}
-
-	public void init() throws ServletException {
-		// Put your code here
-	}
-
 }
