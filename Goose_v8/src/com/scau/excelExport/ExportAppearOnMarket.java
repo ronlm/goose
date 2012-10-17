@@ -16,7 +16,7 @@ public class ExportAppearOnMarket extends ExcelTemplate<AppearOnMarket>{
 
 	public ExportAppearOnMarket(String fileName, List<AppearOnMarket> contents) {
 		super(fileName, contents);
-		this.titles = new String[]{"序号","农户姓名","联系电话","农场名","鹅苗进场日期","现存数量","存活率","离90天上市相差天数"};
+		this.titles = new String[]{"农户姓名","联系电话","农场名","鹅苗进场日期","进场数量","现存数量","存活率","离90天上市相差天数"};
 	}
 
 	@Override
@@ -46,15 +46,18 @@ public class ExportAppearOnMarket extends ExcelTemplate<AppearOnMarket>{
 					cell.setCellValue(contents.get(rowIndex - 1).getMarket().getFarmName());
 					break;
 				case 4:
-					cell.setCellValue(contents.get(rowIndex - 1).getMarket().getReceiveDate());
+					cell.setCellValue(contents.get(rowIndex - 1).getMarket().getReceiveDate().toString());
 					break;
 				case 5:
-					cell.setCellValue(contents.get(rowIndex - 1).getGooseNum());
+					cell.setCellValue(contents.get(rowIndex - 1).getMarket().getAmount());
 					break;
 				case 6:
-					cell.setCellValue(f.format(contents.get(rowIndex - 1).getGooseNum()/contents.get(rowIndex - 1).getGooseNum()));
+					cell.setCellValue(contents.get(rowIndex - 1).getGooseNum());
 					break;
 				case 7:
+					cell.setCellValue(f.format(contents.get(rowIndex - 1).getGooseNum()/contents.get(rowIndex - 1).getGooseNum()));
+					break;
+				case 8:
 					cell.setCellValue(contents.get(rowIndex - 1).getDayTo90());
 					break;
 				default:
