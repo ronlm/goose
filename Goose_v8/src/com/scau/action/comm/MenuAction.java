@@ -22,6 +22,10 @@ import com.scau.service.impl.comm.CommResourceService;
 import com.scau.util.PageController;
 
 
+/** 处理与系统菜单管理相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class MenuAction extends BaseAction implements Serializable {
@@ -31,9 +35,12 @@ public class MenuAction extends BaseAction implements Serializable {
 	private CommMenu menu;
 	private List<CommMenu> menuList = new ArrayList<CommMenu>();
 	private CommResourceService commResourceService;
-
+	/***
+	 * 获得菜单的html显示文本返回到页面中
+	 * @return
+	 */
 	public String list() {
-		// 取列表
+		
 		int totalRows = commMenuService.getRecordCount(new CommMenu());
 		String URL = getListURL();
 		this.pager.setURL(URL);
@@ -98,7 +105,11 @@ public class MenuAction extends BaseAction implements Serializable {
 		}
 		return list();
 	}
-
+	/**
+	 * 保存编辑的菜单
+	 * @param originList
+	 * @param objectList
+	 */
 	private void save(List<CommMenu> originList, List<CommMenu2> objectList) {
 		for (CommMenu menu : originList) {
 			CommMenu2 menu2 = new CommMenu2();
@@ -112,6 +123,12 @@ public class MenuAction extends BaseAction implements Serializable {
 		}
 	}
 
+	/**
+	 * 迭代设置选中的
+	 * @param pid
+	 * @param menuList
+	 * @param resultList
+	 */
 	private void setMenu(Long pid, List<CommMenu2> menuList,
 			List<CommMenu2> resultList) {
 		List<CommMenu2> sub = getSubList(pid, menuList);
@@ -122,6 +139,12 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	}
 
+	/**
+	 * 获得菜单的子菜单
+	 * @param pid
+	 * @param menuList
+	 * @return
+	 */
 	private List<CommMenu2> getSubList(Long pid, List<CommMenu2> menuList) {
 		// pid 就是父菜单的ID号， 子菜单以此得到父菜单号
 		List<CommMenu2> subList = new ArrayList<CommMenu2>();
@@ -160,6 +183,13 @@ public class MenuAction extends BaseAction implements Serializable {
 
 	private int level = 0;
 
+	/**
+	 * 把主界面的菜单页打印成html
+	 * @param mainMenu2
+	 * @param request
+	 * @param crrList
+	 * @return 菜单的html展示格式
+	 */
 	private String getMenuHTML(List<CommMenu2> mainMenu2,
 			HttpServletRequest request, List<CommRoleResource> crrList) {
 		StringBuffer sb = new StringBuffer();
@@ -168,9 +198,11 @@ public class MenuAction extends BaseAction implements Serializable {
 		for (CommMenu2 menu2 : mainMenu2) {
 			sb.append("<li>");
 			if (menu2.getPid() == 0) {
+				//这是一级菜单
 				for (CommRoleResource crr : crrList) {
 					if ((long) crr.getResourceId() == (long) menu2
 							.getResourceId()) {
+						// 迭代获得菜单下的所有子菜单，以html展示
 						sb.append("<a href=\""
 								+ menu2.getUrl()
 								+ "\" target=\"mainIframe\" style=\"cursor: pointer;\"><img src=\""
@@ -181,6 +213,7 @@ public class MenuAction extends BaseAction implements Serializable {
 					}
 				}
 			} else {
+				//这是子菜单
 				for (CommRoleResource crr : crrList) {
 					if ((long) crr.getResourceId() == (long) menu2
 							.getResourceId()) {

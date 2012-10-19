@@ -18,7 +18,11 @@ import com.scau.model.comm.CommResource;
 import com.scau.service.impl.comm.CommResourceService;
 import com.scau.util.PageController;
 
-
+/***
+ * 处理与系统资源相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class ResourceAction extends BaseAction implements Serializable {
@@ -49,15 +53,22 @@ public class ResourceAction extends BaseAction implements Serializable {
 		return "edit";
 	}
 
+	/**
+	 * 将要执行添加新资源
+	 * @return
+	 */
 	public String add(){
 		commResource = commResourceService.get(resource);
 		request.setAttribute("resource", commResource);
 		return "edit";
 	}
 	
-	
+	/**
+	 * 保存在页面编辑好的资源
+	 * @return
+	 */
 	public String save() {
-		// 保存表单
+		
 		try {
 			commResourceService.save(resource);
 			return list();
@@ -69,6 +80,10 @@ public class ResourceAction extends BaseAction implements Serializable {
 		}
 	}
 
+	/**
+	 * 删除选中的系统资源
+	 * @return
+	 */
 	public String del() {
 		// 删除
 		String[] ids = request.getParameterValues("id");

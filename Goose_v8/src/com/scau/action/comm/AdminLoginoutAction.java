@@ -21,6 +21,10 @@ import com.scau.service.impl.comm.CommRoleService;
 import com.scau.service.impl.comm.CommUserService;
 
 
+/** 处理用户登录请求的Action
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class AdminLoginoutAction extends BaseAction implements Serializable ,ModelDriven<CommUser>{
@@ -34,10 +38,15 @@ public class AdminLoginoutAction extends BaseAction implements Serializable ,Mod
 	private MenuAction menuAction;
 	private CommRoleService commRoleService;
 	
+	/**登录方法
+	 * @return
+	 * @throws Exception
+	 */
 	public String login() throws Exception {
 		try {
 			loginUser = (CommUser) commUserService.checkUser(user);
 			if (null != loginUser) {
+				//登录成功
 				CommRoleResource crr = new CommRoleResource();
 				crr.setRoleId(loginUser.getRoleId());
 				List<CommRoleResource> crrList = commRoleResourceService.list(crr);
@@ -63,21 +72,31 @@ public class AdminLoginoutAction extends BaseAction implements Serializable ,Mod
 
 	}
 
+	/**
+	 * 登出
+	 * @return
+	 */
 	public String logout() {
 		request.getSession().invalidate();
 		return "failure";
 
 	}
 
+	/***
+	 * 取得当前登录用户
+	 * @return
+	 */
 	public String get() {
-		// 取得当前登录用户
 		user = commUserService.get(user);
 		request.setAttribute("user", user);
 		return "edit";
 	}
 
+	/***
+	 * 执行完修改用户信息后保存
+	 * @return
+	 */
 	public String save() {
-
 		try {	
 			commUserService.save(user);
 			request.setAttribute("message",
