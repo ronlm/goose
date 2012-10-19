@@ -18,7 +18,11 @@ import com.scau.service.impl.comm.CommUserService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 
-
+/**
+ * 处理与系统用户相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class UserAction extends BaseAction implements Serializable {
@@ -32,8 +36,11 @@ public class UserAction extends BaseAction implements Serializable {
 	private CommUser user;
 	private CommRoleService commRoleService;
 	
+	/**
+	 * 获得系统用户列表
+	 * @return
+	 */
 	public String list() {
-		// 取列表		
 			int totalRows = commUserService.getRecordCount(new CommUser());
 			String URL = getListURL();
 			this.pager.setURL(URL);
@@ -44,19 +51,23 @@ public class UserAction extends BaseAction implements Serializable {
 			request.setAttribute("pager", pager);
 			return "list";		
 	}
-
-	public String get() {
-		// 点了添加或者点了修改	
+	/**
+	 * 点了添加或者点了修改用户
+	 * @return
+	 */
+	public String get() { 
 			commUser = commUserService.get(user);
 			roleList = commRoleService.listAll(new CommRole());
 			request.setAttribute("user", commUser);
 			return "edit";
 	}
 
+	/***
+	 * 保存编辑用户表单信息
+	 * @return
+	 */
 	public String save() {
-		// 保存表单
 		try {
-			
 			commUserService.save(user);
 			roleList = commRoleService.listAll(new CommRole());
 			return list();
@@ -68,8 +79,11 @@ public class UserAction extends BaseAction implements Serializable {
 		}
 	}
 
+	/**
+	 *  删除	
+	 * @return
+	 */
 	public String del() {
-		// 删除	
 			String[] ids = request.getParameterValues("id");
 			CommUser user = new CommUser();
 			for (String id : ids) {

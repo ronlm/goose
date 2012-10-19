@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-/** 提供最高层Action类的抽象，封装了对HttpServletequest 和 HttpServletResponse的访问
+/** 本类提供最高层Action类的抽象，封装了对HttpServletequest 和 HttpServletResponse的访问
  * @author jianhao
  *
  */

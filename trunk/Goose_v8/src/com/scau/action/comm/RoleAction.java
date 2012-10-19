@@ -19,7 +19,11 @@ import com.scau.service.impl.comm.CommRoleService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 
-
+/**
+ * 处理与系统的角色相关请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class RoleAction extends BaseAction implements Serializable {
@@ -31,9 +35,11 @@ public class RoleAction extends BaseAction implements Serializable {
 	private CommRoleResourceService commRoleResourceService;
 	private CommRole commRole;
 	
+	/*
+	 * 获得系统角色列表
+	 */
 	public String list() {
 	
-			// 取列表
 			int totalRows = commRoleService.getRecordCount(new CommRole());
 			String URL = getListURL();
 			this.pager.setURL(URL);
@@ -45,9 +51,12 @@ public class RoleAction extends BaseAction implements Serializable {
 			request.setAttribute("pager", pager);
 			return "list";
 	}
-
+	
+	/**点了添加或者点了修改角色
+	 * 
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改
 		commRole = commRoleService.get(commRole);
 		
 		//获取该角色的资源
@@ -62,7 +71,7 @@ public class RoleAction extends BaseAction implements Serializable {
 				logger.error("查询获取该角色的资源时出错了: " + e.getMessage(), e);
 			}
 		}
-		//所有资源
+		//返回当前所有资源
 		CommResourceService resourceService = (CommResourceService) BeansUtil.get("commResourceService");
 		resourceList = resourceService.listAll(new CommResource());
 		request.setAttribute("commRole", commRole);
@@ -106,8 +115,11 @@ public class RoleAction extends BaseAction implements Serializable {
 
 	}
 
+	/**
+	 * 删除
+	 * @return
+	 */
 	public String del() {
-			// 删除
 			String[] ids = request.getParameterValues("id");
 			CommRole role = new CommRole();
 			for (String id : ids) {
