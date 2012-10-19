@@ -70,6 +70,12 @@ public class SecurityFilter implements Filter {
 		}
 	}
 
+	/**
+	 * 检查用户是否拥有访问该路径的权限
+	 * @param path
+	 * @param user
+	 * @return
+	 */
 	private boolean hasRight(String path, CommUser user) {
 		if(null != user && null != user.getRoleId()){
 			//取得当前用户的可访问资源
@@ -106,7 +112,12 @@ public class SecurityFilter implements Filter {
 	}
 	
 	
-
+	/**
+	 * 检查访问的路径与资源是否匹配
+	 * @param path
+	 * @param resource
+	 * @return
+	 */
 	private boolean match(String path, String resource) {
 		Pattern pattern = Pattern.compile(resource);
 		Matcher matcher = pattern.matcher(path);
