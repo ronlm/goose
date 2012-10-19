@@ -5,7 +5,11 @@ import javax.servlet.ServletContextListener;
 
 import com.scau.util.Utils;
 
-
+/**
+ * 容器初始化和销毁时执行里边的contextInitialized和contextDestroyed方法
+ * @author jianhao
+ *
+ */
 public class Init implements ServletContextListener {
 	
 	private static String logRoot = "log.root";
