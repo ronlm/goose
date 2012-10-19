@@ -11,16 +11,14 @@ import org.springframework.stereotype.Component;
 
 import com.scau.action.comm.BaseAction;
 import com.scau.exception.BusinessException;
-import com.scau.model.goose.Farm;
-import com.scau.model.goose.Good;
 import com.scau.model.goose.GoodType;
-import com.scau.model.goose.SaleRegion;
-import com.scau.service.impl.goose.GoodService;
 import com.scau.service.impl.goose.GoodTypeService;
-import com.scau.service.impl.goose.SaleGooseService;
-import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与物资类型相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class GoodTypeAction extends BaseAction{
@@ -30,6 +28,11 @@ public class GoodTypeAction extends BaseAction{
 	private GoodTypeService goodTypeService;
 	private GoodType goodType;
 	
+	/**
+	 * 获得全部物资分类列表
+	 * @return
+	 * @throws Exception
+	 */
 	public String list() throws Exception {
 		// 取列表		
 			int totalRows = goodTypeService.listAll(new GoodType()).size();
@@ -41,16 +44,23 @@ public class GoodTypeAction extends BaseAction{
 			request.setAttribute("pager", pager);
 			return "list";		
 	}
-
+	/**
+	 * 点了添加或者点了修改	
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
+		// 
 			goodType = goodTypeService.get(goodType);
 			request.setAttribute("goodType", goodType);
 			return "edit";
 	}
 
+	/**
+	 * 保存物资类型编辑表单的信息
+	 * @return
+	 */
 	public String save() throws Exception {
-		// 保存表单
+		// 
 		try {	
 			goodTypeService.save(goodType);
 			return list();
@@ -62,8 +72,12 @@ public class GoodTypeAction extends BaseAction{
 		}
 	}
 
+	/**
+	 * 删除选中的物资类型记录
+	 * @return
+	 */
 	public String del() throws Exception {
-		// 删除	
+
 			String[] ids = request.getParameterValues("id");
 			GoodType goodType = new GoodType();
 			for (String id : ids) {

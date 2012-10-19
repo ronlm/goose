@@ -1,6 +1,5 @@
 package com.scau.action.good;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,22 +13,22 @@ import org.springframework.stereotype.Component;
 import com.scau.action.comm.BaseAction;
 import com.scau.exception.BusinessException;
 import com.scau.model.goose.BuyGood;
-import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Good;
 import com.scau.model.goose.GoodSupplier;
 import com.scau.model.goose.GoodType;
-import com.scau.model.goose.TradeGood;
 import com.scau.service.impl.goose.BuyGoodService;
 import com.scau.service.impl.goose.BuyGoodViewService;
-import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GoodService;
 import com.scau.service.impl.goose.GoodSupplierService;
 import com.scau.service.impl.goose.GoodTypeService;
-import com.scau.service.impl.goose.TradeGoodService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 import com.scau.view.goose.BuyGoodView;
-
+/**
+ * 处理与物资采购相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class BuyGoodAction extends BaseAction{
@@ -45,6 +44,10 @@ public class BuyGoodAction extends BaseAction{
 	private GoodTypeService goodTypeService;
 	private int daysWithin ;
 	
+	/**
+	 * 列出在特定日期和物资种类条件下的所有采购记录
+	 * @return
+	 */
 	public String list() {
 			// 取列表
 			// 取得要显示的日期条件
@@ -57,6 +60,8 @@ public class BuyGoodAction extends BaseAction{
 			}
 			
 			selectedGoodSupplier = goodSupplierService.get(selectedGoodSupplier);
+			
+			//用于查询的hql语句
 			StringBuilder hql = new StringBuilder("from com.scau.view.goose.BuyGoodView t where 1=1 ");
 			
 			int goodTypeId = -1;
@@ -78,10 +83,11 @@ public class BuyGoodAction extends BaseAction{
 			int totalRows = buyGoodViewService.findByCondition(hql.toString()).size();// 总的记录条数
 			String URL = getListURL();
 			this.pager.setURL(URL);
-			this.pager.setTotalRowsAmount(totalRows);
+			this.pager.setTotalRowsAmount(totalRows);// 总的记录条数
 			List<BuyGoodView> resourceList = buyGoodViewService.findByCondition(this.pager.getPageStartRow(), this.pager.getPageSize(), hql.toString());
 			List<GoodSupplier> goodSupplierList = goodSupplierService.list(new GoodSupplier());
 			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
+			
 			pager.setData(resourceList);
 			request.setAttribute("selectedGoodSupplier", selectedGoodSupplier);
 			request.setAttribute("goodSupplierList", goodSupplierList);
@@ -91,11 +97,16 @@ public class BuyGoodAction extends BaseAction{
 			request.getSession().setAttribute("daysWithin", daysWithin);
 			return "list";		
 	}
-
+	
+	/**
+	 * 点了添加或者点了修改物资
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
+		 
 			buyGood = buyGoodService.get(buyGood);
 			GoodService goodService = (GoodService) BeansUtil.get("goodService");
+			// 列出所有的物资供应商
 			GoodSupplierService goodSupplierService = (GoodSupplierService) BeansUtil.get("goodSupplierService");
 			
 			List<Good> goodList = goodService.list(new Good());
@@ -106,6 +117,10 @@ public class BuyGoodAction extends BaseAction{
 			return "edit";
 	}
 
+	/**
+	 * 保存物资编辑表单信息
+	 * @return
+	 */
 	public String save() {
 		// 保存表单
 		try {
@@ -125,9 +140,12 @@ public class BuyGoodAction extends BaseAction{
 			return "edit";
 		}
 	}
-
+	
+	/**
+	 *  删除删除选中的物资记录	
+	 * @return
+	 */
 	public String del() {
-		// 删除	
 			String[] ids = request.getParameterValues("id");
 			BuyGood buyGood= new BuyGood();
 			for (String id : ids) {
