@@ -13,12 +13,10 @@ import org.springframework.stereotype.Component;
 
 import com.scau.action.comm.BaseAction;
 import com.scau.exception.BusinessException;
-import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Good;
 import com.scau.model.goose.GoodType;
 import com.scau.model.goose.TradeGood;
-import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GoodService;
 import com.scau.service.impl.goose.GoodTypeService;
@@ -27,7 +25,11 @@ import com.scau.service.impl.goose.TradeGoodViewService;
 import com.scau.util.BeansUtil;
 import com.scau.util.PageController;
 import com.scau.view.goose.TradeGoodView;
-
+/**
+ * 处理与物资销售相关请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class TradeGoodAction extends BaseAction{
@@ -42,6 +44,10 @@ public class TradeGoodAction extends BaseAction{
 	private Farmer selectedFarmer ;
 	private int daysWithin ;
 	
+	/**
+	 * 展示特定日期和种类的所有物资销售记录
+	 * @return
+	 */
 	public String list() {
 		// 取列表
 		// 取得要显示的日期条件
@@ -90,8 +96,12 @@ public class TradeGoodAction extends BaseAction{
 			return "list";		
 	}
 
+	/**
+	 * 点了添加或者点了修改销售记录
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
+
 			tradeGood = tradeGoodService.get(tradeGood);
 			GoodService goodService = (GoodService) BeansUtil.get("goodService");
 						
@@ -103,6 +113,10 @@ public class TradeGoodAction extends BaseAction{
 			return "edit";
 	}
 
+	/**
+	 * 保存编辑物资销售表单的记录
+	 * @return
+	 */
 	public String save() {
 		// 保存表单
 		try {
@@ -121,6 +135,10 @@ public class TradeGoodAction extends BaseAction{
 		}
 	}
 
+	/**
+	 * 删除选中的销售信息
+	 * @return
+	 */
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.scau.action.comm.BaseAction;
 import com.scau.exception.BusinessException;
-import com.scau.model.goose.Farm;
 import com.scau.model.goose.Good;
 import com.scau.model.goose.GoodType;
 import com.scau.service.impl.goose.GoodService;
@@ -19,7 +18,11 @@ import com.scau.service.impl.goose.GoodTypeService;
 import com.scau.service.impl.goose.GoodViewService;
 import com.scau.util.PageController;
 import com.scau.view.goose.GoodView;
-
+/**
+ * 处理与物资基本信息相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class GoodAction extends BaseAction{
@@ -31,8 +34,12 @@ public class GoodAction extends BaseAction{
 	private GoodTypeService goodTypeService;
 	private Good good;
 	
+	/**
+	 *  取列表,用视图 GoodView显示
+	 * @return
+	 * @throws Exception
+	 */
 	public String list() throws Exception {
-		// 取列表,用视图 GoodView显示
 			
 			int totalRows = goodViewService.listAll(new GoodView()).size();
 			String URL = getListURL();
@@ -40,7 +47,7 @@ public class GoodAction extends BaseAction{
 			this.pager.setTotalRowsAmount(totalRows);
 			List<GoodView> resourceList = goodViewService.list(new GoodView(),this.pager.getPageStartRow(),this.pager.getPageSize(),null,null);
 			for (GoodView good : resourceList) {
-				good.setStock(goodViewService.currentStock(good));//更新库存
+				good.setStock(goodViewService.currentStock(good));//更新该种物资的库存
 			}
 			pager.setData(resourceList);
 			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
@@ -49,8 +56,11 @@ public class GoodAction extends BaseAction{
 			return "list";		
 	}
 
+	/**
+	 *  点了添加或者点了修改记录
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
+		
 			good = goodService.get(good);
 			List<GoodType> goodTypeList = goodTypeService.list(new GoodType());
 			request.setAttribute("goodTypeList", goodTypeList);
@@ -58,6 +68,11 @@ public class GoodAction extends BaseAction{
 			return "edit";
 	}
 
+	/**
+	 * 保存物资信息编辑表单的信息
+	 * @return
+	 * @throws Exception
+	 */
 	public String save() throws Exception {
 		// 保存表单
 		try {	
@@ -73,6 +88,11 @@ public class GoodAction extends BaseAction{
 		}
 	}
 
+	/**
+	 * 删除选中的物资信息记录
+	 * @return
+	 * @throws Exception
+	 */
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");

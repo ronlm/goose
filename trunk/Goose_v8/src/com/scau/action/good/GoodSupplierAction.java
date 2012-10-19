@@ -15,7 +15,11 @@ import com.scau.exception.BusinessException;
 import com.scau.model.goose.GoodSupplier;
 import com.scau.service.impl.goose.GoodSupplierService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与物资供应商相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class GoodSupplierAction extends BaseAction{
@@ -25,6 +29,10 @@ public class GoodSupplierAction extends BaseAction{
 	private GoodSupplierService goodSupplierService;
 	private GoodSupplier goodSupplier;
 		
+	/**
+	 * 获得供应商列表
+	 * @return
+	 */
 	public String list() {
 		// 取列表	
 			
@@ -38,18 +46,24 @@ public class GoodSupplierAction extends BaseAction{
 			request.setAttribute("pager", pager);
 			return "list";		
 	}
-
+	
+	/**
+	 *  点了添加或者点了修改	
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			goodSupplier = goodSupplierService.get(goodSupplier);
 			request.setAttribute("goodSupplier", goodSupplier);
 			return "edit";
 	}
 
+	/**
+	 * 保存编辑的供应商信息表单
+	 * @return
+	 */
 	public String save() {
 		// 保存表单
 		try {
-			System.out.println("test-------------------test,"+goodSupplier.getName());
 			goodSupplierService.save(goodSupplier);
 		
 			return list();
@@ -61,6 +75,10 @@ public class GoodSupplierAction extends BaseAction{
 		}
 	}
 
+	/**
+	 * 删除一条供应商信息
+	 * @return
+	 */
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
