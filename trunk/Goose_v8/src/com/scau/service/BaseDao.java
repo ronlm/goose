@@ -27,7 +27,7 @@ import com.scau.exception.DataAccessException;
 
 
 
-/** 采用泛型去完成的对所有实体类和视图类完成对数据库执行CRUD等各种方法的基类
+/** 采用泛型去执行所有实体类和视图类完成对数据库执行CRUD等各种方法的基类
  * @author jianhao
  *
  * @param <T>
@@ -61,11 +61,7 @@ public class BaseDao<T> {
 
 	}
 
-	/**
-	 * @param entity
-	 * @throws DataAccessException
-	 */
-	/**
+	/**删除
 	 * @param entity
 	 * @throws DataAccessException
 	 */
@@ -82,7 +78,10 @@ public class BaseDao<T> {
 			// throw new DataAccessException("删除记录出错！");
 		}
 	}
-	
+	/**更新
+	 * @param entity
+	 * @throws DataAccessException
+	 */
 	public void update(T entity) throws DataAccessException {
 		if (null == entity) {
 			throw new DataAccessException("尝试更新空对象！请至少对id属性设置值。entity==null");
@@ -96,6 +95,11 @@ public class BaseDao<T> {
 		}
 	}
 
+	/**
+	 * 查找
+	 * @param entity
+	 * @return
+	 */
 	public T get(T entity) {
 		try {
 			if (list(entity).size() == 0 || null == list(entity)) {
@@ -166,7 +170,7 @@ public class BaseDao<T> {
 	}
 
 	
-	/**
+	/**填入相应的属性名，属性值和相应的排序方式，返回合符的结果列表
 	 * @param entity
 	 * @param start
 	 * @param size	结果的条数
@@ -221,6 +225,11 @@ public class BaseDao<T> {
 		
 	}
 	
+	/**
+	 * 使用Hql查找
+	 * @param queryString
+	 * @return
+	 */
 	public List<T> findByCondition(String queryString) {
 		return hibernateTemplate.find(queryString);
 	}
@@ -248,6 +257,11 @@ public class BaseDao<T> {
 		   return list;
 	}
 	
+	/**
+	 * 获得合符的记录数量
+	 * @param entity
+	 * @return
+	 */
 	public int getRecordCount(T entity) {
 		List<T> list;
 		try {
@@ -289,12 +303,20 @@ public class BaseDao<T> {
 		return (Long)this.findByCondition(queryString).get(0);
 	}
 	
+	/**
+	 * 批量更新
+	 * @param list
+	 * @throws DataAccessException
+	 */
 	public void batchUpdate(List<T> list) throws DataAccessException {
 		for (T object : list) {
 			this.update(object);
 		}
 	}
-
+	/**
+	 * 批量添加
+	 * @param list
+	 */
 	public void batchAdd(List<T> list){
 		for(T entity:list){
 			this.add(entity);
