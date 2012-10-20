@@ -31,7 +31,7 @@ public class FarmStockService extends Thread{
 	private Farm farm;
 	
 	public FarmStock getFarmStock(Farm f) throws Exception{
-		//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内（打死你也不相信养一个鹅200天 + 吧）
+		//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之内
 		String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
 				+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
 		List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);

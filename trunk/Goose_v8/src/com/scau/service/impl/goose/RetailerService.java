@@ -17,7 +17,8 @@ public class RetailerService extends BaseService<Retailer>{
 	@Transactional
 	public void save(Retailer entity) throws BusinessException{
 		if (null != entity && null != entity.getName()) {
-			if(null != entity.getId() && 0 != entity.getId()){				
+			if(null != entity.getId() && 0 != entity.getId()){	
+				//id不为null,更新，为null则add
 				update(entity);
 			}else{
 				add(entity);

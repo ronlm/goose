@@ -1,6 +1,5 @@
 package com.scau.service.impl.goose;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -26,7 +25,12 @@ public class MutilThreadGooseService extends Thread{
 	private ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
 	private int daysBefore;//要删除daysBefore天以前的数据
 	private Farm farm;
-	
+	/**
+	 * 删除农场的daysBefort前的鹅只数据
+	 * @param f
+	 * @param daysBefore
+	 * @throws Exception
+	 */
 	public  void DeleteGooseData(Farm f ,int daysBefore) throws Exception{
 		//找出所有属于某个农场的所有dayBefore天以前的交付鹅苗批次记录
 		List<ReceiveGoose> receiveGooses = receiveGooseService.findByCondition("from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId() +

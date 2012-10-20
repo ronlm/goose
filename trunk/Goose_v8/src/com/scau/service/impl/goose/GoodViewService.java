@@ -29,6 +29,11 @@ public class GoodViewService extends BaseService<GoodView>{
 		}
 	}
 	
+	/**
+	 * 计算所有物资的当前库存
+	 * @param entity
+	 * @return
+	 */
 	public long currentStock(GoodView entity){
 		BuyGoodService buyGoodService = (BuyGoodService) BeansUtil.get("buyGoodService");
 		TradeGoodService tradeGoodService = (TradeGoodService) BeansUtil.get("tradeGoodService");

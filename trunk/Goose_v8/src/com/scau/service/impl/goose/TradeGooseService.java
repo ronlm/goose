@@ -14,6 +14,7 @@ public class TradeGooseService extends BaseService<TradeGoose>{
 	@Transactional
 	public void save(TradeGoose tradeGoose) throws BusinessException{
 		if (null != tradeGoose && null != tradeGoose.getFarmId()) {
+			//id不为null,更新，为null则add
 			if(null != tradeGoose.getId() && 0 != tradeGoose.getId()){
 				update(tradeGoose);
 			}else{

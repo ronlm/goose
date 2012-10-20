@@ -15,6 +15,7 @@ public class SaleRegionService extends BaseService<SaleRegion>{
 	@Transactional
 	public void save(SaleRegion entity) throws BusinessException{
 		if (null != entity && null != entity.getRegion()) {
+			//id不为null,更新，为null则add
 			if(null != entity.getId() && 0 != entity.getId()){
 				update(entity);
 			}else{

@@ -18,6 +18,7 @@ public class GoodService extends BaseService<Good>{
 	public void save(Good good) throws BusinessException{
 		if (null != good && null != good.getName()) {
 			if(null != good.getId() && 0 != good.getId()){
+				//id不为null,更新，为null则add
 				update(good);
 			}else{
 				add(good);

@@ -16,6 +16,7 @@ public class SaleGooseService extends BaseService<SaleGoose>{
 	public void save(SaleGoose entity) throws BusinessException{
 		if (null != entity && null != entity.getRetailerId()) {
 			if(null != entity.getId() && 0 != entity.getId()){
+				//id不为null,更新，为null则add
 				entity.setTotalValue(entity.getTotalWeight() * entity.getUnitPrice());//自动计算该次销售的总金额
 				update(entity);
 			}else{
