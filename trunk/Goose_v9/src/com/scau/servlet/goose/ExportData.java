@@ -61,6 +61,24 @@ public class ExportData extends HttpServlet {
 		String type = request.getParameter("type");
 		String today = (new java.sql.Date(new Date().getTime())).toString();
 		String fileName ;
+		StringBuffer result = new StringBuffer();
+		Date fromDate = new Date(-1) ;//默认 1970-01-01
+		Date toDate = new Date(new java.util.Date().getTime());//默认今天
+		long fromNum = 0,toNum = 0;
+		
+		if(null != request.getParameter("fromDate") && null != request.getParameter("toDate")){
+			try {
+				fromDate = java.sql.Date.valueOf(request.getParameter("fromDate"));
+				toDate = java.sql.Date.valueOf(request.getParameter("toDate"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(null != request.getParameter("fromNum") && null != request.getParameter("toNum")){
+			fromNum = Long.parseLong(request.getParameter("fromNum"));
+			toNum = Long.parseLong(request.getParameter("toNum"));
+		}
 		
 		if(type.equals("market")){
 			try {
@@ -108,26 +126,10 @@ public class ExportData extends HttpServlet {
 				
 				final CountDownLatch begin = new CountDownLatch(1);
 				final CountDownLatch end = new CountDownLatch(totalFarmList.size());
+				
 				List<FarmStock> totalFarmStockList = new LinkedList<FarmStock>();
-				for(Farm f :totalFarmList){
-					//计算全部农场的存栏量
-					FarmStockService farmStockService = new FarmStockService(totalFarmStockList, f, begin, end);
-					farmStockService.start();//启动每个个农户各自的线程
-				}
-				
-				begin.countDown();
-				long startTime = System.currentTimeMillis();
-				try {
-					end.await();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} finally {
-					long endTime = System.currentTimeMillis();
-					System.out.println("stock spend time: " + (endTime - startTime) +"ms");
-				}
-				
-				Collections.sort(totalFarmStockList,new FarmStock());
-				ExportFarmStock export = new ExportFarmStock(fileName, totalFarmStockList);
+				FarmStockService farmStockService = new FarmStockService(totalFarmStockList, begin, end);
+				ExportFarmStock export = new ExportFarmStock(fileName, farmStockService.getTotalFarmStockList());
 				Workbook workbook =  export.exportExcel();
 				workbook.write(out);
 			} catch (Exception e) {
