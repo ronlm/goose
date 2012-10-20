@@ -31,15 +31,16 @@
 							  自定义天数:
 							  <input type="text" id="daysWithin" name="daysWithin" value="${daysWithin }" style="width:80px;border:border:1px solid #fff000;">  
 							天&nbsp;&nbsp;&nbsp;&nbsp;
-							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span></a>
+							<a class="button-small" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span></a>
 							<c:if test="${retailer != null }"><input type="hidden" name="retailer.id" id="retailer.id" value="${retailer.id }" /></c:if>
 							
-						</form>
+						
 						<a class="button" href="javascript:void(0)"
 							onclick="this.blur(); history.go(-1);return false;"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
-								align="absmiddle" />&nbsp;返回上一页</span>
+								 />&nbsp;返回上一页</span>
 						</a>
+						</form>
 					</div>
 				</th>
 			</tr>
