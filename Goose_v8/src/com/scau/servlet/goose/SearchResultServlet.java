@@ -68,6 +68,7 @@ public class SearchResultServlet extends HttpServlet {
 			}
 			
 			if(searchType.equals("receiveGoose")){
+				//检索鹅苗进场记录
 				//组装Hql语句
 				String queryString = "select r from com.scau.model.goose.ReceiveGoose r where r.receiveDate " + 
 									"between '"+ fromDate +"' and '"+ toDate + "'";
@@ -99,6 +100,7 @@ public class SearchResultServlet extends HttpServlet {
 				out.print(result);
 				
 			}else if(searchType.equals("tradeGoose")){
+				//检索成品鹅回购记录
 				//组装Hql语句
 				String queryString = "select r from com.scau.model.goose.TradeGoose r where r.tradeDate "
 						+ "between '"+ fromDate + "' and '"+ toDate +"'";
@@ -137,6 +139,7 @@ public class SearchResultServlet extends HttpServlet {
 				
 			}
 			else if(searchType.equals("saleGoose")){
+				//检索成品鹅出售记录
 				String queryString = "select r from com.scau.model.goose.SaleGoose r where r.saleDate "
 						+ "between '"+ fromDate + "' and '"+ toDate +"'";
 				if(0 != fromNum && 0 != toNum){
@@ -171,6 +174,7 @@ public class SearchResultServlet extends HttpServlet {
 				out.print(result);
 			}
 			else if(searchType.equals("buyGood")){
+				//检索物资采购记录
 				//组装Hql语句
 				String queryString = "select r from com.scau.view.goose.BuyGoodView r where r.date "
 						+ "between '"+ fromDate + "' and '"+ toDate +"'";
@@ -193,6 +197,7 @@ public class SearchResultServlet extends HttpServlet {
 				out.print(result);
 			}
 			else if(searchType.equals("tradeGood")){
+				//检索物资销售记录
 				//组装Hql语句
 				String queryString = "select r from com.scau.view.goose.TradeGoodView r where r.tradeDate " + "between '"+ fromDate + "' and '"+ toDate +"'";
 				if(0 != fromNum && 0 != toNum){
