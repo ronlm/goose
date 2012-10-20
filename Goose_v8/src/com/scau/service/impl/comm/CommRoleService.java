@@ -17,6 +17,7 @@ public class CommRoleService extends BaseService<CommRole> implements Serializab
 	@Transactional
 	public Long save(CommRole role) throws BusinessException{
 		if (null != role && null != role.getName()) {
+			//id不为null,更新，为null则add
 			if(null != role.getId() && 0 != role.getId()){
 				update(role);	
 				return role.getId();

@@ -15,7 +15,7 @@ import com.scau.service.BaseService;
 public class CommRoleResourceService extends BaseService<CommRoleResource> implements Serializable {
 
 	public List<CommRoleResource> listByRoleId(CommRoleResource entity) throws Exception {
-		
+		//id不为null,更新，为null则add
 		if(null != entity && null != entity.getRoleId()){
 			return list(entity);
 		}
