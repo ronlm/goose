@@ -95,8 +95,6 @@ public class SearchResultServlet extends HttpServlet {
 					String[] temp = new String[content.size()];
 					contentList.add(content.toArray(temp));
 				}
-				request.getSession().setAttribute("titles", titles);
-				request.getSession().setAttribute("contentList", contentList);
 				out.print(result);
 				
 			}else if(searchType.equals("tradeGoose")){
@@ -133,8 +131,6 @@ public class SearchResultServlet extends HttpServlet {
 					String[] temp = new String[content.size()];
 					contentList.add(content.toArray(temp));
 				}
-				request.getSession().setAttribute("titles", titles);
-				request.getSession().setAttribute("contentList", contentList);
 				out.print(result);
 				
 			}
@@ -151,7 +147,6 @@ public class SearchResultServlet extends HttpServlet {
 				
 				result.append("<tr><td>序号</td><td>日期</td><td>数量</td><td>单价</td><td>总量</td><td>金额合计</td><td width=\"15%\">"+
 						"备注</td><td width=\"40%\">相关信息</td></tr>");
-				String[] titles = {"日期","销售商","联系电话","数量","单价","总量","金额合计","备注"};
 				List<String[]> contentList = new LinkedList<String[]>();
 				int i = 1;
 				for (SaleGoose saleGoose : resultList) {
@@ -169,8 +164,6 @@ public class SearchResultServlet extends HttpServlet {
 					String[] temp = new String[content.size()];
 					contentList.add(content.toArray(temp));
 				}
-				request.getSession().setAttribute("titles", titles);
-				request.getSession().setAttribute("contentList", contentList);
 				out.print(result);
 			}
 			else if(searchType.equals("buyGood")){
@@ -193,7 +186,7 @@ public class SearchResultServlet extends HttpServlet {
 							+ buyGoodView.getBatchNum()+ "</td><td>"+ buyGoodView.getUnitPrice() +"</td><td>"+ buyGoodView.getAmount() + "</td><td>"+ buyGoodView.getAmount() * buyGoodView.getUnitPrice() +
 							"</td><td>"+ buyGoodView.getDate() +"</td><td>"+ buyGoodView.getComments() +"&nbsp;</td></tr>");
 				}
-				request.getSession().setAttribute("contentList", resultList);
+				
 				out.print(result);
 			}
 			else if(searchType.equals("tradeGood")){
@@ -215,7 +208,7 @@ public class SearchResultServlet extends HttpServlet {
 							"</td><td>"+ tradeGoodView.getUnitPrice() +"</td><td>"+ tradeGoodView.getAmount() + "</td><td>"+ tradeGoodView.getGoodUnit() +"</td><td>"+ tradeGoodView.getAmount() * tradeGoodView.getUnitPrice() +
 							"</td><td>"+ tradeGoodView.getTradeDate() +"</td><td>"+ tradeGoodView.getComments() +"&nbsp;</td></tr>");
 				}
-				request.getSession().setAttribute("contentList", resultList);
+				
 				out.print(result);
 				
 			}

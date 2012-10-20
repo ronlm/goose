@@ -7,6 +7,7 @@
 	
 		<jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 		<script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
+		<!-- 这个js用于提交搜索的条件 -->
 		<script type="text/javascript" src="../../js/search.js"></script>
 		<script type="text/javascript" src="../../js/getInfo.js"></script>
 		<script  type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
@@ -33,15 +34,16 @@
 								<input type="text" id="toNum" name="toNum" value="不限" validation="number" style="width: 80px"/>
 							</span>&nbsp;&nbsp;
 							从&nbsp;&nbsp;
-							<input type="text"  validation="date" readonly="readonly" id="fromDate" name="fromDate" value="2012-01-01" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/> 
+							<input type="text"  validation="date" readonly="readonly" id="fromDate" name="fromDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/> 
 							&nbsp;
-							到&nbsp;<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
+							到&nbsp;
+							<input type="text"  validation="date" readonly="readonly"  id="toDate" name="toDate"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
 							&nbsp;&nbsp;
 							<a class="button" id="submit"><span>&nbsp;确 定&nbsp;</span> </a></br>
 							<a class="button" href="javascript:void(0)"
 								onclick="exportXls();"><span><img
-								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
-								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
+								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"/>
+								&nbsp;导出全部数据到Excel表格</span>
 							</a>&nbsp;&nbsp;当有检索结果时才能导出EXCEL表格文件！
 					</div>
 					<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;">
@@ -60,7 +62,7 @@
 	</table>
 	</body>
 	<script type="text/javascript">
-		 var date = getdate();
+	 var date = getdate();
 		function getdate(){ 
 			var now = new Date();
 			y = now.getFullYear() ;
@@ -70,16 +72,23 @@
 			d = d < 10 ? "0"+ d : d ;
 			return y+ "-"+m+ "-"+d ;
 			};
-			
+		 $("#fromDate").val(new Date().getFullYear() + "-01-01");
 		 $("#toDate").val(date);
 		 function exportXls(){
 			 var type = $("input:radio[name='searchType']:checked").val();
-			 var fromNum ="&fromNum="+ $("#fromNum").val();
-			 var toNum = "&toNum=" + $("#toNum").val();
-			 var fromDate = "&fromDate=" + $("#fromDate").val();
-			 var toDate = "&toDate=" $("#toDate").val();
-			 alert("/Goose/data/exportData/ExportData?type="+ type + fromNum + toNum + fromDate + toDate);
-			 window.open("/Goose/data/exportData/ExportData?type="+ type + fromNum + toNum + fromDate + toDate);
-		 };
+			 var url = "/Goose/data/exportData/ExportData?type="+ type;
+		
+			 var fromNum = $("#fromNum").val();
+			 var toNum = $("#toNum").val();
+			 if(fromNum != "不限" && toNum != "不限" && isNum(fromNum) && isNum(toNum) ){
+				  url = url + "&fromNum=" + fromNum + "&toNum=" + toNum;
+			  }
+			 var fromDate = $("#fromDate").val();
+			 var toDate = $("#toDate").val();
+			  
+			 url = url + "&&fromDate=" + fromDate + "&&toDate=" + toDate;
+			
+			 window.open(url);
+		 }
 	</script>
 </html>
