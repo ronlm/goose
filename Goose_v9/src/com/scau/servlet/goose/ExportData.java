@@ -85,32 +85,8 @@ public class ExportData extends HttpServlet {
 				fileName = today + "日全部农场鹅只上市信息汇总.xls";
 				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 				
-				/* 查看鹅只可上市信息
-				 *候选条件：鹅苗接收批次时间在从今天算已养殖45天到105天内
-				*/
-				String hql =  "select m from com.scau.view.goose.Market m where m.receiveDate between '" + marketService.getDateBefore(105) + "' and '" +
-							marketService.getDateBefore(45) + "' order by m.receiveDate asc";
-				// 以下的计算是找出记录的总数
-				List<Market> totalList = marketService.findByCondition(hql);
-				
-				List<AppearOnMarket> resourceList = new LinkedList<AppearOnMarket>();
-				for (Market market : totalList) {	
-					long feedDays = new Date().getTime() - market.getReceiveDate().getTime();//已养殖天数
-					long day = ON_MARKET_DAY - feedDays/(3600*24*1000);//离上市相差的天数
-					//查找出属于该个接收鹅苗批次，又未死亡和未交易的鹅只数量
-				
-					String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
-							+ "g.isValid =1 and g.tradeId=null and g.deadDate =null";
-					long gooseNum = gooseService.getRecordCount(gooseCondition);
-						
-					AppearOnMarket a = new AppearOnMarket();
-					a.setFarmer(farmerService.get(new Farmer(),market.getFarmerId()));
-					a.setDayTo90(day);
-					a.setGooseNum(gooseNum);
-					a.setMarket(market);
-					resourceList.add(a);
-				}
-				ExportAppearOnMarket export = new ExportAppearOnMarket(fileName, resourceList);
+				MarketService marketService = (MarketService) BeansUtil.get("marketService");
+				ExportAppearOnMarket export = new ExportAppearOnMarket(fileName, marketService.getAppearOnMarketList());
 				Workbook workbook = export.exportExcel();
 				workbook.write(out);
 				
