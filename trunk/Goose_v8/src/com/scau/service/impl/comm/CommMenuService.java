@@ -18,8 +18,10 @@ public class CommMenuService extends BaseService<CommMenu> implements Serializab
 	public void save(CommMenu menu) throws BusinessException{
 		if (null != menu && null != menu.getName()) {
 			if(null != menu.getId() && 0 != menu.getId()){
+				//id不为null,更新
 				update(menu);
 			}else{
+				//添加
 				add(menu);
 			}
 		}else {
