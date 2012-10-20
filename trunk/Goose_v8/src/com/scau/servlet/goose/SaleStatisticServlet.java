@@ -15,22 +15,17 @@ import com.scau.service.impl.goose.RetailerService;
 import com.scau.service.impl.goose.SaleGooseService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.BeansUtil;
-
+/**
+ * 这里完成成品鹅的销售统计功能
+ * @author jianhao
+ *
+ */
 public class SaleStatisticServlet extends HttpServlet {
 
 	private SaleRegionService saleRegionService ;
 	private RetailerService retailerService;
 	private SaleGooseService saleGooseService;
-	/**
-	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
