@@ -3,7 +3,8 @@ package com.scau.servlet.goose;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.Collections;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,20 +25,23 @@ import com.scau.excelExport.ExportSearchRecord;
 import com.scau.excelExport.ExportTradeGoodView;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
-import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
+import com.scau.model.goose.Retailer;
+import com.scau.model.goose.SaleGoose;
+import com.scau.model.goose.TradeGoose;
+import com.scau.service.impl.goose.BuyGoodViewService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmStockService;
 import com.scau.service.impl.goose.FarmerService;
-import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.MarketService;
 import com.scau.service.impl.goose.ReceiveGooseService;
+import com.scau.service.impl.goose.RetailerService;
+import com.scau.service.impl.goose.SaleGooseService;
+import com.scau.service.impl.goose.TradeGoodViewService;
+import com.scau.service.impl.goose.TradeGooseService;
 import com.scau.util.BeansUtil;
 import com.scau.view.goose.BuyGoodView;
-import com.scau.view.goose.Market;
 import com.scau.view.goose.TradeGoodView;
-import com.scau.vo.goose.AppearOnMarket;
-import com.scau.vo.goose.DeadInfo;
 import com.scau.vo.goose.FarmStock;
 
 /** 这个类是用于响应页面的导出excel表格的，根据从页面过来的参数type，指定表格数据的类型
@@ -47,12 +51,7 @@ import com.scau.vo.goose.FarmStock;
  */
 public class ExportData extends HttpServlet {
 
-	private static int ON_MARKET_DAY = 90;//设定的鹅只成熟日期
-	private MarketService marketService;
-	private GooseService gooseService;
-	private FarmerService farmerService;
 	private FarmService farmService;
-	private ReceiveGooseService receiveGooseService;
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -84,7 +83,6 @@ public class ExportData extends HttpServlet {
 			try {
 				fileName = today + "日全部农场鹅只上市信息汇总.xls";
 				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-				
 				MarketService marketService = (MarketService) BeansUtil.get("marketService");
 				ExportAppearOnMarket export = new ExportAppearOnMarket(fileName, marketService.getAppearOnMarketList());
 				Workbook workbook = export.exportExcel();
@@ -124,7 +122,6 @@ public class ExportData extends HttpServlet {
 				}
 				fileName = today + "最近" + daysWithin + "日内全部农场鹅只死亡统计信息.xls";
 				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-	
 				ExportDeadInfo export = new ExportDeadInfo(fileName, farmService.getAllFarmDeadInfo(daysWithin));
 				Workbook workbook = export.exportExcel();
 				workbook.write(out);
@@ -135,43 +132,116 @@ public class ExportData extends HttpServlet {
 		} 
 		else if (type.equals("receiveGoose")) {
 			try {
-			String[] titles = (String[]) request.getSession().getAttribute("titles");	
+				
+			String queryString = "select r from com.scau.model.goose.ReceiveGoose r where r.receiveDate " + 
+						"between '"+ fromDate +"' and '"+ toDate + "'";
+			if(0 != fromNum && 0 != toNum){
+				queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
+			}
+		
+			ReceiveGooseService receiveGooseService = (ReceiveGooseService)BeansUtil.get("receiveGooseService");
+			List<ReceiveGoose> resultList = receiveGooseService.findByCondition(queryString);
+			
+			List<String[]> contentList = new LinkedList<String[]>();
+			for (ReceiveGoose receiveGoose : resultList) {
+				List<String> content = new ArrayList<String>();
+				content.add(receiveGoose.getReceiveDate().toString());
+				content.addAll(sliptMsg(getFarmerAndFarmInfo(receiveGoose.getFarmId())));
+				content.add(receiveGoose.getAmount().toString());
+				content.add(receiveGoose.getComments());
+				String[] temp = new String[content.size()];
+				contentList.add(content.toArray(temp));
+			}	
+					
 			fileName = "鹅苗进场信息汇总.xls";
+			String[] titles = {"日期","农户","联系电话","农场","地址","数量","备注"};
 			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 			@SuppressWarnings("unchecked")
-			List<String[]> contentList = (List<String[]>) request.getSession().getAttribute("contentList");
 			ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
 			export.setTitles(titles);
 			Workbook workbook= export.exportExcel();
 			workbook.write(out);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 		}
 		else if (type.equals("tradeGoose")) {
 			try {
-			String[] titles = (String[]) request.getSession().getAttribute("titles");
-			fileName = "成品鹅回购信息汇总.xls";
-			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-			@SuppressWarnings("unchecked")
-			List<String[]> contentList = (List<String[]>) request.getSession().getAttribute("contentList");
-			ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
-			export.setTitles(titles);
-			Workbook workbook = export.exportExcel();
-			workbook.write(out);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+				
+				//导出成品鹅回购记录
+				//组装Hql语句
+				String queryString = "select r from com.scau.model.goose.TradeGoose r where r.tradeDate "
+						+ "between '"+ fromDate + "' and '"+ toDate +"'";
+				if(0 != fromNum && 0 != toNum){
+					queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
+				}
+				NumberFormat f=NumberFormat.getInstance();  //创建一个格式化类f
+				f.setMaximumFractionDigits(5);    //设置小数位的格式
+				TradeGooseService tradeGooseService = (TradeGooseService) BeansUtil.get("tradeGooseService");
+				List<TradeGoose> resultList = tradeGooseService.findByCondition(queryString);
+				
+				List<String[]> contentList = new LinkedList<String[]>();
+				for (TradeGoose tradeGoose : resultList) {
+					List<String> content = new ArrayList<String>();
+					content.add(tradeGoose.getTradeDate().toString());
+					content.addAll(sliptMsg(getFarmerAndFarmInfo(tradeGoose.getFarmId())));
+					content.add(tradeGoose.getAmount().toString());
+					content.add(tradeGoose.getUnitPrice().toString());
+					content.add(tradeGoose.getTotalWeight().toString());
+					content.add((f.format(tradeGoose.getTotalWeight() * tradeGoose.getUnitPrice())));
+					content.add(tradeGoose.getComments());
+					String[] temp = new String[content.size()];
+					contentList.add(content.toArray(temp));
+				}
+				
+				fileName = "成品鹅回购信息汇总.xls";
+				String[] titles = {"日期","农户","联系电话","农场","地址","数量","单价","总量(重量或数量)","金额合计","备注"};
+				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+				@SuppressWarnings("unchecked")
+				ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
+				export.setTitles(titles);
+				Workbook workbook = export.exportExcel();
+				workbook.write(out);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 		else if (type.equals("saleGoose")) {
 			try {
-				String[] titles = (String[]) request.getSession().getAttribute("titles");
+						
+				//导出成品鹅出售记录
+				String queryString = "select r from com.scau.model.goose.SaleGoose r where r.saleDate "
+						+ "between '"+ fromDate + "' and '"+ toDate +"'";
+				if(0 != fromNum && 0 != toNum){
+					queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
+				}
+				
+				SaleGooseService saleGooseService = (SaleGooseService) BeansUtil.get("saleGooseService");
+				List<SaleGoose> resultList = saleGooseService.findByCondition(queryString);
+				
+				List<String[]> contentList = new LinkedList<String[]>();
+				int i = 1;
+				for (SaleGoose saleGoose : resultList) {
+					result.append("<tr><td>" + (i++) + "</td><td>" + saleGoose.getSaleDate() + "</td><td>" + saleGoose.getAmount()+ "</td><td>" + saleGoose.getUnitPrice()+ "</td><td>" + 
+							saleGoose.getTotalWeight()+ "</td><td>" + (saleGoose.getTotalWeight()*saleGoose.getUnitPrice())+ "</td><td>" + 
+							(saleGoose.getComments() == null ?"":saleGoose.getComments()) + "&nbsp;</td><td >" + getRetailerInfo(saleGoose.getRetailerId()) + "</td></tr>");
+					List<String> content = new ArrayList<String>();
+					content.add(saleGoose.getSaleDate().toString());
+					content.addAll(sliptMsg(getRetailerInfo(saleGoose.getRetailerId())));
+					content.add(saleGoose.getAmount().toString());
+					content.add(saleGoose.getUnitPrice().toString());
+					content.add(saleGoose.getTotalWeight().toString());
+					content.add(saleGoose.getTotalValue().toString());
+					content.add(saleGoose.getComments());
+					String[] temp = new String[content.size()];
+					contentList.add(content.toArray(temp));
+				}	
+				
 				fileName = "成品鹅出售信息汇总.xls";
+				String[] titles = {"日期","销售商","联系电话","数量","单价","总量","金额合计","备注"};
 				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 				@SuppressWarnings("unchecked")
-				List<String[]> contentList = (List<String[]>) request.getSession().getAttribute("contentList");
 				ExportSearchRecord export = new ExportSearchRecord(fileName, contentList);
 				export.setTitles(titles);
 				Workbook workbook = export.exportExcel();
@@ -181,26 +251,46 @@ public class ExportData extends HttpServlet {
 			}
 		}
 		else if (type.equals("buyGood")) {
+	
+			//导出物资采购记录
+			//组装Hql语句
+			String queryString = "select r from com.scau.view.goose.BuyGoodView r where r.date "
+					+ "between '"+ fromDate + "' and '"+ toDate +"'";
+			if(0 != fromNum && 0 != toNum){
+				queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
+			}
+			
+			BuyGoodViewService buyGoodViewService = (BuyGoodViewService) BeansUtil.get("buyGoodViewService");
+			List<BuyGoodView> resultList = buyGoodViewService.findByCondition(queryString);
+			
 			fileName = "采购物资汇总.xls";
 			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 			@SuppressWarnings("unchecked")
-			List<BuyGoodView> contentList = (List<BuyGoodView>) request.getSession().getAttribute("contentList");
-			ExportBuyGooseView export = new ExportBuyGooseView(fileName, contentList);
+			ExportBuyGooseView export = new ExportBuyGooseView(fileName, resultList);
 			Workbook workbook;
 			try {
 				workbook = export.exportExcel();
 				workbook.write(out);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else if (type.equals("tradeGood")) {
+
+			//导出物资销售记录
+			//组装Hql语句
+			String queryString = "select r from com.scau.view.goose.TradeGoodView r where r.tradeDate " + "between '"+ fromDate + "' and '"+ toDate +"'";
+			if(0 != fromNum && 0 != toNum){
+				queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
+			}
+			
+			TradeGoodViewService tradeGoodViewService = (TradeGoodViewService) BeansUtil.get("tradeGoodViewService");
+			List<TradeGoodView> resultList = tradeGoodViewService.findByCondition(queryString);
+			
 			fileName = "出售物资汇总.xls";
 			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 			@SuppressWarnings("unchecked")
-			List<TradeGoodView> contentList = (List<TradeGoodView>) request.getSession().getAttribute("contentList");
-			ExportTradeGoodView export = new ExportTradeGoodView(fileName, contentList);
+			ExportTradeGoodView export = new ExportTradeGoodView(fileName, resultList);
 			Workbook workbook;
 			try {
 				workbook = export.exportExcel();
@@ -210,24 +300,55 @@ public class ExportData extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		//移除放在session的titles 和内容列表contentList
-		request.getSession().removeAttribute("titles");
-		request.getSession().removeAttribute("contentList");
+		
 		out.close();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		this.doPost(req, resp);
 	}
 	
 	public ExportData(){
-		this.gooseService = (GooseService) BeansUtil.get("gooseService");
-		this.marketService = (MarketService) BeansUtil.get("marketService");
-		this.farmerService = (FarmerService) BeansUtil.get("farmerService");
 		this.farmService = (FarmService) BeansUtil.get("farmService");
-		this.receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
+	}
+	
+	/**获得农场和农户信息
+	 * */
+	public String getFarmerAndFarmInfo(long farmId){
+		Farm farm = new Farm();
+		FarmService farmService = (FarmService) BeansUtil.get("farmService");
+		Farmer farmer = new Farmer();
+		FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
+		
+		farm.setId(farmId);
+		farm = farmService.get(farm);
+		farmer.setId(farm.getFarmerId());
+		farmer = farmerService.get(farmer);
+		String farmMsg = "农户名:" + farmer.getName() + "     电话:"+ farmer.getPhone() + "      农场名:"+ farm.getName() + "       地址:"
+						+ farm.getAddress();
+		return farmMsg;
+	}
+	
+	/**获得销售商信息
+	 * */
+	private String getRetailerInfo(long retailerId){
+		RetailerService retailerService = (RetailerService)BeansUtil.get("retailerService");
+		Retailer retailer = new Retailer();
+		retailer.setId(retailerId);
+		retailer = retailerService.get(retailer);
+		String msg = "销售商名:" + retailer.getName() + "   联系电话:" + retailer.getPhone();
+		return msg;
+	}
+	
+	private List<String> sliptMsg(String farmAndFarmerInfo){
+		List<String> result = new ArrayList<String>();
+		for (String string : farmAndFarmerInfo.split(".{2,4}:")) {
+			if(!string.equals("")){
+				result.add(string.replaceAll(";...", ""));
+			}
+		}
+		return result;
 	}
 }
