@@ -125,7 +125,7 @@ public class ExportData extends HttpServlet {
 				fileName = today + "最近" + daysWithin + "日内全部农场鹅只死亡统计信息.xls";
 				response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 	
-				ExportDeadInfo export = new ExportDeadInfo(fileName, receiveGooseService.getAllFarmDeadInfo(daysWithin));
+				ExportDeadInfo export = new ExportDeadInfo(fileName, farmService.getAllFarmDeadInfo(daysWithin));
 				Workbook workbook = export.exportExcel();
 				workbook.write(out);
 				
