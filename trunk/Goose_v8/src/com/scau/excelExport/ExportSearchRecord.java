@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-/** 导出记录检索页里返回的结果
+/** 导出记录检索页里返回的结果，包括鹅苗进场，成品鹅回购，成品鹅出售
  * @author jianhao
  *
  */
@@ -27,7 +27,8 @@ public class ExportSearchRecord extends ExcelTemplate<String[]>{
 				// 主要修改此处，调整每列打印的数据类型，匹配相应的标题
 				Cell cell = row.createCell(cellNum);
 				if(0 == cellNum){
-					
+					//打印记录的序号
+					cell.setCellValue(rowIndex);
 				}else {
 					cell.setCellValue(contents.get(rowIndex - 1)[cellNum-1]);
 				}

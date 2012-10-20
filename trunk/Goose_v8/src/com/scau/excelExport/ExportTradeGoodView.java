@@ -6,7 +6,11 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 import com.scau.view.goose.TradeGoodView;
-
+/**
+ * 导出销售物资记录的excel表格
+ * @author jianhao
+ *
+ */
 public class ExportTradeGoodView extends ExcelTemplate<TradeGoodView>{
 
 	public ExportTradeGoodView(String fileName, List<TradeGoodView> contents) {

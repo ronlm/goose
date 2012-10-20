@@ -9,20 +9,56 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-
+/**
+ * 导出数据报表的基类，使用Template模式
+ * @author jianhao
+ *
+ * @param <E>
+ */
 public abstract class ExcelTemplate<E> {
 
-	protected String fileName;// 要导出的excel文件名
-	protected String[] titles;// 表单标题列内容
-	protected List<E> contents;// 表单内容列表
-	protected Workbook workbook;// create a new sheet
+	/**
+	 *  要导出的excel文件名
+	 */
+	protected String fileName;
+	/**
+	 *   表单标题列内容
+	 */
+	protected String[] titles;
+	/**
+	 *表单内容列表
+	 */
+	protected List<E> contents;
+	/**
+	 * 装载表单的workbook
+	 */
+	protected Workbook workbook;
+	/**
+	 * 表单
+	 */
 	protected Sheet sheet;// create a new sheet
-	protected CellStyle titleCellStyle;// 表单标题列单元格风格
-	protected CellStyle contentCellStyle;// 表单数据列单元格风格
+	/**
+	 * 表单标题列单元格风格
+	 */
+	protected CellStyle titleCellStyle;
+	/**
+	 * 表单数据列单元格风格
+	 */
+	protected CellStyle contentCellStyle;
+	/**
+	 * 标题的字体
+	 */
 	protected Font titleFont;
+	/**
+	 * 表单内容的字体
+	 */
 	protected Font contentFont;
 
-	// 所有导出数据功能必须要实现的方法
+	/**所有导出数据功能必须要实现的方法
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public Workbook exportExcel() throws Exception {
 		int totalRowNum = contents.size() + 1;
 		this.workbook.setSheetName(0, fileName);
