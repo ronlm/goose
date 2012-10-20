@@ -17,7 +17,9 @@ import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.MutilThreadGooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
-
+/**
+ * 删除Goose表中2年前的记录
+ */
 @Component
 public class DeleteGooseAction extends BaseAction{
 	private final static Log logger = LogFactory
@@ -34,6 +36,7 @@ public class DeleteGooseAction extends BaseAction{
 		final CountDownLatch begin = new CountDownLatch(1);
 		final CountDownLatch end = new CountDownLatch(farmList.size());
 		for (Farm farm : farmList) {
+			//使用多线程，为每个农场新建一条线程，各自删除去相应批次的鹅只记录
 			MutilThreadGooseService mutilThreadGooseService = new MutilThreadGooseService(begin, end, 365*2, farm);
 			mutilThreadGooseService.start();
 		}

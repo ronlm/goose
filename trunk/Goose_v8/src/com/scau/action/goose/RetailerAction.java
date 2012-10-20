@@ -19,7 +19,11 @@ import com.scau.service.impl.goose.RetailerViewService;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.PageController;
 import com.scau.view.goose.RetailerView;
-
+/**
+ * 处理与鹅只销售商相关请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class RetailerAction extends BaseAction {
@@ -30,7 +34,11 @@ public class RetailerAction extends BaseAction {
 	private RetailerViewService retailerViewService;
 	private SaleRegionService saleRegionService;
 	private Retailer retailer;
-		
+	
+	/**
+	 * 列出全部销售商信息
+	 * @return
+	 */
 	public String list() {
 		// 取列表		
 			int totalRows = retailerViewService.getRecordCount(new RetailerView());
@@ -43,18 +51,24 @@ public class RetailerAction extends BaseAction {
 			request.setAttribute("pager", pager);
 			return "list";		
 	}
-
+	/**
+	 * 点了添加或者点了修改销售商信息
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			retailer = retailerService.get(retailer);
 			List<SaleRegion> saleRegionList  = saleRegionService.list(new SaleRegion());
 			request.setAttribute("retailer", retailer);
 			request.setAttribute("saleRegionList", saleRegionList);
 			return "edit";
 	}
-
+	
+	/**
+	 * 保存销售商信息表单
+	 * @return
+	 */
 	public String save() {
-		// 保存表单
+		 
 		try {
 			retailerService.save(retailer);		
 			return list();
@@ -67,9 +81,12 @@ public class RetailerAction extends BaseAction {
 			return list();
 		}
 	}
-
+	
+	/**
+	 *  删除选中的销售商记录
+	 * @return
+	 */
 	public String del() {
-		// 删除	
 			String[] ids = request.getParameterValues("id");
 			Retailer retailer= new Retailer();
 			for (String id : ids) {	

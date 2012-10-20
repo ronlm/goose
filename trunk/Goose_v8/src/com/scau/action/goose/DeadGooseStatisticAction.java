@@ -39,8 +39,12 @@ public class DeadGooseStatisticAction extends BaseAction {
 	private Farm farm;
 	private ReceiveGoose receiveGoose;
 
+	/**
+	 * 查看全部农场特定日期下的鹅只非正常死亡数量
+	 * @return
+	 */
 	public String dead() {
-		// 查看鹅只非正常死亡信息
+		
 		int daysWithin = 100;
 		String URL = request.getRequestURI();
 		this.pager.setURL(URL);
@@ -94,8 +98,12 @@ public class DeadGooseStatisticAction extends BaseAction {
 		return "dead";
 	}
 
+	/**
+	 * 查看一个指定农场的所有存栏 的receiveGoose 的死亡信息和存活率
+	 * @return
+	 */
 	public String deadDetail() {
-		// 查看一个指定农场的所有存栏 的receiveGoose 的死亡信息和存活率
+
 		int daysWithin = 0;
 		farm = farmService.get(farm);
 		String URL = request.getRequestURI() + "?farm.id=" + farm.getId();

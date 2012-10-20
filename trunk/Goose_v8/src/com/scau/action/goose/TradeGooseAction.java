@@ -17,7 +17,11 @@ import com.scau.model.goose.TradeGoose;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.TradeGooseService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与回购成品鹅相关请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
@@ -30,6 +34,10 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private TradeGooseService tradeGooseService;
 	private int daysWithin;
 	
+	/**
+	 * 列出选定日期条件和农场所得的成品鹅回购信息
+	 * @return
+	 */
 	public String list() {
 		   
 			List<TradeGoose> resourceList = null;
@@ -58,7 +66,7 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 				request.setAttribute("farm", farm);
 	
 			}else if(null == farm){
-				 // 查看全部农场最近接收的鹅苗信息
+				 // 没有选定农场，查看全部农场最近接收的鹅苗信息
 				String hql = "select rg from com.scau.model.goose.TradeGoose rg where rg.tradeDate >='" + 
 						tradeGooseService.getDateBefore(daysWithin) + "' order by rg.tradeDate desc";
 				int totalRows = tradeGooseService.findByCondition(hql).size();// 总的记录条数
@@ -71,17 +79,22 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 			return "list";		
 	}
 
+	/**
+	 * 点了添加或者点了修改回购记录
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			tradeGoose = tradeGooseService.get(tradeGoose);
 			request.setAttribute("tradeGoose", tradeGoose);
 			return "edit";
 	}
 
+	/**
+	 * 保存编辑回购记录表单
+	 * @return
+	 */
 	public String save() {
-		// 保存表单
-		try {
-			
+		try {	
 			tradeGooseService.save(tradeGoose);
 			return list();
 		} catch (Exception e) {
@@ -92,8 +105,11 @@ public class TradeGooseAction extends BaseAction implements ModelDriven<Farm>{
 		}
 	}
 
+	/**
+	 * 删除选中的回购记录
+	 * @return
+	 */
 	public String del() throws Exception {
-		// 删除	
 			String[] ids = request.getParameterValues("id");
 			Farm farm= new Farm();
 			for (String id : ids) {	
