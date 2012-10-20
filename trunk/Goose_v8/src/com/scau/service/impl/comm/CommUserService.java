@@ -14,6 +14,7 @@ import com.scau.service.BaseService;
 public class CommUserService extends BaseService<CommUser> implements Serializable {
 
 	public CommUser checkUser(CommUser entity) throws BusinessException {
+		//id不为null,更新，为null则add
 		if (null == entity) {
 			throw new BusinessException("用户对象不能为空!");
 		}

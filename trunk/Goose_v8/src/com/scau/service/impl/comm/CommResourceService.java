@@ -17,6 +17,7 @@ public class CommResourceService extends BaseService<CommResource> implements Se
 	@Transactional
 	public void save(CommResource resource) throws BusinessException{
 		if (null != resource && null != resource.getName()) {
+			//id不为null,更新，为null则add
 			if(null != resource.getId() && 0 != resource.getId()){
 				update(resource);
 			}else{
