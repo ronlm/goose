@@ -14,6 +14,7 @@ public class BuyGoodService extends BaseService<BuyGood>{
 	@Transactional
 	public void save(BuyGood entity) throws BusinessException{
 		if (null != entity ) {
+			//id不为null,更新，为null则add
 			if(null != entity.getGoodId() && null != entity.getGoodSupplierId()){
 				if( null != entity.getId()){
 					update(entity);

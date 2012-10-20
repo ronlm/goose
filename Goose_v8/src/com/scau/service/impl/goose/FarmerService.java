@@ -15,6 +15,7 @@ public class FarmerService extends BaseService<Farmer>{
 	public void save(Farmer entity) throws BusinessException{
 		if (null != entity && null != entity.getName()) {
 			if(null != entity.getId() && 0 != entity.getId()){
+				//id不为null,更新，为null则add
 				update(entity);
 			}else{
 				add(entity);

@@ -15,6 +15,7 @@ public class ReceiveGooseService extends BaseService<ReceiveGoose>{
 	public void save(ReceiveGoose receive) throws BusinessException{
 		if (null != receive && null != receive.getFarmId()) {
 			if(null != receive.getId() && 0 != receive.getFarmId()){
+				//id不为null,更新，为null则add
 				update(receive);
 			}else{
 				add(receive);

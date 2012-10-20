@@ -9,6 +9,7 @@ public class BuyGoodViewService extends BaseService<BuyGoodView>{
 
 	@Override
 	public BuyGoodView get(BuyGoodView entity) {
+		//id不为null,更新，为null则add
 		if(null != entity && null != entity.getId() && 0!= entity.getId()){
 			return super.get(entity, entity.getId());
 		}

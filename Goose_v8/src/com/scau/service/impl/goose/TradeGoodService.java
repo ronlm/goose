@@ -14,6 +14,7 @@ public class TradeGoodService extends BaseService<TradeGood>{
 	@Transactional
 	public void save(TradeGood entity) throws BusinessException{
 		if (null != entity) {
+			//id不为null,更新，为null则add
 			if( null!= entity.getId() && 0 != entity.getId()){
 				update(entity);
 			}else{
