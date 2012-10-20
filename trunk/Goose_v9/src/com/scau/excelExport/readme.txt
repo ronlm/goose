@@ -1,0 +1,2 @@
+本包内，ExcelTemplate作为全部导入报表类的基类，
+所有继承它的类必须实现printContent()方法去实现打印报表内容。
