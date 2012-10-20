@@ -1,5 +1,7 @@
 package com.scau.service.impl.goose;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -64,6 +66,49 @@ public class FarmStockService extends Thread{
 				}
 			}
 		}
+	}
+	/**
+	 * 获得全部农场的存栏数
+	 * @return
+	 */
+	public List<FarmStock> getTotalFarmStockList(){
+		FarmService farmService = (FarmService) BeansUtil.get("farmService");
+		List<Farm> totalFarmList = farmService.list(new Farm());
+		
+		final CountDownLatch begin = new CountDownLatch(1);
+		final CountDownLatch end = new CountDownLatch(totalFarmList.size());
+		List<FarmStock> totalFarmStockList = new LinkedList<FarmStock>();
+		for(Farm f :totalFarmList){
+			//计算全部农场的存栏量
+			FarmStockService farmStockService = new FarmStockService(totalFarmStockList, f, begin, end);
+			farmStockService.start();//启动每个个农户各自的线程
+		}
+		
+		begin.countDown();
+		long startTime = System.currentTimeMillis();
+		try {
+			end.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			long endTime = System.currentTimeMillis();
+			System.out.println("stock spend time: " + (endTime - startTime) +"ms");
+		}
+		
+		Collections.sort(totalFarmStockList,new FarmStock());
+		return totalFarmStockList;
+	}
+	/**
+	 * 这个构造方法用对全部农场统计存栏数量
+	 * @param stockList
+	 * @param begin
+	 * @param end
+	 */
+	public FarmStockService(List<FarmStock> stockList,final CountDownLatch begin,
+			final CountDownLatch end){
+		this.begin = begin;
+		this.end = end;
+		this.stockList = stockList;
 	}
 	
 	public FarmStockService(List<FarmStock> stockList,Farm farm,final CountDownLatch begin,

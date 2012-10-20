@@ -74,7 +74,12 @@
 		 $("#toDate").val(date);
 		 function exportXls(){
 			 var type = $("input:radio[name='searchType']:checked").val();
-			 window.open("/Goose/data/exportData/ExportData?type="+ type);
-		 }
+			 var fromNum ="&fromNum="+ $("#fromNum").val();
+			 var toNum = "&toNum=" + $("#toNum").val();
+			 var fromDate = "&fromDate=" + $("#fromDate").val();
+			 var toDate = "&toDate=" $("#toDate").val();
+			 alert("/Goose/data/exportData/ExportData?type="+ type + fromNum + toNum + fromDate + toDate);
+			 window.open("/Goose/data/exportData/ExportData?type="+ type + fromNum + toNum + fromDate + toDate);
+		 };
 	</script>
 </html>
