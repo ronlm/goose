@@ -14,7 +14,11 @@ import com.scau.exception.BusinessException;
 import com.scau.model.goose.SaleRegion;
 import com.scau.service.impl.goose.SaleRegionService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与销售分区相关请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class SaleRegionAction extends BaseAction{
@@ -24,6 +28,11 @@ public class SaleRegionAction extends BaseAction{
 	private SaleRegionService saleRegionService;
 	private SaleRegion saleRegion;
 	
+	/**
+	 * 列出全部的销售分区信息
+	 * @return
+	 * @throws Exception
+	 */
 	public String list() throws Exception {
 		// 取列表		
 			int totalRows = saleRegionService.listAll(new SaleRegion()).size();
@@ -36,15 +45,24 @@ public class SaleRegionAction extends BaseAction{
 			return "list";		
 	}
 
+	/**
+	 *点了添加或者点了修改销售分区信息
+	 * @return
+	 * @throws Exception
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			saleRegion = saleRegionService.get(saleRegion);
 			request.setAttribute("saleRegion", saleRegion);
 			return "edit";
 	}
 
+
+	/**
+	 *保存编辑的销售分区信息表单
+	 * @return
+	 * @throws Exception
+	 */	
 	public String save() throws Exception {
-		// 保存表单
 		try {	
 			saleRegionService.save(saleRegion);
 			return list();
@@ -55,9 +73,13 @@ public class SaleRegionAction extends BaseAction{
 			return list();
 		}
 	}
-
+	
+	/**
+	 *删除选中的销售分区信息
+	 * @return
+	 * @throws Exception
+	 */	
 	public String del() throws Exception {
-		// 删除	
 			String[] ids = request.getParameterValues("id");
 			SaleRegion saleRegion = new SaleRegion();
 			for (String id : ids) {

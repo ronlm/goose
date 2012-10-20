@@ -39,7 +39,12 @@ import com.scau.view.goose.Market;
 import com.scau.view.goose.TradeGoodView;
 import com.scau.vo.goose.AppearOnMarket;
 import com.scau.vo.goose.FarmStock;
-
+/**
+ * 处理与鹅只相关的上市统计(market)，销售统计(sale)，存栏统计(stock)，农户购买物资与存栏鹅只比对(stockAndGood)，
+ * 鹅只在公司的存仓数量(wareStock),即已经向农户回购但未出售的鹅只数
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class GooseStatisticAction extends BaseAction {
@@ -49,7 +54,10 @@ public class GooseStatisticAction extends BaseAction {
 	private MarketService marketService;
 	private FarmService farmService;
 	private GooseService gooseService;
-	private static int ON_MARKET_DAY = 90;//设定的鹅只成熟日期
+	/**
+	 * 设定的鹅只成熟日期
+	 */
+	private static int ON_MARKET_DAY = 90;
 	private ReceiveGooseService receiveGooseService;
 	private Farm farm;
 	private int daysWithin;
@@ -59,12 +67,17 @@ public class GooseStatisticAction extends BaseAction {
 	private ReceiveGoose receiveGoose;
 	private Date today = new Date(new java.util.Date().getTime());
 	
+	/**
+	 * 上市统计(market)
+	 * @return
+	 * @throws Exception
+	 */
 	public String market() throws Exception{
 		String URL = request.getRequestURI();
 		this.pager.setURL(URL);
 
 		/* 查看鹅只可上市信息
-		 *候选条件：鹅苗接收批次时间在从今天算已养殖45天到105天内
+		 *候选条件：鹅苗进场批次时间在从今天算已养殖45天到105天内
 		*/
 		String hql =  "select m from com.scau.view.goose.Market m where m.receiveDate between '" + marketService.getDateBefore(105) + "' and '" +
 					marketService.getDateBefore(45) + "' order by m.receiveDate asc";
@@ -98,7 +111,7 @@ public class GooseStatisticAction extends BaseAction {
 		return "market";
 	} 
 
-	/**
+	/** 查看全部农场的存栏量
 	 * @return
 	 */
 	public String stock() throws Exception{
@@ -108,7 +121,8 @@ public class GooseStatisticAction extends BaseAction {
 		int totalRowCount = farmService.list(new Farm()).size();
 		this.pager.setTotalRowsAmount(totalRowCount);
 		List<Farm> totalFarmList = farmService.list(new Farm());
-			
+		
+		//此处使用cyclicbarrier线程操作，生成与农场数量相等的线程，每条线程计算每个农场的存栏量
 		final CountDownLatch begin = new CountDownLatch(1);
 		final CountDownLatch end = new CountDownLatch(totalFarmList.size());
 		List<FarmStock> totalFarmStockList = new LinkedList<FarmStock>();
@@ -118,7 +132,7 @@ public class GooseStatisticAction extends BaseAction {
 			farmStockService.start();//启动每个个农户各自的线程
 		}
 		
-		begin.countDown();
+		begin.countDown();//启动线程
 		long startTime = System.currentTimeMillis();
 		try {
 			end.await();
@@ -126,6 +140,7 @@ public class GooseStatisticAction extends BaseAction {
 			e.printStackTrace();
 			return "error";
 		} finally {
+			//测试计算耗时
 			long endTime = System.currentTimeMillis();
 			System.out.println("stock spend time: " + (endTime - startTime) +"ms");
 		}
@@ -137,19 +152,24 @@ public class GooseStatisticAction extends BaseAction {
 		}
 		int toIndex = Math.min(totalFarmStockList.size(),  this.pager.getPageStartRow() + this.pager.getPageSize());
 		List<FarmStock> resourceList = totalFarmStockList.subList(pager.getPageStartRow(),toIndex);
-		Collections.sort(resourceList,new FarmStock());
+		Collections.sort(resourceList,new FarmStock());//为返回的农场存栏列表按农场ID排序
 		pager.setData(resourceList);
 		request.setAttribute("pager", pager);
 		request.setAttribute("totalStock", totalStock);
 		request.setAttribute("today", new Date(new java.util.Date().getTime()));
 		return "stock";
-}
+	}
 	
+	/**
+	 * 对比当前农户所有鹅的存栏量与物资购买记录
+	 * @return
+	 * @throws Exception
+	 */
 	public String stockAndGood() throws Exception{
-		//对比当前农户所有鹅的存栏量与物资（饲料）购买记录
 		GoodTypeService goodTypeService = (GoodTypeService) BeansUtil.get("goodTypeService");
 		int totalStock = 0;
 		int totalGood = 0;
+		//获得选中的日期条件
 		if(null != request.getParameter("daysWithin")){
 			daysWithin = Integer.parseInt(request.getParameter("daysWithin"));
 			request.getSession().removeAttribute("daysWithin");
@@ -157,7 +177,7 @@ public class GooseStatisticAction extends BaseAction {
 		else if(null != request.getSession().getAttribute("daysWithin")){
 			daysWithin = (Integer)request.getSession().getAttribute("daysWithin");
 		}
-		
+		//获得选中的农户
 		selectedFarmer = farmerService.get(selectedFarmer);
 		if(null != selectedFarmer){
 			//先计算农户名下所有农场的存栏数
@@ -166,12 +186,12 @@ public class GooseStatisticAction extends BaseAction {
 			List<Farm> farmList = farmService.list(farm);
 			List<FarmStock> stockList = new LinkedList<FarmStock>();//new ArrayList<FarmStock>();
 			for (Farm f : farmList) {
-				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后（打死你也不相信养一个鹅200天 + 吧）
+				//找出所有属于某个农场的所有接收鹅苗批次:接收日期在今天的200天之后
 				String hql = "select rg from com.scau.model.goose.ReceiveGoose rg where rg.farmId=" + f.getId()
 						+" and rg.receiveDate >='" + receiveGooseService.getDateBefore(200) + "' order by rg.receiveDate desc";
 				List<ReceiveGoose>	receiveList = receiveGooseService.findByCondition(hql);
 				
-				long gooseNum = 0;
+				long gooseNum = 0;//存栏量
 				for(ReceiveGoose receiveGoose : receiveList){
 					String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + receiveGoose.getId() + "' and "
 							+ "g.isValid ='1' and g.tradeId=null";
@@ -188,6 +208,7 @@ public class GooseStatisticAction extends BaseAction {
 			List<TradeGoodView> tradeGoodViewList = new ArrayList<TradeGoodView>();
 			StringBuffer hql = new StringBuffer("select t from com.scau.view.goose.TradeGoodView t where 1=1 ");
 			int goodTypeId = -1;
+			//选中特定的物资物类
 			if(null != request.getParameter("goodTypeId")){
 				goodTypeId = Integer.parseInt(request.getParameter("goodTypeId"));
 			}
@@ -253,9 +274,12 @@ public class GooseStatisticAction extends BaseAction {
 		return "wareStock";
 	}
 	
+	/**
+	 * 销售统计页面的一些数据初始化工作，数据计算交由类com.servlet.goose.SaleStatisticServlet完成，以异步加载形式
+	 * @return
+	 */
 	public String sale(){
-		/*这里完成销售统计页面的一些数据初始化工作，数据计算交由类com.servlet.goose.SaleStatisticServlet完成，以异步加载形式
-		 * */
+		
 		String fromDateStr = Calendar.getInstance().get(Calendar.YEAR) + "-01-01";
 		Date fromDate = Date.valueOf(fromDateStr) ;//默认 1970-01-01
 		Date toDate = new Date(new java.util.Date().getTime());//默认今天

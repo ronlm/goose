@@ -17,7 +17,11 @@ import com.scau.model.goose.ReceiveGoose;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与鹅苗进场批次相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
@@ -30,6 +34,10 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 	private ReceiveGooseService receiveGooseService;
 	private int daysWithin;
 	
+	/**
+	 * 按选定的农户，日期条件列出相应的鹅苗批次信息
+	 * @return
+	 */
 	public String list() {
 		   
 			List<ReceiveGoose> resourceList = null;
@@ -72,6 +80,11 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			return "list";		
 	}
 	
+	/**
+	 * 删除一条选中的鹅苗进场记录
+	 * @return
+	 * @throws Exception
+	 */
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
@@ -84,14 +97,19 @@ public class ReceiveGooseAction extends BaseAction implements ModelDriven<Farm>{
 			return list();//返回取列表页面，并刷新列表
 	}
 
-	
+	/*
+	 * 点了添加或者点了修改记录
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			receiveGoose = receiveGooseService.get(receiveGoose);
 			request.setAttribute("receiveGoose", receiveGoose);
 			return "edit";
 	}
 
+	/**
+	 * 保存编辑鹅苗进场记录表单的信息
+	 * @return
+	 */
 	public String save() {
 		// 保存表单
 		try {

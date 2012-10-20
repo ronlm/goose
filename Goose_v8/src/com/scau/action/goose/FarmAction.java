@@ -18,7 +18,11 @@ import com.scau.model.goose.Farmer;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与农场信息相关请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
@@ -30,10 +34,20 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 	private Farmer farmer;
 	private FarmerService farmerService;	
 	
+	/**
+	 * 列表某个农户名下所有的农场信息
+	 * @return
+	 * @throws Exception
+	 */
 	public String list() throws Exception {
 		// 取列表
 			if(null != request.getAttribute("farmer")){
+				//有选中特定农户
 				farmer = (Farmer) request.getAttribute("farmer");
+			}
+			else{
+				// 没有选中特定农户，则列出所有的农场信息
+				listAll();
 			}
 			farmer = farmerService.get(farmer);
 			farm = new Farm();
@@ -50,6 +64,11 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 			return "list";		
 	}
 
+	/**
+	 * 列出所有的农场信息
+	 * @return
+	 * @throws Exception
+	 */
 	public String listAll() throws Exception{
 			farm = new Farm();
 			int totalRows = farmService.list(farm).size();
@@ -64,19 +83,31 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 			return "list";		
 	}
 	
+	/**
+	 * 点了添加或修改农场信息
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			farm = farmService.get(farm);
 			request.setAttribute("farm", farm);
 			return "edit";
 	}
 
+	/**
+	 * 点了添加农场
+	 * @return
+	 */
 	public String add(){
 		farmer = farmerService.get(farmer);
 		request.setAttribute("farmer", farmer);
 		return "edit";
 	}
 	
+	/**
+	 * 保存编辑农场信息的表单
+	 * @return
+	 * @throws Exception
+	 */
 	public String save() throws Exception {
 		// 保存表单
 		try {
@@ -95,6 +126,11 @@ public class FarmAction extends BaseAction implements ModelDriven<Farmer>{
 		}
 	}
 
+	/**
+	 * 删除选中的农场
+	 * @return
+	 * @throws Exception
+	 */
 	public String del() throws Exception {
 		// 删除	
 			String[] ids = request.getParameterValues("id");

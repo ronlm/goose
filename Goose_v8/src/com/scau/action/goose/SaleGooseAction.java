@@ -17,6 +17,11 @@ import com.scau.service.impl.goose.RetailerService;
 import com.scau.service.impl.goose.SaleGooseService;
 import com.scau.util.PageController;
 
+/**
+ * 处理与鹅只出售相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class SaleGooseAction extends BaseAction {
@@ -29,6 +34,10 @@ public class SaleGooseAction extends BaseAction {
 	private SaleGooseService saleGooseService;
 	private int daysWithin;
 	
+	/**
+	 * 列出特定日期条件和特定销售商的成品鹅出售信息
+	 * @return
+	 */
 	public String list()  {
 		   //查看列表
 			List<SaleGoose> resourceList = null;
@@ -46,7 +55,7 @@ public class SaleGooseAction extends BaseAction {
 			
 			retailer = retailerService.get(retailer);
 			if(null != retailer){
-				 // 查看某个农场最近接收的鹅苗信息	
+				 // 查看与某个销售商的出售信息	
 				saleGoose = new SaleGoose();
 				saleGoose.setRetailerId(retailer.getId());
 			
@@ -71,15 +80,21 @@ public class SaleGooseAction extends BaseAction {
 			return "list";		
 	}
 
+	/**
+	 * 点了添加或者点了修改出售记录
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			saleGoose = saleGooseService.get(saleGoose);
 			request.setAttribute("saleGoose", saleGoose);
 			return "edit";
 	}
 
+	/**
+	 * 保存编辑出售记录表单
+	 * @return
+	 */
 	public String save() {
-		// 保存表单
 		try {
 			//对于可能出现的修改单价和总重量，更新销售记录的总金额
 			saleGoose.setTotalValue(saleGoose.getUnitPrice() * saleGoose.getTotalWeight());
@@ -94,8 +109,11 @@ public class SaleGooseAction extends BaseAction {
 		}
 	}
 
+	/**
+	 *  删除出售记录
+	 * @return
+	 */
 	public String del() throws Exception {
-		// 删除	
 			String[] ids = request.getParameterValues("id");
 			SaleGoose saleGoose= new SaleGoose();
 			for (String id : ids) {

@@ -15,7 +15,11 @@ import com.scau.exception.BusinessException;
 import com.scau.model.goose.Farmer;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.util.PageController;
-
+/**
+ * 处理与农户相关的请求
+ * @author jianhao
+ *
+ */
 @Component
 @Scope("prototype")
 public class FarmerAction extends BaseAction{
@@ -25,6 +29,10 @@ public class FarmerAction extends BaseAction{
 	private FarmerService farmerService;
 	private Farmer farmer;
 		
+	/**
+	 * 列出所有的农户信息
+	 * @return
+	 */
 	public String list() {
 		// 取列表	
 			
@@ -39,13 +47,20 @@ public class FarmerAction extends BaseAction{
 			return "list";		
 	}
 
+	/**
+	 * 点了添加或者点了修改农户信息
+	 * @return
+	 */
 	public String get() {
-		// 点了添加或者点了修改	
 			farmer = farmerService.get(farmer);
 			request.setAttribute("farmer", farmer);
 			return "edit";
 	}
 
+	/**
+	 * 保存编辑农户信息的表单
+	 * @return
+	 */
 	public String save() {
 		// 保存表单
 		try {
@@ -61,6 +76,10 @@ public class FarmerAction extends BaseAction{
 		}
 	}
 
+	/**
+	 * 删除选中的农户
+	 * @return
+	 */
 	public String del() {
 		// 删除	
 			String[] ids = request.getParameterValues("id");
