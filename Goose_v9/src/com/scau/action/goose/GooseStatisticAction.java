@@ -95,7 +95,7 @@ public class GooseStatisticAction extends BaseAction {
 			//查找出属于该个接收鹅苗批次，又未死亡和未交易的鹅只数量
 		
 			String gooseCondition = "select count(*) from com.scau.model.goose.Goose g where g.receiveId='" + market.getReceiveId() + "' and "
-					+ "g.isValid =1 and g.tradeId=null and g.deadDate =null";
+					+ "g.isValid =1 and g.tradeId=null";
 			long gooseNum = gooseService.getRecordCount(gooseCondition);
 				
 			AppearOnMarket a = new AppearOnMarket();

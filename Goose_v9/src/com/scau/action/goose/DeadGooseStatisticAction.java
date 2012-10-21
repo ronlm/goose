@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.scau.action.comm.BaseAction;
-import com.scau.model.goose.DeadGoose;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
