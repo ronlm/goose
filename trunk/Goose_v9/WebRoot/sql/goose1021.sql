@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-21 18:02:33
+Date: 2012-10-21 18:28:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -200,7 +200,8 @@ CREATE TABLE `dead_goose` (
   `gooseId` int(11) NOT NULL,
   `deadReasonId` int(11) NOT NULL,
   `deadDate` date NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `deadReasonId` (`deadReasonId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -353,8 +354,9 @@ CREATE TABLE `goose` (
   `tradeId` int(11) DEFAULT NULL,
   `saleId` int(11) DEFAULT NULL,
   `isValid` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136758 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `receiveId` (`receiveId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goose
@@ -372,7 +374,7 @@ CREATE TABLE `receive_goose` (
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `receiveDate` (`receiveDate`)
-) ENGINE=InnoDB AUTO_INCREMENT=2506 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receive_goose
