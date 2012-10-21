@@ -145,7 +145,7 @@ public class GooseStatisticAction extends BaseAction {
 			System.out.println("stock spend time: " + (endTime - startTime) +"ms");
 		}
 		
-		//统计全部农场的存栏量
+		//统计全部农场的存栏总量
 		long totalStock = 0;
 		for (FarmStock farmStock : totalFarmStockList) {
 			totalStock += farmStock.getStock();
