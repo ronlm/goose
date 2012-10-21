@@ -33,6 +33,10 @@
 
   <xs:element name="loginResponse" type="tns:loginResponse"/>
 
+  <xs:element name="setDeadGoose" type="tns:setDeadGoose"/>
+
+  <xs:element name="setDeadGooseResponse" type="tns:setDeadGooseResponse"/>
+
   <xs:element name="setInvalid" type="tns:setInvalid"/>
 
   <xs:element name="setInvalidResponse" type="tns:setInvalidResponse"/>
@@ -111,6 +115,19 @@
       <xs:element minOccurs="0" name="farmerId" type="xs:long"/>
       <xs:element minOccurs="0" name="id" type="xs:long"/>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setDeadGoose">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element name="arg1" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setDeadGooseResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 

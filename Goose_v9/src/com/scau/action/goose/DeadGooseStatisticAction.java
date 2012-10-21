@@ -13,13 +13,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.scau.action.comm.BaseAction;
+import com.scau.model.goose.DeadGoose;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
+import com.scau.service.impl.goose.DeadGooseViewService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.util.PageController;
+import com.scau.view.goose.DeadGooseView;
 import com.scau.vo.goose.DeadDetail;
 import com.scau.vo.goose.DeadInfo;
 
@@ -35,6 +38,7 @@ public class DeadGooseStatisticAction extends BaseAction {
 	private PageController pager;
 	private FarmService farmService;
 	private GooseService gooseService;
+	private DeadGooseViewService deadGooseViewService;
 	private ReceiveGooseService receiveGooseService;
 	private Farm farm;
 	private ReceiveGoose receiveGoose;
@@ -178,8 +182,8 @@ public class DeadGooseStatisticAction extends BaseAction {
 				daysWithin = (Integer) request.getSession().getAttribute("daysWithin");
 		}
 		
-		List<Goose> resourceList = gooseService.findByCondition(pager.getPageStartRow(), pager.getPageSize(),
-						"select g from com.scau.model.goose.Goose g where g.receiveId=" + receiveGoose.getId() + " and g.isValid=0");
+		List<DeadGooseView> resourceList = deadGooseViewService.findByCondition(pager.getPageStartRow(), pager.getPageSize(),
+						"select dg from com.scau.view.goose.DeadGooseView dg where dg.receiveId=" + receiveGoose.getId());
 		pager.setData(resourceList);
 		pager.setTotalRowsAmount(resourceList.size());
 		
@@ -241,6 +245,15 @@ public class DeadGooseStatisticAction extends BaseAction {
 
 	public void setReceiveGoose(ReceiveGoose receiveGoose) {
 		this.receiveGoose = receiveGoose;
+	}
+
+	public DeadGooseViewService getDeadGooseViewService() {
+		return deadGooseViewService;
+	}
+
+	@Resource
+	public void setDeadGooseViewService(DeadGooseViewService deadGooseViewService) {
+		this.deadGooseViewService = deadGooseViewService;
 	}
 	
 	
