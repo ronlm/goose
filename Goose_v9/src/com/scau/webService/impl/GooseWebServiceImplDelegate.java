@@ -8,6 +8,7 @@ import javax.jws.WebParam;
 import org.springframework.transaction.annotation.Transactional;
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.DeadGoose;
+import com.scau.model.goose.DeadReason;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
@@ -21,6 +22,7 @@ import com.scau.model.webService.RetailerWs;
 import com.scau.model.webService.SaleGooseWs;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.service.impl.goose.DeadGooseService;
+import com.scau.service.impl.goose.DeadReasonService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GooseService;
@@ -79,6 +81,10 @@ public class GooseWebServiceImplDelegate {
 
 	public int setDeadGoose(String gooseId, long deadReasonId) {
 		return gooseWebServiceImpl.setDeadGoose(gooseId, deadReasonId);
+	}
+
+	public List<DeadReason> getAllDeadReasons() {
+		return gooseWebServiceImpl.getAllDeadReasons();
 	}
 
 }

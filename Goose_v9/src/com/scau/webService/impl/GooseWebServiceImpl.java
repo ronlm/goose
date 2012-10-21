@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.scau.model.comm.CommUser;
 import com.scau.model.goose.DeadGoose;
+import com.scau.model.goose.DeadReason;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
@@ -24,6 +25,7 @@ import com.scau.model.webService.RetailerWs;
 import com.scau.model.webService.SaleGooseWs;
 import com.scau.service.impl.comm.CommUserService;
 import com.scau.service.impl.goose.DeadGooseService;
+import com.scau.service.impl.goose.DeadReasonService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GooseService;
@@ -332,6 +334,13 @@ public class GooseWebServiceImpl implements IGooseService{
 		}
 		
 		return 0;
+	}
+
+	@WebMethod
+	@Transactional
+	public List<DeadReason> getAllDeadReasons() {
+		DeadReasonService deadReasonService = (DeadReasonService) BeansUtil.get("deadReasonService");
+		return deadReasonService.listAll(new DeadReason());
 	}
 
 
