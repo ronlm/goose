@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-21 18:28:53
+Date: 2012-10-21 20:47:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,9 @@ CREATE TABLE `buy_good` (
   `origin` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `goodSupplierId` (`goodSupplierId`),
+  KEY `goodId` (`goodId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
@@ -42,7 +44,7 @@ INSERT INTO `buy_good` VALUES ('7', '1', '5', '454', '50', '100', '广州', '201
 INSERT INTO `buy_good` VALUES ('8', '4', '5', '3143', '100', '100', '珠海', '2012-09-04', '霏霏ffdfdfd');
 INSERT INTO `buy_good` VALUES ('9', '1', '1', '431232', '34', '434', 'fsadf', '2012-09-25', '34343');
 INSERT INTO `buy_good` VALUES ('10', '1', '1', '12312', '322', '123', '23', '2012-10-11', 'dfasd');
-INSERT INTO `buy_good` VALUES ('11', '5', '1', '34', '234', '234', 're', '2012-10-17', 'fasfsfsdgsdfg');
+INSERT INTO `buy_good` VALUES ('11', '5', '1', '34', '234', '234', 're', '2012-10-21', 'fasfsfsdgsdfg');
 INSERT INTO `buy_good` VALUES ('12', '4', '1', '234', '234', '234', 'dfdfd', '2012-10-10', '');
 
 -- ----------------------------
@@ -373,7 +375,7 @@ CREATE TABLE `receive_goose` (
   `receiveDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `receiveDate` (`receiveDate`)
+  KEY `farmId` (`farmId`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -398,7 +400,7 @@ CREATE TABLE `retailer` (
 -- ----------------------------
 -- Records of retailer
 -- ----------------------------
-INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '1', '123465', '茜需要', 'afasdfasdfadsfd							');
+INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '1', '123465', '茜需要', 'afasdfasdfadsfd								');
 INSERT INTO `retailer` VALUES ('2', '张三鹅肉加工厂', '1', '9527', '珠海', '鞢夺	桔柑			');
 INSERT INTO `retailer` VALUES ('3', '白水酒店', '1', '13431243', '左膨胀', '			');
 INSERT INTO `retailer` VALUES ('4', 'qqShop', '4', '123', '广州', '地 模压 			');
@@ -418,13 +420,14 @@ CREATE TABLE `sale_goose` (
   `totalValue` double DEFAULT NULL,
   `saleDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `retailerId` (`retailerId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of sale_goose
 -- ----------------------------
-INSERT INTO `sale_goose` VALUES ('1', '1', '100', '22', '650', '7000', '2012-10-07', 'fdfdf');
+INSERT INTO `sale_goose` VALUES ('1', '1', '100', '22.2', '650', '14430', '2012-10-07', 'fdfdf		');
 
 -- ----------------------------
 -- Table structure for `sale_region`
@@ -457,7 +460,9 @@ CREATE TABLE `trade_good` (
   `unitPrice` double DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `farmerId` (`farmerId`),
+  KEY `goodId` (`goodId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
@@ -468,9 +473,9 @@ INSERT INTO `trade_good` VALUES ('8', '1', '3', '2012-09-17', '30', '10', 'cash	
 INSERT INTO `trade_good` VALUES ('9', '1', '1', '2012-09-16', '123', '3', '	');
 INSERT INTO `trade_good` VALUES ('10', '7', '5', '2012-09-08', '100', '10', '	');
 INSERT INTO `trade_good` VALUES ('11', '2', '5', '2012-09-17', '100', '15', 'fdfdfdf	');
-INSERT INTO `trade_good` VALUES ('12', '1', '1', '2012-10-24', '123', '123', '	13123');
+INSERT INTO `trade_good` VALUES ('12', '1', '1', '2012-10-21', '123', '123', '	13123		');
 INSERT INTO `trade_good` VALUES ('13', '5', '1', '2012-10-09', '12', '123', '	');
-INSERT INTO `trade_good` VALUES ('14', '1', '3', '2012-10-20', '12', '122', '		');
+INSERT INTO `trade_good` VALUES ('14', '1', '3', '2012-10-21', '12', '122', '			');
 INSERT INTO `trade_good` VALUES ('15', '7', '1', '2012-10-09', '121', '12', '	');
 INSERT INTO `trade_good` VALUES ('16', '1', '5', '2012-10-17', '11', '11', '	');
 
@@ -486,13 +491,14 @@ CREATE TABLE `trade_goose` (
   `totalWeight` double DEFAULT NULL,
   `tradeDate` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `farmId` (`farmId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_goose
 -- ----------------------------
-INSERT INTO `trade_goose` VALUES ('1', '1', '2', '2', '2', '2012-10-08', null);
+INSERT INTO `trade_goose` VALUES ('1', '1', '2', '2.03', '2', '2012-10-08', '	');
 
 -- ----------------------------
 -- View structure for `buygoodview`
