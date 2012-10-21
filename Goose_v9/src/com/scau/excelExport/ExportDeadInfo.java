@@ -15,7 +15,7 @@ public class ExportDeadInfo extends ExcelTemplate<DeadInfo>{
 
 	public ExportDeadInfo(String fileName, List<DeadInfo> contents) {
 		super(fileName, contents);
-		this.titles = new String[]{"序号","农户姓名","电话","农场名","死亡数量"};
+		this.titles = new String[]{"农户姓名","电话","农场名","死亡数量"};
 	}
 
 	@Override
