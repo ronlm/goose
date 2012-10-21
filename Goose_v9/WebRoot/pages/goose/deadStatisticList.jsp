@@ -16,6 +16,8 @@
 				<th colspan="8">
 					<h3>当前页面:鹅只死亡信息统计</h3>
 					<div class="tableControllerButton">
+					<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/deadReasonAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部鹅只死亡原因</span></a>
+					
 						<form name="changeDayForm" id="changeDayForm" action="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!dead" method="post">
 							最近
 							  <select name="daysSelect" id="daysSelect" style="width:80px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;">  

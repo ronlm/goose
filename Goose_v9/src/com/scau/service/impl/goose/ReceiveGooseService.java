@@ -1,22 +1,12 @@
 package com.scau.service.impl.goose;
 
-import java.beans.Beans;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import com.scau.exception.BusinessException;
-import com.scau.model.comm.CommUser;
-import com.scau.model.goose.Farm;
-import com.scau.model.goose.Farmer;
-import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.service.BaseService;
-import com.scau.util.BeansUtil;
-import com.scau.vo.goose.DeadInfo;
 
 @Component
 public class ReceiveGooseService extends BaseService<ReceiveGoose>{

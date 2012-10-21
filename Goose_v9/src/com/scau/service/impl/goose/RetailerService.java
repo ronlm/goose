@@ -5,11 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.scau.exception.BusinessException;
-import com.scau.model.comm.CommUser;
 import com.scau.model.goose.Retailer;
-import com.scau.model.goose.SaleRegion;
 import com.scau.service.BaseService;
-import com.scau.util.BeansUtil;
 
 @Component
 public class RetailerService extends BaseService<Retailer>{

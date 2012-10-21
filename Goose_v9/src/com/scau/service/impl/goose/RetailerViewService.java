@@ -1,15 +1,7 @@
 package com.scau.service.impl.goose;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
-
-import com.scau.exception.BusinessException;
-import com.scau.model.comm.CommUser;
-import com.scau.model.goose.Retailer;
-import com.scau.model.goose.SaleRegion;
 import com.scau.service.BaseService;
-import com.scau.util.BeansUtil;
 import com.scau.view.goose.RetailerView;
 
 @Component

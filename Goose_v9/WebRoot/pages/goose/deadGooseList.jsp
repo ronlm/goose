@@ -15,9 +15,12 @@
 		<thead>
 			<tr class="tableController">
 				<th colspan="8">
+					
 					<h3>${farm.name}&nbsp;农场现存栏鹅只死亡时间列表</h3>
+					<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/saleGoose/saleRegionAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部鹅只死亡原因</span></a>
+					
 						最近
-						 <select name="daysSelect" id="daysSelect" style="width:80px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;">  
+						 <select name="daysSelect" id="daysSelect" style="width:60px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;">  
 								  <option value="3" <c:if test="${daysWithin == 3 }">selected="selected"</c:if>>3</option>
 								  <option value="7" <c:if test="${daysWithin == 7 }">selected="selected"</c:if>>7</option>
 								  <option value="14" <c:if test="${daysWithin == 14 }">selected="selected"</c:if>>14</option>
@@ -30,7 +33,7 @@
 							  </select>  
 							  天内农场死亡鹅只明细&nbsp;&nbsp;&nbsp;&nbsp;
 							  自定义天数:
-							  <input type="text" id="daysWithin" name="daysWithin" value="${daysWithin }" style="width:80px;border:border:1px solid #fff000;">  
+							  <input type="text" id="daysWithin" name="daysWithin" value="${daysWithin }" style="width:40px;border:border:1px solid #fff000;">  
 							天&nbsp;&nbsp;&nbsp;&nbsp;
 							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span></a>
 						<a class="button" href="javascript:void(0)"
