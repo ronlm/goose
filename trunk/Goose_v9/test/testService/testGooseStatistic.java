@@ -1,6 +1,5 @@
 package testService;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.scau.model.goose.Farm;
-import com.scau.model.goose.Goose;
 import com.scau.model.goose.ReceiveGoose;
 import com.scau.model.webService.FarmWs;
 import com.scau.service.impl.goose.FarmService;
@@ -17,8 +15,6 @@ import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.TradeGooseService;
 import com.scau.util.BeansUtil;
-import com.scau.vo.goose.FarmStock;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class testGooseStatistic {
 	protected static ApplicationContext  ctx = new  ClassPathXmlApplicationContext("applicationContext.xml");
