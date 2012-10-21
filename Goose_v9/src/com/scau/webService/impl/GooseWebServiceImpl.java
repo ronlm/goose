@@ -10,6 +10,7 @@ import javax.jws.WebParam;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.scau.model.comm.CommUser;
+import com.scau.model.goose.DeadGoose;
 import com.scau.model.goose.Farm;
 import com.scau.model.goose.Farmer;
 import com.scau.model.goose.Goose;
@@ -22,6 +23,7 @@ import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
 import com.scau.model.webService.SaleGooseWs;
 import com.scau.service.impl.comm.CommUserService;
+import com.scau.service.impl.goose.DeadGooseService;
 import com.scau.service.impl.goose.FarmService;
 import com.scau.service.impl.goose.FarmerService;
 import com.scau.service.impl.goose.GooseService;
@@ -210,12 +212,12 @@ public class GooseWebServiceImpl implements IGooseService{
 	@Transactional
 	public int setInvalid(@WebParam(name="gooseRing")String gooseId) {
 		try {
-		
 			Goose goose = new Goose();
 			goose.setRingId(gooseId);
-			goose = gooseService.get(goose);
+			goose = gooseService.get(goose);//找到那个鹅只的记录
+			
 			goose.setIsValid(0);//设置鹅只状态为死亡
-			goose.setDeadDate(new Date(new java.util.Date().getTime()));
+				
 			gooseService.update(goose);//完成销号操作
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -304,6 +306,32 @@ public class GooseWebServiceImpl implements IGooseService{
 			return null;
 		}
 		
+	}
+
+	@WebMethod
+	@Transactional
+	public int setDeadGoose(String gooseId, long deadReasonId) {
+		try {
+			DeadGooseService deadGooseService = (DeadGooseService) BeansUtil.get("deadGooseService");
+			Goose goose = new Goose();
+			goose.setRingId(gooseId);
+			goose = gooseService.get(goose);//找到那个鹅只的记录
+			
+			goose.setIsValid(0);//设置鹅只状态为死亡
+			//goose.setDeadDate(new Date(new java.util.Date().getTime()));
+			//新建一条鹅只死亡信息
+			DeadGoose deadGoose = new DeadGoose();
+			deadGoose.setDeadDate(new Date(new java.util.Date().getTime()));
+			deadGoose.setDeadReasonId(deadReasonId);// 暂定死亡原因id 为 1
+			deadGoose.setGooseId(goose.getId());
+			deadGooseService.add(deadGoose);//添加一条死亡鹅只记录
+			gooseService.update(goose);//完成销号操作
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;//操作出错
+		}
+		
+		return 0;
 	}
 
 

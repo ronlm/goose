@@ -85,4 +85,12 @@ public interface IGooseService {
 	 */
 	@WebMethod
 	public int setInvalid(String gooseId);
+	/**
+	 * 鹅只死亡处理
+	 * @param gooseId
+	 * @param deadReasonId 死亡原因id
+	 * @return
+	 */
+	@WebMethod
+	public int setDeadGoose(String gooseId,long deadReasonId);
 }
