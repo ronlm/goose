@@ -1,18 +1,10 @@
 package com.scau.model.goose;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
-import com.scau.service.impl.goose.BuyGoodService;
-import com.scau.service.impl.goose.GoodTypeService;
-import com.scau.service.impl.goose.SaleRegionService;
-import com.scau.service.impl.goose.TradeGoodService;
-import com.scau.util.BeansUtil;
 
 @Entity
 @Component
