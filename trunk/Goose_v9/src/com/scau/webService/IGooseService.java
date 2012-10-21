@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.scau.model.goose.DeadReason;
 import com.scau.model.webService.FarmWs;
 import com.scau.model.webService.ReceiveGooseWs;
 import com.scau.model.webService.RetailerWs;
@@ -93,4 +94,11 @@ public interface IGooseService {
 	 */
 	@WebMethod
 	public int setDeadGoose(String gooseId,long deadReasonId);
+	
+	/**
+	 * 获得全部的死亡原因列表
+	 * @return
+	 */
+	@WebMethod
+	public List<DeadReason> getAllDeadReasons();
 }

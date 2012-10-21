@@ -12,12 +12,6 @@
   <message name="loginResponse">
     <part element="tns:loginResponse" name="parameters"/>
   </message>
-  <message name="setInvalid">
-    <part element="tns:setInvalid" name="parameters"/>
-  </message>
-  <message name="setInvalidResponse">
-    <part element="tns:setInvalidResponse" name="parameters"/>
-  </message>
   <message name="getFarmList">
     <part element="tns:getFarmList" name="parameters"/>
   </message>
@@ -48,6 +42,12 @@
   <message name="addSaleGooseResponse">
     <part element="tns:addSaleGooseResponse" name="parameters"/>
   </message>
+  <message name="setInvalid">
+    <part element="tns:setInvalid" name="parameters"/>
+  </message>
+  <message name="setInvalidResponse">
+    <part element="tns:setInvalidResponse" name="parameters"/>
+  </message>
   <message name="getReceiveInfo">
     <part element="tns:getReceiveInfo" name="parameters"/>
   </message>
@@ -71,10 +71,6 @@
       <input message="tns:login"/>
       <output message="tns:loginResponse"/>
     </operation>
-    <operation name="setInvalid">
-      <input message="tns:setInvalid"/>
-      <output message="tns:setInvalidResponse"/>
-    </operation>
     <operation name="getFarmList">
       <input message="tns:getFarmList"/>
       <output message="tns:getFarmListResponse"/>
@@ -94,6 +90,10 @@
     <operation name="addSaleGoose">
       <input message="tns:addSaleGoose"/>
       <output message="tns:addSaleGooseResponse"/>
+    </operation>
+    <operation name="setInvalid">
+      <input message="tns:setInvalid"/>
+      <output message="tns:setInvalidResponse"/>
     </operation>
     <operation name="getReceiveInfo">
       <input message="tns:getReceiveInfo"/>
@@ -119,15 +119,6 @@
         <soap:body use="literal"/>
       </output>
     </operation>
-    <operation name="setInvalid">
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
     <operation name="getFarmList">
       <soap:operation soapAction=""/>
       <input>
@@ -165,6 +156,15 @@
       </output>
     </operation>
     <operation name="addSaleGoose">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="setInvalid">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
