@@ -54,7 +54,7 @@ public class FarmService extends BaseService<Farm>{
 		FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
-		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("ReceiveGooseService");
+		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
 		
 		List<Farm> farmList = farmService.list(new Farm());
 		List<DeadInfo> resourceList = new LinkedList<DeadInfo>();// 结果列
@@ -89,7 +89,7 @@ public class FarmService extends BaseService<Farm>{
 	public List<DeadInfo> getFarmsDeadInfo(int fromIndex,int toIndex,int daysWithin){
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
-		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("ReceiveGooseService");
+		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("receiveGooseService");
 		
 		List<Farm> farmList = farmService.findByCondition(
 				fromIndex,toIndex,
