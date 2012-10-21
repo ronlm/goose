@@ -11,7 +11,6 @@ import com.scau.model.goose.ReceiveGoose;
 import com.scau.service.impl.goose.GooseService;
 import com.scau.service.impl.goose.ReceiveGooseService;
 import com.scau.service.impl.goose.TradeGooseService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class DataAutoInput {
 	protected static ApplicationContext  ctx = new  ClassPathXmlApplicationContext("applicationContext.xml");
