@@ -62,38 +62,9 @@ public class DeadGooseStatisticAction extends BaseAction {
 
 		int totalRowCount = farmService.list(new Farm()).size();
 		this.pager.setTotalRowsAmount(totalRowCount);// 设置总记录条数
-
-		List<Farm> farmList = farmService.findByCondition(
-				pager.getPageStartRow(), pager.getPageSize(),
-				"from com.scau.model.goose.Farm f order by f.id asc");
-		List<DeadInfo> resourceList = new LinkedList<DeadInfo>();// 结果列
-		for (Farm f : farmList) {
-			// 查找每个农场的相关信息
-			List<ReceiveGoose> receiveGooseList = receiveGooseService
-					.findByCondition("from com.scau.model.goose.ReceiveGoose rg where"
-							+ " rg.farmId='"
-							+ f.getId()
-							+ "' and rg.receiveDate >='"
-							+ receiveGooseService.getDateBefore(daysWithin)
-							+ "'");	
-			DeadInfo dead = new DeadInfo();
-			dead.setFarm(f);
-			if (receiveGooseList.size() > 0) {
-				dead.setFarm(f);
-				List<Goose> gooseList = new LinkedList<Goose>();
-				for (ReceiveGoose rg : receiveGooseList) {
-					// 得到一个批次的死亡鹅只死亡记录
-
-					List<Goose> tempList = gooseService.findByCondition("from com.scau.model.goose.Goose g where " +
-							"g.receiveId = " + rg.getId() + " and g.isValid=0 ");					
-					gooseList.addAll(tempList);
-				}
-				dead.setDeadNum(gooseList.size());
-			} else {
-				dead.setDeadNum(0);
-			}
-			resourceList.add(dead);// 加入到结果
-		}
+		
+		int toIndex = Math.min(totalRowCount, pager.getPageStartRow() + pager.getPageSize());
+		List<DeadInfo> resourceList = farmService.getFarmsDeadInfo(this.pager.getPageStartRow(), toIndex, daysWithin);
 		pager.setData(resourceList);
 		request.setAttribute("pager", pager);
 		request.setAttribute("today", new Date(new java.util.Date().getTime()));
