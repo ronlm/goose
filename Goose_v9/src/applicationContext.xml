@@ -74,12 +74,14 @@
 				<value>com.scau.model.goose.SaleRegion</value>
 				<value>com.scau.model.goose.DeadReason</value>
 				<value>com.scau.model.goose.GoodType</value>
+				<value>com.scau.model.goose.DeadGoose</value>
 				<!-- 以下为视图类 -->
 				<value>com.scau.view.goose.Market</value>
 				<value>com.scau.view.goose.TradeGoodView</value>
 				<value>com.scau.view.goose.BuyGoodView</value>
 				<value>com.scau.view.goose.GoodView</value>
 				<value>com.scau.view.goose.RetailerView</value>
+				<value>com.scau.view.goose.DeadGooseView</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
