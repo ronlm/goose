@@ -37,12 +37,10 @@
 							天&nbsp;&nbsp;&nbsp;&nbsp;
 							<a class="button" id="confirm" onclick="submitForm();"><span>&nbsp;确 定&nbsp;</span></a>
 						<a class="button" href="javascript:void(0)"
-							onclick="this.blur(); history.go(-1);return false;"><span><img
+							onclick="this.blur(); history.go(-1);"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回上一页</span> </a>
-								</br>
 						
-					</div>
 				</th>
 				<tr>
 					<td colspan="10">农场:${farm.name }&nbsp;&nbsp;地址:${farm.address }&nbsp;&nbsp;</td>
@@ -53,14 +51,16 @@
 				<tr class="tableTitle">
 				<th width="30px"><h3>序号</h3></th>
 				<th><h3>鹅只脚环ID号</h3></th>
+				<th><h3>死亡原因</h3></th>
 				<th><h3>死亡时间</h3></th>
 		</thead>
 		<tbody id="contentBody" style="overflow: auto;height:1200px"> 
-				<c:forEach items="${pager.data}" var="deadGoose" varStatus="status">
+				<c:forEach items="${pager.data}" var="deadGooseView" varStatus="status">
 					<tr>
 						<td>${status.count }</td>
-						<td>${deadGoose.ringId }</td>
-						<td>${deadGoose.deadDate }</td>
+						<td>${deadGooseView.ringId }</td>
+						<td>${deadGooseView.reason }</td>
+						<td>${deadGooseView.deadDate }</td>
 					</tr>
 				</c:forEach>
 		</tbody>

@@ -14,10 +14,7 @@ public class Goose {
 	private Long tradeId;
 	private Long saleId;
 	private Integer isValid;// 0表示鹅只非正常死亡，1 为正在养殖状态，2为已出售
-	/**
-	 * 鹅只的死亡Id,当在deadGoose的gooseId里有这个鹅的id,说明这鹅已死
-	 */
-	private int deadId;
+	
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -59,12 +56,5 @@ public class Goose {
 	public void setSaleId(Long saleId) {
 		this.saleId = saleId;
 	}
-	public int getDeadId() {
-		return deadId;
-	}
-	public void setDeadId(int deadId) {
-		this.deadId = deadId;
-	}
-	
 	
 }
