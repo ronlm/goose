@@ -17,7 +17,7 @@
 				<th colspan="8">
 					
 					<h3>${farm.name}&nbsp;农场现存栏鹅只死亡时间列表</h3>
-					<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/saleGoose/saleRegionAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部鹅只死亡原因</span></a>
+					<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/deadReasonAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_go.png" align="absmiddle"/>&nbsp;查看全部鹅只死亡原因</span></a>
 					
 						最近
 						 <select name="daysSelect" id="daysSelect" style="width:60px;border: solid,1px" onchange="document.getElementById('daysWithin').value=this.value;">  
