@@ -42,7 +42,7 @@ public class ExportBuyGooseView extends ExcelTemplate<BuyGoodView>{
 				case 7:
 					cell.setCellValue(contents.get(rowIndex - 1).getAmount() * contents.get(rowIndex -1).getUnitPrice());break;
 				case 8:
-					cell.setCellValue(contents.get(rowIndex - 1).getDate());break;
+					cell.setCellValue(contents.get(rowIndex - 1).getDate().toString());break;
 				case 9:
 					cell.setCellValue(contents.get(rowIndex - 1).getComments());break;
 				default:
