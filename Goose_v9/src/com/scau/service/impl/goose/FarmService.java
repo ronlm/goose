@@ -87,7 +87,6 @@ public class FarmService extends BaseService<Farm>{
 	}
 	
 	public List<DeadInfo> getFarmsDeadInfo(int fromIndex,int toIndex,int daysWithin){
-		FarmerService farmerService = (FarmerService) BeansUtil.get("farmerService");
 		FarmService farmService = (FarmService) BeansUtil.get("farmService");
 		GooseService gooseService = (GooseService) BeansUtil.get("gooseService");
 		ReceiveGooseService receiveGooseService = (ReceiveGooseService) BeansUtil.get("ReceiveGooseService");
