@@ -3,12 +3,6 @@ package com.scau.service.impl.goose;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
-
-import com.scau.exception.BusinessException;
-import com.scau.model.goose.Farm;
-import com.scau.model.goose.Good;
 import com.scau.service.BaseService;
 import com.scau.util.BeansUtil;
 import com.scau.view.goose.GoodView;

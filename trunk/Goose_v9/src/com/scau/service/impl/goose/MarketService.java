@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.scau.model.goose.Farmer;
-import com.scau.model.goose.Goose;
 import com.scau.service.BaseService;
 import com.scau.util.BeansUtil;
 import com.scau.view.goose.Market;

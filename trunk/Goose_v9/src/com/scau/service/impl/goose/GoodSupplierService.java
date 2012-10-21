@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.scau.exception.BusinessException;
-import com.scau.model.comm.CommUser;
 import com.scau.model.goose.GoodSupplier;
 import com.scau.service.BaseService;
 

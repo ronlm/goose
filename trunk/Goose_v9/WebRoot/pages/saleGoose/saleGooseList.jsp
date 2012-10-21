@@ -72,7 +72,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		<form action="${pageContext.request.contextPath }/pages/saleGoose/saleGooseAction!del" name="myForm" id="myForm" method="post">
 			<c:forEach items="${pager.data}" var="saleGoose" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
@@ -88,7 +87,6 @@
 					<td>${saleGoose.comments}</td>
 				</tr> 
 			</c:forEach>
-		</form>
 		</tbody>
 		<tfoot>
 			<tr  class="tableController_bottom">

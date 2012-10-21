@@ -12,3 +12,4 @@ SaleGoose:成品鹅销售批次
 SaleRegion:销售分区
 TradeGood:销售物资
 TradeGoose:公司向农场回购成品鹅批次
+DeadReason:鹅只死亡原因
