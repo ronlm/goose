@@ -11,6 +11,7 @@ public class ExportBuyGooseView extends ExcelTemplate<BuyGoodView>{
 
 	public ExportBuyGooseView(String fileName, List<BuyGoodView> contents) {
 		super(fileName, contents);
+		//要打印的标题，第一列序号不用写，封装在ExcelTemplate里
 		this.titles = new String[]{"资源名称","供应商","产地","批号","单价","数量","总价","时间","备注"};
 	}
 

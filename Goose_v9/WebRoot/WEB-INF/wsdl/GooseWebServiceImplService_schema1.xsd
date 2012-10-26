@@ -13,6 +13,10 @@
 
   <xs:element name="addTradeGooseResponse" type="tns:addTradeGooseResponse"/>
 
+  <xs:element name="getAllDeadReasons" type="tns:getAllDeadReasons"/>
+
+  <xs:element name="getAllDeadReasonsResponse" type="tns:getAllDeadReasonsResponse"/>
+
   <xs:element name="getFarmList" type="tns:getFarmList"/>
 
   <xs:element name="getFarmListResponse" type="tns:getFarmListResponse"/>
@@ -169,6 +173,23 @@
   <xs:complexType name="loginResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAllDeadReasons">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAllDeadReasonsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:deadReason"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deadReason">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="reason" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
