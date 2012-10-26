@@ -39,7 +39,7 @@
 							<a class="button" href="javascript:void(0)"
 							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=deadInfo');"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
-								align="absmiddle" />&nbsp;导出全部数据到Excel表格</span>
+								align="absmiddle" />&nbsp;导出全部数据</span>
 							</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;  
 							<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><img

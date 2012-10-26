@@ -74,7 +74,7 @@
 							</div>
 						</td>
 						<td><a class="button"  name="deadGooselist" 
-						href="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadGooseList?daysWithin=${daysWithin }&&receiveGoose.id=${deadDetail.receiveGoose.id}"><span>死亡鹅只时间</span>
+						href="${pageContext.request.contextPath }/pages/goose/deadGooseStatisticAction!deadGooseList?daysWithin=${daysWithin }&&receiveGoose.id=${deadDetail.receiveGoose.id}"><span>死亡鹅只统计</span>
 						</a>
 						</td>
 					</tr>
