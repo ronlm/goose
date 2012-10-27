@@ -16,7 +16,7 @@
 			<tr class="tableController">
 				<th colspan="8">
 					
-					<h3>${farm.name}&nbsp;农场现存栏鹅只死亡时间列表</h3>
+					<h3>${farm.name}&nbsp;农场进场鹅苗批次死亡明细</h3>
 					<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/deadReasonAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_form_magnify.png" align="absmiddle"/>&nbsp;查看鹅只非正常死亡原因</span></a>
 					<a class="button" href="javascript:void(0)"
 							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=receiveGooseDeadInfo&receiveId=${receiveGoose.id }');"><span><img
@@ -35,7 +35,7 @@
 								  <option value="365" <c:if test="${daysWithin == 365 }">selected="selected"</c:if>>365</option>
 								  <option value="-1"<c:if test="${daysWithin == -1}">selected="selected"</c:if>>全部</option>
 							  </select>  
-							  天内农场死亡鹅只明细&nbsp;&nbsp;&nbsp;&nbsp;
+							  天内本批次死亡鹅只明细&nbsp;&nbsp;&nbsp;&nbsp;
 							  自定义天数:
 							  <input type="text" id="daysWithin" name="daysWithin" value="${daysWithin }" style="width:40px;border:border:1px solid #fff000;">  
 							天&nbsp;&nbsp;&nbsp;&nbsp;
