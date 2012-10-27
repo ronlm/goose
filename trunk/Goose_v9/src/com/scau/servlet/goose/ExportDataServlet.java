@@ -21,6 +21,7 @@ import com.scau.excelExport.ExportAppearOnMarket;
 import com.scau.excelExport.ExportBuyGooseView;
 import com.scau.excelExport.ExportDeadInfo;
 import com.scau.excelExport.ExportFarmStock;
+import com.scau.excelExport.ExportReceiveGooseDeadInfo;
 import com.scau.excelExport.ExportSearchRecord;
 import com.scau.excelExport.ExportTradeGoodView;
 import com.scau.model.goose.Farm;
@@ -49,7 +50,7 @@ import com.scau.vo.goose.FarmStock;
  * @author jianhao
  *
  */
-public class ExportData extends HttpServlet {
+public class ExportDataServlet extends HttpServlet {
 
 	private FarmService farmService;
 	
@@ -168,9 +169,7 @@ public class ExportData extends HttpServlet {
 		}
 		else if (type.equals("tradeGoose")) {
 			try {
-				
 				//导出成品鹅回购记录
-				//组装Hql语句
 				String queryString = "select r from com.scau.model.goose.TradeGoose r where r.tradeDate "
 						+ "between '"+ fromDate + "' and '"+ toDate +"'";
 				if(0 != fromNum && 0 != toNum){
@@ -208,8 +207,7 @@ public class ExportData extends HttpServlet {
 				}
 		}
 		else if (type.equals("saleGoose")) {
-			try {
-						
+			try {		
 				//导出成品鹅出售记录
 				String queryString = "select r from com.scau.model.goose.SaleGoose r where r.saleDate "
 						+ "between '"+ fromDate + "' and '"+ toDate +"'";
@@ -253,7 +251,6 @@ public class ExportData extends HttpServlet {
 		else if (type.equals("buyGood")) {
 	
 			//导出物资采购记录
-			//组装Hql语句
 			String queryString = "select r from com.scau.view.goose.BuyGoodView r where r.date "
 					+ "between '"+ fromDate + "' and '"+ toDate +"'";
 			if(0 != fromNum && 0 != toNum){
@@ -276,9 +273,7 @@ public class ExportData extends HttpServlet {
 			}
 		}
 		else if (type.equals("tradeGood")) {
-
 			//导出物资销售记录
-			//组装Hql语句
 			String queryString = "select r from com.scau.view.goose.TradeGoodView r where r.tradeDate " + "between '"+ fromDate + "' and '"+ toDate +"'";
 			if(0 != fromNum && 0 != toNum){
 				queryString = queryString + " and r.amount between " + fromNum +" and "+ toNum;
@@ -291,16 +286,31 @@ public class ExportData extends HttpServlet {
 			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 			@SuppressWarnings("unchecked")
 			ExportTradeGoodView export = new ExportTradeGoodView(fileName, resultList);
-			Workbook workbook;
+			
 			try {
-				workbook = export.exportExcel();
+				Workbook workbook = export.exportExcel();
 				workbook.write(out);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
-		
+		else if(type.equals("receiveGooseDeadInfo")){
+			//导出指定农场指定进场批次的死亡信息统计报表
+			Long receiveId = Long.parseLong(request.getParameter("receiveId"));
+			ReceiveGoose receiveGoose = new ReceiveGoose();
+			receiveGoose.setId(receiveId);
+			response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("农场进场批次死亡信息统计表.xls", "UTF-8"));
+			ExportReceiveGooseDeadInfo export = new ExportReceiveGooseDeadInfo(receiveGoose);
+			try {
+				Workbook workbook = export.exportExcel();
+				workbook.write(out);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		}
+		//关闭输出流
 		out.close();
 	}
 
@@ -310,7 +320,7 @@ public class ExportData extends HttpServlet {
 		this.doPost(req, resp);
 	}
 	
-	public ExportData(){
+	public ExportDataServlet(){
 		this.farmService = (FarmService) BeansUtil.get("farmService");
 	}
 	
