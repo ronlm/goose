@@ -19,7 +19,7 @@
 					<h3>${farm.name}&nbsp;农场现存栏鹅只死亡时间列表</h3>
 					<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/goose/deadReasonAction!list'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_form_magnify.png" align="absmiddle"/>&nbsp;查看鹅只非正常死亡原因</span></a>
 					<a class="button" href="javascript:void(0)"
-							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=receiveGooseDeadInfo&receiveGoose.id=${receiveGoose.id }');"><span><img
+							onclick="window.open('${pageContext.request.contextPath }/data/exportData/ExportData?type=receiveGooseDeadInfo&receiveId=${receiveGoose.id }');"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/application_go.png"
 								align="absmiddle" />&nbsp;导出本进场批次死亡统计数据</span>
 					</a>
