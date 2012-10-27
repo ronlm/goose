@@ -11,6 +11,7 @@ public class DeadGooseView {
 	private Long gooseId;
 	private String ringId;
 	private Long receiveId;
+	private Long reasonId;
 	private String reason;
 	private Date deadDate;
 	
@@ -50,6 +51,12 @@ public class DeadGooseView {
 	}
 	public void setDeadDate(Date deadDate) {
 		this.deadDate = deadDate;
+	}
+	public Long getReasonId() {
+		return reasonId;
+	}
+	public void setReasonId(Long reasonId) {
+		this.reasonId = reasonId;
 	}
 	
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-21 22:11:06
+Date: 2012-10-27 14:29:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -209,6 +209,7 @@ CREATE TABLE `dead_goose` (
 -- ----------------------------
 -- Records of dead_goose
 -- ----------------------------
+INSERT INTO `dead_goose` VALUES ('1', '1', '1', '2012-10-27');
 
 -- ----------------------------
 -- Table structure for `dead_reason`
@@ -510,7 +511,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `dead_goose_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `dead_goose_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dead_goose_view` AS select `dead_goose`.`id` AS `id`,`dead_goose`.`gooseId` AS `gooseId`,`goose`.`ringId` AS `ringId`,`goose`.`receiveId` AS `receiveId`,`dead_reason`.`reason` AS `reason`,`dead_goose`.`deadDate` AS `deadDate` from ((`goose` join `dead_reason`) join `dead_goose`) where ((`goose`.`id` = `dead_goose`.`gooseId`) and (`dead_goose`.`deadReasonId` = `dead_reason`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dead_goose_view` AS select `dead_goose`.`id` AS `id`,`dead_goose`.`gooseId` AS `gooseId`,`goose`.`ringId` AS `ringId`,`goose`.`receiveId` AS `receiveId`,`dead_reason`.`reason` AS `reason`,`dead_goose`.`deadDate` AS `deadDate`,`dead_reason`.`id` AS `reasonId` from ((`goose` join `dead_reason`) join `dead_goose`) where ((`goose`.`id` = `dead_goose`.`gooseId`) and (`dead_goose`.`deadReasonId` = `dead_reason`.`id`)) ;
 
 -- ----------------------------
 -- View structure for `goodview`
