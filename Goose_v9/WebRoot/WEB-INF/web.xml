@@ -23,6 +23,8 @@
     <display-name>初始化log4j日志的目录，放到System.property里面(log.root)</display-name>
     <listener-class>cn.com.ege.mvc.init.Init</listener-class>
   </listener>
+  
+  <!-- Spring 容器的监听器 开始 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -30,6 +32,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
+  <!-- Spring 容器的监听器 结束 -->
+  
+  <!-- 编码过滤器 开始 -->
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -42,6 +47,8 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+    <!-- 编码过滤器 开始 -->
+    
   <filter>
     <filter-name>openSessionInView</filter-name>
     <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -118,6 +125,8 @@
     <filter-name>SecurityFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <!-- Struts2的拦截器 开始 -->
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -130,6 +139,22 @@
     <filter-name>struts2</filter-name>
     <url-pattern>/login/*</url-pattern>
   </filter-mapping>
+    <!-- Struts2的拦截器 结束 -->
+    
+   <error-page>
+   		<error-code>500</error-code>
+   		<location>/error/Error.jsp</location>
+   </error-page>
+    <error-page>
+   		<error-code>404</error-code>
+   		<location>/error/404.jsp</location>
+   </error-page>
+    <error-page>
+   		<error-code>403</error-code>
+   		<location>/error/403.jsp</location>
+   </error-page>
+   
+   
   <mime-mapping>
     <extension>rar</extension>
     <mime-type>application/rar</mime-type>
