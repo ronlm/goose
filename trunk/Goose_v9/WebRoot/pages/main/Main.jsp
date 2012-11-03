@@ -46,7 +46,7 @@
         	<tr>
         	<td height="26" colspan="2" background="${pageContext.request.contextPath }/images/main/BodyBG.gif">
 				        <div id="footer">
-            版权所有&nbsp;&copy;&nbsp;No.634 &nbsp;&nbsp;&nbsp;&nbsp;技术支持：<a href="#" target="_blank">No.643</a>
+            版权所有&nbsp;&copy;&nbsp;鼎宁科技 &nbsp;&nbsp;&nbsp;&nbsp;技术支持：<a href="#" target="_blank">鼎宁科技</a>
         </div>
 			</td>
 		  </tr>
