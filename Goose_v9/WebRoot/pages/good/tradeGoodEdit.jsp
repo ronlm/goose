@@ -68,11 +68,11 @@
 				<tr class="tableController_bottom">
 					<td align="center">&nbsp;</td>
 					<td align="left"><a class="button" href="javascript:void(0)"
-						onclick="this.blur();save();return false;"><span><img
+						onclick="this.blur();save();"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/disk.png"
 								align="absmiddle" />&nbsp;保存</span> </a> <a class="button"
 						href="javascript:void(0)"
-						onclick="this.blur(); history.go(-1);return false;"><span><img
+						onclick="this.blur(); history.go(-1);"><span><img
 								src="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png"
 								align="absmiddle" />&nbsp;返回</span> </a></td>
 				</tr>
