@@ -318,16 +318,20 @@ public class GooseWebServiceImpl implements IGooseService{
 			Goose goose = new Goose();
 			goose.setRingId(gooseId);
 			goose = gooseService.get(goose);//找到那个鹅只的记录
-			
-			goose.setIsValid(0);//设置鹅只状态为死亡
-			//goose.setDeadDate(new Date(new java.util.Date().getTime()));
-			//新建一条鹅只死亡信息
-			DeadGoose deadGoose = new DeadGoose();
-			deadGoose.setDeadDate(new Date(new java.util.Date().getTime()));
-			deadGoose.setDeadReasonId(deadReasonId);// 暂定死亡原因id 为 1
-			deadGoose.setGooseId(goose.getId());
-			deadGooseService.add(deadGoose);//添加一条死亡鹅只记录
-			gooseService.update(goose);//完成销号操作
+			if(null == goose.getIsValid() && 0 != goose.getIsValid()){
+				goose.setIsValid(0);//设置鹅只状态为死亡
+				//goose.setDeadDate(new Date(new java.util.Date().getTime()));
+				//新建一条鹅只死亡信息
+				DeadGoose deadGoose = new DeadGoose();
+				deadGoose.setDeadDate(new Date(new java.util.Date().getTime()));
+				deadGoose.setDeadReasonId(deadReasonId);// 暂定死亡原因id 为 1
+				deadGoose.setGooseId(goose.getId());
+				deadGooseService.add(deadGoose);//添加一条死亡鹅只记录
+				gooseService.update(goose);//完成销号操作
+			}
+			else{
+				return 1;//该只鹅已死，不可再设死亡记录
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 1;//操作出错
