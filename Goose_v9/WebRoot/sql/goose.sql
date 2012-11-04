@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-11-04 09:48:14
+Date: 2012-11-04 20:53:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,7 +132,7 @@ CREATE TABLE `comm_role` (
 -- ----------------------------
 -- Records of comm_role
 -- ----------------------------
-INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '													');
+INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '														');
 INSERT INTO `comm_role` VALUES ('2', '超级管理员', '超级管理员																																						');
 INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户												');
 
@@ -147,18 +147,11 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
 -- ----------------------------
-INSERT INTO `comm_role_resource` VALUES ('75', '1', '1');
-INSERT INTO `comm_role_resource` VALUES ('76', '1', '2');
-INSERT INTO `comm_role_resource` VALUES ('77', '1', '3');
-INSERT INTO `comm_role_resource` VALUES ('78', '1', '4');
-INSERT INTO `comm_role_resource` VALUES ('79', '1', '5');
-INSERT INTO `comm_role_resource` VALUES ('80', '1', '6');
-INSERT INTO `comm_role_resource` VALUES ('81', '1', '7');
 INSERT INTO `comm_role_resource` VALUES ('82', '2', '1');
 INSERT INTO `comm_role_resource` VALUES ('83', '2', '2');
 INSERT INTO `comm_role_resource` VALUES ('84', '2', '3');
@@ -171,6 +164,15 @@ INSERT INTO `comm_role_resource` VALUES ('95', '3', '3');
 INSERT INTO `comm_role_resource` VALUES ('96', '3', '4');
 INSERT INTO `comm_role_resource` VALUES ('97', '3', '5');
 INSERT INTO `comm_role_resource` VALUES ('98', '3', '8');
+INSERT INTO `comm_role_resource` VALUES ('99', '1', '1');
+INSERT INTO `comm_role_resource` VALUES ('100', '1', '2');
+INSERT INTO `comm_role_resource` VALUES ('101', '1', '3');
+INSERT INTO `comm_role_resource` VALUES ('102', '1', '4');
+INSERT INTO `comm_role_resource` VALUES ('103', '1', '5');
+INSERT INTO `comm_role_resource` VALUES ('104', '1', '6');
+INSERT INTO `comm_role_resource` VALUES ('105', '1', '7');
+INSERT INTO `comm_role_resource` VALUES ('106', '1', '8');
+INSERT INTO `comm_role_resource` VALUES ('107', '1', '9');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -205,16 +207,13 @@ CREATE TABLE `dead_goose` (
   `gooseId` int(11) NOT NULL,
   `deadReasonId` int(11) NOT NULL,
   `deadDate` date NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`,`gooseId`,`deadReasonId`),
   KEY `deadReasonId` (`deadReasonId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dead_goose
 -- ----------------------------
-INSERT INTO `dead_goose` VALUES ('1', '1', '1', '2012-10-27');
-INSERT INTO `dead_goose` VALUES ('2', '137268', '1', '2012-11-03');
-INSERT INTO `dead_goose` VALUES ('3', '137269', '1', '2012-11-03');
 
 -- ----------------------------
 -- Table structure for `dead_reason`
@@ -500,12 +499,13 @@ CREATE TABLE `trade_goose` (
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `farmId` (`farmId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_goose
 -- ----------------------------
 INSERT INTO `trade_goose` VALUES ('1', '1', '2', '2.03', '2', '2012-10-08', '	');
+INSERT INTO `trade_goose` VALUES ('2', '10', '2', '5', '1', '2012-11-04', '');
 
 -- ----------------------------
 -- View structure for `buygoodview`
