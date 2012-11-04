@@ -8,6 +8,8 @@
 	</head>
 <body>
 对不起, 服务器繁忙!  请稍后再试.<br/>
+温馨提示：</br>
+若您使用的是谷歌、火狐或IE10浏览器，请换成360、世界之窗或傲游浏览器</br>
 或者你可以...<br/><a href="javascript:history.go(-1)">返回上一页</a>
 <hr>
 <div style="display: none;">
