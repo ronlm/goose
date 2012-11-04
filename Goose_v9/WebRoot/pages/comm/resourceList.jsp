@@ -8,7 +8,7 @@
     	<table class="mainTable">
 			<thead>
 				<tr class="tableController">
-					<th colspan="4">
+					<th colspan="5">
 						<h3>当前页面:系统资源管理</h3>
 						<div class="tableControllerButton">
 							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/Comm/resourceAction!add'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
@@ -25,7 +25,10 @@
 					</th>
 					<th>
 						<h3>资源路径</h3>
-					</th>                         
+					</th>
+					<th>
+						<h3>资源描述</h3>
+					</th>                          
 					<th>
 						<h3>操作</h3>
 					</th>                         
@@ -38,6 +41,7 @@
 					<td width="20px"><input type="checkbox" name="id" value="${resource.id}"/></td>
 					<td>${resource.name}</td>
 					<td>${resource.path}</td>
+					<td>${resource.comment}</td>
 					<td>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/Comm/resourceAction!get?resource.id=${resource.id }'; return false;"><span>修改</span></a>
 						<a class="button-small" href="javascript:void(0)" onclick="this.blur(); deleteOne('${pageContext.request.contextPath }/pages/Comm/resourceAction!del?id=${resource.id }'); return false;"><span>删除</span></a>
