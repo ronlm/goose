@@ -8,7 +8,7 @@
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 <script type="text/javascript" src="../../js/getInfo.js"></script>
-
+<!-- 统计n天内所有农场死亡的鹅只数量 -->
 <body  onload="changeRowColor();">
 	<table class="mainTable" id="table" >
 		<thead>
