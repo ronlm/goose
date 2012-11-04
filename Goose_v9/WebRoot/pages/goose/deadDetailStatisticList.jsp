@@ -9,7 +9,7 @@
 <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 <jsp:include page="../../include/IncludeMain.jsp"></jsp:include>
 <script type="text/javascript" src="../../js/getInfo.js"></script>
-<%-- 对每个农场的当前存栏的所以鹅苗接收批次 ReceiveGoose 分别作死亡数字统计，同时计算各自的存活率--%>
+<%-- 对每个农场的当前存栏的所有鹅苗进场批次 ReceiveGoose 分别作死亡数字统计，同时计算各自的存活率--%>
 <body  onload="changeRowColor();">
 	<table class="mainTable" id="table" >
 		<thead>
