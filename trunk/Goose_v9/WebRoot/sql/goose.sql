@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-10-27 14:29:26
+Date: 2012-11-04 09:48:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -103,7 +103,7 @@ CREATE TABLE `comm_resource` (
   `path` varchar(200) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_resource
@@ -111,10 +111,12 @@ CREATE TABLE `comm_resource` (
 INSERT INTO `comm_resource` VALUES ('1', '系统后台首页', '/pages/main/*', null);
 INSERT INTO `comm_resource` VALUES ('2', '系统管理', '/pages/Comm/*', null);
 INSERT INTO `comm_resource` VALUES ('3', '鹅只管理', '/pages/goose/*', '鹅只管理,供超级管理员，管理系统员和普通用户开放				');
-INSERT INTO `comm_resource` VALUES ('4', '物资管理', '/pages/good/*', '用于管理公司的农用物资	');
+INSERT INTO `comm_resource` VALUES ('4', '物资基本信息管理', '/pages/good/good*', '用于管理公司的农用物资种类，品名和供应商的基本信息		');
 INSERT INTO `comm_resource` VALUES ('5', '农户农场管理', '/pages/farmerFarm/*', '用于管理农户农场	');
 INSERT INTO `comm_resource` VALUES ('6', '鹅只出售管理', '/pages/saleGoose/*', '鹅只出售管理				');
 INSERT INTO `comm_resource` VALUES ('7', '导出数据报表	', '/data/exportData/*', '导出数据报表		');
+INSERT INTO `comm_resource` VALUES ('8', '物资销售管理', '/pages/good/tradeGood*', '物资销售管理');
+INSERT INTO `comm_resource` VALUES ('9', '物资采购管理', '/pages/good/buyGood*', '物资采购管理	');
 
 -- ----------------------------
 -- Table structure for `comm_role`
@@ -132,7 +134,7 @@ CREATE TABLE `comm_role` (
 -- ----------------------------
 INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '													');
 INSERT INTO `comm_role` VALUES ('2', '超级管理员', '超级管理员																																						');
-INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户										');
+INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户												');
 
 -- ----------------------------
 -- Table structure for `comm_role_resource`
@@ -145,15 +147,11 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
 -- ----------------------------
-INSERT INTO `comm_role_resource` VALUES ('71', '3', '1');
-INSERT INTO `comm_role_resource` VALUES ('72', '3', '3');
-INSERT INTO `comm_role_resource` VALUES ('73', '3', '4');
-INSERT INTO `comm_role_resource` VALUES ('74', '3', '5');
 INSERT INTO `comm_role_resource` VALUES ('75', '1', '1');
 INSERT INTO `comm_role_resource` VALUES ('76', '1', '2');
 INSERT INTO `comm_role_resource` VALUES ('77', '1', '3');
@@ -168,6 +166,11 @@ INSERT INTO `comm_role_resource` VALUES ('85', '2', '4');
 INSERT INTO `comm_role_resource` VALUES ('86', '2', '5');
 INSERT INTO `comm_role_resource` VALUES ('87', '2', '6');
 INSERT INTO `comm_role_resource` VALUES ('88', '2', '7');
+INSERT INTO `comm_role_resource` VALUES ('94', '3', '1');
+INSERT INTO `comm_role_resource` VALUES ('95', '3', '3');
+INSERT INTO `comm_role_resource` VALUES ('96', '3', '4');
+INSERT INTO `comm_role_resource` VALUES ('97', '3', '5');
+INSERT INTO `comm_role_resource` VALUES ('98', '3', '8');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -204,12 +207,14 @@ CREATE TABLE `dead_goose` (
   `deadDate` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `deadReasonId` (`deadReasonId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dead_goose
 -- ----------------------------
 INSERT INTO `dead_goose` VALUES ('1', '1', '1', '2012-10-27');
+INSERT INTO `dead_goose` VALUES ('2', '137268', '1', '2012-11-03');
+INSERT INTO `dead_goose` VALUES ('3', '137269', '1', '2012-11-03');
 
 -- ----------------------------
 -- Table structure for `dead_reason`
@@ -464,7 +469,7 @@ CREATE TABLE `trade_good` (
   PRIMARY KEY (`id`),
   KEY `farmerId` (`farmerId`),
   KEY `goodId` (`goodId`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_good
@@ -479,6 +484,7 @@ INSERT INTO `trade_good` VALUES ('13', '5', '1', '2012-10-09', '12', '123', '	')
 INSERT INTO `trade_good` VALUES ('14', '1', '3', '2012-10-21', '12', '122', '			');
 INSERT INTO `trade_good` VALUES ('15', '7', '1', '2012-10-09', '121', '12', '	');
 INSERT INTO `trade_good` VALUES ('16', '1', '5', '2012-10-17', '11', '11', '	');
+INSERT INTO `trade_good` VALUES ('17', '7', '1', '2012-11-03', '12', '123', 'asdfdsf	');
 
 -- ----------------------------
 -- Table structure for `trade_goose`
