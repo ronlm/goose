@@ -18,7 +18,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-pool-1.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-dao-2.0.8.jar"/>
-	<classpathentry kind="lib" path="E:/Projects/Goose_v8/WebRoot/WEB-INF/lib/poi-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.8-20120326.jar"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
