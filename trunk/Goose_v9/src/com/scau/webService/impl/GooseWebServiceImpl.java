@@ -318,7 +318,7 @@ public class GooseWebServiceImpl implements IGooseService{
 			Goose goose = new Goose();
 			goose.setRingId(gooseId);
 			goose = gooseService.get(goose);//找到那个鹅只的记录
-			if(null == goose.getIsValid() && 0 != goose.getIsValid()){
+			if(null != goose.getIsValid() && 0 != goose.getIsValid()){
 				goose.setIsValid(0);//设置鹅只状态为死亡
 				//goose.setDeadDate(new Date(new java.util.Date().getTime()));
 				//新建一条鹅只死亡信息
