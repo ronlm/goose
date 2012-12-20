@@ -1,0 +1,15 @@
+本包内是关于鹅只秕的实体类，具体如下：
+BuyGood:采购物资
+Farm:农场
+Farmer:农户
+Good:物资
+GoodSupplier：物资供应商
+GoodType:物资类型
+Goose：鹅
+ReceiveGoose:鹅苗进场批次
+Retailer:成品鹅销售商
+SaleGoose:成品鹅销售批次
+SaleRegion:销售分区
+TradeGood:销售物资
+TradeGoose:公司向农场回购成品鹅批次
+DeadReason:鹅只死亡原因

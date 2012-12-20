@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Goose_v10"
+  id="myeclipse.1341300966565"
+  context-root="/Goose"
+  j2ee-spec="6.0"
+  archive="Goose_v10.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

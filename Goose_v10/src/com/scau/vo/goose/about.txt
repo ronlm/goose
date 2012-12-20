@@ -1,0 +1,7 @@
+这个包内的类是value object,主要用于存储计算所得的值，向页面传递
+包的的类 不需要！ 在applicationContext.xml里配置成实体类映射到database里。
+AppearOnMarket：一个鹅苗进场批次的上市信息
+DeadDetail:一个鹅苗进场批次的死亡鹅只统计
+DeadInfo:一个农场的死亡鹅只统计
+FarmStock:一个农场的存栏统计信息
+SaleStatisticInfo:一个销售分区的销售统计

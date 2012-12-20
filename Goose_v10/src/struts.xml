@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 包含系统用户，资源，角色，菜单管理模块 -->
+	<include file="commStruts2.xml"/>
+	
+	<!-- 包含养鹅后台模块 -->
+	<include file="gooseStruts2.xml"/>
+	
+	<!-- 包含养物资管理 模块 -->
+	<include file="goodStruts.xml"/>
+</struts>
+	
