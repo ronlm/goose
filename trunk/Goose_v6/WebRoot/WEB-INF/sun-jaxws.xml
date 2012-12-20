@@ -1,7 +1,0 @@
-<?xml version = "1.0"?>
-<endpoints version="2.0"
-	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
-	<endpoint name="GooseWebServiceImplPort"
-		implementation="com.scau.webService.impl.GooseWebServiceImplDelegate"
-		url-pattern="/GooseWebServiceImplPort">
-	</endpoint></endpoints>
