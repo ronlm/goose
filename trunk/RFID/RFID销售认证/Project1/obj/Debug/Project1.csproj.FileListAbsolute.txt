@@ -1,0 +1,45 @@
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\bin\Debug\Project1.exe.config
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.exe
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.pdb
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\bin\Debug\Project1.exe
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\bin\Debug\Project1.pdb
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\obj\Debug\ResolveAssemblyReference.cache
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.Form1.resources
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.Properties.Resources.resources
+E:\cardreader\dh-rf3\V10\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.csproj.GenerateResource.Cache
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\bin\Debug\Project1.exe.config
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.exe
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.pdb
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\bin\Debug\Project1.exe
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\bin\Debug\Project1.pdb
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.Form1.resources
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.Properties.Resources.resources
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\xin\Desktop\即插即用RFID 设备 开发资料\RF读卡器\读卡器开发盘\examples\c#\Project1\obj\Debug\Project1.RFID.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\bin\Debug\Project1.exe.config
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.exe
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.pdb
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\bin\Debug\Project1.exe
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\bin\Debug\Project1.pdb
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.Form1.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.Form2.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.Form3.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.Login.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.Properties.Resources.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\Project1.RFID.resources
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\634-001\Documents\Tencent Files\312360871\FileRecv\c#\Project1\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\xin\Desktop\c#\Project1\bin\Debug\Project1.exe.config
+C:\Users\xin\Desktop\c#\Project1\bin\Debug\Project1.exe
+C:\Users\xin\Desktop\c#\Project1\bin\Debug\Project1.pdb
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\Project1.Login.resources
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\Project1.Properties.Resources.resources
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\Project1.RFID.resources
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\Project1.exe
+C:\Users\xin\Desktop\c#\Project1\obj\Debug\Project1.pdb
