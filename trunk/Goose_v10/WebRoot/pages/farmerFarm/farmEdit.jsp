@@ -74,7 +74,7 @@
 						</td>
 						<td>
 							<input type="text"  validation="date" readonly="readonly" name="farm.signDate" id="signDate" value="${farm.signDate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" class="Wdate" style="width:126px"/>
-							<em style="color:red;">*</em>
+							<em style="color:red;">*(不填则农场为未签约状态，将没有操作功能)</em>
 						</td>
 					</tr>
 					<tr>

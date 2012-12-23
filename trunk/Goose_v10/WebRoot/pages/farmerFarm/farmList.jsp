@@ -17,7 +17,7 @@
 					</c:if>
 					<div class="tableControllerButton">
 						<c:if test="${farmer.name!=null }">
-							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/farmerFarm/farmAction!add?farmer.id=${farmer.id }'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加</span></a>
+							<a class="button" href="javascript:void(0)" onclick="this.blur(); window.location='${pageContext.request.contextPath }/pages/farmerFarm/farmAction!add?farmer.id=${farmer.id }'; return false;"><span><img src="${pageContext.request.contextPath }/js/kui/icons/application_add.png" align="absmiddle"/>&nbsp;添加新农场</span></a>
 						</c:if>
 							<a class="button" href="javascript:void(0)" onclick="this.blur(); history.go(-1);return false;"><span><imgsrc="${pageContext.request.contextPath }/js/kui/icons/anticlockwise.png" align="absmiddle" />&nbsp;返回上一页</span>
 							</a>
