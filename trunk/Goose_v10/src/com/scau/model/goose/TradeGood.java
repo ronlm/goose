@@ -15,7 +15,7 @@ public class TradeGood {
 	private Long goodId;
 	private Double unitPrice;
 	private Date tradeDate;
-	private Long amount;
+	private Double amount;
 	private String comments;
 	
 	@Id
@@ -40,10 +40,11 @@ public class TradeGood {
 	public void setTradeDate(Date tradeDate) {
 		this.tradeDate = tradeDate;
 	}
-	public Long getAmount() {
+	
+	public Double getAmount() {
 		return amount;
 	}
-	public void setAmount(Long amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 	public String getComments() {
