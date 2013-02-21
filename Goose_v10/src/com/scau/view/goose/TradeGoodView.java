@@ -13,17 +13,12 @@ public class TradeGoodView {
 	private String phone;
 	private Long goodId;
 	private Long goodTypeId;
-	public Long getGoodTypeId() {
-		return goodTypeId;
-	}
-	public void setGoodTypeId(Long goodTypeId) {
-		this.goodTypeId = goodTypeId;
-	}
+	
 	private String goodName;
 	private String goodUnit;
 	private Date tradeDate;
-	private double unitPrice;
-	private int amount;
+	private Double unitPrice;
+	private Double amount;
 	private String comments;
 	
 	@Id
@@ -32,6 +27,13 @@ public class TradeGoodView {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Long getGoodTypeId() {
+		return goodTypeId;
+	}
+	public void setGoodTypeId(Long goodTypeId) {
+		this.goodTypeId = goodTypeId;
 	}
 	public Long getFarmerId() {
 		return farmerId;
@@ -69,11 +71,15 @@ public class TradeGoodView {
 	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public int getAmount() {
+	
+	public Double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+	public void setUnitPrice(Double unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 	public String getComments() {
 		return comments;

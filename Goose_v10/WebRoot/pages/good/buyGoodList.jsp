@@ -79,7 +79,7 @@
 					<td>${buyGoodView.origin}</td>
 					<td>${buyGoodView.batchNum}</td>
 					<td><fmt:formatNumber value="${buyGoodView.unitPrice}" maxFractionDigits="3"/></td>
-					<td>${buyGoodView.amount}</td>
+					<td><fmt:formatNumber value="${buyGoodView.amount}" maxFractionDigits="3"/></td>
 					<td><fmt:formatNumber value="${buyGoodView.unitPrice * buyGoodView.amount}" maxFractionDigits="3"/></td>
 					<td>${buyGoodView.date}</td>
 					<td>${buyGoodView.comments}</td>
