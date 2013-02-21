@@ -75,7 +75,7 @@
 					<td>${tradeGoodView.goodName}</td>
 					<td>${tradeGoodView.farmerName}</td>
 					<td><fmt:formatNumber value="${tradeGoodView.unitPrice}" maxFractionDigits="3"/></td>
-					<td>${tradeGoodView.amount}</td>
+					<td><fmt:formatNumber value="${tradeGoodView.amount }" maxFractionDigits="3"/></td>
 					<td>${tradeGoodView.goodUnit}</td>
 					<td><fmt:formatNumber value="${tradeGoodView.unitPrice * tradeGoodView.amount }" maxFractionDigits="3"/></td>
 					<td>${tradeGoodView.tradeDate}</td>

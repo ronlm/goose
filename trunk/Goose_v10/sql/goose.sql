@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Mysql5.0
+Source Server         : mysql
 Source Server Version : 50142
 Source Host           : localhost:3306
 Source Database       : goose
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2012-11-04 20:53:29
+Date: 2013-02-21 12:20:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,30 +22,23 @@ DROP TABLE IF EXISTS `buy_good`;
 CREATE TABLE `buy_good` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存',
   `goodSupplierId` int(11) NOT NULL,
-  `goodId` varchar(255) NOT NULL,
+  `goodId` int(11) NOT NULL,
   `batchNum` varchar(11) DEFAULT NULL COMMENT '批号，可选填',
-  `unitPrice` double(255,0) DEFAULT NULL,
-  `amount` int(11) NOT NULL DEFAULT '0',
+  `unitPrice` double DEFAULT NULL,
+  `amount` double NOT NULL DEFAULT '0',
   `origin` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `goodSupplierId` (`goodSupplierId`),
   KEY `goodId` (`goodId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of buy_good
 -- ----------------------------
-INSERT INTO `buy_good` VALUES ('4', '4', '1', '3423fdf', '23', '500', 'TZ', '2012-09-05', 'SDFGSDGSDFG');
-INSERT INTO `buy_good` VALUES ('5', '4', '3', '13434', '15', '100', 'TW', '2012-09-12', 'FASFSADF');
-INSERT INTO `buy_good` VALUES ('6', '1', '5', '322134fsadf', '50', '100', '广州', '2012-08-30', 'adfasfasdf');
-INSERT INTO `buy_good` VALUES ('7', '1', '5', '454', '50', '100', '广州', '2012-09-05', 'adfasfasdf');
-INSERT INTO `buy_good` VALUES ('8', '4', '5', '3143', '100', '100', '珠海', '2012-09-04', '霏霏ffdfdfd');
-INSERT INTO `buy_good` VALUES ('9', '1', '1', '431232', '34', '434', 'fsadf', '2012-09-25', '34343');
-INSERT INTO `buy_good` VALUES ('10', '1', '1', '12312', '322', '123', '23', '2012-10-11', 'dfasd');
-INSERT INTO `buy_good` VALUES ('11', '5', '1', '34', '234', '234', 're', '2012-10-21', 'fasfsfsdgsdfg');
-INSERT INTO `buy_good` VALUES ('12', '4', '1', '234', '234', '234', 'dfdfd', '2012-10-10', '');
+INSERT INTO `buy_good` VALUES ('4', '1', '1', '1111', '11', '2323', '11', '2013-02-21', '');
+INSERT INTO `buy_good` VALUES ('5', '1', '2', '2312', '12.32', '2323.13', '123', '2013-02-13', '');
 
 -- ----------------------------
 -- Table structure for `comm_menu`
@@ -71,13 +64,13 @@ INSERT INTO `comm_menu` VALUES ('4', '系统菜单管理', '/pages/Comm/menuActi
 INSERT INTO `comm_menu` VALUES ('5', '系统角色管理', '/pages/Comm/roleAction!list', '1', '/images/main/null.png', '2');
 INSERT INTO `comm_menu` VALUES ('6', '农户农场管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '5');
 INSERT INTO `comm_menu` VALUES ('8', '农户信息管理', '/pages/farmerFarm/farmerAction!list', '6', '/images/main/null.png', '5');
-INSERT INTO `comm_menu` VALUES ('9', '物资信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
+INSERT INTO `comm_menu` VALUES ('9', '物资信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '4');
 INSERT INTO `comm_menu` VALUES ('10', '农场信息管理', '/pages/farmerFarm/farmAction!listAll', '6', '/images/main/null.png', '5');
-INSERT INTO `comm_menu` VALUES ('11', '物资基本信息', '/pages/good/goodAction!list', '9', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('13', '供应商信息', '/pages/good/goodSupplierAction!list', '9', '/images/main/null.png', '3');
-INSERT INTO `comm_menu` VALUES ('14', '物资销售信息', '/pages/good/tradeGoodAction!list', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('11', '物资基本信息', '/pages/good/goodAction!list', '9', '/images/main/null.png', '4');
+INSERT INTO `comm_menu` VALUES ('13', '供应商信息', '/pages/good/goodSupplierAction!list', '9', '/images/main/null.png', '4');
+INSERT INTO `comm_menu` VALUES ('14', '物资销售信息', '/pages/good/tradeGoodAction!list', '9', '/images/main/null.png', '8');
 INSERT INTO `comm_menu` VALUES ('15', '鹅只信息管理', 'javascript:void(0)', '0', '/images/main/MenuIcon.png', '3');
-INSERT INTO `comm_menu` VALUES ('17', '物资采购信息', '/pages/good/buyGoodAction!list', '9', '/images/main/null.png', '3');
+INSERT INTO `comm_menu` VALUES ('17', '物资采购信息', '/pages/good/buyGoodAction!list', '9', '/images/main/null.png', '9');
 INSERT INTO `comm_menu` VALUES ('18', '销售商信息', '/pages/saleGoose/retailerAction!list', '28', '/images/main/null.png', '6');
 INSERT INTO `comm_menu` VALUES ('19', '鹅苗进场管理', '/pages/goose/receiveGooseAction!list', '15', '/images/main/null.png', '3');
 INSERT INTO `comm_menu` VALUES ('20', '成品鹅回购管理', '/pages/goose/tradeGooseAction!list', '15', '/images/main/null.png', '3');
@@ -127,14 +120,15 @@ CREATE TABLE `comm_role` (
   `name` varchar(100) DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role
 -- ----------------------------
-INSERT INTO `comm_role` VALUES ('1', '超超级管理员', '														');
-INSERT INTO `comm_role` VALUES ('2', '超级管理员', '超级管理员																																						');
-INSERT INTO `comm_role` VALUES ('3', '普通用户', '普通用户												');
+INSERT INTO `comm_role` VALUES ('1', '超级管理员', '																');
+INSERT INTO `comm_role` VALUES ('4', '经理', '			');
+INSERT INTO `comm_role` VALUES ('5', '采购员', '			');
+INSERT INTO `comm_role` VALUES ('6', '销售人员', '		');
 
 -- ----------------------------
 -- Table structure for `comm_role_resource`
@@ -147,7 +141,7 @@ CREATE TABLE `comm_role_resource` (
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`),
   KEY `resourceId` (`resourceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_role_resource
@@ -164,15 +158,31 @@ INSERT INTO `comm_role_resource` VALUES ('95', '3', '3');
 INSERT INTO `comm_role_resource` VALUES ('96', '3', '4');
 INSERT INTO `comm_role_resource` VALUES ('97', '3', '5');
 INSERT INTO `comm_role_resource` VALUES ('98', '3', '8');
-INSERT INTO `comm_role_resource` VALUES ('99', '1', '1');
-INSERT INTO `comm_role_resource` VALUES ('100', '1', '2');
-INSERT INTO `comm_role_resource` VALUES ('101', '1', '3');
-INSERT INTO `comm_role_resource` VALUES ('102', '1', '4');
-INSERT INTO `comm_role_resource` VALUES ('103', '1', '5');
-INSERT INTO `comm_role_resource` VALUES ('104', '1', '6');
-INSERT INTO `comm_role_resource` VALUES ('105', '1', '7');
-INSERT INTO `comm_role_resource` VALUES ('106', '1', '8');
-INSERT INTO `comm_role_resource` VALUES ('107', '1', '9');
+INSERT INTO `comm_role_resource` VALUES ('142', '1', '1');
+INSERT INTO `comm_role_resource` VALUES ('143', '1', '2');
+INSERT INTO `comm_role_resource` VALUES ('144', '1', '3');
+INSERT INTO `comm_role_resource` VALUES ('145', '1', '4');
+INSERT INTO `comm_role_resource` VALUES ('146', '1', '5');
+INSERT INTO `comm_role_resource` VALUES ('147', '1', '6');
+INSERT INTO `comm_role_resource` VALUES ('148', '1', '7');
+INSERT INTO `comm_role_resource` VALUES ('149', '1', '8');
+INSERT INTO `comm_role_resource` VALUES ('150', '1', '9');
+INSERT INTO `comm_role_resource` VALUES ('151', '4', '1');
+INSERT INTO `comm_role_resource` VALUES ('152', '4', '3');
+INSERT INTO `comm_role_resource` VALUES ('153', '4', '4');
+INSERT INTO `comm_role_resource` VALUES ('154', '4', '5');
+INSERT INTO `comm_role_resource` VALUES ('155', '4', '6');
+INSERT INTO `comm_role_resource` VALUES ('156', '4', '7');
+INSERT INTO `comm_role_resource` VALUES ('157', '4', '8');
+INSERT INTO `comm_role_resource` VALUES ('158', '4', '9');
+INSERT INTO `comm_role_resource` VALUES ('159', '6', '1');
+INSERT INTO `comm_role_resource` VALUES ('160', '6', '4');
+INSERT INTO `comm_role_resource` VALUES ('161', '6', '6');
+INSERT INTO `comm_role_resource` VALUES ('162', '6', '7');
+INSERT INTO `comm_role_resource` VALUES ('163', '6', '8');
+INSERT INTO `comm_role_resource` VALUES ('164', '5', '1');
+INSERT INTO `comm_role_resource` VALUES ('165', '5', '4');
+INSERT INTO `comm_role_resource` VALUES ('166', '5', '9');
 
 -- ----------------------------
 -- Table structure for `comm_user`
@@ -189,14 +199,14 @@ CREATE TABLE `comm_user` (
   `roleId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `roleId` (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comm_user
 -- ----------------------------
 INSERT INTO `comm_user` VALUES ('1', 'admin', '引擎小组', 'admin', '123', '123@d.com', '123', '1');
-INSERT INTO `comm_user` VALUES ('2', 'engine', '', '123456', '', '', '', '2');
-INSERT INTO `comm_user` VALUES ('4', 'user', '', '123456', '', '', '', '3');
+INSERT INTO `comm_user` VALUES ('4', 'user', '', '123456', '', '', '', '4');
+INSERT INTO `comm_user` VALUES ('5', 'a', '', '123456', '', '', '', '5');
 
 -- ----------------------------
 -- Table structure for `dead_goose`
@@ -223,13 +233,14 @@ CREATE TABLE `dead_reason` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dead_reason
 -- ----------------------------
 INSERT INTO `dead_reason` VALUES ('1', '鹅瘟');
 INSERT INTO `dead_reason` VALUES ('2', '其他');
+INSERT INTO `dead_reason` VALUES ('3', '沙门氏');
 
 -- ----------------------------
 -- Table structure for `farm`
@@ -244,7 +255,7 @@ CREATE TABLE `farm` (
   `area` int(11) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of farm
@@ -252,15 +263,6 @@ CREATE TABLE `farm` (
 INSERT INTO `farm` VALUES ('1', '1号农场', '1', '广州', '2012-07-04', '3000', 'sgsdffgdsfg	');
 INSERT INTO `farm` VALUES ('2', '牛牛', '2', '南海', '2012-07-01', '2000', 'dfyfyh');
 INSERT INTO `farm` VALUES ('3', '明德', '3', '南海', '2012-01-02', '1000', 'trdstrt');
-INSERT INTO `farm` VALUES ('4', '天天农场', '4', '清远', '2012-01-08', '234234', 'gfhdrr');
-INSERT INTO `farm` VALUES ('5', '城在农场', '5', '阳山', '2012-01-26', '3432', 'sdgsdf');
-INSERT INTO `farm` VALUES ('6', '为之农场', '6', '韶关', '2012-02-01', '2000', 'fgsdfg');
-INSERT INTO `farm` VALUES ('7', '阳光农场', '1', '肇庆', '2012-03-01', '1000', 'hfghfdh');
-INSERT INTO `farm` VALUES ('8', '东宝农场', '2', '肇庆', '2012-01-30', '1005', 'fasdfasd');
-INSERT INTO `farm` VALUES ('9', '功夫农场', '3', '阳山', '2011-11-30', '200', 'fgdsfg');
-INSERT INTO `farm` VALUES ('10', '非 飞农场', '4', '东华', '2011-12-29', '540', 'adsfasd');
-INSERT INTO `farm` VALUES ('11', 'gogas', '2', '水边', '2011-05-30', '234', '	');
-INSERT INTO `farm` VALUES ('12', '爱热农场', '7', '英德', null, '234', '	莾地');
 
 -- ----------------------------
 -- Table structure for `farmer`
@@ -273,7 +275,7 @@ CREATE TABLE `farmer` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of farmer
@@ -281,10 +283,6 @@ CREATE TABLE `farmer` (
 INSERT INTO `farmer` VALUES ('1', '张三', '123456', '广州', '无');
 INSERT INTO `farmer` VALUES ('2', '李四', '123456', '南海', '未签约');
 INSERT INTO `farmer` VALUES ('3', '朱八', '3345879', '台山', '	');
-INSERT INTO `farmer` VALUES ('4', '赵一', '1345545', '英德', '革要');
-INSERT INTO `farmer` VALUES ('5', '钱二', '214324134', '清远', '奔城');
-INSERT INTO `farmer` VALUES ('6', '吴六', '23423433', '阳山', '厅地');
-INSERT INTO `farmer` VALUES ('7', '周七1', '234324456667', '阳山', '夺震城');
 
 -- ----------------------------
 -- Table structure for `good`
@@ -297,17 +295,15 @@ CREATE TABLE `good` (
   `unit` varchar(255) DEFAULT NULL,
   `stock` int(11) DEFAULT '0' COMMENT '库存',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '5', '油麦菜种', 'bao', null);
+INSERT INTO `good` VALUES ('1', '5', '油麦菜种', '包', null);
 INSERT INTO `good` VALUES ('2', '4', '大叶槐苗', '棵', '0');
-INSERT INTO `good` VALUES ('3', '3', '无敌消毒水', '瓶', null);
-INSERT INTO `good` VALUES ('4', '3', '百毒杀', '瓶', '0');
-INSERT INTO `good` VALUES ('5', '1', '正大饲料', '包', null);
-INSERT INTO `good` VALUES ('6', '1', '幸福饲料', '包', null);
+INSERT INTO `good` VALUES ('3', '1', '1', '10', null);
+INSERT INTO `good` VALUES ('4', '1', '2', '2', null);
 
 -- ----------------------------
 -- Table structure for `goodsupplier`
@@ -320,15 +316,13 @@ CREATE TABLE `goodsupplier` (
   `address` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of goodsupplier
 -- ----------------------------
 INSERT INTO `goodsupplier` VALUES ('1', '张三农药店', '111111', '广州', '	dfsadfsdafasf	');
 INSERT INTO `goodsupplier` VALUES ('3', '李四', '222222', '广州', 'fadsfadsfdas		');
-INSERT INTO `goodsupplier` VALUES ('4', '鑫鑫农资店', '432423', '在砝码城', '	');
-INSERT INTO `goodsupplier` VALUES ('5', '嘻嘻化肥店', '343434', '大规模', '塔顶	');
 
 -- ----------------------------
 -- Table structure for `good_type`
@@ -338,17 +332,13 @@ CREATE TABLE `good_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL COMMENT '农用物资的所属种类',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of good_type
 -- ----------------------------
 INSERT INTO `good_type` VALUES ('1', '饲料');
 INSERT INTO `good_type` VALUES ('2', '化肥');
-INSERT INTO `good_type` VALUES ('3', '农药');
-INSERT INTO `good_type` VALUES ('4', '树苗');
-INSERT INTO `good_type` VALUES ('5', '种子');
-INSERT INTO `good_type` VALUES ('6', '其他');
 
 -- ----------------------------
 -- Table structure for `goose`
@@ -400,17 +390,13 @@ CREATE TABLE `retailer` (
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `regionId` (`regionId`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of retailer
 -- ----------------------------
 INSERT INTO `retailer` VALUES ('1', 'XX烧鹅店', '1', '123465', '茜需要', 'afasdfasdfadsfd								');
 INSERT INTO `retailer` VALUES ('2', '张三鹅肉加工厂', '1', '9527', '珠海', '鞢夺	桔柑			');
-INSERT INTO `retailer` VALUES ('3', '白水酒店', '1', '13431243', '左膨胀', '			');
-INSERT INTO `retailer` VALUES ('4', 'qqShop', '4', '123', '广州', '地 模压 			');
-INSERT INTO `retailer` VALUES ('5', '天鹅门店', '5', '2344', '广州', '无可奈何花落去			');
-INSERT INTO `retailer` VALUES ('6', '鹅专门店', '1', '2343', '地城', '	塔顶栽植');
 
 -- ----------------------------
 -- Table structure for `sale_goose`
@@ -432,7 +418,7 @@ CREATE TABLE `sale_goose` (
 -- ----------------------------
 -- Records of sale_goose
 -- ----------------------------
-INSERT INTO `sale_goose` VALUES ('1', '1', '100', '22.2', '650', '14430', '2012-10-07', 'fdfdf		');
+INSERT INTO `sale_goose` VALUES ('1', '1', '23', '234.34', '324.33', '342344.33', '2013-02-12', null);
 
 -- ----------------------------
 -- Table structure for `sale_region`
@@ -442,16 +428,13 @@ CREATE TABLE `sale_region` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `region` varchar(30) NOT NULL COMMENT '销售商所属的地区',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sale_region
 -- ----------------------------
 INSERT INTO `sale_region` VALUES ('1', '华南地区');
 INSERT INTO `sale_region` VALUES ('2', '华北区');
-INSERT INTO `sale_region` VALUES ('3', '东北区');
-INSERT INTO `sale_region` VALUES ('4', '华中区');
-INSERT INTO `sale_region` VALUES ('5', '西南区');
 
 -- ----------------------------
 -- Table structure for `trade_good`
@@ -463,27 +446,16 @@ CREATE TABLE `trade_good` (
   `goodId` int(11) NOT NULL,
   `tradeDate` date DEFAULT NULL,
   `unitPrice` double DEFAULT NULL,
-  `amount` int(11) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `farmerId` (`farmerId`),
   KEY `goodId` (`goodId`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_good
 -- ----------------------------
-INSERT INTO `trade_good` VALUES ('7', '5', '1', '2012-09-06', '44', '100', 'TFHFGHXF	');
-INSERT INTO `trade_good` VALUES ('8', '1', '3', '2012-09-17', '30', '10', 'cash	');
-INSERT INTO `trade_good` VALUES ('9', '1', '1', '2012-09-16', '123', '3', '	');
-INSERT INTO `trade_good` VALUES ('10', '7', '5', '2012-09-08', '100', '10', '	');
-INSERT INTO `trade_good` VALUES ('11', '2', '5', '2012-09-17', '100', '15', 'fdfdfdf	');
-INSERT INTO `trade_good` VALUES ('12', '1', '1', '2012-10-21', '123', '123', '	13123		');
-INSERT INTO `trade_good` VALUES ('13', '5', '1', '2012-10-09', '12', '123', '	');
-INSERT INTO `trade_good` VALUES ('14', '1', '3', '2012-10-21', '12', '122', '			');
-INSERT INTO `trade_good` VALUES ('15', '7', '1', '2012-10-09', '121', '12', '	');
-INSERT INTO `trade_good` VALUES ('16', '1', '5', '2012-10-17', '11', '11', '	');
-INSERT INTO `trade_good` VALUES ('17', '7', '1', '2012-11-03', '12', '123', 'asdfdsf	');
 
 -- ----------------------------
 -- Table structure for `trade_goose`
@@ -499,13 +471,11 @@ CREATE TABLE `trade_goose` (
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `farmId` (`farmId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of trade_goose
 -- ----------------------------
-INSERT INTO `trade_goose` VALUES ('1', '1', '2', '2.03', '2', '2012-10-08', '	');
-INSERT INTO `trade_goose` VALUES ('2', '10', '2', '5', '1', '2012-11-04', '');
 
 -- ----------------------------
 -- View structure for `buygoodview`
