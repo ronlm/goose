@@ -16,7 +16,7 @@ public class BuyGood {
 	private Long goodSupplierId;
 	private String batchNum;
 	private Double unitPrice;
-	private Long amount;
+	private Double amount;
 	private String origin;
 	private Date date;
 	private String comments;
@@ -55,13 +55,7 @@ public class BuyGood {
 	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public Long getAmount() {
-		return amount;
-	}
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
+	
 	public String getOrigin() {
 		return origin;
 	}
@@ -80,8 +74,12 @@ public class BuyGood {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
-	
+	public Double getAmount() {
+		return amount;
+	}
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 	
 	
 }
