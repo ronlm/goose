@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50142
 File Encoding         : 65001
 
-Date: 2013-02-21 12:20:39
+Date: 2013-02-26 09:50:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -295,15 +295,14 @@ CREATE TABLE `good` (
   `unit` varchar(255) DEFAULT NULL,
   `stock` int(11) DEFAULT '0' COMMENT '库存',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '5', '油麦菜种', '包', null);
-INSERT INTO `good` VALUES ('2', '4', '大叶槐苗', '棵', '0');
-INSERT INTO `good` VALUES ('3', '1', '1', '10', null);
-INSERT INTO `good` VALUES ('4', '1', '2', '2', null);
+INSERT INTO `good` VALUES ('1', '1', '1', '1', null);
+INSERT INTO `good` VALUES ('7', '1', '2', '2', null);
+INSERT INTO `good` VALUES ('8', '1', '3', '3', null);
 
 -- ----------------------------
 -- Table structure for `goodsupplier`
